@@ -181,3 +181,7 @@ BufferedOutputStream是字节流, 实现缓冲的输出流, 可以将多个字�
 5. 序列化对象时，**要求里面属性的类型也需要实现序列化接口**。（Master是Dog里面的属性，Master也要实现序列化接口）
 6. 序列化具备可继承性，也就是如果某类已经实现了序列化，则它的所有子类也已经默认实现了序列化。
 
+##### 12、**标准输入输出流**
+传统方法System.out.println("");是使用out 对象将数据输出到显示器。
+
+传统的方法, Scanner是从标准输入键盘接收数据（见代码com.hspedu.standard.InputAndOutput）
