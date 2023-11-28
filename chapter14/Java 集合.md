@@ -32,7 +32,7 @@
 3.Map接口的实现子类 是双列集合，存放的 Key-Value
 ```
 
-##### 2 Collection接口实现类的特点
+#### 二 、Collection接口实现类的特点
 
 - Collection实现子类可以存放多个元素,每个元素可以是Object
 - 有些Collection的实现类，可以存放重复的元素，有些不可以
@@ -41,7 +41,7 @@
 
 `演示示例见代码：com.hspedu.collection_.CollectionMethod`
 
-###### 2.1 Collection接口的遍历形式
+##### 1 Collection接口的遍历形式
 
 > 使用迭代器Iterator
 
@@ -56,3 +56,44 @@
 > for循环增强遍历
 
 增强for循环，可以替代itrator迭代器，特点:增强for就是简化版的iterator，本质一样。只能用于遍历集合或者数组
+
+#### 三 、List接口和常用方法
+
+##### 1 List接口是Collection接口的子接口
+
+- List集合类中元素有序(即添加顺序和取出顺序一致)、并且可以重复
+- List集合中的每个元素都有其对应的顺序索引，即支持索引
+- List容器中的元素都对应一个整数型的序号记载其在容器中的位置，可以根据序号存取容器中的元素。
+- List接口的常用实现类有:ArrayList、LinkedList和Vector
+
+
+
+> List接口和常用方法
+
+- add 在index位置插入元素
+
+- addAll 从index位置开始将所有元素添加进来
+
+- get 获取指定index位置的元素
+
+- indexOf 返回在集合中首次出现的位置
+
+- lastIndexOf 返回在当前集合中末次出现的位置
+
+- remove 移除index位置的元素，并返回此元素
+
+- set 设置指定index位置的元素(替换)
+
+- subList 返回一个范围位置中的子集合
+
+  
+
+##### 2 List的三种遍历方式
+
+##### 3 ArrayList底层接口和源码分析
+
+##### 4 LinkList底层结构
+
+##### 5 LinkList底层操作机制
+
+##### 6 LinkLis和ArrayList的区别
