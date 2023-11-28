@@ -216,3 +216,24 @@ OutputStreamWriter是将字符输出流转为字节输出流，继承自Writer�
 ![](https://img2018.cnblogs.com/blog/1745215/202002/1745215-20200228133235379-1910140449.png)
 
 （见代码com.hspedu.transformation.ConversionStreamTest）
+
+##### 15、**打印流PrintStream 和PrintWriter**
+
+打印流只有输出流，没有输入流
+
+（见代码com.hspedu.printstream.PrintStream_）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
