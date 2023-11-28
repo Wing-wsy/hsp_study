@@ -45,10 +45,14 @@
 
 > 使用迭代器Iterator
 
-- Itrator对象称为迭代器，用于遍历Collection集合中的元素。
+- Iterator对象称为迭代器，用于遍历Collection集合中的元素。
 - 所有实现了Collection接口的集合类都有一个Iterator()方法，用以返回一个实现了Iterator接口的对象，即可以返回一个迭代器
 - Iterator仅用于遍历集合，Iterator本身并不存放对象
 
-> Itrator接口的方法
+`迭代器使用见代码：com.hspedu.collection_.CollectionIterator `
+
+
 
 > for循环增强遍历
+
+增强for循环，可以替代itrator迭代器，特点:增强for就是简化版的iterator，本质一样。只能用于遍历集合或者数组
