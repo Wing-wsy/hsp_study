@@ -70,30 +70,54 @@
 
 > List接口和常用方法
 
-- add 在index位置插入元素
+- `add` 在index位置插入元素
 
-- addAll 从index位置开始将所有元素添加进来
+- `addAll` 从index位置开始将所有元素添加进来
 
-- get 获取指定index位置的元素
+- `get` 获取指定index位置的元素
 
-- indexOf 返回在集合中首次出现的位置
+- `indexOf` 返回在集合中首次出现的位置
 
-- lastIndexOf 返回在当前集合中末次出现的位置
+- `lastIndexOf` 返回在当前集合中末次出现的位置
 
-- remove 移除index位置的元素，并返回此元素
+- `remove` 移除index位置的元素，并返回此元素
 
-- set 设置指定index位置的元素(替换)
+- `set` 设置指定index位置的元素(替换)
 
-- subList 返回一个范围位置中的子集合
+- `subList` 返回一个范围位置中的子集合
 
   
+  
+  `List接口和常用方法使用见代码：com.hspedu.list_.List_ `
 
 ##### 2 List的三种遍历方式
 
+`List的三种遍历方式见代码：com.hspedu.list_.ListFor`
+
 ##### 3 ArrayList底层接口和源码分析
 
-##### 4 LinkList底层结构
+- ArrayList可以放所有的元素甚至是`空元素`，可以放入多个空值。
+- ArrayList是由`数组`来实现数据存储的。
+- ArrayList基本等同于Vector，除了ArrayList是线程不安全(执行效率高)，在`多线程`下，不建议用ArrayList。
+- ArrayList中维护了一个Object类型的`数组elementData`
+- transient Object[] elementData  //表示该属性不会被序列化
+- 当创建ArrayList对象时，如果使用的是无参构造器，则初始elementData容量是0，第1次添加，则扩容elementData为10,如需再次扩容，则扩容elementData为1.5倍
+- 如果使用的是指定大小的构造器，则初始elementData容量为指定大小，如果需要扩容，则直接扩容elementData为1.5倍
 
-##### 5 LinkList底层操作机制
+##### 4 Vector底层机构和源码剖析
 
-##### 6 LinkLis和ArrayList的区别
+> Vector的基本介绍
+
+- Vector底层也是一个对象数组，protected Object[] elementData
+- Vector 是线程同步的，即`线程安全`，Vector类的操作方法带有synchronized
+- 在开发中，需要线程同步安全时，优先考虑用Vector
+
+> Vector和List比较
+
+![](https://img-blog.csdnimg.cn/4e1fd49d8b714efd92e7c9ad047c5b15.png#pic_center)
+
+##### 5 LinkList底层结构
+
+##### 6 LinkList底层操作机制
+
+##### 7 LinkLis和ArrayList的区别
