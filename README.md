@@ -5,7 +5,8 @@
 #### chapter-19 - java IO 流     【 √ 】
 #### chapter-23 - java 反射      【 × 】
 
-04:51
-next：https://www.bilibili.com/video/BV1YA411T76k/?p=7&spm_id_from=pageDriver&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c
 
+【HashSet源码解读】
+23:39
+next：https://www.bilibili.com/video/BV1YA411T76k?p=24&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c
 笔记：https://blog.csdn.net/sinat_38316216/article/details/127388493

@@ -17,9 +17,9 @@ public class ListFor {
 
     @Test
     public void getBianli() {
-        List list = new ArrayList();
+//        List list = new ArrayList();
 //        List list = new Vector();
-//        List list = new LinkedList();
+        List list = new LinkedList();
         list.add("Jack");
         list.add("Tom");
         list.add("鱼香肉丝");
