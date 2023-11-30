@@ -184,6 +184,8 @@
 
 
 > 源码分析
+>
+> 没写完，可看视频，https://www.bilibili.com/video/BV1YA411T76k/?p=27&spm_id_from=pageDriver&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c
 
 ```java
 // 开始分析这两个语句
@@ -197,9 +199,9 @@ hashSet.add("java");
 
 ///////////////////////////////下面是对add方法的具体分析///////////////////////////////
 
-/** 第一步:add进去实际调用的是上面创建出来的 HashMap 集合调用了个put方法，PRESENT没啥作用，用于占位而已，共享的 */
+/** 第一步:add进去实际调用的是上面new HashSet()创建出来的 HashMap 集合调用了个put方法，PRESENT没作用，用于占位，共享的 */
  public boolean add(E e) {
-     return map.put(e, PRESENT)==null;  // HashMap类的put只要不存在就会返回null，如果存在则返回当前元素
+     return map.put(e, PRESENT)==null;  // HashMap类的put成功就会返回null，如果存在则返回当前元素
  }
 
 /** 第二步:进去put方法，继续调用了putVal方法 */
@@ -213,20 +215,21 @@ hashSet.add("java");
      return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
  }
 
-/** 第四步:进去putVal方法（hash是第三步计算的值【相同的数据计算出来的值是一样的】）,key是添加的值 */
+/** 第四步:进去putVal方法（hash是第三步计算的值【相同的key计算出来的值是一样的】）,key是添加的值 */
 
 ///////////////////////////////对putVal方法的具体分析-开始///////////////////////////////
 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
         // 这些是辅助变量
         Node<K,V>[] tab; Node<K,V> p; int n, i;           
-        // 这个table是HashMap里的数组 Node<K,V>[] table;Node就是存放数据的，可参考自己写的一个演示类HashSetStructure里的Node
+        // 这个table是HashMap里的数组 Node<K,V>[] table;Node就是存放数据的，可参考演示类HashSetStructure里的Node
         if ((tab = table) == null || (n = tab.length) == 0)     
-            // 第一次添加会走到这里，执行resize方法，resize方法逻辑很复杂，请看下面resize方法的单独分析
+            // 第一次添加table=null会走到这里，执行resize方法，resize方法逻辑很复杂，请看下面resize方法的单独分析
             // 第一次添加时，resize会返回一个长度16的数组给tab（第一次扩容16个空间），这样tab的数组长度为 16，n = 16
             n = (tab = resize()).length;
         // 这里根据hash和n的值就能知道当前元素要保存到哪个索引里
         // 当然，保存前会先根据索引去获取tab数组的值，如果该索引没值，那就直接存进去，如果有值则执行下面的else
+        // 第一次该索引tab[i]没值，直接存，不走else
         if ((p = tab[i = (n - 1) & hash]) == null)
             tab[i] = newNode(hash, key, value, null);
         else {
@@ -258,10 +261,14 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                 return oldValue;
             }
         }
+        //记录添加的数量
         ++modCount;
+        //判断当前元素是否超过了扩容阈值（第一次计算出来得12）是的话扩容，可以看resize方法里是会对threshold赋值的
         if (++size > threshold)
             resize();
+        //这个方法是HashMap留给他的实现子类来实现的，类似于钩子函数，在这里是没有执行逻辑的
         afterNodeInsertion(evict);
+        // 到这说明添加成功，这里返回了null，所以为什么put成功后就会返回了空
         return null;
     }
 
@@ -356,7 +363,47 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 
 
+##### 课后练习
+
+一、equals和hashCode示例1:
+
+```
+练习要求：
+1、创建3个Workers放入HashSet 中
+2、当name和age一样时就不能添加到HashSet
+```
+
+`示例1见代码：com.hspedu.set_.Employee `
 
 
 
+二、equals和hashCode示例2:重写2次
 
+```
+练习要求：
+1、Employ 里只要名字name和出生年份birthday相同就不能添加到HashSet
+```
+
+`示例1见代码：com.hspedu.set_.Employee02 `
+
+
+
+三、equals和hashCode示例2:重写1次
+
+```
+练习要求：
+1、Employ 里只要名字name和出生年份birthday相同就不能添加到HashSet
+```
+
+`示例1见代码：com.hspedu.set_.Employee03 `
+
+
+
+##### 3 LinkedHashSet
+
+> LinkedHashSet的全面说明
+
+- LinkedHashSet是HashSet的子类
+- LinkedHashSet底层是一个LinkedHashMap，底层维护了一个数组+双向链表
+- LinkedHashSet根据元素的hashCode值来决定元素的存储位置，同时使用链表维护元素的次序图(图)，这使得元素看起来是以插入顺序保存的。
+- LinkedHashSet不允许添加重复元素

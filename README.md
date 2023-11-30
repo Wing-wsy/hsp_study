@@ -6,7 +6,9 @@
 #### chapter-23 - java 反射      【 × 】
 
 
-【HashSet源码解读】
-23:39
-next：https://www.bilibili.com/video/BV1YA411T76k?p=24&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c
+【LinkedHashSet介绍】
+01:00
+next：https://www.bilibili.com/video/BV1YA411T76k?p=30
 笔记：https://blog.csdn.net/sinat_38316216/article/details/127388493
+
+Java：
