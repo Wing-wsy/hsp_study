@@ -12,8 +12,6 @@
 next：https://www.bilibili.com/video/BV1YA411T76k?p=30
 笔记：https://blog.csdn.net/sinat_38316216/article/details/127388493
 
-Java：
-
 √：完成
 △：进行中
 ×：未开始
