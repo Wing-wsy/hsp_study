@@ -407,3 +407,49 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 - LinkedHashSet底层是一个LinkedHashMap，底层维护了一个数组+双向链表
 - LinkedHashSet根据元素的hashCode值来决定元素的存储位置，同时使用链表维护元素的次序图(图)，这使得元素看起来是以插入顺序保存的。
 - LinkedHashSet不允许添加重复元素
+
+> 说明
+
+- 在LinkedHashSet中维护一个hash表和双向链表(LinkedHashSet 有head和tail)
+
+
+- 每一个结点有before和after属性，这样可以形成双向链表
+
+
+- 在添加一个元素时，先求hash值，再求索引，确定该元素在table的位置，然后将添加的元素加入到双向链表(如果已经存在，不添加[原则和hashset一样])
+
+
+​       tail.next = newElement
+​      newElement.pre = tail
+​      tail = newElement;
+
+- 这样的话，我们遍历LinkedHashSet 也能确保插入顺序和遍历顺序一致
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
