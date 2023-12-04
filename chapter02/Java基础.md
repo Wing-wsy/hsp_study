@@ -144,7 +144,7 @@ public void test
 
 
 
-###### 4.3 数据类型
+###### 4.3 基本数据类型
 
 每一种数据都定义了明确的数据类型，在内存中分配了不同大小的内存空间（字节）
 
@@ -244,7 +244,15 @@ public class Test{
 
 
 
-字符类型可以使用单个字符，字符类型是char，char是两个字节（可以存放汉子），多个字符使用字符串String
+字符类型可以使用单个字符，字符类型是char，char是两个字节（可以存放汉字），多个字符使用字符串String
+
+
+
+> 布尔类型
+
+- 布尔类型也叫boolean类型，boolean类型数据只允许取值 true 和 false，无 null
+- boolean 类型占用 1 个字节
+- boolean 类型适用于逻辑运算，一般用于程序流程控制（if、while、do-while、for）
 
 ###### 4.4 编码
 
@@ -256,8 +264,6 @@ public class Test{
 - Gbk（可以表示汉字，而且范围广，字母使用1个字节，汉字2个字节）
 - Gb2312(可以表示汉字，gb2312 < gbk，用得少，了解)
 - big5码（繁体中文，台湾，香港）
-
-
 
 > 小思考
 
@@ -275,19 +281,143 @@ Unicode码兼容ASCII码（比如a在Unicode表示97，在ASCII码中也是）
 补充：utf-8是一种变长的编码方式，它可以使用 1-6 个字节来表示一个符号，根据不同的符号而变化字节长度。
 ```
 
-> 布尔类型
-
-- 布尔类型也叫boolean类型，boolean类型数据只允许取值 true 和 false，无 null
-- boolean 类型占用 1 个字节
-- boolean 类型适用于逻辑运算，一般用于程序流程控制（if、while、do-while、for）
-
-###### 4.5 数据类型转换
 
 
+###### 4.5 基本数据类型转换
+
+> 自动类型转换
+
+当Java程序在进行赋值或者运算时，精度小的类型自动转换为精度大的类型，这个就是`自动类型转换`
+
+数据类型按精度（容量）大小排序为：
+
+1. char  < int < long < float < double ;
+2. byte < short  < int < long < float < double ;
+
+```java
+int num = 'a';   // ok  char -> int
+double d1 = 80;  // ok  int -> double
+```
+
+> 自动类型转换注意和细节
+
+1. 有多种类型的数据混合运算时，系统首先自动将所有数据转换成容量最大的那种数据类型，然后再进行计算。
+2. 当我们把精度大的数据类型赋值给精度小的数据类型时，会出错；反之小的赋值给大的就会进行自动类型转换。
+3. byte,short和char之间不会相互自动转换
+4. byte, short,char 他们三者可以计算，在计算时首先转换为int类型
+5. boolean,不参与运算
+6. 自动提升原则：表达式结果的类型自动提升为操作数中最大的类型
+
+```java
+int n1 = 10;  
+float d1 = n1 + 1.1;  // 错误，按照上面的第一点原则：有多种类型的数据混合运算时，系统首先自动将所有数据转换成容量最大的那种数据类型，然后再进行计算。
+分析：n1 是 int 类型； 1.1是double类型（没写后缀L或D，默认double），两者运算转成最大的double进行运算，最终结果为double类型，所以不能直接赋值给float
+  
+// 如果就是想使用float接收呢，可以
+float d1 = n1 + 1.1F; 
+float d1 = float(n1 + 1.1); 
+
+byte b1 = 10;  // -128 ～ 127，ok，为什么呢，10不是int类型吗，怎么能赋值给 byte类型呢
+// 解答：当把具体的数赋值给byte类型时，编译器会先判断该数是否在byte范围内，如果是就可以
+
+int n2 = 1;
+byte b2 = n2; // 错误，原因：如果是变量赋值，判断类型
+
+//byte,short和char之间不会相互自动转换
+byte b1 = 10;
+char c1 = b1; // 错误，原因：byte不能自动转成char
+
+
+//byte, short,char 他们三者可以计算，在计算时首先转换为int类型
+byte b2 = 1;
+byte b3 = 2;
+short s1 = 1;
+short s2 = b2 + s1; // 错误，原因：运算时已经提升为了int类型
+
+byte b4 = b2 + b3; //错误，原因：只要有byte, short,char 他们三者参与了计算，都会提升为int，所以b2 + b3 最终类型为 int ，所以不行
+```
 
 
 
+> 强制类型转换
 
+自动类型转换的逆过程，将容量大的数据类型转换为容量小的数据类型，使用时要加上强制转换符()，但可能造成精度降低或溢出，格外要注意。
+
+```java 
+int n1 = (int)1.9;
+System.out.println("n1=" + n1);// 结果：n1=1；精度损失，所以要格外注意
+
+int n2 = 2000;
+byte b1 = (byte)n2;
+System.out.println("b1=" + b1);//结果b1=-48；数据溢出，并不是想象的 128
+
+// char类型可以保存int的常量值，但不能保存int的变量值，需要强转
+char c1 = 100;
+int m = 100;
+char c2 = m; // 错误
+char c3 = (char)m;  // ok
+System.out.println(c3);
+
+// 强转符号只针对最近的操作数有效，往往会使用小括号提升优先级
+int n1 = (int)10 * 3.5 + 6 * 1.1; // 编译错误
+int n1 = (int)(10 * 3.5 + 6 * 1.1); // ok
+```
+
+
+
+######  4.6 基本数据类型和String类型转换
+
+程序开发中，我们经常需要将基本数据类型转成String类型，或者将String类型转成基本数据类型。
+
+> 基本数据类型转Sting类型，后面加 ""就能转成功
+
+```java
+int n1 = 100;
+float f1 = 1.1F;
+double d1 = 4.5;
+boolean b1 = true;
+
+String s1 = n1 + "";  // 100
+String s2 = f1 + "";  // 1.1
+String s3 = d1 + "";  // 4.5
+String s4 = b1 + "";  // true
+```
+
+
+
+> String类型转成基本数据类型，使用parseXX()；
+
+```java
+String str = "123";
+byte b1 = Byte.parseByte(str); // 123
+short s1 = Short.parseShort(str); // 123
+int num1 = Integer.parseInt(str);  // 123
+long lo1 = Long.parseLong(str);  // 123
+float f1 = Float.parseFloat(str); // 123.0
+double d1 = Double.parseDouble(str); // 123.0
+boolean boo = Boolean.parseBoolean("true"); // true
+
+// 怎么把String转成char呢？因为char只能有一个字符,取索引，所以转换方式如下
+char ch = str.charAt(2); // 3
+```
+
+
+
+ ##### 5 运算符
+
+###### 5.1 运算符介绍
+
+###### 5.2 算术运算符
+
+###### 5.3 关系运算符
+
+###### 5.4 逻辑运算符
+
+###### 5.5 赋值运算符
+
+###### 5.6 三元运算符
+
+###### 5.7 运算符优先级
 
 
 
@@ -301,6 +431,32 @@ Unicode码兼容ASCII码（比如a在Unicode表示97，在ASCII码中也是）
 
 1. JDK = JRE + Java开发工具
 2. JRE = JVM + 核心类库
+
+> 2、基本数据类型转换练习题
+
+```java
+short s = 12; // ok
+s = s-9; //错误 int -> short
+
+byte b = 10; // ok
+b = b + 11;  //错误 int -> byte
+b = (byte)(b + 11); // ok ,使用强转
+
+char c = 'a'; //ok
+int i = 16;  // ok
+float d = .314F; // ok
+double result = c + i + d; // ok, float -> double
+
+byte b = 16; //ok
+short s = 14; //ok
+short t = s + b;// 错误 int -> short
+```
+
+
+
+
+
+
 
 
 
