@@ -1631,13 +1631,347 @@ java提供四种访问控制修饰符号，用于控制方法和属性(成员变
 2. 提供一个公共的(public)set方法，用于对属性判断井赋值（set方法里面可以加入数据验证的业务逻辑）
 3. 提供一个公共的(public)get方法，用于获取属性的值
 
+
+
 ###### 10.4 继承
 
-###### 10.5 多态
+> 介绍
 
-###### 10.6 Super
+继承可以解決代码复用,让我们的编程更加靠近人类思维，当多个类存在相同的厲性(变量)和方法时,可以从这些类中抽象士父类,在父类中定义这些相同的属性和方法，所有的类不需要重新定义这些属性和方法，只需要通过extends来声明继承父类即可
 
-###### 10.7 overwrite
+```java
+// 继承的基本语法
+class 子类 extends 父类{}
+
+
+// 举例，A类是父类，B和C类会继承到A类中的属性和方法
+class A类{
+  共有属性
+  共有方法
+}
+
+class B类 extends A类{
+  B类的特有属性
+  B类的特有方法
+}
+
+class C类 extends A类{
+  C类的特有属性
+  C类的特有方法
+}
+```
+
+> 注意和细节点
+
+1. 子类继承了`所有的`属性和方法，**非私有的属性和方法可以在子类直接访问（但是具体得看该子类是否跟父类在同一个包下，如果是，那么除了 private的属性和方法都能访问，如果不同包下，那么只能访问 public 和 protected的属性和方法）**，但是`私有属性`和`私有方法`不能在子类直接访问，要通过`父类的公共方法`去访问
+2. 子类必须调用父类的构造器,完成父类的初始化
+3. 当创建子类对象时，不管使用子类的哪个构造器，`默认情况下总会去调用父类的无参构造器`，如果`父类没有提供无参构造器`，则必须在子类的构造器中`用 super 去指定使用父类的哪个构造器`完成对父类的初始化工作，否则，编泽不会通过
+4. 如果希望指定去调用父类的某个构造器，则显式的调用一下
+5. super在使用时，需要放在构造器第一行(super只能在构造器中使用，不能在成员方法中使用)
+6. **supe() 和 this() 都只能放在构造器第一行，因此这两个方法不能共存在一个构造器**
+7. java所有类都是Object类的子类，Object 是所有类的基类。
+8. 父类构造器的调用不限于直接父类！将一直往上追湖直到Object类(顶级父类）
+9. ﻿子类最多只能继承一个父类(即直接继承），即java中是单继承机制。
+10. 不能滥用继承，子类和父类之间必须满足逻辑关系（即 Dog不能继承Person）
+
+```java
+class GrandPa{
+    String name = "大头爷爷";
+    String hobby = "旅游";
+}
+class Father extends GrandPa{
+    String name = "大头爸爸";
+    int age = 39;
+}
+class Son extends Father{
+    String name = "大头儿子";
+}
+
+
+// 《第一次测试开始》继承的内存布局如下图
+Son son = new Son();
+/**
+  这时请大家注意，要按照查找关系来返回信息
+  (1〕首先看子类是否有该属性
+  (2）如果子类有这个属性，并且可以访间，则返回信息
+  (3）如果子类没有这个属性，就看父类有没有这个属性(如果父类有该属性，并且可以访间，就返回信息〕
+  (4）如果父类没有就按照（3)的规则，继续找上级父类，直到Object.如果都没有找到，报错
+ * */
+System.out.println(son.name); // 大头儿子
+System.out.println(son.age);  // 39
+System.out.println(son.hobby);// 旅游
+
+// 《第二次测试开始》假如将 Father 的 age 设置成私有
+class Father extends GrandPa{
+    String name = "大头爸爸";
+    private int age = 39;
+}
+// 那么直接访问会报错 
+System.out.println(son.age);  // 报错，提示私有属性不能访问
+// 在Father提供共有的方法进行访问age
+class Father extends GrandPa{
+    String name = "大头爸爸";
+    private int age = 39;
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) 
+        this.age = age;
+    }
+}
+// 继续访问 通过
+System.out.println(son.getAge()); // 39
+
+// 《第三次测试开始》继续深一步理解，假如GrandPa也有一个共有的age呢，使用son.age访问不到Father（私有），但是能访问到GrandPa的age吗？
+class GrandPa{
+    String name = "大头爷爷";
+    String hobby = "旅游";
+    int age = 88;  // 增加了age
+}
+
+System.out.println(son.age);  // 依然报错，提示私有属性不能访问
+// 解释上面为什么不能访问：因为根据查找关系，先查 Son 是否有age属性，没有，继续查 Father 是否有 age 属性，有（并且是私有的），直接报错提示私有不能访问，因为Father中已经查到了age这个属性了，所有不会因为访问不到而继续去查GrandPa中是否有age属性【这个查找的关系很重要】
+
+// 《第四次测试开始》继续深一步研究，假如GrandPa、Father和Son都有一个同名的属性，假如叫 String phone，此时使用下面的会输出什么呢？
+class GrandPa{
+    String phone = "老人机";
+}
+class Father extends GrandPa{
+    String phone = "小米";
+}
+class Son extends Father{
+   String phone = "苹果";
+}
+
+Son son = new Son();
+System.out.println(son.phone);  // 苹果
+System.out.println(this.phone);  // 苹果
+System.out.println(super.phone);  // 小米
+
+// 问题来了，那我怎么样才能访问到 GrandPa 的 phone 呢？
+// 答：目前来说访问不到，因为向上访问的关键字只能是 super，当使用super.phone会触发查找原则，先查找父类 Father 是否有 phone 这个属性并且能访问，很明显这里就查到了，就直接返回了“小米”,要想访问到 GrandPa 的 phone ，除非 父类 Father 没有 phone 这个属性。
+
+// 重要：使用super会先对父类进行查找，查不到就继续再向上的父类进行查找，会遵循就近原则，查到就返回
+```
+
+
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img01.png)
+
+
+
+> 好处
+
+1. 代码的复用性提高了
+2. 代码的扩展性和维护性提高了
+
+
+
+###### 10.5 Super关键字
+
+> 介绍
+
+super代表父类的引用，用于访问父类的属性、方法、构造器
+
+
+
+> 使用细节
+
+1. 访问父类的属性，但不能访问父类的private属性(具体看是否在同包下，如果子类和父类不在同一个包下，那么父类默认修饰符的属性也是不能访问的) `super.属性名`
+2. 访问父类的方法，不能访问父类的private方法(规则同上)，`super.方法名（参数列表)`;
+3. 访问父类的构造器 `super(参数列表)`;只能放在构造器的第一句，只能出现一句
+4. 代码里只要看到super.就直接跳过本类，直接从父类开始查找，查到就返回，查不到就报错
+
+
+
+> 细节
+
+1. 调用父类的构造器的好处（分工明确，父类属性由父类初始化，子类的属性由子类初始化）
+2. 当子类中有和父类中的成员（属性和方法） 重名时，为了访问父类的成员，必须通过super。如果没有重名，使用super、this.直接访问是一样的效果
+3. super的访问不限于直接父类，如果爷爷类和本类中有同名的成员，也可以使用super去访回爷爷类的成员；如果多个基类(上级类)中都有同名的成员，使用super访问遵循就近原则。A->B->C
+
+`看上面的多继承代码案例，有详细说明super`
+
+
+
+| No.  | 区别点     | this                                                   | super                                  |
+| ---- | ---------- | ------------------------------------------------------ | -------------------------------------- |
+| 1    | 访问属性   | 访问本类中的属性，如果本类没有此属性则从父类中继续查找 | 从父类开始查找属性                     |
+| 2    | 调用方法   | 访问本类中的方法,如果本类没有此方法则从父类继续查找    | 从父类开始查找方法                     |
+| 3    | 调用构造器 | 调用本类构造器，必须放在构造器首行                     | 调用父类构造器，必须放在子类构造器首行 |
+| 4    | 特殊       | 表示当前对象                                           | 子类中访问父类对象                     |
+
+
+
+###### 10.6 方法重写/覆盖override
+
+> 介绍
+
+方法覆盖（重写）就是子类有一个方法,和父类的某个方法的`名称`，`访问修饰符(特殊，见下面分析)`，`返回类型(特殊，见下面分析)`，`参数`一样,那么我们就说子类的这个方法覆盖了父类的那个方法
+
+> 注意事项和细节
+
+1. 子类的方法的参数,方法名称,要和父类方法的参数,方法名称完全一样（**返回类型和访问修饰符可以不用完全一样，见下面说明**）
+2. 子类方法的返回类型和父类方法返回类型一样，或者是父类返回类型的子类(比如父类 返回类型是 Obiect,子类方法返回类型是String)，比如：父类 public Object getInfo(){}，子类 public String getInfo(){} 这是可以的，String是Object的子类
+3. 子类方法`不能缩小`父类方法的`访问权限`，比如：父类 void sayOk(){}，子类 public void sayOk(){} 这是可以的,子类public改成private就不可以。
+
+
+
+| 名称            | 发生范围 | 方法名   | 形参列表                               | 返回类型                                                     | 修饰符                             |
+| --------------- | -------- | -------- | -------------------------------------- | ------------------------------------------------------------ | ---------------------------------- |
+| 重载(overload)  | 本类     | 必须一样 | `类型`、`个数`或者`顺序`至少有一个不同 | 无要求                                                       | 无要求                             |
+| 重写(override） | 父子类   | 必须一样 | 相同                                   | 子类重写的方法，返回的类型和父类返回的类型一致，或者是其子类 | 子类方法不能缩小父类方法的访问范围 |
+
+
+
+###### 10.7 多态
+
+> 介绍
+
+方法或对象具有多种形态。是面向对象的第三大特征，多态是建立在封装和继承基础
+
+之上的。
+
+> 多态的具体表现（重写和重载就体现多态）
+
+第一种表现：方法的多态
+
+```java
+class A {
+    public int sum(int a,int b){
+        return a + b;
+    }
+    public int sum(int a,int b,int c){
+        return a + b + c;
+    }
+}
+
+// 调用sum方法，根据入参不同，调用的方法不同，这就是多态的体现
+A a = new A();
+System.out.println(a.sum(1, 2));
+System.out.println(a.sum(1, 2, 3));
+```
+
+第二种表现：对象的多态（核心和重点）
+
+1. 一个对象的编译类型和运行类型可以不一致
+2. 编译类型在定义对象时，就确定了，不能改变
+3. 运行类型是可以变化的
+4. 编译类型看定义时=号 的左边，运行类型看=号的 右边
+
+```java
+class Animal {
+    public void cry(){
+        System.out.println("动物在 叫唤");
+    }
+}
+class Cat extends Animal {
+    public void cry() {
+        System.out.println("猫在 叫唤");
+    }
+    // 猫特有的方法
+    public void catchMouse(){
+        System.out.println("猫捉老鼠");
+    }
+}
+class Dog extends Animal {
+    public void cry(){
+        System.out.println("狗在 叫唤");
+    }
+}
+
+// animal 的编译类型是 Animal，运行类型是 Dog
+// 父类的引用指向子类的对象（向上转型）
+// 只有在运行的时候，才知道animal指向Dog，编译时是不知道的，所以父类的引用不能调用子类特有的方法
+Animal animal = new Dog();
+// 也可以使用这样的方式，Object 也是Dog的父类
+Object obj = new Dog();
+animal.cry(); // 运行到这里时，animal的运行类型是 Dog
+
+animal = new Cat();
+animal.cry();
+//这里报错，父类的引用不能调用子类特有的方法，因为在编译阶段，能调用哪些成员，是由编译类型来决定的
+//animal.catchMouse(); 
+
+Cat cat = (Cat)animal;
+// 调用Cat特有方法
+cat.catchMouse();
+```
+
+> 多态的注意事项和细节
+
+1. 多态的前提是：两个对象（类）`存在继承关系`
+2. 属性没有重写之说！属性的值看编译类型（重点！！,看下面代码）
+3. instanceOf 比较操作符，用于判断对象的`运行类型`(不是编译类型)是否为xx类型或xx类型的子类型
+
+```java
+// 属性没有重写之说！属性的值看编译类型
+class Base{
+    int count = 10;
+}
+class Sub extends Base{
+    int count = 20;
+}
+
+ Base base = new Sub();
+ System.out.println(base.count); // 10
+ Sub sub = new Sub();
+ System.out.println(sub.count); // 20
+
+//instanceOf 比较操作符，用于判断对象的运行类型是否为xx类型或xx类型的子类型
+if(base instanceof Base){
+    System.out.println("Base yes"); // Base yes
+}
+if(base instanceof Sub){
+    System.out.println("Sub yes");  // Sub yes
+}
+if(sub instanceof Base){
+    System.out.println("Sub1 yes"); // Sub1 yes
+}
+```
+
+
+
+> 多态的向上转型
+
+1. 本质：`父类的引用`指向了`子类的对象`
+2. 语法：父类类型 引用名=new 子类类型()：
+3. 特点：编译类型看左边，运行类型看右边。
+    可以调用父类中的所有成员(需遵守访问权限），不能调用子类中特有成员；最终运行效果看子类的具体实现
+
+> 多态的向下转型
+
+1. 语法：子类类型 引用名=(子类类型)父类引用;如：Cat cat = (Cat)animal;
+2. 只能强转父类的引用，不能强转父类的对象
+3. 要求父类的引用必须指向的是当前目标类型的对象
+4. 可以调用子类类型中所有的成员
+
+[重点练习题，巩固！（多态的练习2）](######9、多态的练习2)
+
+
+
+> Java的动态绑定机制
+
+```
+1. 当调用对象方法的时候，该方法会和该对象的内存地址/运行类型绑定
+2. 当调用对象属性时，没有动态绑定机制，哪里声明，哪里使用
+```
+
+[重点练习题，巩固！（多态的练习3）](######10、多态的练习3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ###### 10.8 Object类详解
 
@@ -1647,14 +1981,14 @@ java提供四种访问控制修饰符号，用于控制方法和属性(成员变
 
 
 
-#####  作业
+#####  练习题
 
-> 1、JDK,JRE,JVM的关系
+###### 1、JDK,JRE,JVM的关系
 
 1. JDK = JRE + Java开发工具
 2. JRE = JVM + 核心类库
 
-> 2、基本数据类型转换练习题
+###### 2、基本数据类型转换练习题
 
 ```java
 short s = 12; // ok
@@ -1677,7 +2011,7 @@ double num3 = 3d;  //ok
 double num4 = 8;  // ok int -> double
 ```
 
-> 3、算术运算符面试题
+###### 3、算术运算符面试题
 
 ```java
 # ++在后面
@@ -1694,7 +2028,7 @@ System.out.println(i);// 请问这里输出什么  答案：2
 
 ```
 
-> 4、数组练习
+###### 4、数组练习
 
 ```java
 // 创建一个 char 类型的26个元素的数组，分别放置 'A' - 'Z'
@@ -1708,7 +2042,7 @@ for (int i = 0; i < chars.length; i++) {
 }
 ```
 
-> 5、使用Arrays对数组进行排序
+###### 5、使用Arrays对数组进行排序
 
 ```java
 import java.util.Arrays;
@@ -1717,7 +2051,246 @@ int[] arr = {-1,3,78,23,5};
 Arrays.sort(arr);
 ```
 
+###### 6、继承的this和super使用
 
+```java
+class A{
+    A(){
+        System.out.println("a 无参构造
+    }
+    A(String name){
+        super();
+        System.out.println("a name
+    }
+}
+class B extends A{
+    B(){
+        this("abc");
+        System.out.println("b 无参构造
+    }
+    B(String name){
+        super(); // 这里不写也会默认调用父类的无参构造器
+        System.out.println("b name
+    }
+}
+
+/* main - test */
+B b = new B();// 输出如下：
+// a 无参构造
+// b name 有参构造
+// b 无参构造                      
+```
+
+###### 7、继承的练习
+
+```java
+class Person{
+    // 父类的name
+    String name;
+    int age;
+    Person(String name,int age){
+        System.out.println("Person：" + this.hashCode());
+        // 虽然子类也有一个name，但这里是给父类的name赋值
+        this.name = name;
+        this.age = age;
+    }
+    public String say(){
+        return "name=" + name + ",age=" + age;
+    }
+}
+class Student extends Person {
+    // 子类的name
+    String name;
+    String hobby;
+    Student(String name,int age,String hobby){
+        super(name,age);
+        this.hobby = hobby;
+        // 这里是给子类的name赋值
+//        this.name = name;
+        System.out.println("Student：" + this.hashCode());
+    }
+    public String say(){
+        // 这里的name访问的是子类的
+        return super.say() + age + ",hobby=" + hobby + ",name=" + name;
+        // super.name访问的是父类的
+//        return super.say() + age + ",hobby=" + hobby + ",name=" + super.
+//        return "name=" + name + ",age=" + age + ",hobby=" + hobby;
+    }
+}
+
+/* main - test */
+Student stu = new Student("Wing",18,"敲代码");
+System.out.println(stu.say());
+
+//输出内容
+Person：747464370    // 和下面打印的相同，可以理解成是同一个对象引用
+Student：747464370   
+name=Wing,age=1818,hobby=敲代码,name=null 
+```
+
+###### 8、多态的练习1
+
+```java
+double d = 13.4;   // ok
+long l = (long)d;  // ok
+System.out.println(l); // 13
+int in = 5;
+boolean b = (boolean)in; // 不可以 in -> boolean
+Object obj = "Hello";  // 可以，向上转型
+String str = (String)obj; // 可以，向下转型
+System.out.println(str); // Hello
+Object objPri = new Integer(5);
+String strPri = (String)objPri;  // 不可以 Integer -> String
+Integer i = (Integer) objPri; // 可以
+System.out.println(i); // 5
+```
+
+###### 9、多态的练习2
+
+```java
+class Base{
+    int count = 10;
+    public void display(){
+        System.out.println(this.count);
+    }
+}
+class Sub extends Base{
+    int count = 20;
+    public void display(){
+        System.out.println(this.count);
+    }
+}
+
+/* main - test */
+// 这个练习题很重要，记住口诀
+// 访问属性时，看编译类型【逐级查找】；访问方法时，看运行类型；
+Sub s = new Sub();
+System.out.println(s.count);  //访问属性，s的编译类型是 Sub，所以输出：20
+s.display();   // 访问方法，s的运行类型是 Sub，所以输出：20
+Base b = s;  //向上转型
+System.out.println(b == s);  // true
+System.out.println(b.count); // 访问属性，b的编译类型是 Base，所以输出：10
+b.display();  // 访问方法，b的运行类型是 Sub，所以输出：20
+
+
+// 假如注释Sub中的 int count = 20; ，那么上面的输出都是 10
+```
+
+###### 10、多态的练习3
+
+```java
+class A{
+    public int i = 10;
+    public int sum(){
+       return getI() + 10;
+    }
+    public int sum1(){
+       return i + 10;
+    }
+    public int sum2(){
+        return getI() + 10;
+    }
+    public int sum3(){
+        return i + 10;
+    }
+    public int getI(){
+        return i;
+    }
+}
+class B extends A{
+    public int i = 20;
+    public int sum(){
+        return i + 20;
+    }
+    public int sum1(){
+        return i + 10;
+    }
+    public int getI(){
+        return i;
+    }
+}
+
+/* main - test */
+//Java 的动态绑定机制（很重要！！！）
+// 1. 当调用对象方法的时候，该方法会和该对象的内存地址/运行类型绑定
+// 2. 当调用对象属性时，没有动态绑定机制，哪里声明，哪里使用
+A a = new B();
+// 访问属性时，看编译类型【逐级查找】；访问方法时，看运行类型【逐级查找】；
+// 分析：a的运行类型是B，所以先查B类有没sum方法，有直接执行，很容易知道结果 40
+System.out.println(a.sum());  // 40
+// 分析：a的运行类型是B，所以先查B类有没sum1方法，有直接执行，很容易知道结果 30
+
+System.out.println(a.sum1()); // 30
+// 分析：a的运行类型是B，所以先查B类有没sum2方法，没有，那么执行A类的sum2方法，
+// 重点来了，sum2调用了getI()，这个方法B和A类都有，根据上面“动态绑定机制”，会执行B类中的getI()，所以结果为 30
+System.out.println(a.sum2()); // 30
+// 分析：a的运行类型是B，所以先查B类有没sum3方法，没有，那么执行A类的sum3方法，
+// 重点来了，sum3中的 i ，这个属性B和A类都有，根据上面“动态绑定机制”，会使用A类中的 i ，所以结果为 20
+
+System.out.println(a.sum3()); // 20
+```
+
+###### 11、多态的练习4
+
+```java
+class Person{
+    String name;
+    int age;
+    Person(String name,int age){
+        this.name = name;
+        this.age = age;
+    }
+    public String say(){
+        return name + "," + age;
+    }
+}
+class Student extends Person{
+    double score;
+    Student(String name, int age, double score) {
+        super(name, age);
+        this.score = score;
+    }
+    public String say(){
+        return "学生：" + super.say() + "," + score;
+    }
+    
+    // 学生特有方法
+    public String getScore(){
+        return "学生成绩：" + score;
+    }
+}
+class Teacher extends Person{
+    double salary;
+    Teacher(String name, int age, double salary) {
+        super(name, age);
+        this.salary = salary;
+    }
+    public String say(){
+        return "老师：" + super.say() + "," + salary;
+    }
+    // 老师特有方法
+    public String getSalary(){
+        return "老师薪水：" + salary;
+    }
+}
+
+/* main - test */
+Person[] p = new Person[5];
+p[0] = new Person("li",18);
+p[1] = new Student("qin",19,80);
+p[2] = new Student("liu",20,90);
+p[3] = new Teacher("wang",21,10000);
+p[4] = new Teacher("yang",22,20000);
+for (Person person : p) {
+    System.out.println(person.say());
+    if(person instanceof Student){
+        System.out.println(((Student) person).getScore());
+    }
+    if(person instanceof Teacher){
+        System.out.println(((Teacher) person).getSalary());
+    }
+}
+```
 
 
 

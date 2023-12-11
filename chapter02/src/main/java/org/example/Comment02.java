@@ -3,14 +3,28 @@ package org.example;
 /**
  * @author wing
  * @version 1.1
+ *
  */
 public class Comment02 {
     public static void main(String[] args) {
+        Person p1 = new Person("wang",19);
+        System.out.println("p1 的hashCode:" + p1.hashCode());
+        System.out.println("p1 :" + p1);
+        Person p2 = new Person("li",18);
+        System.out.println("p2 的hashCode:" + p2.hashCode());
+    }
+}
 
-        // 怎么把String转成char呢？因为char只能有一个字符，所以转换方式如下
-        char ch = 52906; // 3
-        System.out.println(ch);
 
 
+
+class Person{
+    String name;
+    int age;
+    public Person(String name,int age){
+        this.age = age;
+        this.name = name;
+        System.out.println("this 的hashCode:" + this.hashCode());
+        System.out.println("this:" + this);
     }
 }
