@@ -1977,7 +1977,451 @@ System.out.println("程序结束");
 
 #### 11 面向对象编程（高级）
 
+#####  11.1 类变量(静态变量)和类方法(静态方法)
+
+> 介绍
+
+类变量也叫静态变量/静态属性，是该类的所有对象共享的变量,任何一个该类的对象去访问它时,取到的都是相同的值,同样任何一个该类的对象去修改它时,修改的也是同一个变量。
+
+```java
+// 定义语法
+// 第一种
+访问修饰符 static 数据类型 变量名：【推荐】
+
+//第二种
+static 访问修饰符 数据类型 变量名;【不推荐】
+```
+
+> 如何访问类变量
+
+```java
+// 使用方式 静态变量的访问修饰符的访问权限和范围 和 普通属性是一样的。
+//方式一
+类名.类变量名    //【推荐】
+
+//方式二
+对象名.类变量名  //【不推荐】
+```
+
+> 类变量和类方法使用注意事项和细节
+
+1. 什么时候需要用类变量，当我们需要让某个类的所有对象都共享一个变量时，就可以考虑使用类变量(静态变量)
+2. 类变量与实例变量（普通属性） 区别：类变量是该类的所有对象共享的，而实例变量是每个对象独享的
+3. 加上static称为类变量或静态变量，否则称为实例变量/普通变量/非静态变量
+4. 类变量可以通过 【类名.类变量名】 或者 【对象名.类变量名】 来访问，但java设计者推荐我们使用 类名.类变量名方式访问。
+5. 实例变量不能通过 类名.类变量名 方式访问
+6. 类变量是在类加载时就初始化了，也就是说，即使你没有创建对象，只要类加载了就可以使用类变量了
+7. 类变量的生命周期是随类的加载开始，随着类消亡而销毁。
+
+
+
+> 类方法介绍
+
+类方法也叫静态方法
+
+```java
+// 定义形式如下：
+//方式一
+访问修饰符 static 数据返回类型 方法名(){}   // 【推荐】
+
+//方式二
+static 访问修饰符 数据返回类型 方法名(){}   // 【不推荐】
+```
+
+> 类方法的调用
+
+```java
+// 使用方式   前提是满足访问修饰符的访问权限和范围
+//方式一
+【类名.类方法名】   // 【推荐】
  
+//方式二
+【对象名.类方法名】  // 【不推荐】
+```
+
+> 使用场景
+
+当方法中不涉及到任何对象相关的成员，则可以将方法设计成静态方法，提高开发效率，比如 Math、Arrays、Collections集合类等
+
+> 类方法使用注意事项和细节
+
+1. 类方法和普通方法都是随着类的加载而加载，将结构信息存储在方法区：类方法中无this的参数（普通方法中隐含着this的参数）
+2. 类方法中不允许使用和对象有关的关键字，比如this和super。普通方法(成员方法）可以
+3. 类方法(静态方法)中 只能访问 静态变量 或静态方法
+4. 静态方法，只能访问静态的成员，非静态的方法，可以访问静态成员和非静态成员，也就是可以访问所有的成员(必须遵守访问权限）
+
+
+
+#####  11.2 理解main方法语法
+
+> 解释main方法的形式：public static void main (String [] args){}
+
+1. main方法由虛拟机调用
+2. java虛拟机需要调用类的main()方法，所以该方法的访问权限必须是public
+3. java虛拟机在执行main()方法时不必创建对象，所以该方法必须是static
+4. 该方法接收String类型的数组参数，该数组中保存执行java命令时传递给所运行的类的参数
+
+```java
+比如在命令行执行一个类：java Hello tom wing li
+那么String[] args数组接收到的内容就是：
+arg[0]：tom
+arg[0]：wing
+arg[0]：li
+```
+
+
+
+#####  11.3 代码块
+
+> 介绍
+
+代码化块又称为初始化块;属于类中的成员【即是类的一部分】，类似于方法，将逻辑语句封装在方法体中，通过{}包裹起来。
+
+但和方法不同，没有方法名，没有返回，没有参数，只有方法体，而且不用通过对象或类显式调用，而是**加载类(静态代码块)或创建对象(普通代码块)时隐式调用**
+
+```java
+// 基本语法
+[修饰符]{
+ 代码
+};
+
+// 注意：
+1）修饰符 可选，要写的话，也只能写 static
+2）代码块分为两类，使用static 修饰的叫静态代码块，没有static修饰的，叫普通代码块
+3）逻辑语句可以为任何逻辑语句（输入、输出、方法调用、循环、判断等）
+4）分号“;”可以写上，也可以省略
+```
+
+> 好处和使用场景
+
+1. 相当于另外一种形式的构造器（对构造器的补充机制），可以做初始化的操作
+2. 场景：如果多个构造器中都有重复的语句，可以抽取到初始化块中，提高代码的重用性
+
+> 代码块使用注意事项和细节
+
+1. 代码块优先于构造器执行
+2. 静态代码块优先于普通代码块执行
+3. `static代码块`也叫静态代码块，作用就是对类进行初始化，而且它随着**类的加载**而执行，并且**只会执行一次**。如果是`普通代码块`，每创建一个对象，就执行
+4. 普通的代码块，在创建对象实例时，会被隐式的调用。被创建一次，就会调用一次，如果**只是使用类的静态成员时，普通代码块井不会执行**
+
+```java
+// 类什么时候被加载(重点)
+1)创建对象实例时(new)
+2)创建子类对象实例，父类也会被加载
+3)使用类的静态成员时(静态属性，静态方法）
+```
+
+> 创建一个对象，在一个类，调用的顺序是(重点！！！)：
+
+1. `第一步`先**调用静态代码块和静态属性初始化**(注意：静态代码块和静态属性初始化调用的优先级一样，如果有多个静态代码块和多个静态变量初始化，则按他们定义的顺序调用）
+2. `第二步`**调用普通代码块和普通属性的初始化**(注意：普通代码块和普通属性初始化调用的优先级一样，如果有多个普通代码块和多个普通属性初始化，则按定义顺序调用）
+3. `最后`调用构造方法。
+4. 构造器 的最前面其实隐含了 supe()和 调用普通代码块，静态相关的代码块， 属性初始化，在类加载的，就执行完毕，因此是优先于 构造器和普通代码块执行的
+5. 注意，如果有继承关系，B继承A类，new B()时，加载顺序是：**A类静态属性或者静态代码块**（优先级一样，按顺序执行） >  **B类静态属性或者静态代码块**（优先级一样，按顺序执行 ）> **A类普通属性初始化和普通代码块**（优先级一样，按顺序执行 ） > **A类构造方法** > **B类普通属性初始化和普通代码块**（优先级一样，按顺序执行 ） > **B类构造方法** 【见下面输出，这个真的很重要！！！】
+6. 静态代码块只能直接调用静态成员(静态属性和静态方法），普通代码块可以调用任意成员
+
+```java
+//我们看一下创建一个子类时(继承关系)，他们的静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法的调用顺序如下：
+
+1)父类的静态代码块和静态属性(优先级一样，按定义顺序执行)
+2)子类的静态代码块和静态属性(优先级一样，按定义顺序执行)
+3)父类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行）
+4)父类的构造方法
+5)子类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行）
+6)子类的构造方法
+```
+
+
+
+```java
+class A{
+   static {
+       System.out.println("AAA 静态代码块 1 执行");
+   }
+   private static int age = getAge();
+   static {
+       System.out.println("AAA 静态代码块 2 执行");
+   }
+   private static String name = getName();
+   {
+       System.out.println("AAA 普通代码块执行");
+   }
+    private int hobby = getHobby();
+    private int fatherField = getFatherField();
+   A(){
+       System.out.println("AAA 构造方法执行");
+   }
+   private String nickName = getNickName();
+   public static int getAge(){
+       System.out.println("AAA 静态属性 age 赋值");
+       return age;
+   }
+   public int getHobby(){
+       System.out.println("AAA 普通属性 hobby 赋值");
+       return hobby;
+   }
+   public int getFatherField(){
+       System.out.println("AAA 普通属性(特有) fatherField 赋值
+       return fatherField;
+   }
+   public static String getName(){
+       System.out.println("AAA 静态属性 name 赋值");
+       return name;
+   }
+   public String getNickName(){
+       System.out.println("AAA 普通属性nickName赋值");
+       return nickName;
+   }
+}
+class B extends A{
+    private static int age = getAge();
+    static {
+        System.out.println("BBB 静态代码块 1 执行");
+    }
+    static {
+        System.out.println("BBB 静态代码块 2 执行");
+    }
+    {
+        System.out.println("BBB 普通代码块执行");
+    }
+    private int hobby = getHobby();
+    private static String name = getName();
+    private String nickName = getNickName();
+    private int sonField = getSonField();
+    B(){
+        System.out.println("BBB 构造方法执行");
+    }
+    public static int getAge(){
+        System.out.println("BBB 静态属性 age 赋值");
+        return age;
+    }
+    public static String getName(){
+        System.out.println("BBB 静态属性 name 赋值");
+        return name;
+    }
+    public int getHobby(){
+        System.out.println("BBB 普通属性 hobby 赋值");
+        return hobby;
+    }
+    public String getNickName(){
+        System.out.println("BBB 普通属性 nickName 赋值");
+        return nickName;
+    }
+    public int getSonField(){
+        System.out.println("BBB 普通属性(特有) sonField 赋值")
+        return sonField;
+    }
+}
+                          
+                          
+ new B();
+/* 打印结果如下： */
+// AAA 静态代码块 1 执行
+// AAA 静态属性 age 赋值
+// AAA 静态代码块 2 执行
+// AAA 静态属性 name 赋值
+// BBB 静态属性 age 赋值
+// BBB 静态代码块 1 执行
+// BBB 静态代码块 2 执行
+// BBB 静态属性 name 赋值
+// AAA 普通代码块执行
+// BBB 普通属性 hobby 赋值 //【按查找顺序，子类BBB有getHobby()方法就直接使用，不会使用AAA的getHobby()方法】
+// AAA 普通属性(特有) fatherField 赋值 //【按查找顺序，子类BBB没有getFatherField()方法，所以使用AAA的getFatherField()方法】
+// BBB 普通属性 nickName 赋值 //【按查找顺序，子类BBB有getHobby()方法就直接使用，不会使用AAA的getHobby()方法】
+// AAA 构造方法执行
+// BBB 普通代码块执行
+// BBB 普通属性 hobby 赋值
+// BBB 普通属性 nickName 赋值
+// BBB 普通属性(特有) sonField 赋值
+// BBB 构造方法执行
+```
+
+
+
+#####  11.4 单例设计模式
+
+> 什么是单例设计模式
+
+1. 静态方法和属性的经典使用
+2. 设计模式是在大量的实践中总结和理论化之后优选的代码结构、编程风格、以及解决问题的思考方式。设计模式就像是经典的棋谱，不同的棋局，我们用不同的棋谱，免去我们自己再思考和摸索
+3. 所谓类的单例设计模式，就是采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，井且该类只提供一个取得其对象实例的方法
+4. 单例模式有两种方式：1）**饿汉式** 2)**懒汉式**
+5. 设计模式有23种，比如：单例、工厂、代理、观察者、装饰者等
+
+
+
+> 单例模式什么场景下会使用呢
+
+比如：有一个类，而且是核心类，并且是重量级，非常耗费资源的，但实际上我们整个系统只需要一个。这时就可以将这个类设计成单例模式。
+
+
+
+> 单例模式使用步骤
+
+1. 构造器私有化（不允许创建对象）
+2. 类的内部创建对象
+3. 向外暴露一个可获取该对象的静态的公共方法 getInstance()
+
+> 饿汉式和懒汉式
+
+```java
+
+/** 饿汉式 */
+class GirlFriend{
+    public static int age = 10;
+    // 【饿汉式】类加载时就创建，不管是否有使用，先加载
+    private static GirlFriend gf = new GirlFriend();
+    private GirlFriend(){System.out.println("GirlFriend 构造器被调用");}
+    public static GirlFriend getInstance(){
+        return gf;
+    }
+}
+
+/** 懒汉式 */
+class BoyFriend{
+    public static int age = 20;
+    // 【懒汉式】类加载时不创建，使用时才创建
+    private static BoyFriend bf = null;
+    private BoyFriend(){System.out.println("BoyFriend 构造器被调用");}
+    public static BoyFriend getInstance(){
+        if(bf == null){
+            bf = new BoyFriend();
+        }
+        return bf;
+    }
+}
+
+
+/** 测试是否执行了构造器 */
+System.out.println(GirlFriend.age);
+System.out.println(BoyFriend.age);
+/** 测试饿汉式 */
+GirlFriend gf1 = GirlFriend.getInstance();
+GirlFriend gf2 = GirlFriend.getInstance();
+System.out.println(gf1 == gf2 ); //true
+/** 测试懒汉式 */
+BoyFriend bf1 = BoyFriend.getInstance();
+BoyFriend bf2 = BoyFriend.getInstance();
+System.out.println(bf1 == bf2 ); //true
+```
+
+> 饿汉式VS懒汉式
+
+1. 二者最主要的区别在于创建对象的时机不同：饿汉式是在类加载就创建了对象实例，而懒汉式是在使用时才创建
+2. 饿汉式不存在线程安全问题，懒汉式存在线程安全问题
+3. 饿汉式存在浪费资源的可能。因为如果程序员一个对象实例都没有使用，那么饿汉式创建的对象就浪费了，懒汉式是使用时才创建，就不存在这个问题
+4. 在我们javaSE标准类中，java.lang.Runtime就是经典的单例模式
+
+
+
+#####  11.5 final关键字
+
+> 基本介绍
+
+1. 当不希望类被继承时,可以用final修饰
+2. 当不希望父类的某个方法被子类覆盖/重写(override)时（可以继承）,可以用final关键字修饰
+3. 当不希望类的的某个属性的值被修改,可以用final修饰
+4. 当不希望某个局部变量被修改，可以使用final修饰
+
+> 注意事项和细节
+
+1. final修饰的属性又叫常量，一般 用XX_XX_XX来命名
+
+2. final修饰的属性（非静态）在定义时,必须赋初值,并且以后不能再修改，赋值可以在如下位置之一【选择一个位置赋初值即可】
+
+   1）定义时
+
+   2）在构造器中
+
+   3）在代码块中
+
+3. 如果final修饰的属性是**静态**的，则初始化的位置只能是：
+
+   1）定义时
+
+   2）在静态代码块（不能在构造器中赋值）
+
+4. final类不能继承，但是可以实例化对象
+
+5. 如果类不是final类，但是含有final方法，则该方法虽然不能重写，但是可以被继承。
+
+6. 一般来说，如果一个类已经是final类了，就没有必要再将方法修饰成final方法
+
+7. final不能修饰构造方法
+
+8. final 和 static 往往搭配使用，效率更高，不会导致类加载，底层编译器做了优化处理【见下面代码,有点意思】
+
+9. 包装类(Integer,Double,Float, Boolean等都是final),String也是final类。
+
+```java
+class A{
+    public static int num1 = 100;
+    public final static int num2 = 200;
+    static {
+        System.out.println("A 的静态代码块被执行了");
+    }
+}
+
+ // 单独输出A.num1，会执行静态代码块，导致类加载
+ System.out.println(A.num1);
+ // 单独输出A.num2，不会执行静态代码块，不会进行类加载
+ //System.out.println(A.num2);
+```
+
+
+
+#####  11.6 抽象类
+
+> 介绍
+
+当父类的某些方法，需要声明，但是又不确定如何实现时，可以将其声明为抽象方法（具体实现交给子类实现），那么这个类就是抽象类。抽象类的价值更多作用是在于设计，是设计者设计好后，让子类继承实现抽象类
+
+> 注意事项和细节
+
+1. 一个类有抽象方法时，这个类必须声明为抽象类，abstract修饰
+2. 抽象类中不一定存在抽象方法，也可以没有抽象的方法
+3. 抽象类不能被实例化
+4. abstract 只能修饰类和方法，不能修饰属性和其它的
+5. 抽象类可以有任意成员 【因为抽象类还是类】，比如：非抽象方法、构造器、静态属性等
+6. 如果一个类继承了抽象类，则它必须实现抽象类的所有抽象方法，除非它自己也声明为abstract类。
+
+
+
+> 抽象类如何做成“模板设计模式” 【阅读代码，很有价值】
+
+看代码：
+
+原始：org.example.abstract_.test01.TestTemplate01
+
+改进：org.example.abstract_.test02.TestTemplate02
+
+最终：org.example.abstract_.test03.TestTemplate03
+
+
+
+
+
+
+
+#####  11.7 接口
+
+#####  11.8 内部类
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### 练习题
 
@@ -2388,9 +2832,75 @@ new Demo("john").test();
 //Jack
 ```
 
+###### 14、final练习
 
+```java
+《基本数据类型测试》
+class A{
+    // 方法形参也能使用final修饰
+    public int addOne(final int x){
+        // x++;  不允许修改，这是错误的
+        return x + 1;
+    }
+}
 
+ A a = new A();
+ System.out.println(a.addOne(4));
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+《引用数据类型测试》
+  class A{
+    public void addStudent(final Student stu){
+        System.out.println(stu);
+        //stu = null; 不允许修改地址
+        stu.setAge(20); // 运行修改值
+        System.out.println(stu);
+    }
+}
+class Student{
+    int age = 10;
+    String name = "Wing";
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    @Override
+    public String toString() {
+        return "Student{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+
+A a = new A();
+a.addStudent(new Student());
+```
+
+###### 15、abstract抽象类
+
+```java
+题1，思考：abstract final class A1() 能编译通过吗，why？错误 final是不能继承
+题2，思考：abstract public static void test2()；能编译通过吗，why？ 错误，static关键字和方法重写无关
+题3，思考：abstract private void test3()；能编译通过吗，why? 错误，私有方法不能被重写
+  
+//演示父类的私有方法不能被子类重写 
+class A{
+    private void add(){} // 父类私有的方法，这里再加一个 abstract 就更错
+}
+class B extends A{
+    @Override
+    void add(){}  // 尝试重写父类的方法，报错，因为父类的方法被私有
+}  
+```
 
 
 
