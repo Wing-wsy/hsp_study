@@ -1,3 +1,5 @@
+
+
 ### 一、Java基础
 
 #### 1 注意事项和细节
@@ -13,11 +15,14 @@
 ##### 1.1 小思考
 
 ```markdown
-问：Java多个类写到同一个文件和分开写有什么好处呢？
+问：Java多个类(接口也是一样的)写到同一个文件和分开写有什么好处呢？
 答：有好处和弊端，
 好处：方便管理，比如Dog和Cat类写在了Hello类中，而一个文件只能有一个类使用public修饰，所以Dog和Cat不能使用public修饰，所以只能在本包内使用，在其他包无法使用，刚好这两个类我们也仅仅设计成只能 Hello类 来访问，所以这时写到一个文件中。
 
 弊端：不能被其他包的类访问，不方便后续扩展。
+
+补充：类和接口修饰只能使用 public 和 默认
+interface A{} 或者 public interface A{}，类就是如：public class A{} 或者 class A{} 【使用public修饰就要跟文件名一致】
 ```
 
 ###### 1.2 学习新技术的方法：
@@ -2397,27 +2402,448 @@ class A{
 
 最终：org.example.abstract_.test03.TestTemplate03
 
+> 最终版代码
 
+```java
+public class AA extends Template {
+    @Override
+    public void job(){
+        long num = 0;
+        for (long i = 0; i < 800000; i++) {
+            num += i;
+        }
+    }
+}
 
+public class BB extends Template{
+    @Override
+    public void job(){
+        long num = 0;
+        for (long i = 0; i < 100000; i++) {
+            num *= i;
+        }
+    }
+}
 
+abstract public class Template {
+    public abstract void job();// 抽象方法
+    public void calculateTime(){
+        long start = System.currentTimeMillis();
+        job();
+        long end = System.currentTimeMillis();
+        System.out.println("执行时间：" + (end - start));
+    }
+}
 
-
+AA aa = new AA();
+aa.calculateTime();
+BB bb = new BB();
+bb.calculateTime();
+```
 
 #####  11.7 接口
 
+> 介绍
+
+接口就是给出一些没有实现的方法,封装到一起,到某个类要使用的时候,在根据具体情况把这出方法写出来
+
+
+
+> 注意事项和细节
+
+1. 在Jdk7.0前 接口里的所有方法都没有方法体
+2. Jdk8.0后（包括）接口类可以有静态方法，默认方法(default修饰)，也就是说接口中可以有方法的具体实现
+3. 接口中定义的没有实现体的方法，`默认为抽象方法`，可以省略abstract关键字
+4. 接口不能被实例化
+5. 接口中所有的方法是 public方法，接口中抽象方法，可以不用abstract 修饰
+6. 一个普通类实现接口,就必须将该接口的所有方法都实现。
+7. 抽象类实现接口，可以不用实现接口的方法
+8. 一个类同时可以实现多个接口
+9. 接口中的属性，只能是final的，而且是 public static final 修饰符。比如：int a=1;实际上是 public static final int a=1;（必须初始化）
+10. 接口中属性的访问形式：接口名.属性名
+11. 接口不能继承其它的类,但是可以继承多个别的接口
+12. 接口的修饰符 只能是 **public 和默认**，这点和类的修饰符是一样的,如：interface A{} 或者 public interface A{}，类就是如：public class A{} 或者 class A{} 【使用public修饰就要跟文件名一致】
+
+```java
+// 重点：接口里面可以定义属性，还可以定义方法，方法只能定义这三种（1.抽象方法 2.默认实现方法 3.静态方法）
+public interface AInterface {
+    public int n1 = 10;
+    // 普通抽象方法
+    public void hi();
+    
+    //接口可以定义默认方法（JDK8或者之后）
+    default public void ok(){
+        System.out.println("ok"
+    }
+    //接口可以定义静态方法（JDK8或者之后）
+    public static void cry(){
+        System.out.println("cry
+    }
+}
+```
+
+> 验证接口中的方法是public修饰的
+
+```java
+public interface AInterface {
+    void say();// 假如接口不是public，那这里没写就是默认
+}
+class Cat implements AInterface{
+    @Override
+    void say() {}   // 子类实现时，也设置成默认，按照子类不能缩小父级的修饰符权限，这应当是可以的，但是这里会报错，所以验证完毕，接口里的方法都是public修饰的
+}
+```
+
+[类和接口的修饰符](#####1.1 小思考)
+
+
+
+> 实现接口 VS 继承类
+
+接口和继承解决的问题不同
+
+`继承的价值主要在于`：解决代码的复用性和可维护性。
+
+`接口的价值主要在于`：设计，设计好各种规范(方法），让其它类去实观这些方法。
+
+接口比继承更加灵活，接口在一定程度上实现代码解耦
+
+
+
+> 多态传递
+
+```java
+interface IG extends IH{}   // 1）这里继承了 IH
+interface IH{}
+class Student implements IG{}
+
+IG ig = new Student();
+IH ih = new Student();   // 2）所以这里可以接收，这就是多态传递
+```
+
+
+
 #####  11.8 内部类
 
+> 介绍
+
+一个类的内部又完整的嵌套了另一个类结构。被嵌套的类称为内部类(inner class),嵌套其他类的类称为外部类(outer class)。是我们`类的第五大成员`，**内部类最大的特点就是可以直接访问私有属性**，并且可以体现类与类之间的包含关系。
+
+```java
+// 基本语法
+class Outer{  // 外部类
+  class Inner{  // 内部类
+  }
+}
+```
+
+> 类的五大成员
+
+1. 成员属性
+2. 成员方法
+3. 构造方法
+4. 代码块
+5. 内部类
+
+
+
+> 内部类的分类
+
+```java
+/* 定义在外部类局部位置上（比如方法内）：*/
+1）局部内部类（有类名）
+2）匿名内部类（没有类名，重点！！！！！！）
+
+/* 定义在外部类的成员位置上：*/
+1）成员内部类（没有static修饰）
+2）静态内部类（使用static修饰）
+```
+
+###### 11.8.1 局部内部类
+
+说明：局部内部类是定义在外部类的局部位置，比如方法中，也可以代码块中，并且有类名
+
+1. 可以直接访问外部类的**所有成员**，包含私有的
+2. 不能添加访问修饰符,因为它的地位就是一个局部变量。局部变量是不能使用修饰符的。但是可以使用final 修饰，因为局部变量也可以使用final【在外部类的同一个方法里面，比如有两个内部类 Inner01(使用final修饰，说明不能被继承)、Inner02，这时Inner02 extends Inner01 会报错，因为Inner01使用了final修饰】
+3. 作用域：仅仅在定义它的方法或代码块中
+4. 局部内部类----访问---->外部类的成员【访问方式：直接访问】
+5. 外部类----访问---->局部内部类的成员【访问方式：创建对象，再访问(注意：必须在作用域内）比如外部类里面有一个方法m1，m1方法里面有一个内部类Inner02,那么直接在m1方法里面，new Inner02(); 就行】
+6. 外部其他类--不能访问-----＞局部内部类（ 因为 局部内部类地位是一个局部变量）
+7. 如果外部类和局部内部类的成员重名时，默认遵循就近 原则，如果想访问外部类的成员，则可以使用（外部类名.this.成员）去访问【比如外部类有一个变量 n1，局部内部类也有一个变量n1，那么局部内部类里面的方法输出n1时，输出的是哪个呢？就近原则，使用的是局部内部类的，但是想输出外部类的n1，怎么访问呢？可以使用“外部类名.this.成员”来访问】
+
+
+
+```java
+class Outer02{  // 外部类
+    private int n1 = 100;
+    private void m2(){  // 私有方法
+        System.out.println("Outer02 m2()");
+    }
+    public void m1(){  // 公有方法
+        //1.局部内部类是定义在外部类的局部位置，通常在方法
+        //3.不能添加访问修饰符，但是可以使用final 修饰
+        //4.作用域：仅仅在定义它的方法或代码块中
+        final class Inner02{//局部内部类(本质仍然是一个类)
+            private int n1 = 200;
+            //2.可以直接访问外部类的所有成员，包含私有的,见f1方法
+            public void f1(){
+                //5．局部内部类可以直接访问外部类的成员，比如下面 外部类n1 和m2()
+                // 6如果外部类和局部内部类的成员重名时都是n1，默认遵循就近原则，如果想访问外部类的成员，则可以使用（外部类名.this.成员）去访问【Outer02.this 就是调用 m1 的对象，谁调用了m1，】
+                System.out.println("n1=" + n1 + "  " + Outer02.this.n1 );
+              System.out.println("Outer02.this hashCode:" + Outer02.this.hashCode());
+              System.out.println("this hashCode:" + this.hashCode());
+                m2();
+            }
+        }
+        Inner02 inner02 = new Inner02();
+        inner02.f1();
+    }
+}
+
+Outer02 outer02 = new Outer02();
+outer02.m1();
+System.out.println("outer02 hashCode:" + outer02.hashCode());
+System.out.println("inner02 hashCode:" + inner02.hashCode());
+
+//输出结果：
+n1=200  100
+Outer02.this hashCode:747464370  // 和下面输出的 hashCode一样，说明是同一个对象引用
+this hashCode:1513712028
+Outer02 m2()
+inner02 hashCode:1513712028
+outer02 hashCode:747464370
+```
+
+
+
+###### 11.8.2 匿名内部类
+
+> 介绍
+
+本质还是类，该类没有名字，同时还是一个对象，匿名内部类是定义在外部类的局部位置，比如方法中，井且没有类名（准确来说是有类名，只是类名由系统分配）
+
+```java
+// 基本语法
+new 类或接口(参数列表){
+  类体
+};
+```
+
+> 匿名内部类基于接口使用
+
+```java
+// 匿名内部类作用：简化开发，我们只想使用一次之后就不再使用了，所以没必要再写一个类来实现接口，再去调用（匿名内部类一般用于传递参数）
+
+interface IA{
+    void cry();
+}
+
+
+// 编译类型：IA
+// 运行类型：匿名内部类
+/*
+  底层会帮我们创建出一个类并且实现接口 类名自动分配比如：Outer04$1,并且创建好之后里面就new了一个Outer04$1实例，并且把地址返回给了 ia 的引用（匿名内部类使用一次之后就没有了，但是引用 ia 可以多次调用）：
+   class Outer04$1 implements IA{
+        @Override
+        public void cry() {
+            System.out.println("老虎叫唤。。");
+        }
+    }
+* */
+IA ia = new IA() {
+    @Override
+    public void cry() {
+        System.out.println("老虎叫唤。。");
+    }
+};
+ia.cry();
+// 获取运行类型
+System.out.println("匿名内部类的运行类型：" + ia.getClass());
+
+老虎叫唤。。
+匿名内部类的名称：class org.example.innerclass.Outer04$1
+```
+
+> 匿名内部类基于类使用
+
+```java
+class Father{
+    public void cry(){
+        System.out.println("father 叫唤");
+    }
+}
+
+Father fa1 = new Father();
+System.out.println("运行类型：" + fa1.getClass());
+Father fa2 = new Father() {
+    @Override
+    public void cry() {
+        System.out.println("儿子叫唤。。");
+    }
+};
+fa2.cry();
+// 获取运行类型
+System.out.println("匿名内部类的运行类型：" + fa2.getClass());
+
+运行类型：class org.example.innerclass.Father
+儿子叫唤。。
+匿名内部类的运行类型：class org.example.innerclass.Outer04$1
+```
+
+> 注意事项和细节
+
+1. 可以直接访问外部类的所有成员，包含私有的
+2. 匿名内部类不能添加访问修饰符,因为它的地位就是一个局部变量（Father fa2 = public new Father() {} 不能这样写）
+3. 作用域：仅仅在定义它的方法或代码块中
+4. 外部其他类--不能访问-----＞匿名内部类（因为 匿名内部类地位是一个局部变量）
+5. 如果外部类和匿名内部类的成员重名时，匿名内部类访问的话，默认遵循就近原则，如果想访问外部类的成员，则可以使用 （外部类名,this.成员）去访问（参考上面局部内部类的代码）
 
 
 
 
 
+###### 11.8.3 成员内部类
+
+> 介绍
+
+成员内部类是定义在外部类的成员位置，井且没有static修饰
+
+> 使用注意事项和细节
+
+1. 可以直接访问外部类的所有成员，包含私有的
+2. 可以添加任意访问修饰符(public. protected、默认、private),因为它的地位就是一个成员
+3. 作用域和外部类的其他成员一样，为整个类体，比如前面案例，在外部类的成员方法中创建成员内部类对象，再调用方法
+4. 成员内部类---访问---->外部类成员(比如：属性）[访问方式：直接访问]
+5. 外部类---访问------>成员内部类（说明）访问方式：创建对象，再访问
+6. 外部其他类---访问---＞成员内部类【2种方式，见下面演示】
+7. 如果外部类和内部类的成员重名时，内部类访问的话，默认遵循就近原则，如果想访问外部类的成员，则可以使用(外部类名.this.成员）去访问
+
+> 简单使用
+
+```java
+class Outer08{
+    private int n1 = 10;
+    public String name = "Wing";
+    // 成员内部类
+    class Inner08{
+        public void say(){
+            // 1、成员内部类，是定义在外部类成员的位置上
+// 2、成员内部类跟成员一样，可以使用所有的修饰符修饰
+            System.out.println("n1 = " + n1 + ",name = " + name);
+        }
+    }
+    public void t1(){
+        // 可以在成员方法，new 成员内部类的对象
+        Inner08 inner08 = new Inner08();
+        inner08.say();
+    }
+   public Inner08 getInstance(){
+     return new Inner08();
+    }
+  
+}
+
+
+Outer08 outer08 = new Outer08();
+outer08.t1();
+
+n1 = 10,name = Wing
+```
+
+> 外部其他类---访问---＞成员内部类的2种方式
+
+```java
+// 方式1
+Outer08.Inner08 inner081 = new Outer08().new Inner08();
+inner081.say();
+
+或者
+  
+Outer08 outer08 = new Outer08();
+Outer08.Inner08 inner08 = outer08.new Inner08();
+
+// 方式2
+Outer08.Inner08 instance = outer08.getInstance();
+instance.say();
+```
 
 
 
+###### 11.8.4 静态内部类
+
+1. 静态内部类是定义在外部类的成员位置，并且有static修饰
+
+2. 可以直接访问外部类的所有静态成员，包含私有的，但不能直接访问非静态成员
+
+3. 可以添加任意访问修饰符(public. protected 、默认、private),因为它的地位就是
+    一个成员。
+
+4. 作用域：同其他的成员，为整个类体
+
+5. 静态内部类---访问---->外部类(比如：静态属性）[访问方式：直接访问所有静
+
+   态成员]
+
+6. 外部类--访问------>静态内部类 访问方式：创建对象，再访问
+
+7. 外部其它类--访问------>静态内部类 访问方式：创建
+
+8. 如果外部类和静态内部类的成员重名时，静态内部类访问的时，默认遵循就近
+
+   原则，如果想访问外部类的成员，则可以使用(外部类名.成员）去访问
 
 
 
+> 外部类访问静态内部类
+
+```java
+class Outer10{
+    private int n1 = 10;
+    private static String name = "Wing";
+    // 1、放在外部类的成员位置上
+    // 2、使用static 修饰
+    // 3、可以访问外部类所有静态成员，不能访问非静态成员
+    static class Inner10{
+        private static String name = "Wang";
+        public void say(){
+            //可以直接访问外部类的所有成员，包含私有的
+//内部和外部同名，就近原则
+System.out.println("name = " + name + ",外部name = " + Outer10.name);
+        }
+    }
+    public void m1(){
+        //外部类--访问------>静态内部类 访问方式：创建对象，再访问
+        Inner10 inner10 = new Inner10();
+        inner10.say();
+    }
+    public Inner10 getInstance(){
+      return new Inner10();
+    }
+    public static Inner10 getInstance1(){
+      return new Inner10();
+    }
+}
+
+Outer10 outer10 = new Outer10();
+outer10.m1();
+```
+
+> 外部其它类访问静态内部类
+
+```java
+// 方法一：静态内部类，可以通过类名直接访问（前提是满足访问权限）
+Outer10.Inner10 inner10 = new Outer10.Inner10();
+inner10.say();
+
+// 方法二：外部类定义一个getInstance()来获取
+Outer10 outer10 = new Outer10();
+Outer10.Inner10 instance = outer10.getInstance();
+instance.say();
+
+// 方法三：外部类定义一个静态getInstance()来获取
+ Outer10.Inner10 instance1 = Outer10.getInstance1();
+ instance1.say();
+```
 
 
 
@@ -2904,7 +3330,73 @@ class B extends A{
 
 
 
+###### 16、接口
 
+```java
+public interface A {
+    int a = 23;  // 接口的属性默认 public static final
+}
+
+public class B implements A{
+    public static int a = 100;
+}
+
+ B b = new B();
+ System.out.println(b.a); // 23
+ System.out.println(A.a); // 23
+ System.out.println(B.a); // 23  这个也能输出
+
+```
+
+###### 17、继承和实现属性的问题
+
+```java
+interface A {
+    int x = 10;
+}
+class B {
+    int x = 20;
+}
+class C extends B implements A{
+    public void pX(){
+        // System.out.println(x); // 错误，提示x不明确（因为父类和接口都有x）
+        // 可以明确的指定x
+        // 访问接口的 x 就使用 A.x
+        // 访问父类的 x 就使用 super.x
+        System.out.println(A.x + "  " + super.x);
+    }
+}
+
+new C().pX();
+```
+
+###### 18、内部类练习
+
+```java
+class Outer{
+    public Outer(){
+        Inner s1 = new Inner();
+        s1.a = 10;
+        Inner s2 = new Inner();
+        System.out.println(s2.a);
+    }
+    class Inner{
+        public int a = 5;
+    }
+}
+
+public class Outer04 {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        Outer.Inner r = outer.new Inner();
+        System.out.println(r.a);
+    }
+}
+
+//结果：
+5
+5
+```
 
 
 
