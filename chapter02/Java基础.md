@@ -2559,12 +2559,16 @@ class Outer{  // 外部类
 2）静态内部类（使用static修饰）
 ```
 
+
+
+
+
 ###### 11.8.1 局部内部类
 
 说明：局部内部类是定义在外部类的局部位置，比如方法中，也可以代码块中，并且有类名
 
 1. 可以直接访问外部类的**所有成员**，包含私有的
-2. 不能添加访问修饰符,因为它的地位就是一个局部变量。局部变量是不能使用修饰符的。但是可以使用final 修饰，因为局部变量也可以使用final【在外部类的同一个方法里面，比如有两个内部类 Inner01(使用final修饰，说明不能被继承)、Inner02，这时Inner02 extends Inner01 会报错，因为Inner01使用了final修饰】
+2. **不能添加访问修饰符**,因为它的地位就是一个局部变量。局部变量是不能使用修饰符的。但是可以使用final 修饰，因为局部变量也可以使用final【在外部类的同一个方法里面，比如有两个内部类 Inner01(使用final修饰，说明不能被继承)、Inner02，这时Inner02 extends Inner01 会报错，因为Inner01使用了final修饰】
 3. 作用域：仅仅在定义它的方法或代码块中
 4. 局部内部类----访问---->外部类的成员【访问方式：直接访问】
 5. 外部类----访问---->局部内部类的成员【访问方式：创建对象，再访问(注意：必须在作用域内）比如外部类里面有一个方法m1，m1方法里面有一个内部类Inner02,那么直接在m1方法里面，new Inner02(); 就行】
@@ -2613,6 +2617,8 @@ Outer02 m2()
 inner02 hashCode:1513712028
 outer02 hashCode:747464370
 ```
+
+
 
 
 
@@ -2843,6 +2849,204 @@ instance.say();
 // 方法三：外部类定义一个静态getInstance()来获取
  Outer10.Inner10 instance1 = Outer10.getInstance1();
  instance1.say();
+```
+
+
+
+#### 12 枚举和注解
+
+1. 枚举对应英文(enumeration，简写 enum)
+2. 枚举是一组常量的集合
+3. 可以这里理解：枚举属于一种特殊的类，里面只包含一组有限的特定的对象
+
+> 枚举的实现方式
+
+1. 自定义类实现枚举
+2. 使用enum关键字实现枚举
+
+
+
+#####  12.1 自定义类实现枚举
+
+> 自定义类实现枚举
+
+```java
+class Season{
+    // 定义的固定四个对象
+    public static final Season SPRING = new Season("春天","温暖");
+    public static final Season WINTER = new Season("冬天","寒冷");
+    public static final Season AUTUMN = new Season("秋天","凉爽");
+    public static final Season SUMMER = new Season("夏天","炎热");
+
+    private String name;
+    private String desc;
+    // 构造方法私有，不允许创建
+    private Season(String name, String desc){
+        this.name = name;
+        this.desc = desc;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getDesc() {
+        return desc;
+    }
+}
+
+System.out.println(Season.SUMMER.getName());  // 夏天
+System.out.println(Season.SUMMER.getDesc());  // 炎热
+```
+
+
+
+##### 12.2 enum关键字实现枚举
+
+> 使用enum关键字实现枚举（基于自定义类实现改造）
+
+```java
+// 演示使用enum关键字来实现枚举类
+enum Season2 {
+    // 如果使用了enum来实现枚举类
+    // 1.使用enum关键字替代class关键字
+    // 2. public static final Season SPRING = new Season("春天","温暖");  --> SPRING("春天","温暖");
+    // 3. 如果有多个常量（对象）,使用英文逗号间隔
+    // 4. 要求将定义的常量对象写在最前面，比如 SPRING("春天","温暖") 写在 private String name; 后面会报错
+    SPRING("春天","温暖"),
+    WINTER("冬天","寒冷"),
+    AUTUMN("秋天","凉爽"),
+    SUMMER("夏天","炎热"),
+    What;  // 这里实际上是 What()，只不过，调用无参构造器时小括号可以省略
+    private String name;
+    private String desc;
+    // 构造方法私有，不允许创建
+    private Season2(String name, String desc){
+        this.name = name;
+        this.desc = desc;
+    }
+    private Season2(){
+    }
+    public String getName() {
+        return name;
+    }
+    public String getDesc() {
+        return desc;
+    }
+}
+
+System.out.println(Season2.SUMMER.getName());  // 夏天
+System.out.println(Season2.SUMMER.getDesc());  // 炎热
+```
+
+
+
+> enum关键字实现枚举注意事项
+
+1. 当我们使用enum 关健字开发一个枚举类时，**默认会继承Enum类**（作为父类），而且是一个final类
+2. 传统的 public static final Season2 SPRING = new Season2（"春天”，"温暖")：简化成 SPRING("春天”“温暖”)， 这里必须知道，它调用的是哪个构造器
+3. 如果使用无参构造器 创建 枚举对象，则实参列表和小括号都可以省略
+4. 当有多个枚举对象时，使用，间隔，最后有一个**分号结尾**
+5. 枚举对象必须放在枚举类的行首。
+6. 使用enum关键字后，就不能再继承其它类了，因为enum会隐式继承Enum，而Java是单继承机制
+7. 枚举类和普通类一样，可以实现接口，如下形式。enum 类名 implements 接口1，接口21
+
+
+
+> Enum 类常用方法（我们写一个枚举类时，会默认继承 Enum 类，所以我们可以用父类的属性和方法）
+
+1. `tostring`:Enum类已经重马过了，返回的是当前对象名,子类可以重号该方法，用于返回对象的属性信息
+2. `name`：返回当前对象名（常量名），子类中不能重写
+3. `ordinal`：返回当前对象的位置号，默认从0开始
+4. `values`：返回当前枚类中所有的常量
+5. `valueof`：将字符串转换成枚举对象，要求字符串必须为已有的常量名，否则报异常
+6. `compareTo` ：比较两个枚举常量，比较的就是位置号
+
+[见练习题](######20、enum枚举练习)
+
+
+
+##### 12.3 JDK内置的基本注解类型
+
+> 介绍
+
+1. 注解(Annotation)也被称为元数据(Metadata)，用于修饰解释包、类、方法、 属性、构造器、局部变量等数据信息
+2. 和注释一样，注解不影响程序逻辑，但注解可以被编译或运行，相当于嵌入在代码中的补充信息
+3. 在JavaSE中，注解的使用目的比较简单，例如标记过时的功能，忽路警告等。在JavaEE中注解占据了更重要的角色，例如用来配置应用程序的任何切面，代替javaEE旧版中所遗留的繁冗代码和XML配置等
+
+
+
+> 三个基本的 Annotation
+
+1. @Override： 限定某个方法，是重写父类方法，该注解只能用于方法
+2. @Deprecated：用于表示某个程序元素(类，方法等)己过时，过时不代表不能用，只是不推荐使用，可以修饰方法，类，字段，包,参数 等等
+3. @SuppressWarnings:抑制编译器警告
+
+```java
+1)查看@Override注解源码为 @Target(ElementType. IKETHOD),说明只能修饰方法
+2)@Target 是修饰注解的注解，称为元注解
+```
+
+
+
+##### 12.4 元注解：对注解进行注解（了解即可）
+
+> 元注解基本介绍
+
+本身作用不大，但看源码时，可以知道他是干什么
+
+
+
+> 元注解的种类（使用不多，了解，不用深入研究）
+
+1. `Retention`   //指定注解的作用范围，三种 SOURCE,CLASS,RUNTIME
+2. `Target` // 指定注解可以在哪些地方使用
+3. `Documented` //指定该注解是否会在javadoc体现
+4. `lnherited` //子类会继承父类注解
+
+
+
+> @Retention 注解
+
+```markdown
+说明:
+只能用于修饰一个 Annotation 定义，用于指定该 Annotation 可以保留多长时间，@Rentention 包含一个 RetentionPolicy 类型的成员变量，使用 @Rentention时必须为该 value 成员变量指定值：
+
+@Retention的三种值
+1) RetentionPolicy.SOURCE：编译器使用后，直接丢弃这种策略的注释
+2) RetentionPolicy.CLASS: 编译器将把注解记录在 class 文件中.当运行 Java 程序时，JVM 不会保留注解。这是默认值
+3) RetentionPolicy.RUNTIME:编译器将把注解记录在class 文件中.当运行Java 程序时，JVM 会保留注释．程序可以通过反射获取该注解
+
+
+补充解释：
+1) RetentionPolicy.SOURCE：作用在Java源文件（比如，@Override）,编译成class时生效，但不会保留到class文件
+2) RetentionPolicy.CLASS: 作用在Java源文件，并且编译后依然会保留到class文件，但JVM运行时不会保留
+3) RetentionPolicy.RUNTIME:作用在Java源文件，并且编译后会保留到class文件，JVM运行时也会保留
+```
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img02.jpg)
+
+
+
+>  @Target 注解
+
+```markdown
+说明：
+用于修饰 Annotation 定义，用于指定被修饰的 Annotation 能用于修饰哪些程序元素，@Target 也包含一个名为 value 的成员变量
+```
+
+>  @Documented 注解
+
+```markdown
+@Documented：用于指定被该元 Annotation 修饰的 Annotation 类将被javadoc 工具提取成文档，即在生成文档时，可以看到该注解
+
+说明：定义为Documented的注解必须设置Retention值为RUNTIME
+```
+
+>  @lnherited 注解
+
+```markdown
+被它修饰的 Annotation 将具有继承性-如果某个类使用了被 @lnherited 修的 Annotation，则其子类将自动具有该注解
+
+说明：实际应用中，使用较少。了解即可。
 ```
 
 
@@ -3396,6 +3600,104 @@ public class Outer04 {
 //结果：
 5
 5
+```
+
+###### 19、enum枚举语法判断练习
+
+```java
+// 判断下面是否正确
+
+enum Gender{
+  BOY,GIRL; // 这里其实是调用了 Gender类的无参构造器
+}
+
+答：
+  1）上面语法是ok
+  2）有一个枚关类Gender， 没有属性
+  3）有两个枚举对象 BOY, GIRL，使用的无参构造器创建
+```
+
+###### 20、enum枚举练习1
+
+```java
+enum Gender2{
+    BOY,GIRL;
+//    @Override
+//    public String toString() {
+//        return "heihei";
+//    }
+}
+
+Gender2 boy1 = Gender2.BOY;  
+Gender2 boy2 = Gender2.BOY;
+Gender2 boy3 = Gender2.GIRL;
+// 本质就是调用 Gender2 的toString()方法，现在 Gender2类 没有写 toString()方法，所以会找他父类Enum的toString()方法
+System.out.println(boy1); //BOY  如果上面的 toString 注释打开，那么输出 heihei
+System.out.println(boy1 == boy2);// true
+System.out.println(boy1.ordinal());// 0
+System.out.println(boy2.ordinal());// 0
+System.out.println(boy3.ordinal());// 1
+System.out.println(boy1.name());// BOY
+System.out.println(boy2.name());// BOY
+System.out.println(boy3.name());// GIRL
+
+Gender2[] values = Gender2.values();
+for (int i = 0; i < values.length; i++) {
+    System.out.println(values[i]);
+}
+
+// 重点：ordinal() 和 name() 是其父类 Enum 提供的方法
+```
+
+###### 21、enum枚举练习2
+
+```java
+/**
+ * 声明week权举类，基中包含星期一至星期日
+ * MONDAY, TUESDAY WEDNESDAY, THURSDAY. FRIDAY, SATURDAY, SUNDAY:
+ * 使用values 返回所有的枚举数组，井遍历输出 星期一～星期日
+ *
+ * */
+enum Week{
+    MONDAY("星期一"),
+    TUESDAY("星期二"),
+    WEDNESDAY("星期三"),
+    THURSDAY("星期四"),
+    FRIDAY("星期五"),
+    SATURDAY("星期六"),
+    SUNDAY("星期日");
+    private String name;
+    private Week(String name){
+        this.name = name;
+    }
+    @Override
+    public String toString() {
+        return name;
+    }
+}
+
+
+ Week[] weeks = Week.values();
+ for (Week week : weeks) {
+     System.out.println(week);  // 观察上面toString写和不写输出的结果
+ }
+
+// 不写toString
+TUESDAY
+WEDNESDAY
+THURSDAY
+FRIDAY
+SATURDAY
+SUNDAY
+  
+// 写toString
+星期一
+星期二
+星期三
+星期四
+星期五
+星期六
+星期日
 ```
 
 
