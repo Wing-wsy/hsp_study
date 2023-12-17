@@ -1,5 +1,121 @@
 
 
+### Java学习路线
+
+#### 第一阶段：**Java 基础**
+
+最开始要学习的是 Java 基础，学习了这部分，就会对 Java 语言有一个初步的了解。
+
+这部分主要学习的内容有：**基本程序结构，类与对象，接口，泛型，反射，集合，异常与调试， Java 网络编程， Java I/O和多线程**
+
+![](https://pics2.baidu.com/feed/6d81800a19d8bc3e93de6262b640a015aad3459d.jpeg@f_auto?token=1ef1aba6ad85b0976a634065cc300929)
+
+#### 第二阶段：**数据库**
+
+MySQL 和 Oracle 都是广受企业欢迎的数据库，其中 MySQL 是目前应用最广泛的开源关系数据库，目前只学习 MySQL 就可以了。
+
+这部分主要学习的内容有：数据库的**CRUD操作、JDBC API、数据库特性和数据库连接池**。
+
+其中，数据库连接池是为了避免频繁地创建和销毁 JDBC 连接，常见连接池包括**C3P0，Druid 和 HikariCP**，目前使用最广泛的是HikariCP
+
+![](https://pics7.baidu.com/feed/d50735fae6cd7b896896c80b2eef44acdb330e92.jpeg@f_auto?token=780362efcff54a821c3b4ab99134b8d0)
+
+#### 第三阶段：**Java Web**
+
+学习 Java Web，我们不仅需要掌握后端 Java 技术，还需要学习些前端知识。
+
+前端有三大基础技术 **Html、CSS和 Java Script**，初学的话，学习这些就可以了。如果想做出更好的交互式效果，可以再学习Vue和React等前端技术。
+
+后端 Java 技术包括 **Servlet、Filter、Listener、Session、Cookie、JSP、EL 表达式和 JSTL 等**。其中，像 JSP 这样比较老的技术，目前在各大互联网公司基本不再使用，已经被 **Freemark、Thymeleaf** 这样的模板引擎所替代，我们只需要了解基本使用即可
+
+![](https://pics1.baidu.com/feed/eac4b74543a9822616d8f2bbbe49bf0a4b90eb6c.jpeg@f_auto?token=695bdedf9ebd85265d6df7fd9317a6af)
+
+#### 第四阶段：**主流框架**
+
+这部分我们要学习的主流框架主要有 **Spring、Spring MVC 和 MyBatis**，俗称 **SSM** 框架。学习这些框架之前，先学习Maven和Git
+
+`Maven` 本质就是一个巨大的 jar 包资源库，使用 Maven 构建项目，只需在项目的 pom.xml 中配置相关依赖后，就可以直接从远程仓库同步到本地，再也不用满世界搜索下载 jar 包了，省了很多查找和下载的烦恼。
+
+![](https://pics1.baidu.com/feed/b812c8fcc3cec3fd7da98829fc43d23486942728.jpeg@f_auto?token=777fa5d809bf7d3898bdaa58d4432d99)
+
+`Git` 是一个开源的分布式版本控制系统，最大作用就是对文件进行版本管理，方便在不同版本进行切换修改，还可以很方便的协作开发。
+
+`GitHub` 是基于 Git 的代码库托管站，学会了 Git ，我们就能愉快地上 Github 交友了
+
+
+
+![](https://pics7.baidu.com/feed/d009b3de9c82d1588b5b2d729ac11fd3be3e4269.jpeg@f_auto?token=c652b35acebd478591b85737d64aa693)
+
+**SSM框架**:
+
+`Spring` 是一个轻量级的 Java 开发框架，现在已经是最受欢迎的企业级 Java 应用程序开发框架。Spring 框架的核心特性是依赖注入(DI)与面向切面编程(AOP).
+
+![](https://pics6.baidu.com/feed/5fdf8db1cb134954f75aa63a77859453d0094a7a.jpeg@f_auto?token=a1e162a089b2206f8b5b1ab56e6890b7)
+
+`Spring MVC` 是一个基于MVC架构，用来简化web应用程序开发的框架，它是 Spring 的一部分，SpringMVC 已经成为目前最主流的 MVC 框架之一
+
+![](https://pics3.baidu.com/feed/5ab5c9ea15ce36d38b3360e225383c8ce850b107.jpeg@f_auto?token=c8c7c8bf4bdbfcb4335e5c5773308f8c)
+
+`MyBatis` 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。
+
+在使用传统JDBC时，往往需要写很多JDBC代码，需要自己写SQL语句以及自己装配参数，然后自己对结果集进行封装处理.
+
+而Mybatis则帮我们简化了以上功能，只需要一些配置文件（xml）或是注解即可完成对数据库的查询以及结果的映射封装.
+
+![](https://pics7.baidu.com/feed/1ad5ad6eddc451da655983148236546dd21632fc.jpeg@f_auto?token=7b74478b547b4b713d1bcd4cc2d45935)
+
+
+
+整合SSM框架还是比较繁琐的，时间紧张的小伙伴可以不用在整合这里花费时间，因为这种整合方式目前也不在流行了，现在直接使用更强大的利器**Spring Boot**就可以了。
+
+`Spring Boot` 采用约定大约配置的方式，大量的减少了配置文件的使用，从而使开发人员不再需要定义样板化的配置。
+
+那要不要跳过了 SSM 直接去学习 Spring Boot呢？
+
+如果只是为了使用 Spring Boot，当然可以跳过，毕竟 SSM 配置太繁琐了
+
+**如果想深入学习，尤其是找 Java 开发的工作，面试中会出现很多 Spring 的底层问题，因此还是要学习 SSM 的，如果跳过了不利于学习原理**
+
+![](https://pics2.baidu.com/feed/e850352ac65c1038452fdf4393da9518b17e8937.jpeg@f_auto?token=ad87766a4b39554ac7537ffec1d9991d)
+
+
+
+#### 第五阶段：**服务器中间件**
+
+学完上面的内容，我们已经具备实际项目的开发能力了，但是要解决些复杂的业务场景，我们还要学习Redis、MQ、Elasticsearch这些中间件。
+
+`Redis` 是一个 key-value 存储系统，是跨平台的非关系型数据库，可用作数据库，高速缓存和消息队列代理,Redis作为当下主流的缓存技术，已经成为互联网企业的不二首选.
+
+![](https://pic.rmb.bdstatic.com/bjh/down/db6b3d0b3952eb20b7390e5485dd0d61.gif)
+
+`MQ（Message Queue）`是一种跨进程的通信机制，用于传递消息。通俗点说，就是一个先进先出的数据结构。MQ有三大主要作用分别为解耦、异步、削峰/限流
+
+`Elasticsearch`全文搜索属于最常见的需求，开源的 Elasticsearch是目前全文搜索引擎的首选。
+
+它可以快速地储存、搜索和分析海量数据。维基百科、Stack Overflow、Github 都采用它。
+
+Elasticsearch的底层是开源库 Lucene。但是，必须自己写代码去调用Lucene的接口。Elastic 是 Lucene 的封装，提供了 REST API 的操作接口，开箱即用
+
+![](https://pics3.baidu.com/feed/0dd7912397dda14435caf414937cd6a90ef486af.jpeg@f_auto?token=4fa632f24b74022d7221b59cddd7cd08)
+
+#### 第六阶段：**微服务和分布式**
+
+`Spring Cloud` 是一套完整的微服务解决方案，基于 Spring Boot框架。
+
+准确的说，Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot 的开发便利性简化了分布式系统的开发，比如服务发现、服务网关、服务路由、链路追踪等.
+
+![](https://pics3.baidu.com/feed/fd039245d688d43f732611375dd5d4100cf43bba.jpeg@f_auto?token=279bc460ba4269f1ede349f61a4209e0)
+
+`Dubbo`值得一提的是，还有阿里开源Dubbo，Dubbo一个高性能优秀的服务框架。简单地说，Dubbo是一个基于Spring的RPC（远程过程调用）框架，能够实现服务的远程调用、服务的治理。
+
+![](https://pics4.baidu.com/feed/0dd7912397dda1443427f5d5937cd6a90df48685.jpeg@f_auto?token=2517a29b687ee47310fcc63b1e9d4615)
+
+`ZooKeeper`是一个高可用的分布式管理与协调框架，基于ZAB算法（原子消息广播协议）的实现。该框架能够保证分布式环境中数据的一致性，使得ZooKeeper成为了解决分布式一致性问题的利器
+
+![](https://pics2.baidu.com/feed/060828381f30e9242777f5ad56c3680d1f95f7b5.png@f_auto?token=477631308d47c7f63e37e985c54c7f60)
+
+
+
 ### 一、Java基础
 
 #### 1 注意事项和细节
@@ -121,14 +237,11 @@ Java中的注释类型
 
 ```java
 // 行尾风格(推荐)
-public void test{
-  
+public void test{ 
 }
-
 // 次行风格
 public void test
 {
-  
 }
 ```
 
@@ -243,11 +356,7 @@ public class Test{
 }
 ```
 
-
-
 字符类型可以使用单个字符，字符类型是char，char是两个字节（可以存放汉字），多个字符使用字符串String
-
-
 
 > 布尔类型
 
@@ -326,7 +435,6 @@ byte b2 = n2; // 错误，原因：如果是变量赋值，判断类型
 byte b1 = 10;
 char c1 = b1; // 错误，原因：byte不能自动转成char
 
-
 //byte, short,char 他们三者可以计算，在计算时首先转换为int类型
 byte b2 = 1;
 byte b3 = 2;
@@ -335,8 +443,6 @@ short s2 = b2 + s1; // 错误，原因：运算时已经提升为了int类型
 
 byte b4 = b2 + b3; //错误，原因：只要有byte, short,char 他们三者参与了计算，都会提升为int，所以b2 + b3 最终类型为 int ，所以不行
 ```
-
-
 
 > 强制类型转换
 
@@ -379,8 +485,6 @@ String s2 = f1 + "";  // 1.1
 String s3 = d1 + "";  // 4.5
 String s4 = b1 + "";  // true
 ```
-
-
 
 > String类型转成基本数据类型，使用parseXX()；
 
@@ -532,8 +636,6 @@ b++;  //等价于 b = (byte)(b + 1);
 4. Java严格区分大小写，长度无限制
 5. 标识符不能包含空格
 
-
-
 > 标识符的命名规范（建议这样使用）
 
 1. `包名`：多单词组成时所有字母都小写：aaa.bbb.ccc //比如：com.wing.crm
@@ -677,7 +779,6 @@ int a=1<<2  => 00000001 => 00000100 本质 1*2*2=4
 if(条件表达式){
   执行代码块；
 }
-
 // 说明：当条件表达式为true时，就会执行{}的代码，如果为false，就不执行，特别说明，如果{}中只有一条语句，则可以不用{}，建议写上{}
 ```
 
@@ -690,7 +791,6 @@ if(条件表达式){
 }else{
   执行代码块2；
 }
-
 // 说明：当条件表达式为true时，执行代码块1;否则，执行代码块2
 ```
 
@@ -758,8 +858,6 @@ switch(表达式){
 3. case子句中的值必须是常量，而不能是变量
 4. default子句是可选的，当没有匹配的case时执行default
 
-
-
 > Switch 和 if的比较
 
 1. 如果判断的具体数值不多，而且符合 (byte,short,int char enum,String) 这6种类型，建议使用switch
@@ -797,7 +895,6 @@ for( ; i <= 10 ; ){
 // 循环结束后需要使用i
 System.out.println(i);
 
-
 //解析：为什么要将i写到外面呢？
 //答：假如有个需求，就是for循环遍历完结束后还想使用变量i，所以要写到外面提升作用域
 ```
@@ -818,8 +915,6 @@ for (int i = 0,j = 0; i < count ; i++,j+=2){
 }
 ```
 
-
-
 > while循环控制
 
 ```java
@@ -835,8 +930,6 @@ while(循环条件){
 
 1. 循环条件是返回一个布尔值的表达式
 2. while循环是先判断再执行语句
-
-
 
 > do while循环控制
 
@@ -994,8 +1087,6 @@ System.out.println("平均体重：" + avgWeight);
 2. 数组中的元素可以是任何数据类型，包括`基本类型`和`引用类型`，但是`不能混用`
 3. 数组创建后，如果没有赋值，有默认值 int->0,short->0,byte->0,long->0,float->0.0,double->0.0,char \u0000,boolean -> false,String null
 
-
-
 > 数组赋值机制
 
 1. 基本数据类型赋值，这个值就是具体的数据，而且相互不影响（int n1 = 2;int n2 = n1;）
@@ -1036,13 +1127,9 @@ for (int j = 0; j < arr2.length; j++) {
 
 数据量过大，无法全部加载到内存中，需要借助外部存储进行排序，包括（`合并排序法`和`直接合并排序法`）ps:大数据开发时会遇到
 
-
-
 > 冒泡排序法
 
 冒泡排序（Bubble Sorting）的基本思想是：通过对待排序序列从后向前（从下标较大的元素开始，也可以从前向后，从下标较小的元素开始），依次比较相邻元素的值，若发现逆序则交换，使值较大的元素逐渐从前移向后部。
-
-
 
 ```java
 // 值传递
@@ -1098,15 +1185,11 @@ for (int i = 0; i < arr.length; i++) {
 
 比如：猫有很多种类，但是猫都有属性和行为，然后将这些共有的属性抽取到一个类中，这就是猫类，可以通过猫类new出具体的对象，比如new出田园猫，橘猫等等。具体的就是对象。
 
-
-
 > 类与对象的区别和联系
 
 1. 类是抽象的，概念的，代表一类事物，比如人类，猫类...，即它是数据类型
 2. 对象是具体的，实际的，代表一个具体事物，即是实例
 3. 类是对象的模板，对象是类的一个个体，对应一个实例
-
-
 
 > 成员变量/属性的注意事项和细节
 
@@ -1115,8 +1198,6 @@ for (int i = 0; i < arr.length; i++) {
 3. 属性如果不赋值，有默认值( int->0,short->0,byte->0,long->0,float->0.0,double->0.0,char \u0000,boolean -> false,String null)
 
 `代码 org.example.classtest.PropertiesDetail `
-
-
 
 > 如何创建对象
 
@@ -1175,8 +1256,6 @@ Person p1 = new Person();
 // 返回int 可以使用double ，自动转换类型
 double d1 = getInt();
 double d2 = getDou(); 
-
-
 public static int getInt(){
      int n = 100;
      return n; // 返回int类型
@@ -1186,8 +1265,6 @@ public static int getInt(){
      return n;  // 方法返回值是double ,真实返回int类型
  }
 ```
-
-
 
 > 方法调用细节说明
 
@@ -1204,7 +1281,6 @@ class A{
         print(1);
     }
 }
-
 // 跨类中的方法A类调用B类方法：需要通过对象名调用
 class A{
     public void print(int n){
@@ -1235,7 +1311,6 @@ public static int factorial(int n){
         return factorial(n - 1) * n;
     }
 }
-
 // 斐波那契数 1,1,2,3,5,8,13,21...
 public static int test1(int n){
     if(n < 3){
@@ -1252,8 +1327,6 @@ public static int test1(int n){
 3. 如果方法中使用的是引用类型变量(比如数组），就会共享该引用类型的数据
 4. 送归必须向退出递归的条件逼近，否则就是无限递归,出现StackOverflowError，死龟了
 5. 当一个方法执行完毕，或者遇到return，就会返回，遵守谁调用，就将结果返回给谁，同时当方法执行完毕或者返回时，该方法也就执行完毕
-
-
 
 > 老鼠找迷宫
 
@@ -1319,7 +1392,6 @@ public static int sum(int n1,int n2,int n3,int n4){
  System.out.println(sum(1)); // 1
  System.out.println(sum(1,2)); // 3
  System.out.println(sum(1,2,3));  // 6
-
 // 求多个数的和
  public static int sum(int... nums ){
      int totalNum = 0;
@@ -1328,11 +1400,9 @@ public static int sum(int n1,int n2,int n3,int n4){
      }
      return totalNum;
  }
-
 /* 也可以传一个数组 */
 int[] arr = {1,2,3,9};
 System.out.println(sum(arr)); // 15
-
 
 /* 可变参数和普通参数一起，但可变参数要在最后 */ 
 int[] arr = {1,2,3,9};
@@ -1365,8 +1435,6 @@ public static int sum(String str,int... nums ){
 3. java中作用域的分类
     全局变量：也就是属性，作用域为整个类体 Cat类：cry eat 等方法使用属性
 4. 全局变量(属性)可以不赋值，直接使用，因为有默认值，局部变量必须赋值后，才能使用，因为没有默认值
-
-
 
 ```java
 class Cat{
@@ -1463,12 +1531,10 @@ class Person{
         System.out.println("this 的hashCode:" + this.hashCode());
     }
 }
-
 Person p1 = new Person("wang",19);
 System.out.println("p1 的hashCode:" + p1.hashCode());
 Person p2 = new Person("li",18);
 System.out.println("p2 的hashCode:" + p2.hashCode());
-
 //输出结果
 this 的hashCode:901506536
 p1 的hashCode:901506536
@@ -1498,8 +1564,6 @@ p2 的hashCode:747464370
 
 包的本质 实际上就是创建不同的文件夹/目录，来保存类文件
 
-
-
 > 包的命名规则
 
 只能包含数字、字母、下划线、小圆点，但不能用数字开头，不能是关键字或保留字
@@ -1523,7 +1587,6 @@ p2 的hashCode:747464370
 
 ```java
 // 注意：需要使用哪个类，就导入哪个类即可，不建议使用*号全导入
-
 import java.util.Scanner;  // 表示只会引入 Scanner 这个类
 import java.util.*;  // 表示将 java.util 包下的所有类引入
 ```
@@ -1552,8 +1615,6 @@ java提供四种访问控制修饰符号，用于控制方法和属性(成员变
 | 受保护   | protected      | √    | √    | √            | x      |
 | 默认     | 没有修饰符     | √    | √    | x            | x      |
 | 私有     | private        | √    | x    | x            | x      |
-
-
 
 > 使用注意事项
 
@@ -1590,18 +1651,15 @@ java提供四种访问控制修饰符号，用于控制方法和属性(成员变
 // 继承的基本语法
 class 子类 extends 父类{}
 
-
 // 举例，A类是父类，B和C类会继承到A类中的属性和方法
 class A类{
   共有属性
   共有方法
 }
-
 class B类 extends A类{
   B类的特有属性
   B类的特有方法
 }
-
 class C类 extends A类{
   C类的特有属性
   C类的特有方法
@@ -1633,7 +1691,6 @@ class Father extends GrandPa{
 class Son extends Father{
     String name = "大头儿子";
 }
-
 
 // 《第一次测试开始》继承的内存布局如下图
 Son son = new Son();
@@ -1705,8 +1762,6 @@ System.out.println(super.phone);  // 小米
 
 ![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img01.png)
 
-
-
 > 好处
 
 1. 代码的复用性提高了
@@ -1718,16 +1773,12 @@ System.out.println(super.phone);  // 小米
 
 super代表父类的引用，用于访问父类的属性、方法、构造器
 
-
-
 > 使用细节
 
 1. 访问父类的属性，但不能访问父类的private属性(具体看是否在同包下，如果子类和父类不在同一个包下，那么父类默认修饰符的属性也是不能访问的) `super.属性名`
 2. 访问父类的方法，不能访问父类的private方法(规则同上)，`super.方法名（参数列表)`;
 3. 访问父类的构造器 `super(参数列表)`;只能放在构造器的第一句，只能出现一句
 4. 代码里只要看到super.就直接跳过本类，直接从父类开始查找，查到就返回，查不到就报错
-
-
 
 > 细节
 
@@ -1736,8 +1787,6 @@ super代表父类的引用，用于访问父类的属性、方法、构造器
 3. super的访问不限于直接父类，如果爷爷类和本类中有同名的成员，也可以使用super去访回爷爷类的成员；如果多个基类(上级类)中都有同名的成员，使用super访问遵循就近原则。A->B->C
 
 `看上面的多继承代码案例，有详细说明super`
-
-
 
 | No.  | 区别点     | this                                                   | super                                  |
 | ---- | ---------- | ------------------------------------------------------ | -------------------------------------- |
@@ -1757,8 +1806,6 @@ super代表父类的引用，用于访问父类的属性、方法、构造器
 1. 子类的方法的参数,方法名称,要和父类方法的参数,方法名称完全一样（**返回类型和访问修饰符可以不用完全一样，见下面说明**）
 2. 子类方法的返回类型和父类方法返回类型一样，或者是父类返回类型的子类(比如父类 返回类型是 Obiect,子类方法返回类型是String)，比如：父类 public Object getInfo(){}，子类 public String getInfo(){} 这是可以的，String是Object的子类
 3. 子类方法`不能缩小`父类方法的`访问权限`，比如：父类 void sayOk(){}，子类 public void sayOk(){} 这是可以的,子类public改成private就不可以。
-
-
 
 | 名称            | 发生范围 | 方法名   | 形参列表                               | 返回类型                                                     | 修饰符                             |
 | --------------- | -------- | -------- | -------------------------------------- | ------------------------------------------------------------ | ---------------------------------- |
@@ -1786,7 +1833,6 @@ class A {
         return a + b + c;
     }
 }
-
 // 调用sum方法，根据入参不同，调用的方法不同，这就是多态的体现
 A a = new A();
 System.out.println(a.sum(1, 2));
@@ -1820,7 +1866,6 @@ class Dog extends Animal {
         System.out.println("狗在 叫唤");
     }
 }
-
 // animal 的编译类型是 Animal，运行类型是 Dog
 // 父类的引用指向子类的对象（向上转型）
 // 只有在运行的时候，才知道animal指向Dog，编译时是不知道的，所以父类的引用不能调用子类特有的方法
@@ -1833,7 +1878,6 @@ animal = new Cat();
 animal.cry();
 //这里报错，父类的引用不能调用子类特有的方法，因为在编译阶段，能调用哪些成员，是由编译类型来决定的
 //animal.catchMouse(); 
-
 Cat cat = (Cat)animal;
 // 调用Cat特有方法
 cat.catchMouse();
@@ -1853,7 +1897,6 @@ class Base{
 class Sub extends Base{
     int count = 20;
 }
-
  Base base = new Sub();
  System.out.println(base.count); // 10
  Sub sub = new Sub();
@@ -1871,8 +1914,6 @@ if(sub instanceof Base){
 }
 ```
 
-
-
 > 多态的向上转型
 
 1. 本质：`父类的引用`指向了`子类的对象`
@@ -1888,8 +1929,6 @@ if(sub instanceof Base){
 4. 可以调用子类类型中所有的成员
 
 [重点练习题，巩固！（多态的练习2）](######9、多态的练习2)
-
-
 
 > Java的动态绑定机制
 
@@ -1920,8 +1959,6 @@ if(sub instanceof Base){
 3. 两个引用，如果指向的是不同对象，则哈希值是不一样的（不绝对，也有可能是不一样的，存在哈希碰撞，只不过概率很低，姑且这里认为是不一样的，到集合会提到）
 4. 哈希值主要根据地址号来的！但是不能完全将哈希值等价于地址
 5. 后面在集合，中hashCode 如果需要的话，也会重写
-
- 
 
 ###### 10.8.3 toString 方法
 
@@ -1965,8 +2002,6 @@ System.gc(); // 主动调用垃圾回收器
 System.out.println("程序结束");
 ```
 
-
-
 ##### 10.9 不要让惰性毁了你
 
 ```java
@@ -1977,8 +2012,6 @@ System.out.println("程序结束");
    其实每个人都是有缺陷的，人性就是好逸恶劳的，每个人都想舒服一点，包括我自己有时也想听听音乐，打打游戏，放放松，我们可以适当的放松享受生活，当你享受完了一定要记住，我们还要扬帆起航！我们每个人都可以做的比现在更好，关键的是自己能不能克服这种惰性，如果你能克服，树立一个目标，每天前进一点，最终是能达到一定水平的，虽然说不能达到一个很高很高的水平，达到像马云，马化腾这样的高度，当然我们能达到自己能够得着的最高的水平，这就够了，这样生活就会越来越好，越来越有冲劲，总而言之一句话，要想以后的生活更加舒服更加精彩，那么一定要克服自己的惰性，不要让惰性毁了你的聪明才智，休息一下，再扬帆起航！   -- 清华大学韩顺平老师
 
 ```
-
-
 
 #### 11 面向对象编程（高级）
 
@@ -1992,7 +2025,6 @@ System.out.println("程序结束");
 // 定义语法
 // 第一种
 访问修饰符 static 数据类型 变量名：【推荐】
-
 //第二种
 static 访问修饰符 数据类型 变量名;【不推荐】
 ```
@@ -2003,7 +2035,6 @@ static 访问修饰符 数据类型 变量名;【不推荐】
 // 使用方式 静态变量的访问修饰符的访问权限和范围 和 普通属性是一样的。
 //方式一
 类名.类变量名    //【推荐】
-
 //方式二
 对象名.类变量名  //【不推荐】
 ```
@@ -2018,8 +2049,6 @@ static 访问修饰符 数据类型 变量名;【不推荐】
 6. 类变量是在类加载时就初始化了，也就是说，即使你没有创建对象，只要类加载了就可以使用类变量了
 7. 类变量的生命周期是随类的加载开始，随着类消亡而销毁。
 
-
-
 > 类方法介绍
 
 类方法也叫静态方法
@@ -2028,7 +2057,6 @@ static 访问修饰符 数据类型 变量名;【不推荐】
 // 定义形式如下：
 //方式一
 访问修饰符 static 数据返回类型 方法名(){}   // 【推荐】
-
 //方式二
 static 访问修饰符 数据返回类型 方法名(){}   // 【不推荐】
 ```
@@ -2039,7 +2067,6 @@ static 访问修饰符 数据返回类型 方法名(){}   // 【不推荐】
 // 使用方式   前提是满足访问修饰符的访问权限和范围
 //方式一
 【类名.类方法名】   // 【推荐】
- 
 //方式二
 【对象名.类方法名】  // 【不推荐】
 ```
@@ -2054,8 +2081,6 @@ static 访问修饰符 数据返回类型 方法名(){}   // 【不推荐】
 2. 类方法中不允许使用和对象有关的关键字，比如this和super。普通方法(成员方法）可以
 3. 类方法(静态方法)中 只能访问 静态变量 或静态方法
 4. 静态方法，只能访问静态的成员，非静态的方法，可以访问静态成员和非静态成员，也就是可以访问所有的成员(必须遵守访问权限）
-
-
 
 #####  11.2 理解main方法语法
 
@@ -2074,8 +2099,6 @@ arg[0]：wing
 arg[0]：li
 ```
 
-
-
 #####  11.3 代码块
 
 > 介绍
@@ -2089,7 +2112,6 @@ arg[0]：li
 [修饰符]{
  代码
 };
-
 // 注意：
 1）修饰符 可选，要写的话，也只能写 static
 2）代码块分为两类，使用static 修饰的叫静态代码块，没有static修饰的，叫普通代码块
@@ -2127,7 +2149,6 @@ arg[0]：li
 
 ```java
 //我们看一下创建一个子类时(继承关系)，他们的静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法的调用顺序如下：
-
 1)父类的静态代码块和静态属性(优先级一样，按定义顺序执行)
 2)子类的静态代码块和静态属性(优先级一样，按定义顺序执行)
 3)父类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行）
@@ -2135,8 +2156,6 @@ arg[0]：li
 5)子类的普通代码块和普通属性初始化(优先级一样，按定义顺序执行）
 6)子类的构造方法
 ```
-
-
 
 ```java
 class A{
@@ -2216,9 +2235,7 @@ class B extends A{
         System.out.println("BBB 普通属性(特有) sonField 赋值")
         return sonField;
     }
-}
-                          
-                          
+}              
  new B();
 /* 打印结果如下： */
 // AAA 静态代码块 1 执行
@@ -2241,8 +2258,6 @@ class B extends A{
 // BBB 构造方法执行
 ```
 
-
-
 #####  11.4 单例设计模式
 
 > 什么是单例设计模式
@@ -2253,13 +2268,9 @@ class B extends A{
 4. 单例模式有两种方式：1）**饿汉式** 2)**懒汉式**
 5. 设计模式有23种，比如：单例、工厂、代理、观察者、装饰者等
 
-
-
 > 单例模式什么场景下会使用呢
 
 比如：有一个类，而且是核心类，并且是重量级，非常耗费资源的，但实际上我们整个系统只需要一个。这时就可以将这个类设计成单例模式。
-
-
 
 > 单例模式使用步骤
 
@@ -2270,7 +2281,6 @@ class B extends A{
 > 饿汉式和懒汉式
 
 ```java
-
 /** 饿汉式 */
 class GirlFriend{
     public static int age = 10;
@@ -2281,7 +2291,6 @@ class GirlFriend{
         return gf;
     }
 }
-
 /** 懒汉式 */
 class BoyFriend{
     public static int age = 20;
@@ -2295,8 +2304,6 @@ class BoyFriend{
         return bf;
     }
 }
-
-
 /** 测试是否执行了构造器 */
 System.out.println(GirlFriend.age);
 System.out.println(BoyFriend.age);
@@ -2316,8 +2323,6 @@ System.out.println(bf1 == bf2 ); //true
 2. 饿汉式不存在线程安全问题，懒汉式存在线程安全问题
 3. 饿汉式存在浪费资源的可能。因为如果程序员一个对象实例都没有使用，那么饿汉式创建的对象就浪费了，懒汉式是使用时才创建，就不存在这个问题
 4. 在我们javaSE标准类中，java.lang.Runtime就是经典的单例模式
-
-
 
 #####  11.5 final关键字
 
@@ -2366,14 +2371,11 @@ class A{
         System.out.println("A 的静态代码块被执行了");
     }
 }
-
  // 单独输出A.num1，会执行静态代码块，导致类加载
  System.out.println(A.num1);
  // 单独输出A.num2，不会执行静态代码块，不会进行类加载
  //System.out.println(A.num2);
 ```
-
-
 
 #####  11.6 抽象类
 
@@ -2389,8 +2391,6 @@ class A{
 4. abstract 只能修饰类和方法，不能修饰属性和其它的
 5. 抽象类可以有任意成员 【因为抽象类还是类】，比如：非抽象方法、构造器、静态属性等
 6. 如果一个类继承了抽象类，则它必须实现抽象类的所有抽象方法，除非它自己也声明为abstract类。
-
-
 
 > 抽象类如何做成“模板设计模式” 【阅读代码，很有价值】
 
@@ -2414,7 +2414,6 @@ public class AA extends Template {
         }
     }
 }
-
 public class BB extends Template{
     @Override
     public void job(){
@@ -2424,7 +2423,6 @@ public class BB extends Template{
         }
     }
 }
-
 abstract public class Template {
     public abstract void job();// 抽象方法
     public void calculateTime(){
@@ -2434,7 +2432,6 @@ abstract public class Template {
         System.out.println("执行时间：" + (end - start));
     }
 }
-
 AA aa = new AA();
 aa.calculateTime();
 BB bb = new BB();
@@ -2446,8 +2443,6 @@ bb.calculateTime();
 > 介绍
 
 接口就是给出一些没有实现的方法,封装到一起,到某个类要使用的时候,在根据具体情况把这出方法写出来
-
-
 
 > 注意事项和细节
 
@@ -2470,7 +2465,6 @@ public interface AInterface {
     public int n1 = 10;
     // 普通抽象方法
     public void hi();
-    
     //接口可以定义默认方法（JDK8或者之后）
     default public void ok(){
         System.out.println("ok"
@@ -2496,8 +2490,6 @@ class Cat implements AInterface{
 
 [类和接口的修饰符](#####1.1 小思考)
 
-
-
 > 实现接口 VS 继承类
 
 接口和继承解决的问题不同
@@ -2508,20 +2500,15 @@ class Cat implements AInterface{
 
 接口比继承更加灵活，接口在一定程度上实现代码解耦
 
-
-
 > 多态传递
 
 ```java
 interface IG extends IH{}   // 1）这里继承了 IH
 interface IH{}
 class Student implements IG{}
-
 IG ig = new Student();
 IH ih = new Student();   // 2）所以这里可以接收，这就是多态传递
 ```
-
-
 
 #####  11.8 内部类
 
@@ -2545,8 +2532,6 @@ class Outer{  // 外部类
 4. 代码块
 5. 内部类
 
-
-
 > 内部类的分类
 
 ```java
@@ -2559,10 +2544,6 @@ class Outer{  // 外部类
 2）静态内部类（使用static修饰）
 ```
 
-
-
-
-
 ###### 11.8.1 局部内部类
 
 说明：局部内部类是定义在外部类的局部位置，比如方法中，也可以代码块中，并且有类名
@@ -2574,8 +2555,6 @@ class Outer{  // 外部类
 5. 外部类----访问---->局部内部类的成员【访问方式：创建对象，再访问(注意：必须在作用域内）比如外部类里面有一个方法m1，m1方法里面有一个内部类Inner02,那么直接在m1方法里面，new Inner02(); 就行】
 6. 外部其他类--不能访问-----＞局部内部类（ 因为 局部内部类地位是一个局部变量）
 7. 如果外部类和局部内部类的成员重名时，默认遵循就近 原则，如果想访问外部类的成员，则可以使用（外部类名.this.成员）去访问【比如外部类有一个变量 n1，局部内部类也有一个变量n1，那么局部内部类里面的方法输出n1时，输出的是哪个呢？就近原则，使用的是局部内部类的，但是想输出外部类的n1，怎么访问呢？可以使用“外部类名.this.成员”来访问】
-
-
 
 ```java
 class Outer02{  // 外部类
@@ -2618,10 +2597,6 @@ inner02 hashCode:1513712028
 outer02 hashCode:747464370
 ```
 
-
-
-
-
 ###### 11.8.2 匿名内部类
 
 > 介绍
@@ -2643,8 +2618,6 @@ new 类或接口(参数列表){
 interface IA{
     void cry();
 }
-
-
 // 编译类型：IA
 // 运行类型：匿名内部类
 /*
@@ -2665,7 +2638,6 @@ IA ia = new IA() {
 ia.cry();
 // 获取运行类型
 System.out.println("匿名内部类的运行类型：" + ia.getClass());
-
 老虎叫唤。。
 匿名内部类的名称：class org.example.innerclass.Outer04$1
 ```
@@ -2678,7 +2650,6 @@ class Father{
         System.out.println("father 叫唤");
     }
 }
-
 Father fa1 = new Father();
 System.out.println("运行类型：" + fa1.getClass());
 Father fa2 = new Father() {
@@ -2703,10 +2674,6 @@ System.out.println("匿名内部类的运行类型：" + fa2.getClass());
 3. 作用域：仅仅在定义它的方法或代码块中
 4. 外部其他类--不能访问-----＞匿名内部类（因为 匿名内部类地位是一个局部变量）
 5. 如果外部类和匿名内部类的成员重名时，匿名内部类访问的话，默认遵循就近原则，如果想访问外部类的成员，则可以使用 （外部类名,this.成员）去访问（参考上面局部内部类的代码）
-
-
-
-
 
 ###### 11.8.3 成员内部类
 
@@ -2748,11 +2715,8 @@ class Outer08{
     }
   
 }
-
-
 Outer08 outer08 = new Outer08();
 outer08.t1();
-
 n1 = 10,name = Wing
 ```
 
@@ -2762,18 +2726,13 @@ n1 = 10,name = Wing
 // 方式1
 Outer08.Inner08 inner081 = new Outer08().new Inner08();
 inner081.say();
-
 或者
-  
 Outer08 outer08 = new Outer08();
 Outer08.Inner08 inner08 = outer08.new Inner08();
-
 // 方式2
 Outer08.Inner08 instance = outer08.getInstance();
 instance.say();
 ```
-
-
 
 ###### 11.8.4 静态内部类
 
@@ -2797,8 +2756,6 @@ instance.say();
 8. 如果外部类和静态内部类的成员重名时，静态内部类访问的时，默认遵循就近
 
    原则，如果想访问外部类的成员，则可以使用(外部类名.成员）去访问
-
-
 
 > 外部类访问静态内部类
 
@@ -2829,7 +2786,6 @@ System.out.println("name = " + name + ",外部name = " + Outer10.name);
       return new Inner10();
     }
 }
-
 Outer10 outer10 = new Outer10();
 outer10.m1();
 ```
@@ -2840,18 +2796,14 @@ outer10.m1();
 // 方法一：静态内部类，可以通过类名直接访问（前提是满足访问权限）
 Outer10.Inner10 inner10 = new Outer10.Inner10();
 inner10.say();
-
 // 方法二：外部类定义一个getInstance()来获取
 Outer10 outer10 = new Outer10();
 Outer10.Inner10 instance = outer10.getInstance();
 instance.say();
-
 // 方法三：外部类定义一个静态getInstance()来获取
  Outer10.Inner10 instance1 = Outer10.getInstance1();
  instance1.say();
 ```
-
-
 
 #### 12 枚举和注解
 
@@ -2863,8 +2815,6 @@ instance.say();
 
 1. 自定义类实现枚举
 2. 使用enum关键字实现枚举
-
-
 
 #####  12.1 自定义类实现枚举
 
@@ -2892,12 +2842,9 @@ class Season{
         return desc;
     }
 }
-
 System.out.println(Season.SUMMER.getName());  // 夏天
 System.out.println(Season.SUMMER.getDesc());  // 炎热
 ```
-
-
 
 ##### 12.2 enum关键字实现枚举
 
@@ -2932,12 +2879,9 @@ enum Season2 {
         return desc;
     }
 }
-
 System.out.println(Season2.SUMMER.getName());  // 夏天
 System.out.println(Season2.SUMMER.getDesc());  // 炎热
 ```
-
-
 
 > enum关键字实现枚举注意事项
 
@@ -2948,8 +2892,6 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 5. 枚举对象必须放在枚举类的行首。
 6. 使用enum关键字后，就不能再继承其它类了，因为enum会隐式继承Enum，而Java是单继承机制
 7. 枚举类和普通类一样，可以实现接口，如下形式。enum 类名 implements 接口1，接口21
-
-
 
 > Enum 类常用方法（我们写一个枚举类时，会默认继承 Enum 类，所以我们可以用父类的属性和方法）
 
@@ -2962,8 +2904,6 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 
 [见练习题](######20、enum枚举练习)
 
-
-
 ##### 12.3 JDK内置的基本注解类型
 
 > 介绍
@@ -2971,8 +2911,6 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 1. 注解(Annotation)也被称为元数据(Metadata)，用于修饰解释包、类、方法、 属性、构造器、局部变量等数据信息
 2. 和注释一样，注解不影响程序逻辑，但注解可以被编译或运行，相当于嵌入在代码中的补充信息
 3. 在JavaSE中，注解的使用目的比较简单，例如标记过时的功能，忽路警告等。在JavaEE中注解占据了更重要的角色，例如用来配置应用程序的任何切面，代替javaEE旧版中所遗留的繁冗代码和XML配置等
-
-
 
 > 三个基本的 Annotation
 
@@ -2985,15 +2923,11 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 2)@Target 是修饰注解的注解，称为元注解
 ```
 
-
-
 ##### 12.4 元注解：对注解进行注解（了解即可）
 
 > 元注解基本介绍
 
 本身作用不大，但看源码时，可以知道他是干什么
-
-
 
 > 元注解的种类（使用不多，了解，不用深入研究）
 
@@ -3002,20 +2936,15 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 3. `Documented` //指定该注解是否会在javadoc体现
 4. `lnherited` //子类会继承父类注解
 
-
-
 > @Retention 注解
 
 ```markdown
 说明:
 只能用于修饰一个 Annotation 定义，用于指定该 Annotation 可以保留多长时间，@Rentention 包含一个 RetentionPolicy 类型的成员变量，使用 @Rentention时必须为该 value 成员变量指定值：
-
 @Retention的三种值
 1) RetentionPolicy.SOURCE：编译器使用后，直接丢弃这种策略的注释
 2) RetentionPolicy.CLASS: 编译器将把注解记录在 class 文件中.当运行 Java 程序时，JVM 不会保留注解。这是默认值
 3) RetentionPolicy.RUNTIME:编译器将把注解记录在class 文件中.当运行Java 程序时，JVM 会保留注释．程序可以通过反射获取该注解
-
-
 补充解释：
 1) RetentionPolicy.SOURCE：作用在Java源文件（比如，@Override）,编译成class时生效，但不会保留到class文件
 2) RetentionPolicy.CLASS: 作用在Java源文件，并且编译后依然会保留到class文件，但JVM运行时不会保留
@@ -3023,8 +2952,6 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 ```
 
 ![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img02.jpg)
-
-
 
 >  @Target 注解
 
@@ -3049,7 +2976,191 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 说明：实际应用中，使用较少。了解即可。
 ```
 
+#### 13 异常
 
+##### 13.1 异常的概念
+
+> 基本概念
+
+Java语言中，将程序执行中发生的不正常情况称为“异常”。(开发过程中的语法错误和逻辑错误不是异常）
+
+> 执行过程中所发生的异常事件可分为两类
+
+1. Error(错误）：java虚拟机无法解決的严重问题。如：JVM系统内部错误、资源耗尽等严重情況。比如：StackOverflowError[栈溢出]和OOM(out ofmemory)，Error 是严重错误，程序会崩溃
+2. Exception： 其它因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如空指针访向，试图读取不存在的文件，网络连接中断等等，Exception 分为两大类：**运行时异常（非受检异常）**[程序运行时，发生的异常]和**编译时异常（受检异常）**[编译时，编译器检查出的异常]
+
+##### 13.2 异常体系图
+
+![](https://img-blog.csdnimg.cn/img_convert/8928446c39f9150690a59dd57011bffe.png)
+
+> 异常小结
+
+1. 异常分为两大类，`运行时异常`和`编译时异常`
+2. 运行时异常，编泽器检测不出来。一般是指编程时的逻辑错误，是程序员应该避免其出现的异常。java.lang.RuntimeException类及它的子类都是运行时异常
+3. 对于运行时异常，可以不作处理，因为这类异常很普遍，若全处理可能会对程序的可读性和运行效率产生影响
+4. 编译时异常，是编译器要求必须处置的异常
+
+> 编译异常 FileNotFoundException异常演示
+
+```java
+ FileInputStream fis;
+ fis = new FileInputStream("d:\\a.jpg");   // 这一行会爆红，提示异常必须处理，否则编译不通过
+ fis.close();
+```
+
+##### 13.3 常见的异常
+
+> 常见的运行时异常（程序在运行时发生的异常）
+
+1. NullPointerException 空指针异常
+2. ArithmeticException 数字运算异常
+3. ArrayIndexOutOfBoundsExcetpion 数组下标越界异常
+4. ClassCastExcetpion 类型转换异常
+5. NumberFormatException 数字格式异常
+
+> 常见的编译时异常（程序在编译时发生的异常）
+
+1. SQLException 操作数据库，查询表可能发生的异常
+2. IOException 操作文件，可能发生的异常
+3. FileNotFoundException 当操作一个不存在的文件时，发生的异常
+4. ClassNotFoundException 加载类，而该类不存在发生的异常
+5. EOFException 操作文件，到文件末尾发生的异常
+6. IllegalArguementException 参数异常
+
+##### 13.4 异常处理概念
+
+> 基本介绍
+
+异常处理就是当异常发生时，对异常处理的方式
+
+##### 13.5 异常处理分类
+
+> 异常处理方式 try-catch-finally
+
+1. `try-catch-finally` 程序员在代码中捕获发生的异常，自行处理
+2. `throws` 将发生的异常抛出，交给调用者(方法)来处理，最顶级的处理者就是JVM【JVM处理简单暴力，打印异常信息，然后中断程序】
+3. 可以进行`try-finally`配合使用，这种用法**相当于没有捕获异常**，因此程序会直接崩掉 。应用场景，就是执行一段代码，不管是否发生异常，都必须执行某个业务逻辑
+
+> throws异常处理
+
+1. 如果一个方法(中的语句执行时)可能生成某种异常，但是并不能确定如何处理这种异常，则此方法应显示地声明抛出异常，表明该方法将不对这些异常进行处理，而由该方法的调用者负责处理
+2. 对于运行时异常， 程序中如果没有处理，默认是 throws 方式处理
+3. 子类重写父类的方法时，对抛出异常的规定：子类重写的方法，所抛出的异常类型么和父类抛出的异常一致，要么为父类抛出的异常的类型的子类型，否则编译不通过
+
+##### 13.6 自定义异常
+
+> 基本介绍
+
+当程序中出现了某些“错误”，但该错误信息并没有在Throwable子类中描述处理，这个时候可以自己设计异常类，用于描述该错误信息
+
+> 自定义异常的步骤
+
+1. 定义类：自定义异常类名(程序员自己写） 继承Exception或Runtime Exception
+2. 如果继承Exception，属于编译异常
+3. 如果继承RuntimeException，属于运行异常（一般来说，继承RuntimeException)
+
+##### 13.7 throw和throws的对比
+
+|        | 意义                     | 位置       | 后面跟的东西 |
+| ------ | ------------------------ | ---------- | ------------ |
+| throws | 异常处理的一种方式       | 方法声明处 | 异常类型     |
+| throw  | 手动生成异常对象的关键宇 | 方法体中   | 异常对象     |
+
+#### 14 常用类
+
+##### 14.1 包装类-Wrapper
+
+> 包装类的分类
+
+1. 针对**八种基本数据类型**相应的引用类型一包装类
+2. 有了类的特点，就可以调用类中的方法
+
+| 基本数据类型 | 包装类    |
+| ------------ | --------- |
+| boolean      | Boolean   |
+| char         | Character |
+| byte         | Byte      |
+| short        | Short     |
+| int          | Integer   |
+| long         | Long      |
+| float        | Float     |
+| double       | Double    |
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img03.png)
+
+###### 14.1.1 包装类和基本数据的转换
+
+1. jdk5 前的手动装箱和拆箱方式，装箱：基本类型->包装类型，反之，拆箱
+2. jdk5 以后(含jdk5) 的自动装箱和拆箱方式
+3. 自动装箱底层调用的是valueOf方法，比如integer.valueOf()
+
+> 演示int为例
+
+```java
+/* 演示jdk5前 手动装箱 */
+int n1 = 100;
+// 方式一
+Integer integer = new Integer(n1);
+// 方式二
+Integer integer2 = Integer.valueOf(n1);
+/* 演示jdk5前 手动拆箱 */
+int i = integer.intValue();
+
+/* 演示jdk5后（包含），自动装箱和拆箱 */
+int n2 = 200;
+Integer integer3 = n2;  // 底层调用的还是 Integer.valueOf() 方法
+int n3 = integer3;  // 底层调用的还是 integer.intValue(); 方法
+```
+
+###### 14.1.2 包装类型和String类型的相互转换
+
+```java
+/* 包装类(Integer) -> String */
+ Integer i = 100;
+ //方式1
+ String str1 = i + "";
+ //方式2
+ String str2 = i.toString();
+ //方式3
+ String str3 = String.valueOf(i);
+
+ /* String -> 包装类(Integer) */
+ String str4 = "123";
+ //方式1
+ Integer i1 = Integer.parseInt(str4); // 使用到自动装箱
+ //方式2
+ Integer i2 = new Integer(str4);
+```
+
+##### 14.2 String
+
+> String类的理解
+
+1. String 对象用于保存字符串，也就是一组字符序列
+2. 字符串常量对象是用双引号括起的字符序列。例如：“你好”、“12.97"、“boy"等
+3. 字符串的字符使用Unicode字符编码，一个字符(不区分字母还是汉字）占两个字节
+4. String 类实现了 `Serializable`【可序列化，可在网络传输】 和 `Comparable`【说明String可以进行比较大小】
+5. String 有属性 **private final char value[]**; 用于存放字符串内容，一定要注意value是一个final类型，**说明不可以修改**（不可修改的是地址，不是地址里的内容，指向的地址里的内容还是可以修改的）
+6. String类较常用构造方法
+
+- String s1 = new String();
+- String s2 = new String(String original);
+- String s3 = new String(char[] a);
+- String s4 = new String(char[] a, int start, int count);
+
+##### 14.3 StringBuffer
+
+##### 14.4 StringBuilder
+
+##### 14.5 Math
+
+##### 14.6 日期类
+
+##### 14.7 System
+
+##### 14.8 Arrays
+
+##### 14.9 BigInteger BigDecimal
 
 
 
@@ -3097,7 +3208,6 @@ int i = 1;
 i = ++i;
 System.out.println(i);// 请问这里输出什么  答案：2
 // 解析：i = ++i; 这一行程序执行时会使用临时变量分三步：1)i=i+1; 2)temp=i; 3)i=temp;【注意这里的顺序是先执行i=i+1】
-
 ```
 
 ###### 4、数组练习
@@ -3118,7 +3228,6 @@ for (int i = 0; i < chars.length; i++) {
 
 ```java
 import java.util.Arrays;
-
 int[] arr = {-1,3,78,23,5};
 Arrays.sort(arr);
 ```
@@ -3145,7 +3254,6 @@ class B extends A{
         System.out.println("b name
     }
 }
-
 /* main - test */
 B b = new B();// 输出如下：
 // a 无参构造
@@ -3189,11 +3297,9 @@ class Student extends Person {
 //        return "name=" + name + ",age=" + age + ",hobby=" + hobby;
     }
 }
-
 /* main - test */
 Student stu = new Student("Wing",18,"敲代码");
 System.out.println(stu.say());
-
 //输出内容
 Person：747464370    // 和下面打印的相同，可以理解成是同一个对象引用
 Student：747464370   
@@ -3232,7 +3338,6 @@ class Sub extends Base{
         System.out.println(this.count);
     }
 }
-
 /* main - test */
 // 这个练习题很重要，记住口诀
 // 访问属性时，看编译类型【逐级查找】；访问方法时，看运行类型；
@@ -3243,8 +3348,6 @@ Base b = s;  //向上转型
 System.out.println(b == s);  // true
 System.out.println(b.count); // 访问属性，b的编译类型是 Base，所以输出：10
 b.display();  // 访问方法，b的运行类型是 Sub，所以输出：20
-
-
 // 假如注释Sub中的 int count = 20; ，那么上面的输出都是 10
 ```
 
@@ -3281,7 +3384,6 @@ class B extends A{
         return i;
     }
 }
-
 /* main - test */
 //Java 的动态绑定机制（很重要！！！）
 // 1. 当调用对象方法的时候，该方法会和该对象的内存地址/运行类型绑定
@@ -3345,7 +3447,6 @@ class Teacher extends Person{
         return "老师薪水：" + salary;
     }
 }
-
 /* main - test */
 Person[] p = new Person[5];
 p[0] = new Person("li",18);
@@ -3363,8 +3464,6 @@ for (Person person : p) {
     }
 }
 ```
-
-
 
 ###### 12、super、this练习
 
@@ -3450,16 +3549,10 @@ class Demo extends Test{
         System.out.println(this.name);
     }
 }
-
 new Demo().test();
 new Demo("john").test();
 // 输出结果分别是：
-//Test
-//Demo
-//Rose
-//Jack
-//john
-//Jack
+//Test Demo Rose Jack john Jack
 ```
 
 ###### 14、final练习
@@ -3473,11 +3566,9 @@ class A{
         return x + 1;
     }
 }
-
  A a = new A();
  System.out.println(a.addOne(4));
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 《引用数据类型测试》
   class A{
     public void addStudent(final Student stu){
@@ -3510,7 +3601,6 @@ class Student{
                 '}';
     }
 }
-
 A a = new A();
 a.addStudent(new Student());
 ```
@@ -3521,7 +3611,6 @@ a.addStudent(new Student());
 题1，思考：abstract final class A1() 能编译通过吗，why？错误 final是不能继承
 题2，思考：abstract public static void test2()；能编译通过吗，why？ 错误，static关键字和方法重写无关
 题3，思考：abstract private void test3()；能编译通过吗，why? 错误，私有方法不能被重写
-  
 //演示父类的私有方法不能被子类重写 
 class A{
     private void add(){} // 父类私有的方法，这里再加一个 abstract 就更错
@@ -3532,24 +3621,19 @@ class B extends A{
 }  
 ```
 
-
-
 ###### 16、接口
 
 ```java
 public interface A {
     int a = 23;  // 接口的属性默认 public static final
 }
-
 public class B implements A{
     public static int a = 100;
 }
-
  B b = new B();
  System.out.println(b.a); // 23
  System.out.println(A.a); // 23
  System.out.println(B.a); // 23  这个也能输出
-
 ```
 
 ###### 17、继承和实现属性的问题
@@ -3570,7 +3654,6 @@ class C extends B implements A{
         System.out.println(A.x + "  " + super.x);
     }
 }
-
 new C().pX();
 ```
 
@@ -3588,7 +3671,6 @@ class Outer{
         public int a = 5;
     }
 }
-
 public class Outer04 {
     public static void main(String[] args) {
         Outer outer = new Outer();
@@ -3596,21 +3678,16 @@ public class Outer04 {
         System.out.println(r.a);
     }
 }
-
-//结果：
-5
-5
+//结果：5 5
 ```
 
 ###### 19、enum枚举语法判断练习
 
 ```java
 // 判断下面是否正确
-
 enum Gender{
   BOY,GIRL; // 这里其实是调用了 Gender类的无参构造器
 }
-
 答：
   1）上面语法是ok
   2）有一个枚关类Gender， 没有属性
@@ -3627,7 +3704,6 @@ enum Gender2{
 //        return "heihei";
 //    }
 }
-
 Gender2 boy1 = Gender2.BOY;  
 Gender2 boy2 = Gender2.BOY;
 Gender2 boy3 = Gender2.GIRL;
@@ -3645,7 +3721,6 @@ Gender2[] values = Gender2.values();
 for (int i = 0; i < values.length; i++) {
     System.out.println(values[i]);
 }
-
 // 重点：ordinal() 和 name() 是其父类 Enum 提供的方法
 ```
 
@@ -3675,32 +3750,122 @@ enum Week{
         return name;
     }
 }
-
-
  Week[] weeks = Week.values();
  for (Week week : weeks) {
      System.out.println(week);  // 观察上面toString写和不写输出的结果
  }
-
 // 不写toString
-TUESDAY
-WEDNESDAY
-THURSDAY
-FRIDAY
-SATURDAY
-SUNDAY
-  
-// 写toString
-星期一
-星期二
-星期三
-星期四
-星期五
-星期六
-星期日
+TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY SUNDAY
+// 写toString 
+星期一 星期二 星期三 星期四 星期五 星期六 星期日
 ```
 
+###### 22、异常练习1
 
+```java
+public static int m1(){
+    try {
+        int a = 10/0;
+        System.out.println("try 语句块");
+        return 1;
+    }catch (Exception e){
+        System.out.println("catch 语句块");
+        return 2;
+    }finally {
+        System.out.println("finally 语句块");
+        return 3;
+    }
+}
+// 判断输出什么
+// 解答：因为finally不管是否异常都会最终执行，所以即使catch返回了2，但是最终还是finally返回的为准
+System.out.println(m1());  // 3
+catch 语句块
+finally 语句块
+3
+```
+
+###### 23、异常练习2
+
+```java
+public static int m1(){
+    int i = 0;
+    try {
+        int a = 10/0;
+        return 1;
+    }catch (Exception e){
+        return ++i; // i=1 --> 保存临时变量 temp = 1，由于finally没有return，所以执行完finally之后，回到这里return temp的值
+    }finally {
+        ++i;
+        System.out.println("i=" + i);  // 输出 2
+    }
+}
+// 判断输出什么
+// 解答：因为finally不管是否异常都会最终执行，所以即使catch返回了2，但是最终还是finally返回的为准
+System.out.println(m1());  // 1
+```
+
+###### 24、包装类练习题1
+
+```java
+ // 要将三元运算符看成一个整体，这个整体，最高精度是 double，所以最后输出 obj 是 1.0
+ Object obj = true ? new Integer(1) : new Double(2.0);
+ System.out.println(obj); // 1.0
+
+ // if-else 就不是一个整体了，这样最终输出就是 1
+ Object obj2;
+ if(true){
+     obj2 = new Integer(1);
+ }else{
+     obj2 = new Double(2.0);
+ }
+ System.out.println(obj2); // 1
+```
+
+###### 25、包装类练习题2
+
+```java
+Integer i = new Integer(1);
+Integer j = new Integer(1);
+System.out.println(i == j);  //false 都是new 出来的
+
+// -128~127 底层直接从数组获取返回
+Integer m = 1;  // 自动装箱底层使用 Integer.valueOf(1)
+Integer n = 1;  // 自动装箱底层使用 Integer.valueOf(1)
+System.out.println(m == n); // true
+
+Integer x = 128;
+Integer y = 128;
+System.out.println(m == n); // false
+
+// 示例1
+nteger a = new Integer(127);
+nteger b = new Integer(127);
+ystem.out.println("a == b: " + (a == b));  // false
+// 示例2
+nteger c = new Integer(128);
+nteger d = new Integer(128);
+System.out.println("c == d: " + (c == d));  // false
+// 示例3
+nteger e = 127;
+nteger f = 127;
+System.out.println("e == f: " + (e == f));  // true
+// 示例4
+nteger g = 128;
+nteger h = 128;
+System.out.println("g == h: " + (g == h));  // false
+// 示例5
+nteger i = 127;
+nteger j = new Integer(127);
+System.out.println("i == j: " + (i == j));  // false
+// 示例6
+nteger k = 127;
+nt l = 127;
+System.out.println("k == l: " + (k == l));;  // true  有基本数据类型比较时，比较的是值
+// 示例7
+nteger n = 128;
+nt m = 128;
+System.out.println("n == m: " + (n == m));  // true  有基本数据类型比较时，比较的是值
+```
 
 
 
