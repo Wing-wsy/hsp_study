@@ -3148,19 +3148,336 @@ int n3 = integer3;  // 底层调用的还是 integer.intValue(); 方法
 - String s3 = new String(char[] a);
 - String s4 = new String(char[] a, int start, int count);
 
+> 说明
+
+String类是保存字符串常量的。每次更新都需要重新开辟空间，效率较低,因此java设计者还提供了String Builder 和 String Buffer 来增强String的功能，并提高效率
+
+> 创建String对象的两种方式
+
+1. 方式一：直接赋值 String s ="hsp";
+2. 方式二：调用构造器 String s = new String("hsp");
+
+> 方式一
+
+先从常量池查看是否有”hsp” 数据空间，如果有，直接指向；如果没有则重新创建，然后指向。s最终指向的是常量池的空间地址
+
+> 方式二
+
+先在堆中创建空间，里面维护了value属性，指向常量池的hsp空间。如果常量池没有"hsp”，重新创建，如果有，直接通过value指向。最终指向的是堆中的空间地址。
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img04.jpg)
+
+> String类的 intern() 方法介绍
+
+当调用 intern 方法时，如果池已经包含一个等于此 String 对象的字符串（用equals(Object 方法确定），则返回池中的字符串。否则，将此 String 对象添加到池中，并返回此 String 对象的引用。
+
+解读：(1)b.intern() 方法最终返回的是常量池的地址（对象）
+
+对于任何两个字符串`s`和`t` ， `s.intern() == t.intern()`是`true`当且仅当`s.equals(t)`是`true` 
+
+> String 的一些常用方法可以看API文档
+
 ##### 14.3 StringBuffer
+
+> 基本介绍
+
+代表可变的字符序列，可以对字符串内容进行增删，很多方法与string相同，但StringBuffer是可变长度的
+
+> String VS String Buffer
+
+1. String保存的是字符串常量，里面的值不能更改，每次String类的更新实际上就是更改地址，效率较低 //private final char value[];
+
+2. StringBuffer保存的是字符串变量，里面的值可以重改，每次StringBuffer的更新实际上可以更新内容，不用重新地址，效率较高
+
+   //char[] value; // 这个放在堆。
+
+```java
+// 看源码就知道答案
+String str = null;
+StringBuffer sb = new StringBuffer();
+sb.append(str);
+System.out.println(sb);  // null
+StringBuffer sb1 = new StringBuffer(str); //NullPointerException
+System.out.println(sb1);
+```
 
 ##### 14.4 StringBuilder
 
+> 基本介绍
+
+1. 一个可变的宇符序列。此类提供一个与 5tringBuffer 兼容的 AP!，但不保证同步（不是线程安全的）。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候。如果可能，建议优先采用该类，因为在大多数实现中，它比String Buffer 要快
+2. 在StringBuilder 上的主要操作是append 和 insert 方法，可重载这些方法，以接受任意类型的数据
+
+> 效率
+
+StringBuilder(没有加锁优势高效)  >  StringBuffer(加了锁优势安全)    > String(优势是复用性高) 
+
+> string、StringBuffer 和StringBuilder的选择
+
+1. 如果字符串存在大量的修改操作， 一般使用 StringBuffer 或StringBuilder
+2. 如果字符串存在大量的修改操作，并在单线程的情况，使用 String Builder
+3. 如果字符串存在大量的修改操作，并在多线程的情况，使用 StringBuffer
+4. 如果我们字符串很少修改，被多个对象引用，使用String，比如配置信息等
+
 ##### 14.5 Math
 
-##### 14.6 日期类
+##### 14.6 Arrays
 
 ##### 14.7 System
 
-##### 14.8 Arrays
+> 常用方法
 
-##### 14.9 BigInteger BigDecimal
+1. exit 退出当前程序
+2. currentTimeMillens返回当前时间距离1970-1-1 的毫秒数
+3. gc 运行垃圾回收机制 System.gc();
+
+##### 14.8 BigInteger BigDecimal
+
+> 应用场景
+
+1. Biginteger适合保存比较大的整型
+2. BigDecimal适合保存精度更高的浮点型（小数）
+
+> BigInteger的使用
+
+```java
+// 在对 BigInteger 进行加减乘除的时候，需要使用对应的方法，不能直接进行 + - * /
+BigInteger bigInteger = new BigInteger("12388677777779999999999");
+BigInteger bigInteger2 = new BigInteger("100");
+System.out.println(bigInteger); // 12388677777779999999999
+//加法
+BigInteger add = bigInteger.add(bigInteger2);
+System.out.println(add);  // 12388677777780000000099
+//减法
+BigInteger subtract = bigInteger.subtract(bigInteger2);
+System.out.println(subtract);  // 12388677777779999999899
+//乘法
+BigInteger multiply = bigInteger.multiply(bigInteger2);
+System.out.println(multiply);  // 1238867777777999999999900
+//除法
+BigInteger divide = bigInteger.divide(bigInteger2);
+System.out.println(divide);  // 123886777777799999999
+```
+
+> BigDecimal的使用
+
+```java
+// 当我们需要保存一个精度很高的数时，double不够用，可以使用BigDecimal
+//在对 BigDecimal 进行加减乘除的时候，需要使用对应的方法，不能直接进行 + - * /
+BigDecimal bigDecimal = new BigDecimal("1238.9999999999888888888888");
+BigDecimal bigDecimal2 = new BigDecimal("1.1");
+System.out.println(bigDecimal); //
+//加法
+BigDecimal add = bigDecimal.add(bigDecimal2);
+System.out.println(add);  //
+//减法
+BigDecimal subtract = bigDecimal.subtract(bigDecimal2);
+System.out.println(subtract);  //
+//乘法
+BigDecimal multiply = bigDecimal.multiply(bigDecimal2);
+System.out.println(multiply);  //
+//除法
+  BigDecimal divide = bigDecimal.divide(bigDecimal2); // 可能抛出异常 ArithmeticException
+// 解决方案，指定精度(如果有无限循环，就会保留分子的精度)
+BigDecimal divide = bigDecimal.divide(bigDecimal2,BigDecimal.ROUND_CEILING);
+System.out.println(divide);  //
+```
+
+##### 14.9 日期类【开发推荐使用第三代日期】
+
+> 第一代日期：Date (一般和SimpleDateFormat组合使用)
+
+略
+
+> 第二代日期：Calendar
+
+```java
+Calendar c = Calendar.getInstance();
+System.out.println("年：" + c.get(Calendar.YEAR));
+// 这里返回月的时候是从0开始，所以要加1
+System.out.println("月：" + (c.get(Calendar.MONTH) + 1));
+System.out.println("日：" + c.get(Calendar.DAY_OF_MONTH));
+System.out.println("小时：" + c.get(Calendar.HOUR));
+System.out.println("小时(24小时制)：" + c.get(Calendar.HOUR_OF_DAY));
+System.out.println("分钟：" + c.get(Calendar.MINUTE));
+System.out.println("秒：" + c.get(Calendar.SECOND));
+// Calendar 没有专门的格式化方法，所以需要程序员自己来组合显示
+System.out.println(c.get(Calendar.YEAR) + "年" + (c.get(Calendar.MONTH) + 1) + "月" +
+        c.get(Calendar.DAY_OF_MONTH) + "日");
+```
+
+> 第三代日期：LocalDate(日期/年月日)、 LocalTime(时间/时分秒)、 LocalDateTime(日期时间)【JDK8加入】
+
+```java
+// LocalDateTime.now(); 【如果只关注年月日时分秒用这个】
+// LocalDate.now(); 【如果只关注年月日用这个】
+// LocalTime.now()【如果只关注时分秒用这个】
+LocalDateTime ldt = LocalDateTime.now();
+System.out.println(ldt);   // 2023-12-19T00:07:26.072429 【可以使用DateTimeFormatter来进行格式化，看下面】
+System.out.println("年=" + ldt.getYear());
+System.out.println("月=" + ldt.getMonth());
+System.out.println("月=" + ldt.getMonthValue());
+System.out.println("日=" + ldt.getDayOfMonth()) ;
+System.out.println("时=" + ldt.getHour()) ;
+System.out.println("分=" + ldt.getMinute());
+System.out.println("秒=" + ldt.getSecond());
+
+// DateTimeFormatter格式日期类，类似于SimpleDateFormat
+Date TimeFormat dtf = DateTimeFormatter.ofPattern(格式）;
+String str = dtf.format(日期对象）;
+                        
+DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+String format = dtf.format(ldt);
+System.out.println("DateTimeFormatter格式化后：" + format); //DateTimeFormatter格式化后：2023-12-19 00:17:30
+                        
+// 直接计算多少天后
+LocalDateTime localDateTime = ldt.plusDays(5);
+System.out.println("5天后=" + dtf.format(localDateTime));  //5天后=2023-12-24 00:17:30
+                        
+// 看看在 10分钟前是什么时候
+LocalDateTime localDateTime1 = ldt.minusMinutes(10);
+System.out.println("10分钟前=" + dtf.format(localDateTime1));
+```
+
+#### 15 泛型
+
+> 使用传统方法的问题分析
+
+1. 不能对加入到集合 ArrayList中的数据类型进行约束(不安全）(如果没有泛型，ArrayList arr = new ArrayList(); 那么 arr可以添加Dog,也可以添加Cat)
+2. 遍历的时候，需要进行类型转换，如果集合中的数据量较大，对效率有影响
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img08.png)
+
+> 使用泛型后，只能限制加入特定的类型，否则报错，并且遍历时不用向下转型
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img09.png)
+
+> 泛型的好处
+
+1. 编译时，检查添加元素的类型，提高了安全性
+2. 减少了类型转换的次数，提高效率
+
+> 泛型的作用
+
+1. 泛型又称参数化类型，是Jdk5.0 出现的新特性 解决数据类型的安全性问题
+2. 在类声明或实例化时只要指定好需要的具体的类型即可
+3. 可以在类声明时通过一个标识表示类中某个属性的类型，或者是某个方法的返回值的类型，或者是参数类型
+
+##### 15.1 泛型语法
+
+> 语法
+
+```java
+// 1.泛型的声明
+interface 接口名<T>{}
+class 类名<K,V>{}
+// 比如：List , ArrayList
+说明：
+  1）其中，T.K.V不代表值，而是表示类型。
+  2）任意字母都可以。常用 T 表示，是Type的缩写
+// 2.泛型的实例化
+  1）List<String> strList = new ArrayList<String>();
+  2）Iterator <Customer> iterator = customers.iterator();
+```
+
+> 简单案例
+
+```java
+class A{}
+class B extends A{}
+class Person<E>{
+    E s;
+    Person(E s){
+        this.s = s;
+    }
+    public void show(){
+        System.out.println(s + ",运行类型：" + s.getClass());
+    }
+}
+Person<String> p = new Person<>("Wing");
+p.show();
+Person<Integer> p1 = new Person<>(100);
+p1.show();
+Person<A> p2 = new Person<>(new A());
+p2.show();
+Person<A> p3 = new Person<>(new B());  // 这里虽然指定的类型是A，但是B是A的子类，所以也没问题
+p3.show();
+Wing,运行类型：class java.lang.String
+100,运行类型：class java.lang.Integer
+org.example.exception_.A@2c8d66b2,运行类型：class org.example.exception_.A
+org.example.exception_.B@3cb5cdba,运行类型：class org.example.exception_.B
+```
+
+> 泛型使用注意事项和细节
+
+1. interface List<T>{} , public class HashSet <E>{}. 等等
+
+- 说明：T,E只能是引用类型，List <int> list2 = new Array List <int>();这是错误的，非引用类型
+
+2. 在指定泛型具体类型后，**可以传入该类型或者其子类类型**
+3. 泛型使用的两种形式
+
+   1）List <Integer> list1 = new ArrayList < Integer>();
+
+   2）List <Integer> list1 = new ArrayList <>();
+
+4. **如果我们这样写 List list3 = new ArrayList(); 默认给它的 泛型是 [<E>E就是 Object ]**
+
+##### 15.2 自定义泛型
+
+###### 15.2.1 泛型类
+
+```java
+// 基本语法
+class 类名<T,R...＞{
+  T t;
+  R r;
+  ...
+  成员
+}
+```
+
+> 注意细节
+
+1. 普通成员可以使用泛型（属性、方法）
+2. 使用泛型的数组，，不能初始化 T[] ts = new T[8]; // 这是错的
+3. 静态方法中不能使用类的泛型（很好理解，静态跟类相关，只有创建对象了才知道具体泛型是哪种类型）
+4. 泛型类的类型，是在创建对象时确定的（因为创建对象时，需要指定确定类型）
+5. 如果在创建对象时，没有指定类型，默认为Object
+
+###### 15.2.2 泛型接口
+
+```java
+// 基本语法
+class 接口<T,R...＞{
+}
+```
+
+> 注意细节
+
+1. 接口中，静态成员也不能使用泛型（这个和泛型类规定一样）
+2. 泛型接口的类型，在`继承接口`或者`实现接口`时确定
+3. 没有指定类型，默认为Object
+
+###### 15.2.3 泛型方法
+
+##### 15.3 泛型继承和通配符
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3194,7 +3511,7 @@ double num3 = 3d;  //ok
 double num4 = 8;  // ok int -> double
 ```
 
-###### 3、算术运算符面试题
+###### 3、算术运算符
 
 ```java
 # ++在后面
@@ -3867,21 +4184,218 @@ nt m = 128;
 System.out.println("n == m: " + (n == m));  // true  有基本数据类型比较时，比较的是值
 ```
 
+###### 26、String 练习题1
 
+```java
+String a = "abc";
+String b = "abc";
+System.out.println(a.equals(b)); // true 直接比较的内容
+System.out.println(a == b); // true 比较的地址，上面两个都没有new 都是指向常量池的"abc"地址
 
+String a = "hsp";
+String b = new String("hsp");
+System.out.println(a.equals(b));  // true 比较内容
+System.out.println(a == b);  // false  比较地址
+System.out.println(a == b.intern());  // true
+System.out.println(b == b.intern());  // false
+System.out.println(a.intern() == b.intern());  // true
+System.out.println(b.equals(b.intern()));  // true
+```
 
+###### 27、String 练习题2
 
+```java
+class Person{
+    public String name;
+}
+Person p1 = new Person();
+p1.name = "hspedu";
+Person p2 = new Person();
+p2.name = "hspedu";
+System.out.println(p1.name.equals(p2.name));  // true
+System.out.println(p1.name == p2.name); // true
+System.out.println(p1.name == "hspedu");// true
+String s1 = new String("bcde");
+String s2 = new String("bcde");
+System.out.println(s1 == s2);// false
+```
 
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img05.png)
 
+###### 28、String练习题3
 
+```java
+// 问：创建了几个对象
+// 答：3个
+String a = "hello";  // 创建 a 对象
+String b = "abc"; // 创建 b 对象
+// 解读这一行：
+// 1. 先创建一个 StringBuilder sb = new StringBuilder();
+// 2. 执行 sb.append("hello");
+// 3. sb.append("abc");
+// 4. String c = sb.toString();
+// 最后其实是 c 指向堆中的对象(String) value[] -> 池中 "helloabc"
+String c = a + b;
 
+// 重要规则：
+String c1 = "ab" + "cd"; 常量相加，看的是池（因为全是字符串的拼接，编译器会进行优化，String c1 = "ab" + "cd";实际等价于 String c1 = "abcd";）。String c2 = a + b;变量相加，是在堆中
+```
 
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img06.png)
 
+###### 29、String练习题4
 
+```java
+ String s1 = "hspedu";  // s1指向池中的"hspedu"
+ String s2 = "java"; // s2指向池中的"java"
+ String s5 = "hspedujava"; // s5指向池中的"hspedujava"
+ String s6 = (s1 + s2).intern(); // s6指向池中的"hspedujava"（只要看到intern就说明指向的是池中的）
+ System.out.println(s5 == s6);  // true
+```
 
+###### 30、String练习题5
 
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img07.png)
 
+[471集视频：https://www.bilibili.com/video/BV1fh411y7R8?p=471&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c]
 
+###### 31、String练习题6
+
+```java
+@Test
+public void test(){
+    String s = new String("2");
+    s.intern();
+    String s2 = "2";
+    System.out.println(s == s2);
+    String s3 = new String("3") + new String("3");
+    s3.intern();
+    String s4 = "33";
+    System.out.println(s3 == s4);
+}
+
+//jdk6
+//false
+//false
+
+//jdk7
+//false
+//true
+
+//jdk6分析
+1. String s = new String("2");创建了两个对象，一个在堆中的StringObject对象，一个是在常量池中的“2”对象。
+2. s.intern();在常量池中寻找与s变量内容相同的对象，发现已经存在内容相同对象“2”，返回对象2的地址。
+3. String s2 = "2";使用字面量创建，在常量池寻找是否有相同内容的对象，发现有，返回对象"2"的地址。
+4. System.out.println(s == s2);从上面可以分析出，s变量和s2变量地址指向的是不同的对象，所以返回false
+5. String s3 = new String("3") + new String("3");创建了两个对象，一个在堆中的StringObject对象，一个是在常量池中的“3”对象。中间还有2个匿名的new String(“3”)我们不去讨论它们。
+6. s3.intern();在常量池中寻找与s3变量内容相同的对象，没有发现“33”对象，在常量池中创建“33”对象，返回“33”对象的地址。
+7. String s4 = "33";使用字面量创建，在常量池寻找是否有相同内容的对象，发现有，返回对象"33"的地址。
+8. System.out.println(s3 == s4);从上面可以分析出，s3变量和s4变量地址指向的是不同的对象，所以返回false
+
+//jdk7分析
+1.String s = new String("2");创建了两个对象，一个在堆中的StringObject对象，一个是在堆中的“2”对象，并在常量池中保存“2”对象的引用地址。
+2.s.intern();在常量池中寻找与s变量内容相同的对象，发现已经存在内容相同对象“2”，返回对象“2”的引用地址。
+3.String s2 = "2";使用字面量创建，在常量池寻找是否有相同内容的对象，发现有，返回对象“2”的引用地址。
+4.System.out.println(s == s2);从上面可以分析出，s变量和s2变量地址指向的是不同的对象，所以返回false
+5.String s3 = new String("3") + new String("3");创建了两个对象，一个在堆中的StringObject对象，一个是在堆中的“3”对象，并在常量池中保存“3”对象的引用地址。中间还有2个匿名的new String(“3”)我们不去讨论它们。
+6.s3.intern();在常量池中寻找与s3变量内容相同的对象，没有发现“33”对象，将s3对应的StringObject对象的地址保存到常量池中，返回StringObject对象的地址。
+7.String s4 = "33";使用字面量创建，在常量池寻找是否有相同内容的对象，发现有，返回其地址，也就是StringObject对象的引用地址。
+8.System.out.println(s3 == s4);从上面可以分析出，s3变量和s4变量地址指向的是相同的对象，所以返回true
+```
+
+> jdk6
+
+![](https://ucc.alicdn.com/pic/developer-ecology/66b3qbdpwu6gg_5d89ec7bc25c47fca69e1203f448fb07.png)
+
+> jdk7
+
+![](https://ucc.alicdn.com/pic/developer-ecology/66b3qbdpwu6gg_233fbab834ac440dac6f1db12e74b89c.png)
+
+###### 32、泛型练习题1
+
+![](/Users/wing/IdeaProjects/hsp_study/chapter02/picture/img10.png)
+
+```java
+public class MyDate implements Comparable<MyDate>{
+    private int year;
+    private int month;
+    private int day;
+    public MyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+    /*
+      getXX(),setXX(),toString()
+    */
+    // 把对年月日的比较放到这里
+    @Override
+    public int compareTo(MyDate o) {
+        //如果name相同，就比较birthdy - year
+        int yearMinus = year - o.getYear();
+        if(yearMinus != 0){
+            return yearMinus;
+        }
+        //如果year相同，就比较month
+        int monthMinus = month - o.getMonth();
+        if(monthMinus != 0){
+            return monthMinus;
+        }
+        return day - o.getDay();    }
+}
+public class Employee {
+    private String name;
+    private double sal;
+    private MyDate birthday;
+    public Employee(String name, double sal, MyDate birthday) {
+        this.name = name;
+        this.sal = sal;
+        this.birthday = birthday;
+    }
+    /*
+      getXX(),setXX(),toString()
+    */
+}
+ArrayList<Employee> employees = new ArrayList<>();
+employees.add(new Employee("tom",20000,new MyDate(2000,11,12)));
+employees.add(new Employee("jack",12000,new MyDate(2001,11,12)));
+employees.add(new Employee("tom",20000,new MyDate(1900,10,12)));
+System.out.println(employees);
+System.out.println("=========排序后=========");
+// 开始对员工进行指定方式排序
+employees.sort(new Comparator<Employee>() {
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        //先按照name排序，如果name相同，则按生日日期的先后排序。【即：定制排序】
+        //先对传入的参数进行验证
+        if(!(emp1 instanceof Employee && emp2 instanceof Employee)){
+            System.out.println("类型不正确");
+            return 0;
+        }
+        // 比较name
+        int i = emp1.getName().compareTo(emp2.getName());
+        if(i != 0){
+            return i;
+        }
+        /* 这一段代码放到MyDate中实现
+        //如果name相同，就比较birthdy - year
+        int yearMinus = emp1.getBirthday().getYear() - emp2.getBirthday().getYear();
+        if(yearMinus != 0){
+            return yearMinus;
+        }
+        //如果year相同，就比较month
+        int monthMinus = emp1.getBirthday().getMonth() - emp2.getBirthday().getMonth();
+        if(monthMinus != 0){
+            return monthMinus;
+        }
+        return emp1.getBirthday().getDay() - emp2.getBirthday().getDay(); */
+        //注释上面的之后，这里只需要写这一行就行
+        return emp1.getBirthday().compareTo(emp2.getBirthday());
+    }
+});
+System.out.println(employees);
+【看代码：org.example.generic.CenericExercise02】
+```
 
 
 
