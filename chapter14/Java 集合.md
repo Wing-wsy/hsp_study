@@ -1,108 +1,154 @@
-#### 一、Java集合
+### 1 数组与集合的区别
 
-##### 1 集合的理解和好处
+#### 1.1 数组
 
-###### 1.1 数组的不足之处
-
-- 长度开始时必须指定，而且一旦指定，不能更改。
-- 保存的必须为同一类型的元素。
-- 使用数组进行增加元素的示意代码比较麻烦
+1. 数组长度开始时必须指定，而且一旦指定，不能更改
+2. 保存的必须为同一类型（基本类型/引用类型）的元素
+3. 使用数组进行增加/删除元素的代码比较复杂
 
 > 数组扩容，不灵活，比较麻烦，实例如下:
 
 `（见代码 com.hspedu.collection_.ArrayExample ）`
 
-###### 1.2 集合的好处
+#### 1.2 集合
 
-- 可以动态保存任意多个对象，使用比较方便
-- 提供了一系列方便的操作对象的方法:add、remove、set、get等
-- 使用集合添加，删除新元素更加简洁
+1. 集合不仅可以用来存储不同类型（不加泛型时）不同数量的对象，还可以保存具有映射关系的数据
+2. 集合是可以动态扩展容量，可以根据需要动态改变大小
+3. 集合提供了更多的成员方法，能满足更多的需求
 
-###### 1.3 Collection 接口图
+### 2 Java集合
 
-![](https://img-blog.csdnimg.cn/00d7515347a441458ca659fbfe7c2629.png#pic_center)
+#### 2.1 Java集合框架体系
 
-###### 1.4 Map 接口图
+![](https://img-blog.csdnimg.cn/img_convert/cc0fa9e08b38fa11e8850a1c0d05b09c.png)
 
-![](https://img-blog.csdnimg.cn/d1241df8097d40cdbc7824f0e8c8fb87.png#pic_center)
+> 类型简单介绍
 
-```markdown
-1.集合主要是两组(单列集合、双列集合)
-2.Collection接口有两个重要的子接口List Set 它们的实现子类都是单列集合
-3.Map接口的实现子类 是双列集合，存放的 Key-Value
+- `List`: 存储的元素是**有序**的、**可重复**的
+- `Set`: 存储的元素是**无序**的、**不可重复**的
+- `Queue`: 按特定的排队规则来确定先后顺序，存储的元素是**有序**的、**可重复**的
+- `Map`: 使用键值对（key-value）存储，key 是无序的、不可重复的，value 是无序的、可重复的，每个键最多映射到一个值
+
+> 简单总结
+
+集合主要是分了两组（`单列集合`和`双列集合`），单列集合表明在集合里放的是单个元素，双列集合往往是键值对形式（key-value）
+
+#### 2.2 Collection
+
+```ceylon
+Collection 是集合类中的单列集合。他是所有单列集合的父接口。Collection的子接口有List接口和Set接口。这意味着所有的单列集合类都是继承了这个接口。它定义了一些集合共有的基本方法，如添加、删除、查询和遍历元素等方法
 ```
-
-#### 二 、Collection接口实现类的特点
-
-- Collection实现子类可以存放多个元素,每个元素可以是Object
-- 有些Collection的实现类，可以存放重复的元素，有些不可以
-- 有些Collection的实现类是有序的(List),有些是无序的(Set)–这里说的有序和无序是指取出的顺序是否和放入顺序一致
-- Collection接口没有直接的实现子类，是通过它的子接口Set和List来实现的
 
 `演示示例见代码：com.hspedu.collection_.CollectionMethod`
 
-##### 1 Collection接口的遍历形式
+> Iterator迭代器
 
-> 使用迭代器Iterator
-
-- Iterator对象称为迭代器，用于遍历Collection集合中的元素。
-- 所有实现了Collection接口的集合类都有一个Iterator()方法，用以返回一个实现了Iterator接口的对象，即可以返回一个迭代器
-- Iterator仅用于遍历集合，Iterator本身并不存放对象
+1. Iterator对象称为迭代器，用于遍历Collection集合中的元素
+2. 所有实现了Collection接口的集合类都有一个Iterator()方法，用以返回一个实现了Iterator接口的对象，即可以返回一个迭代器
+3. Iterator仅用于遍历集合，Iterator本身并不存放对象
 
 `迭代器使用见代码：com.hspedu.collection_.CollectionIterator `
-
-
 
 > for循环增强遍历
 
 增强for循环，可以替代itrator迭代器，特点:增强for就是简化版的iterator，本质一样。只能用于遍历集合或者数组
 
-#### 三 、List接口和常用方法
+##### 2.2.1 List
 
-##### 1 List接口是Collection接口的子接口
+```ceylon
+List 接口是 Collection 接口的子接口，常用的List实现类有 ArrayList、Vector、LinkedList
+```
 
-- List集合类中元素有序(即添加顺序和取出顺序一致)、并且可以重复
+- List集合类中元素有序(即添加顺序和取出顺序一致)、且可重复
 - List集合中的每个元素都有其对应的顺序索引，即支持索引
-- List容器中的元素都对应一个整数型的序号记载其在容器中的位置，可以根据序号存取容器中的元素。
-- List接口的常用实现类有:ArrayList、LinkedList和Vector
+- List集合可以添加任意元素，**包括null**，并且**可以添加多个**
 
+> List常用方法
 
+```java
+add() // 在index位置插入元素
+addAll() // 从index位置开始将所有元素添加进来
+get() // 获取指定index位置的元素
+indexOf() // 返回在集合中首次出现的位置
+lastIndexOf() // 返回在当前集合中末次出现的位置
+remove() // 移除index位置的元素，并返回此元素
+set() // 设置指定index位置的元素(替换)
+subList() // 返回一个范围位置中的子集合
+```
 
-> List接口和常用方法
-
-- `add` 在index位置插入元素
-
-- `addAll` 从index位置开始将所有元素添加进来
-
-- `get` 获取指定index位置的元素
-
-- `indexOf` 返回在集合中首次出现的位置
-
-- `lastIndexOf` 返回在当前集合中末次出现的位置
-
-- `remove` 移除index位置的元素，并返回此元素
-
-- `set` 设置指定index位置的元素(替换)
-
-- `subList` 返回一个范围位置中的子集合
-
-  
-  
-  `List接口和常用方法使用见代码：com.hspedu.list_.List_ `
-
-##### 2 List的三种遍历方式
+`List接口和常用方法使用见代码：com.hspedu.list_.List_ `
 
 `List的三种遍历方式见代码：com.hspedu.list_.ListFor`
 
-##### 3 ArrayList底层接口和源码分析
+###### 2.2.1.1 ArrayList
 
-- ArrayList可以放所有的元素甚至是`空元素`，可以放入多个空值。
-- ArrayList是由`数组`来实现数据存储的。
-- ArrayList基本等同于Vector，除了ArrayList是线程不安全(执行效率高)，在`多线程`下，不建议用ArrayList。
-- ArrayList中维护了一个Object类型的`数组elementData`
-- transient Object[] elementData  //表示该属性不会被序列化
-- 当创建ArrayList对象时，如果使用的是无参构造器，则初始elementData容量是0，第1次添加，则扩容elementData为10,如需再次扩容，则扩容elementData为1.5倍
-- 如果使用的是指定大小的构造器，则初始elementData容量为指定大小，如果需要扩容，则直接扩容elementData为1.5倍
+> （一）ArrayList的底层实现
+
+ArrayList底层维护了一个**Object类型的数组**，所以ArrayList里面可以存放**任意类型**的元素，**transient表示该属性不会被序列化**
+
+**size变量**用来保存当前数组中已经添加了多少元素
+
+![](picture/img02.png)
+
+> （二）ArrayList的扩容机制（面试题）
+
+当创建ArrayList对象时，如果使用的是**无参构造器**，则初始elementData**容量为0**
+
+**第1次**添加，则扩容**elementData为10**，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> 底层分析结论
+
+1. ArrayList是由`数组`来实现数据存储的
+2. ArrayList中维护了一个Object类型的`数组elementData`
+3. 依上所以ArrayList可以存放任意类型的元素甚至是`空元素`，可以放入多个空值
+4. transient Object[] elementData  //transient关键字表示该属性不会被序列化
+5. 当创建ArrayList对象时，如果使用的是无参构造器，则初始elementData容量是0，第1次添加，则扩容elementData为10,如需再次扩容，则扩容elementData为1.5倍
+6. 如果使用的是指定大小的构造器，则初始elementData容量为指定大小，如果需要扩容，则直接扩容elementData为1.5倍
+7. ArrayList基本等同于Vector，ArrayList是线程不安全(执行效率高)，在`多线程`下，不建议用ArrayList
+
+###### 2.2.1.2 Vector
+
+###### 2.2.1.3 LinkedList
+
+##### 2.2.2 Set
+
+```ceylon
+
+```
+
+###### 2.2.2.1 HashSet
+
+###### 2.2.2.2 LinkedHashSet
+
+###### 2.2.2.3 TreeSet
+
+#### 2.3 Map
+
+##### 2.3.1 HashMap
+
+##### 2.3.2 LinkedHashMap
+
+##### 2.3.3 HashTable
+
+##### 2.3.4 TreeMap
+
+
+
+#### 三 、List接口和常用方法
 
 ##### 4 Vector底层机构和源码剖析
 
@@ -129,8 +175,6 @@
 - 每个节点(Node对象)，里面又维护了`prev`,`next`,`item`三个属性，其中通过prev指向前一个，通过next指向后一个节点 ，最终实现双向链表。
 - 所以LinkedList的元素的添加和删除，不是通过数组完成的，相对来说效率较高
 
-
-
 > 可以阅读源码比较简单
 
 ![](https://img-blog.csdnimg.cn/45cfdd218988441ea8005b8686cba1f2.png#pic_center)
@@ -138,8 +182,6 @@
 ##### 7 LinkLis和ArrayList的区别
 
 ![](https://img-blog.csdnimg.cn/20523a0adc4d4fbdaea985e5ee16a3b6.png#pic_center)
-
-
 
 #### 四 、Set接口和常用方法
 
@@ -157,21 +199,19 @@
 
 - 可以使用迭代器
 - 增强for循环
-- 不能使用索引的方式来获取
+- **不能使用索引的方式来获取**
 
 `见代码 com.hspedu.set_.SetMethod`
 
 ##### 2 HashSet的全面说明
 
 - HashSet实现了Set接口
-- HashSet实际上是HashMap
+- HashSet实际上是HashMap(因为底层就是HashMap)
 - 可以存放null值，但是只能有一个null
 - HashSet不保证元素是有序的，取决于hash后，再确定索引的结果(不保证元素存放和取出顺序一致)
 - 不能有重复元素/对象。在前面Set接口使用已经讲过了
 
-
-
-> 分析:HashSet底层是HashMap，HashMap底层是(数组+链表+红黑树)
+> 分析:HashSet底层是HashMap，HashMap底层是(数组+单向链表+红黑树)
 > 浓缩成6句话
 
 - HashSet底层是HashMap
@@ -180,8 +220,6 @@
 - 如果没有，直接加入
 - 如果有，调用equals比较，如果相同，就放弃添加，如果不相同，则添加到最后
 - 在JAVA 8 中，如果一条链表的元素个数，到达TREEIFY_THRESHOLD(默认是8)，并且table的大小>= MIN_TREEIFY_CAPACITY(默认64)就进行树化(红黑树)
-
-
 
 > 源码分析
 >
@@ -357,11 +395,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
         }
         return newTab;
     }
-
 ///////////////////////////////对resize方法的具体分析-结束///////////////////////////////
 ```
-
-
 
 ##### 课后练习
 
@@ -375,8 +410,6 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 `示例1见代码：com.hspedu.set_.Employee `
 
-
-
 二、equals和hashCode示例2:重写2次
 
 ```
@@ -385,8 +418,6 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 ```
 
 `示例1见代码：com.hspedu.set_.Employee02 `
-
-
 
 三、equals和hashCode示例2:重写1次
 
@@ -397,14 +428,12 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 `示例1见代码：com.hspedu.set_.Employee03 `
 
-
-
 ##### 3 LinkedHashSet
 
 > LinkedHashSet的全面说明
 
 - LinkedHashSet是HashSet的子类
-- LinkedHashSet底层是一个LinkedHashMap，底层维护了一个数组+双向链表
+- LinkedHashSet底层是一个LinkedHashMap，底层维护了一个**数组+双向链表**
 - LinkedHashSet根据元素的hashCode值来决定元素的存储位置，同时使用链表维护元素的次序图(图)，这使得元素看起来是以插入顺序保存的。
 - LinkedHashSet不允许添加重复元素
 
@@ -418,18 +447,27 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 - 在添加一个元素时，先求hash值，再求索引，确定该元素在table的位置，然后将添加的元素加入到双向链表(如果已经存在，不添加[原则和hashset一样])
 
-
 ​       tail.next = newElement
 ​      newElement.pre = tail
 ​      tail = newElement;
 
 - 这样的话，我们遍历LinkedHashSet 也能确保插入顺序和遍历顺序一致
 
+![](/Users/wing/IdeaProjects/hsp_study/chapter14/picture/img01.png)
 
 
 
+#### Collections 工具类
 
+```ceylon
+Collections 中提供了大量对集合元素进行排序、查询和修改等操作的方法，还提供了对集合对象设置不可变、对集合对象实现同步控制等方法。以下定义的方法既可用于操作 List集合，也可用于操作Set 和 Queue 
+```
 
+> 常用操作
+
+```java
+后续补充Collections工具类的常用方法
+```
 
 
 
