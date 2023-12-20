@@ -3459,15 +3459,146 @@ class 接口<T,R...＞{
 2. 泛型接口的类型，在`继承接口`或者`实现接口`时确定
 3. 没有指定类型，默认为Object
 
-###### 15.2.3 泛型方法
+```java
+/* 普通类中使用泛型方法 */
+class Car{ //普通类
+    public void run(){ //普通方法
+    }
+    //说明：
+    //1.<T,R>就是泛型
+    //2.提供给 fly 使用的
+    public <T,R> void fly(T t,R r){ // 泛型方法
+        System.out.println(t.getClass()); //class java.lang.String
+        System.out.println(r.getClass()); //class java.lang.Integer
+    }
+}
+/* 泛型类中使用泛型方法 */
+class Fish<T,R>{
+    public void run(){ //普通方法
+    }
+    public <U,M> void eat(U u,M m){ // 泛型方法
+    }
+    //说明：
+    //1.下面hi方法不是泛型方法
+    //2.是hi方法使用了类声明的泛型
+    public void hi(T t){}
+    //泛型方法，可以使用类声明的泛型，也可以使用自己声明的泛型
+    public<K> void hello(R r,K k){
+        System.out.println(r.getClass());
+        System.out.println(k.getClass());
+    }
+}
+Car car = new Car();
+car.fly("宝马",100); // 当调用方法时传入参数，编译器就会确定类型
+System.out.println("==========");
+Car car2 = new Car();
+car2.fly(300,1.1);
+System.out.println("==========");
+Fish<String, ArrayList> fish = new Fish<>();
+fish.hello(new ArrayList(),11.3f);
+class java.lang.String
+class java.lang.Integer
+==========
+class java.lang.Integer
+class java.lang.Double
+==========
+class java.util.ArrayList
+class java.lang.Float
+```
+
+###### 15.2.3 自定义泛型方法
+
+```java
+//基本语法
+修饰符 <T,R...> 返回类型 方法名（参数列表）{}
+```
+
+> 细节
+
+1. 泛型方法，可以定义在普通类中，也可以定义在泛型类中
+2. 当泛型方法被调用时，类型会确定
+3. public void eat(E e){}，修饰符后没有<T,R...> eat方法不是泛型方法，而是使用了泛型。
 
 ##### 15.3 泛型继承和通配符
 
+1. **泛型不具备继承性**（List-Object> list = new ArrayList<String >():// 这是错的）
+2. <?>：支持任意泛型类型
+3. <? extends A>：支持A类以及A类的子类，规定了泛型的上限
+4. <? super A>：支持A类以及A类的父类，不限于直接父类，规定了泛型的下限
+
+```java
+class AAA{
+}
+class BBB extends AAA{
+}
+class CCC extends BBB{
+}
+public class CenericExercise05 {
+    public static void main(String[] args) {
+        List<Object> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+        List<AAA> list3 = new ArrayList<>();
+        List<BBB> list4 = new ArrayList<>();
+        List<CCC> list5 = new ArrayList<>();
+        // <?> : 可以接收所有泛型类型
+        printCollection1(list1);
+        printCollection1(list2);
+        printCollection1(list3);
+        printCollection1(list4);
+        printCollection1(list5);
+        // <? extends AAA> : 可以接收AAA或者AAA的子类
+        printCollection2(list3);
+        printCollection2(list4);
+        printCollection2(list5);
+        // <? super AAA> : 可以接收AAA或者AAA的父类，不限于直接父类
+        printCollection3(list1);
+        printCollection3(list3);
+    }
+    // List<?> 表示任意的泛型类型都可以接收
+    public static void printCollection1(List<?> c){
+        for(Object object : c){ // 通配符，取出来时就是Object
+            System.out.println(object);
+        }
+    }
+    // List<? extends AAA> 表示上限，可以接收AAA或者AAA的子类
+    public static void printCollection2(List<? extends AAA> c){
+    }
+    // List<? super AAA> 表示下限，可以接收AAA或者AAA的父类，不限于直接父类
+    public static void printCollection3(List<? super AAA> c){
+    }
+}
+```
+
+#### 16 JUnit测试
+
+> 介绍 为什么需要JUnit
+
+1. 一个类有很多功能代码需要测试，为了测试，就需要号入到main方法中
+2. 如果有多个功能代码测试，就需要来回注销，切换很麻烦
+3. 如果可以直接运行一个方法，就方便很多，并且可以给出相关信息，就好了-＞JUnit
+
+```java
+public class JunitTest {
+    public static void main(String[] args) {
+        // 传统测试
+        //JunitTest junitTest = new JunitTest();
+        //junitTest.m1();
+        //junitTest.m2();
+    }
+    @Test
+    public void m1(){
+        System.out.println("m1被调用");
+    }
+    @Test
+    public void m2(){
+        System.out.println("m2被调用");
+    }
+}
+```
 
 
 
-
-
+ 
 
 
 
