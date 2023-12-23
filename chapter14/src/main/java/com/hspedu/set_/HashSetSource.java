@@ -15,11 +15,13 @@ public class HashSetSource {
 
     @Test
     public  void getHashSetSource(){
+
         HashSet hashSet = new HashSet();
-        hashSet.add("java");
-        hashSet.add("php");
-        hashSet.add("java");
+        for (int i = 1; i <= 100; i++) {
+            hashSet.add(i);
+        }
         System.out.println("set=" + hashSet);
+
 
 //        HashMap hashMap = new HashMap();
 //        System.out.println(hashMap.put("1", "one"));

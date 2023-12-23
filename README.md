@@ -13,7 +13,7 @@ next：https://www.bilibili.com/video/BV1YA411T76k?p=30
 笔记：https://blog.csdn.net/sinat_38316216/article/details/127388493
 
 【Java基础】
-next：https://www.bilibili.com/video/BV1fh411y7R8?p=51&spm_id_from=pageDriver&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c
+next(坦克大战)：https://www.bilibili.com/video/BV1fh411y7R8?p=569&vd_source=dc02a4c6e2a8e915fb8ee431999e5b2c
 
 √：完成
 △：进行中

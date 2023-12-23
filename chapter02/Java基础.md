@@ -770,7 +770,7 @@ int a=1<<2  => 00000001 => 00000100 本质 1*2*2=4
 
 程序从上到下逐行执行，中间没有任何判断和跳转。
 
-##### 7.2 分支控制（if, else, switch）
+##### 7.2 分支控制
 
 > 单分支
 
@@ -863,7 +863,7 @@ switch(表达式){
 1. 如果判断的具体数值不多，而且符合 (byte,short,int char enum,String) 这6种类型，建议使用switch
 2. 其他情况：对区间判断，对结果为boolean类型判断，使用if
 
-##### 7.3 循环控制(for, while, do while)
+##### 7.3 循环控制
 
 > 介绍
 
@@ -2015,7 +2015,7 @@ System.out.println("程序结束");
 
 #### 11 面向对象编程（高级）
 
-#####  11.1 类变量(静态变量)和类方法(静态方法)
+#####  11.1 类变量和类方法
 
 > 介绍
 
@@ -2805,6 +2805,74 @@ instance.say();
  instance1.say();
 ```
 
+> 静态内部类开发应用场景
+
+> 来源：LinkedList源码阅读
+
+```java
+// LinkedList 源码里的一个节点静态内部类(为什么源码里Node要定义成静态内部类，下面有案例和个人理解参考)
+private static class Node<E> {
+    E item;
+    Node<E> next;
+    Node<E> prev;
+    Node(Node<E> prev, E element, Node<E> next) {
+        this.item = element;
+        this.next = next;
+        this.prev = prev;
+    }
+}
+```
+
+> 要求：定义一个Order类表示一个订单，它包含了一个订单号和一个商品项列表。OrderItem类表示一个商品项，它包含了一个商品ID和商品数量。
+>
+> 好处：通过静态内部类，我们可以将相关的类组织在一起，提高代码的可读性和可维护性。
+>
+> 应用场景：Java静态内部类的使用场景。静态内部类可以直接在外部类中使用，无需创建外部类的实例。它可以将相关的类组织在一起，提高代码的可读性和可维护性。在实际开发中，**静态内部类常用于表示某个类的辅助类或者某个类的组**（上面Node静态内部类就是LinkedList类的辅助类）
+
+```java
+public class Order {
+    public static void main(String[] args) {
+        Order order = new Order("12345");
+        order.addOrderItem("A001",200);
+        order.addOrderItem("B002",300);
+        order.printOrderItems();
+    }
+    private String orderId;
+    private List<OrderItem> orderItems;
+    public Order(String orderId) {
+        this.orderId = orderId;
+        this.orderItems = new ArrayList<>();
+    }
+    public void addOrderItem(String productId, int quantity){
+        OrderItem item = new OrderItem(productId, quantity);
+        orderItems.add(item);
+    }
+    public void printOrderItems(){
+        for (OrderItem item : orderItems) {
+            System.out.println(item.productId + ":" + item.getQuantity());
+        }
+    }
+    // 解释说明：这里可以定义为静态内部类，也可以定义为成员内部类
+    // 如果这个内部类不会去访问外部类的属性（或者只会访问外部类的静态属性，不会访问非静态的属性），那么定义成静态的最合适
+    // 如果这个内部类有使用到外部类的非静态属性，就定义为成员内部类
+    // public class OrderItem{
+    public static class OrderItem{
+        private String productId;
+        private int quantity;
+        public OrderItem(String productId, int quantity) {
+            this.productId = productId;
+            this.quantity = quantity;
+        }
+        public String getProductId() {
+            return productId;
+        }
+        public int getQuantity() {
+            return quantity;
+        }
+    }
+}
+```
+
 #### 12 枚举和注解
 
 1. 枚举对应英文(enumeration，简写 enum)
@@ -2923,7 +2991,7 @@ System.out.println(Season2.SUMMER.getDesc());  // 炎热
 2)@Target 是修饰注解的注解，称为元注解
 ```
 
-##### 12.4 元注解：对注解进行注解（了解即可）
+##### 12.4 元注解（了解即可）
 
 > 元注解基本介绍
 
@@ -3283,7 +3351,9 @@ BigDecimal divide = bigDecimal.divide(bigDecimal2,BigDecimal.ROUND_CEILING);
 System.out.println(divide);  //
 ```
 
-##### 14.9 日期类【开发推荐使用第三代日期】
+##### 14.9 日期类
+
+【开发推荐使用第三代日期】
 
 > 第一代日期：Date (一般和SimpleDateFormat组合使用)
 
@@ -3521,7 +3591,7 @@ class java.lang.Float
 
 ##### 15.3 泛型继承和通配符
 
-1. **泛型不具备继承性**（List-Object> list = new ArrayList<String >():// 这是错的）
+1. **泛型不具备继承性**（List<Object> list = new ArrayList<String >():// 这是错的）
 2. <?>：支持任意泛型类型
 3. <? extends A>：支持A类以及A类的子类，规定了泛型的上限
 4. <? super A>：支持A类以及A类的父类，不限于直接父类，规定了泛型的下限
@@ -3569,6 +3639,110 @@ public class CenericExercise05 {
 }
 ```
 
+##### 15.4 泛型提升案例
+
+> 案例来源 
+
+看了Collection接口后，有个方法：**boolean addAll(Collection<? extends E> c);**，存在疑问，因为上面学习到【15.1 泛型语法 -> 泛型使用注意事项和细节 -> 2.在指定泛型具体类型后，**可以传入该类型或者其子类类型**】，那么**boolean addAll(Collection<? extends E> c);** 如果改成 **boolean addAll(Collection<E> c);**不也一样吗？，下面开始编写案例模拟Collection的方式验证两种方式是否有区别。
+
+> 验证 boolean addAll(Collection<E> c);
+
+```java
+interface Collection1<E>{  // 自己定义了一个类，模拟 Collection
+    boolean addAll(Collection1<E> c);
+}
+class ArrayList1<E> implements Collection1<E>{
+    @Override
+    public boolean addAll(Collection1<E> c) {
+        return false;
+    }
+}
+class Person{}
+class Stu extends Person{}
+class Tea extends Person{}
+
+ArrayList1<Person> arrayList1 = new ArrayList1<>();
+ArrayList1<Person> personList = new ArrayList1<>();
+ArrayList1<String> strList = new ArrayList1<>();
+ArrayList1<Stu> stuList = new ArrayList1<>();
+ArrayList1<Tea> teaList = new ArrayList1<>();
+arrayList1.addAll(personList); // ok
+arrayList1.addAll(strList); // 编译错误
+arrayList1.addAll(stuList); // 编译错误
+arrayList1.addAll(teaList); // 
+
+/* 测试集合里面的方法 */
+ArrayList<Person> list = new ArrayList<>();
+list.add(new Person()); // ok
+list.add(new Stu()); // ok
+list.add(new Tea()); // ok
+```
+
+> 验证 boolean addAll(Collection<? extends E> c);
+
+```java
+interface Collection1<E>{
+    boolean addAll(Collection1<? extends E> c);
+}
+class ArrayList1<E> implements Collection1<E>{
+    @Override
+    public boolean addAll(Collection1<? extends E> c) {
+        return false;
+    }
+}
+class Person{}
+class Stu extends Person{}
+class Tea extends Person{}
+
+ArrayList1<Person> arrayList1 = new ArrayList1<>();
+ArrayList1<Person> personList = new ArrayList1<>();
+ArrayList1<String> strList = new ArrayList1<>();
+ArrayList1<Stu> stuList = new ArrayList1<>();
+ArrayList1<Tea> teaList = new ArrayList1<>();
+arrayList1.addAll(personList); // ok
+arrayList1.addAll(strList); // 错误
+arrayList1.addAll(stuList); // ok
+arrayList1.addAll(teaList); // ok
+/* 测试集合里面的方法 */
+ArrayList<Person> list = new ArrayList<>();
+list.add(new Person()); // ok
+list.add(new Stu()); // ok
+list.add(new Tea()); // ok
+```
+
+> 结论：通过上面两种方式验证后，最终结果是不一样的，并且和上面学习到【15.1 泛型语法 -> 泛型使用注意事项和细节 -> 2.在指定泛型具体类型后，**可以传入该类型或者其子类类型**】不是一样的方式，不能混为一谈，下面验证“可以传入该类型或者其子类类型”的方式【参考代码：com.hspedu.collection_CollectionTest01】
+
+```java
+class A{}
+class B extends A{}
+class Person<E>{
+    E s;
+    Person(E s){
+        this.s = s;
+    }
+    public void show(){
+        System.out.println(s + ",运行类型：" + s.getClass());
+    }
+}
+Person<A> p2 = new Person<>(new A());
+p2.show();
+Person<A> p3 = new Person<>(new B());  // 这里虽然指定的类型是A，但是B是A的子类，所以也没问题
+p3.show();
+
+// 针对这一行进行分析：Person<A> p3 = new Person<>(new B()); 
+// 指定泛型类型是A，可以理解成Person变成了下面的格式
+class Person{
+    A s;
+    Person(A s){
+        this.s = s;
+    }
+    public void show(){
+        System.out.println(s + ",运行类型：" + s.getClass());
+    }
+}
+// 所以此时调用构造方法传入 new B() 是可以被它的父类 A 接收的（继承的知识），所以这是没有问题的，验证了“可以传入该类型或者其子类类型”
+```
+
 #### 16 JUnit测试
 
 > 介绍 为什么需要JUnit
@@ -3596,19 +3770,24 @@ public class JunitTest {
 }
 ```
 
+#### 17 优雅的代码书写
 
+1.
 
- 
-
-
-
-
-
-
-
-
-
-
+```java
+// 自己平时的书写风格
+int hash1(Object key) {
+    if(key == null){
+        return 0;
+    }
+    return key.hashCode() ^ (key.hashCode() >>> 16);
+}
+// 优雅的书写风格
+int hash2(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+}
+```
 
 
 

@@ -21,6 +21,7 @@ public class CollectionIterator {
         arrayList.add(new Book("西游记", "吴承恩", 38.5));
         arrayList.add(new Book("水浒传", "施耐庵", 66.66));
 
+        // ceylon
         System.out.println("直接输出:" + arrayList);
         System.out.println("------------------");
 
