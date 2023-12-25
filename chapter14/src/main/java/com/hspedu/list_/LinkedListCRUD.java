@@ -1,9 +1,12 @@
 package com.hspedu.list_;
 
+import com.hspedu.test01.A;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author wing
@@ -13,38 +16,29 @@ public class LinkedListCRUD {
 
     @Test
     public void linkedListCRUD() {
-        LinkedList list = new LinkedList();
-        list.add(100);
-        list.add(200);
-        list.add(300);
-        System.out.println(list);
 
-        // 修改，把200更改成400
-        System.out.println(list.set(1, 400)); // 200
+       List one = new ArrayList();
+       one.add("1");
+       one.add("2");
+       one.add("3");
+       one.add("4");
+       System.out.println(one);
+       System.out.println(one.getClass());
 
-        // 删除400
-        System.out.println(list.remove(1)); // 400
+       List two = one.subList(1, 3);
+       System.out.println(two);
+       System.out.println(two.getClass());
+       two.set(0,"a");
+       System.out.println(two);
+       System.out.println(one);
+       List three = two.subList(1, 2);
+       System.out.println(three);
+       System.out.println(three.getClass());
+       three.set(0,"b");
+       System.out.println(three);
+       System.out.println(two);
+       System.out.println(one);
 
-        // 查找第2个元素
-        System.out.println(list.get(1));
-
-        // 迭代器遍历
-        System.out.println("----迭代器遍历----");
-        Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Object next = iterator.next();
-            System.out.println(next);
-        }
-
-        System.out.println("增强for循环遍历");
-        for (Object o : list) {
-            System.out.println(o);
-        }
-
-        System.out.println("普通for循环遍历");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
 
     }
 }

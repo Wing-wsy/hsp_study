@@ -2447,7 +2447,7 @@ bb.calculateTime();
 > 注意事项和细节
 
 1. 在Jdk7.0前 接口里的所有方法都没有方法体
-2. Jdk8.0后（包括）接口类可以有静态方法，默认方法(default修饰)，也就是说接口中可以有方法的具体实现
+2. Jdk8.0后（包括）接口类可以有静态方法，**默认方法(default修饰)，也就是说接口中可以有方法的具体实现**
 3. 接口中定义的没有实现体的方法，`默认为抽象方法`，可以省略abstract关键字
 4. 接口不能被实例化
 5. 接口中所有的方法是 public方法，接口中抽象方法，可以不用abstract 修饰
@@ -2459,6 +2459,29 @@ bb.calculateTime();
 11. 接口不能继承其它的类,但是可以继承多个别的接口
 12. 接口的修饰符 只能是 **public 和默认**，这点和类的修饰符是一样的,如：interface A{} 或者 public interface A{}，类就是如：public class A{} 或者 class A{} 【使用public修饰就要跟文件名一致】
 
+> 续上面第2点 default
+
+> 1.default方法的定义
+
+```java
+default 方法是 Java 8 中引入的新特性，它是接口中的一种特殊方法，可以在接口中提供默认实现，不需要实现类去实现接口中的抽象方法。
+default 方法使得接口可以添加新的方法而不会破坏实现了该接口的类。
+default 方法可以使用 public. protected 和 default 修饰，但不能使用private 修饰。
+```
+
+> 2.default方法的特点
+
+```java
+default 方法可以为接口提供默认实现，使得接口的实现类不必提供新的方法实现。default 方法具有多态性，可以被子类重号，也可以被实现类调用。default 方法可以被多 个实现类共享，减少代码冗余。
+default方法可以访问接口中的 static 方法和常量 ，但不能访问实现类中的非静态成员变量和实例方法
+```
+
+> 3.default方法的使用
+
+```java
+default 方法可以让实现接口的类拥有默认的行为，而不需要实现接口中定义的所有方法。这样可以使接口重加灵活，更容易扩展，而不会影响到己有的实现。使用default 方法时，需要在接口中使用 default 关键字来声明，并在方法体中实观具体的行为
+```
+
 ```java
 // 重点：接口里面可以定义属性，还可以定义方法，方法只能定义这三种（1.抽象方法 2.默认实现方法 3.静态方法）
 public interface AInterface {
@@ -2467,11 +2490,11 @@ public interface AInterface {
     public void hi();
     //接口可以定义默认方法（JDK8或者之后）
     default public void ok(){
-        System.out.println("ok"
+        System.out.println("ok");
     }
     //接口可以定义静态方法（JDK8或者之后）
     public static void cry(){
-        System.out.println("cry
+        System.out.println("cry");
     }
 }
 ```
@@ -2508,6 +2531,24 @@ interface IH{}
 class Student implements IG{}
 IG ig = new Student();
 IH ih = new Student();   // 2）所以这里可以接收，这就是多态传递
+```
+
+> 子类实现接口，父类如果也实现了接口的方法，那么子类可以不用重写（来源ArrayList源码）
+
+```java
+// 接口
+public interface A {
+    void containsAll();
+}
+// 实现接口的方法
+public class AA implements A{     // 这里AA也可以不用实现A,也能通过编译 -> public class AA{
+    @Override
+    public void containsAll() {
+    }
+}
+// B可以不用重写A接口中的方法，因为在父类已经重写
+public class B extends AA implements A{
+}
 ```
 
 #####  11.8 内部类
