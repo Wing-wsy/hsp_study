@@ -13,7 +13,7 @@
 ## 1.2 集合
 
 1. 集合不仅可以用来存储不同类型（不加泛型时）不同数量的对象，还可以保存具有映射关系的数据
-2. 集合是可以动态扩展容量，可以根据需要动态改变大小
+2. 集合是可以动态扩展容量，可以根据需要动态改变大小s
 3. 集合提供了更多的成员方法，能满足更多的需求
 
 # 2 Java集合
@@ -876,8 +876,6 @@ E unlink(Node<E> x) {
 }
 ```
 
-
-
 ****
 
 ##### 2.2.1.3.1 Node
@@ -1719,10 +1717,6 @@ public HashSet(Collection<? extends E> c) {
 }
 ```
 
-> 3.成员方法（判断类）
-
-
-
 > 小试牛刀
 
 ```java
@@ -1741,8 +1735,6 @@ System.out.println(hashSet);
 [com.hspedu.list_.Person@5ed828d, Wing, com.hspedu.list_.Person@371a67ec, wsy, Li, jack]
 // 根据上面的输出结果，引出下面的问题：HashSet 如何确定元素是否重复。
 ```
-
-
 
 ** **
 
@@ -1764,212 +1756,13 @@ System.out.println(hashSet);
 因为，如果单使用数组或者链表的方式，将来数据越来越多，读取或者新增效率会越来越低，所以设计者使用了“数组+链表+红黑树”的结构，大大提高了效率
 ```
 
-** **
-
-> HashSet 源码解读
-
-> 1.main方法debug语句
-
-```java
-HashSet hashSet = new HashSet();
-hashSet.add("java");
-hashSet.add("php");
-hashSet.add("java");
-```
+> 因为HashSet底层就是HashMap，所以源码内容参考HashMap，这里不再赘述
 
 ** **
-
-> 2.无参构造器
-
-```java
-HashSet hashSet = new HashSet();
-```
-
-![](picture/img12.jpg)
-
-**源码解读**：
-
-1. HashSet无参构造器实际是创建了一个HashMap的对象实例，所以HashSet底层就是一个HashMap
-
-** **
-
-> 3.第一次调用add方法分析
-
-```java
-hashSet.add("java");
-```
-
-![](picture/img15.png)
-
-![](picture/img14.png)
-
-**源码解读**：
-
-1. `e`：添加的元素，这里是"java"字符串常量
-2. **PRESENT**其实是一个静态对象，没什么意义，只是起到占位的作用，因为HashMap是一个**Key-Value**结构的， **HashSet需要用它来充当所有Key的Value**
-
-** **
-
-> 3.1 put方法解读
-
-![](picture/img16.png)
-
-**源码解读**：
-
-1. `key`：添加的元素；`value`：占位符 **PRESENT**
-2. **putVal方法**需要传入**hash(key)**，所以先进去**hash方法**看执行了什么操作（下面3.2）
-
-3. 看完下面hash方法解读后，继续回到这里解读
-4. 下一步研究**putVal方法**，看下面 3.3putVal方法解读
-
-** **
-
-> 3.2 hash方法解读
-
-![](picture/img17.png)
-
-**源码解读**：
-
-1. `key`：添加的元素；`h`：临时变量
-2.  **key == null **则返回**hash值为0**
-3. **hashCode方法**是每个对象都有的，如果没有重写hashCode方法，默认都是使用的**Object类的hashCode方法**
-4. **^ 是按位异或，>>>是算术右移** 。将生成的hashcode值的高16位于低16位进行异或运算，这样得到的值再与(数组长度-1)进行**相与操作**[在后面的**putVal方法**里]，**可以得到最散列的下标值**。这里得到**hash值**后我们返回去**3.1put方法**【这里的算法目的是尽量得到不重复的hash值，避免hash碰撞】
-5. 已经计算出`hash`并return，现回到 `3.1 put方法解读 第4点`
-
-** **
-
-> 3.3 putVal方法解读（本次只分析第一次执行add方法执行流程）
-
-![](picture/img18.png)
-
-**源码解读**：
-
-1. `hash`：上面**hash方法**计算得到的**hash值**（注意这里的hash值不等价于hashCode）
-2. `key`：添加的元素；`value`：占位符 **PRESENT**
-3. `tab`、`p`、`n`、`i` 都是一些辅助变量
-4. `table`就是上面提到的数组（看上面**HashSet 的底层实现的第二步**），其本质就是HashMap的一个属性数组，存储类型是**Node**
-5. `624行`：将`table`赋给`tab`，然后判断`tab`是否等于null，如果不为null，就继续把`tab`的长度赋给`n`，继续判断`n`是否等于0
-6. 第一次add，`table`为null，会进入 `625行`
-7. `625行`：执行`resize方法`，并将返回值赋给`tab`，并计算`tab`长度赋给`n`
-8. 看完下面`3.4 resize方法`解读后，继续回到这里解读
-9. 回到`625行`resize方法已经创建了大小为16的数组，`table`指向该数组，辅助变量 `n` 值为16
-10. `626行`：**(数组长度-1)**与hash值进行**相与操作**得到**索引值**（就是当前添加的这个元素要放到哪个索引位置），先获取该索引的元素赋给辅助变量`p`，判断当前索引**是否有元素**，**如果没有，直接进入if 进行添加**
-11. `627行`：创建一个Node对象，并把hash也保存到Node对象，为什么要保存hash呢？**因为将来继续添加元素，如果放到同一个索引下，那要挨个判断是否与该索引下的所有元素的hash值相等...未完，待补充**
-12. 第一次add添加元素，不会进入`628行`else，直接到`657行`，`++modCount`代表修改了一次; `658行`判断是否超过临界值，超过就扩容，第一次add不满足，则执行`660行`，`afterNodeInsertion`在这里其实是一个空方法（HashMap为什么要留空方法呢？实际上是给它的子类进行重写调用的，类似于**钩子函数**），最终添加成功，执行`661行`返回null（所以**返回了null表示添加成功**）
-13. 回到`608行`继续return
-14. 回到`220行`成功为null，所以add最终return **true**
-15. **第一次add添加操作到此分析完毕！**
-
-** **
-
-> 3.4 resize方法解读
-
-![](picture/img19.png)
-
-![](picture/img20.png)
-
-![](picture/img21.png)
-
-**源码解读**：
-
-1. 进入**resize()扩容方法** **重点分析一下，我们在这里先只看它的上半段，**因为旧数组不为空才能进入下半段**，**很明显第一次add不符合这个条件，后面**借助另一个程序再来分析下半段**
-2. `674～675行`：先将成员属性`table`赋给 `oldTab`，再将 `oldTab` 的长度赋给 `oldCap`【临时变量说明：**oldTab**：旧数组；**oldCap**：旧数组长度；**oldThr**：旧数组的扩容临界值；**newCap**：新数组长度；**newThr**：新数组的扩容临界值；】
-3. 根据判断，第一次add会进入 `690行`
-4. `690行`：将默认值`DEFAULT_INITIAL_CAPACITY（默认值16）`赋给`newCap`，第一次add数组的大小是`默认值 16`
-5. `691行`：将加载因子`DEFAULT_LOAD_FACTOR(值为0.75)`乘于默认值`DEFAULT_INITIAL_CAPACITY`后赋给`newThr`，计算结果为12（**12就是临界值**，当后续添加元素到13时，就进行扩容，而不是加满到16才进行扩容）
-6. `698行`：将计算得到最新的扩容值`newThr`的值12赋给属性`threshold`（threshold才是真正保存扩容值的变量，其他都是临时辅助变量）
-7. `700~701行`：创建了一个长度为16的数组赋给`newTab`;然后继续赋给了`table`【到这一步初始的数组已经创建完成，长度16，数组里的内容目前都为null】其实执行到这的目的是最终给扩容值`threshold`,`table`类变量赋值。
-8. `702行`：`oldTab`是在`674行`赋值的，所以`oldTab`为null，不会进入if，最终返回`newTab`（`newTab`是刚创建的新数组），**resize方法结束**（回到3.3 putVal方法解读的8点）
-
-> 补充说明
-
-- HashMap 的加载因子`DEFAULT_LOAD_FACTOR(值为0.75)`是为了平衡**哈希表**的**性能**和**空间**占用而引入的。当哈希表的元素数量达到容量乘以加载因子时，就会触发扩容操作，将哈希表的容量增加一倍，并重新计算每个元素在新哈希表中的位置
-- 加载因子的默认值是 0.75，这个值经过实验得出，可以在时间和空间上取得一个比较好的平衡点。**设置更高的加载因子可以减少哈希表的空间占用，但会增加哈希冲突的概率，导致查找性能下降。相反，设置更低的加载因子可以提高哈希表的查找性能，但会增加空间占用。**
-
-> 第一次add总结
-
-上半段主要是确定新的容量和阈值，并且进行扩容
-
-> 第一次add自画内存图
-
-![](picture/img23.jpg)
-
-** **
-
-> 4.第二次调用add方法分析
-
-```java
-hashSet.add("php");
-```
-
-> 第二次add直接看**putVal方法**
-
-![](picture/img24.png)
-
-**源码解读**：
-
-1. 有了第一次add的分析，第二次add不一样的元素，比较简单
-2. `624行`：table已经在第一次add被创建了长度为16，所以不会进入 `625行`
-3. `626行`：计算出来的索引和第一次不一样，所以取出索引元素赋给`p`为空，直接执行`627行`创建新的node节点并添加到索引的位置。
-4. 然后执行`657行`后面的语句，最后添加成功返回null
-
-![](picture/img25.png)
-
-> 5.第三次调用add方法分析
-
-```java
-hashSet.add("java");  //注意本次添加跟第一次添加的元素相同
-```
-
-> 第三次add直接看**putVal方法**（注意本次添加计算出来的hash值和第一次计算出来的hash值是相同的）
-
-![](picture/img26.png)
-
-**源码解读**：
-
-1. 本次添加跟第一次添加元素一样，所以`626行`获取到跟第一次相同的索引元素赋给`p`，不满足条件，进入到else语句
-2. `630行`：先判断**当前计算的hash值**和**已经存放到这个索引的hash值**是否相同**（不同hash值的元素和数组长度n-1进行与运算，计算结果可能为相同的索引值）**，如果相同，那么继续判断**当前添加的元素是否 == 已经添加的元素**（引用类型比较地址），如果满足那么不用进行后续判断，已经确定是相同的元素。如果上面 == 不满足，那么继续判断**当前添加的元素equals已经添加的元素**是否为true**（equals方法程序员可以重写，比如定义了Person类，重写equals方法，当age和name相同就说明是相同的元素不能重复添加）**，如果为true，说明是同一个元素，无法添加，执行`632行`将 e = p;
-3. 如果`630行`结果为false，我们继续分析后续执行流程
-4. `633行`：判断当前是否是一颗红黑树，如果是，则执行`634行`**红黑树**的添加逻辑，**putTreeVal方法**逻辑很复杂，本次不研究，等学习了红黑树之后再回过头来研究
-5. 假如`633行`不满足，那么执行else语句，**分析else语句主要执行什么逻辑呢？**答：当一个索引下已经保存一个或多个元素形成一个链表时，else就是循环将当前添加的元素与链表所有的元素**进行上面第2步的比较**，只要存在有一个匹配上的，说明是已经存在的元素无法添加，全部不匹配说明可以添加成功，当前添加的元素直接挂在最后一个元素的后面。
-6. `639行`：假如元素可以添加，那么元素添加进去之后，立即判断（TREEIFY_THRESHOLD的值为8），当前添加的元素是索引的第九个时，满足条件，会进入 `640行`调用`treeifyBin方法`进行树化。
-7. 先简单看下`5.1 treeifyBin方法`，再回来分析
-8. 分析完5.1后，继续执行`649行`，只要匹配到了`649行`条件成立，否则都不会执行
-9. **到这HashSet全部解读完毕！**
-10. 如果想看扩容和树化的效果，可以自定义一个类，重写hashCode和equels方法来添加进行尝试
-
-** **
-
-> 5.1 treeifyBin
-
-![](picture/img27.png)
-
-**源码解读**：
-
-1. `753行`：**判断当前tab数组的长度是否小于 64 ，如果小于64，即使同一个索引的链表已经有9个元素了，依然不会马上进行树化，而是先调用 `resize方法`进行扩容**
-
-> 6.研究数组扩容
-
-![](picture/img28.png)
-
-![](picture/img29.jpg)
-
-![](picture/img30.png)
-
-**源码解读**：
-
-1. 当添加到第13个元素时，添加完成后，判断是否满足扩容`658行`满足，执行`resize方法`扩容
-2. `678行`满足，if 不满足，else if 满足，执行 `685行`将扩容临界值乘于2 = 24
-3. `698行`将新的临界值赋给成员变量threshold，然后重新创建一个32长度的数组
-4. 将旧的数组里的数据通过for循环添加到新创建的数组中。
-
-> HashSet扩容相关总结
-
-1. Hashset底层是HashMap，第一次添加时，table 数组扩容到 16，临界值 (threshold)是 16*加载因子 (loadFactor)是0.75= 12（临界值）
-2. 如果table 数组使用到了临界值 12（当添加第13个元素,看下面图片658行）,就会扩容到 16 * 2= 32,新的临界值就是32 * 0.75= 24 依次类推(看下面图片685行，左移一位相当于乘于2)
-3. 在 **java8** 中，如果一条链表的元素个数超过 **TREEIFY_THRESHOLD（默认是8）**，**并且 table 的大小 >= MIN_TREEIFY_CAPACITY（默认是64），就会进行树化(红黑树)。如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树**
 
 #### 2.2.2.2 LinkedHashSet
+
+> 说明：详细源码分析见 LinkedHashMap
 
 - LinkedHashSet是HashSet的子类
 - **LinkedHashSet**底层是一个 **LinkedHashMap**，底层维护了一个 **数组 + 链表 + 双向链表**【虽然没有了红黑树效率没有这么高，但是有顺序了】
@@ -2080,11 +1873,9 @@ class Person{
 
 > 应用场景
 
-**有序可重复：使用List**
-
-**无序不可重复：使用HashSet**
-
-**有序不可重复：LinkHashSet**
+- **有序可重复：使用List**
+- **无序不可重复：使用HashSet**
+- **有序不可重复：LinkHashSet**
 
 
 
@@ -2517,15 +2308,15 @@ int binarySearch(List<? extends Comparable<? super T>> list, T key) {
 
 **总结：数据结构决定算法**
 
+****
+
 ## 2.3 Map
 
 > 介绍
 
 **Map** 集合和 **Collection** 集合不同，**Map 集合是基于键（key）/值（value）的映射**，Collection中的集合，元素是孤立存在的，向集合中存储元素采用一个个元素的方式存储；**Map中的集合，元素是成对存在的，每个元素由键与值两部分组成，通过键可以找对所对应的值**。Collection中的集合称为单列集合，**Map中的集合称为双列集合**。需要注意的是，Map中的集合不能包含重复的键，值可以重复；每个键只能对应一个值
 
-Map接口包含一个内部Entry接口
-
-> 下面对Collection定义的方法进行说明
+> 下面对Map定义的方法进行说明
 
 > **1.抽象方法**
 
@@ -2550,9 +2341,9 @@ clear();     //删除所有映射关系；
 /** 辅助类：*/
 size();                               //获取映射大小
 get();                                //根据k获取v
-Set<K> keySet();                      //TODO重点
-Set<Map.Entry<K, V>> entrySet();      //TODO重点
-Collection<V> values();               //TODO重点
+Set<K> keySet();                      //用于获取key迭代器，重点！
+Collection<V> values();               //用于获取value迭代器，重点！
+Set<Map.Entry<K, V>> entrySet();      //用于获取key-value迭代器，重点！
 ```
 
 > **2.JDK8 新增抽象方法**
@@ -2577,26 +2368,20 @@ replaceAll();              //TODO 默认实现
 Map 还重写了 Object 的 equals() 和 hashCode() 方法（或者说变成了抽象方法？），这样实现 Map 的类就必须重新实现 equals() 和 hashCode() 方法。
 ```
 
-
-
 ****
 
 > Map接口实现类的特点
 
 1. Map与Collection并列存在。用于保存具有映射关系的数据：Key-Value
 2. Map 中的key 和 value 可以是**任何引用类型的数据**，会封装到**HashMap$Node**对象中
-3. Map 中的key 不允许重复，原因和HashSet 一样，前面分析过源码
-4. Map 中的vaiue 可以重复
+3. Map 中的key 不允许重复，value 可以重复
 5. **Map 的key 可以为 null, value 也可以为null，注意 key 为null，只能有一个，value 为null ,可以多个**
-6. 常用String类作为Map的 key
 7. **key 和 value 之间存在单向一对一关系，即通过指定的 key 总能找到对应的 value**
 8. Map存放数据的key-valve示意图，一对 k-v是放在一个**HashMap$Node**中的、是因为**Node 实现了 Entry 接口**，有些书上也说 一对k-v就是一个Entry(如图）
 
 ![](picture/img47.png)
 
 ****
-
-
 
 ### 2.3.1 Entry
 
@@ -2643,10 +2428,11 @@ public V put(K key, V value) {
 }
 ```
 
-> AbstractMap 特有方法
+> AbstractMap 属性
 
 ```java
-
+transient Set<K>        keySet;
+transient Collection<V> values;
 ```
 
 > 下面介绍AbstractMap已经实现的方法
@@ -2767,8 +2553,6 @@ public V get(Object key) {
 }
 ```
 
-
-
 ***
 
 ### 2.3.3 HashMap
@@ -2776,6 +2560,8 @@ public V get(Object key) {
 **优质博客：[HashMap源码解析](https://blog.csdn.net/zxt0601/article/details/77413921)**
 
 > HashMap集合简介
+
+HashMap**的底层是(数组+链表（单向）+红黑树)**
 
 - HashMap 基于哈希表的 Map 接口实现，是以 key-value 存储形式存在，即主要用来存放键值对。HashMap 的实现不是同步的，这意味着**它不是线程安全的**。它的 **key、value 都可以为 null**，此外，HashMap 中的映射不是有序的
 - **jdk1.8 之前** HashMap 由 **数组 + 链表** 组成，**数组是 HashMap 的主体，链表则是主要为了解决哈希冲突**（两个对象调用的 hashCode 方法计算的哈希值经哈希函数算出来的地址被别的元素占用）而存在的（“拉链法”解决冲突）。**jdk1.8 以后**在解决哈希冲突时有了较大的变化，当链表长度大于阈值（或者红黑树的边界值，默认为 8 ）并且当前数组的长度大于 64 时，此时此索引位置上的所有数据改为使用**红黑树**存储
@@ -2901,6 +2687,7 @@ public boolean containsValue(Object value) {
 
 ```java
 get();                                     //通过key获取value
+getOrDefault(Object key, V defaultValue)   //通过key获取value，如果找不到，则返回默认值 defaultValue
 put();                                     //设置指定的key-value
 clear();                                   //清除所有的key-value
 remove(Object key);                        //通过key删除映射
@@ -2909,7 +2696,6 @@ replace(K key, V value)                    //替换value值
 replace(K key, V oldValue, V newValue)     //替换value值
 putIfAbsent();   //如果put进去的key不存在才设置，否则即使相同key，也不会进行覆盖value(因为onlyIfAbsent设置成了true)
 putAll();                                  //TODO
-getOrDefault();                            //TODO
 computeIfAbsent();                         //TODO
 computeIfPresent();                        //TODO
 compute();                                 //TODO
@@ -2925,11 +2711,16 @@ public V get(Object key) {
     Node<K,V> e;
     return (e = getNode(hash(key), key)) == null ? null : e.value;
 }
-/* 2）设置指定的key-value */
+/* 2）通过key获取value */
+public V getOrDefault(Object key, V defaultValue) {
+    Node<K,V> e;
+    return (e = getNode(hash(key), key)) == null ? defaultValue : e.value;
+}
+/* 3）设置指定的key-value */
 public V put(K key, V value) {
     return putVal(hash(key), key, value, false, true);
 }
-/* 3）清除所有的key-value */
+/* 4）清除所有的key-value */
 public void clear() {
     Node<K,V>[] tab;
     modCount++;
@@ -2939,17 +2730,17 @@ public void clear() {
             tab[i] = null;
     }
 }
-/* 4）通过key删除映射 */
+/* 5）通过key删除映射 */
 public V remove(Object key) {
     Node<K,V> e;
     return (e = removeNode(hash(key), key, null, false, true)) == null ?
         null : e.value;
 }
-/* 5）通过key-value删除映射 */
+/* 6）通过key-value删除映射 */
 public boolean remove(Object key, Object value) {
     return removeNode(hash(key), key, value, true, true) != null;
 }
-/* 6）替换value值 */
+/* 7）替换value值 */
 public V replace(K key, V value) {
     Node<K,V> e;
     if ((e = getNode(hash(key), key)) != null) {
@@ -2960,7 +2751,7 @@ public V replace(K key, V value) {
     }
     return null;
 }
-/* 7）替换value值 */
+/* 8）替换value值 */
 public boolean replace(K key, V oldValue, V newValue) {
     Node<K,V> e; V v;
     if ((e = getNode(hash(key), key)) != null &&
@@ -2979,7 +2770,7 @@ public boolean replace(K key, V oldValue, V newValue) {
 /** 辅助类：*/
 size();            //获取映射大小
 keySet();          //获取Set<K>【便于后续遍历key】
-values();          //获取所有的value集合
+values();          //获取Collection<V>【便于后续遍历value】
 entrySet();        //获取Set<Map.Entry<K,V>>【便于后续遍历key-value】
 
 /* 1） */
@@ -3312,125 +3103,11 @@ void afterNodeInsertion(boolean evict) { }
 void afterNodeRemoval(Node<K,V> p) { }
 ```
 
-
-
-> 小试牛刀
-
-```java
-Map map = new HashMap();
-map.put("no1","Wing");
-map.put("no2","Li");
-map.put("no1","xiao");  // 替换
-map.put(null,null);
-map.put(null,"abc");  // 替换
-System.out.println(map);  // 输出什么呢，最后一次key都是no1,是否能添加进去
-
-打印：
-{no2=Li, null=abc, no1=xiao}   // 根据打印的结果来看，很明显如果，key相同，那么会进行替换，这个需要注意
-```
-
-> 相同的key，后面put的value会替换旧的value，`632行`会执行，然后执行`652行`（这一行体现出替换）
-
-![](picture/img45.png)
-
-> 此时 执行 map.get("no2")，看源码，是如何找到key对于的value的
-
-**源码解读**：
-
-1. 进入getNode方法，**hash值**跟以前计算方式一样
-2. 解读`565~566行`：如果table存在，并且该索引下存在元素，那么进入`567行`，否则返回null
-3. 解读`567~568行`：与该索引下的第一个元素进行比较，如果第一个就匹配，那么直接执行`569`返回，否则往下执行
-4. 解读`570行`：如果该元素存在下一个next元素，那么继续挨个**do-while遍历**进行判断，直到找到，否则返回null
-
-![](picture/img46.png)
-
 ****
-
-> 为了方便程序员遍历map，下面研究下map的遍历【entrySet()、 keySet() 和 values() 方法】
-
-```java
-Map map = new HashMap();
-map.put("no1","Wing");
-map.put("no2","Li");
-
-// 解读：
-// 1.k-v 最后是HashMap$Node node = newNode (hash, key, valve, norl)
-// 2.k-v 为了方便程序员的遍历，还会创建 EntrySet 集合，该集合存放的元素的类型 Entry，而一个Entry
-// 对象就有k,V EntrySet<Entry<K, V>＞即源码： transient Set<Map.Entry<k, V>>entrySet;
-// 3.entrySet 中，定义的类型是 Map.Entry，但是实际上存放的还是 HashMap$Node（说明HashMap$Node肯定继承或者实现了Map.Entry）
-// 4.当把HashMap$Node 对象 存放到entrySet 就方便我们的遍历，因为 Map.Entry 提供了重要方法 K getKey(); V getValue ();
-Set set = map.entrySet();    
-for (Object entry : set) {
-  System.out.println(obj.getClass());
-  System.out.println(obj);
-  // 为了从 HashMap$Node 取出k-V
-  // 1．先做一个向下转型
-  Map.Entry entry = (Map.Entry)obj;
-  // 2. 这样就能轻松获取到k和v
-  System.out.println(entry.getKey() + "->" + entry.getValue());
-}
-
-// 也可以只获取key，不需要value【输出是无序的】
-Set set1 = map.keySet();
-for (Object k : set1) {
-    System.out.println("只获取k：" + k);
-}
-System.out.println("k类型" + set1.getClass()); // k类型class java.util.HashMap$KeySet（HashMap的内部类）
-// 只是获取value 【输出是无序的】
-Collection values = map.values();
-for (Object v : values) {
-    System.out.println("只获取v：" + v);
-}
-System.out.println("v类型" + values.getClass()); // v类型class java.util.HashMap$Values（HashMap的内部类）
-
-
-class java.util.HashMap$Node
-no2=Li
-no2->Li
-class java.util.HashMap$Node
-no1=Wing
-no1->Wing
-只获取k：no2
-只获取k：no1
-只获取v：Li
-只获取v：Wing
-```
-
-> entry里的数据并没有重新创建，引用还是指向table里的数据（new了Cat和Person类测试）
-
-![](picture/img48.png)
-
-> HashMap底层的entryset成员变量什么时候被赋值的呀？
->
-> 帖子：https://www.zhihu.com/question/519542699?utm_id=0
-
-****
-
-> Map常用方法
-
-1. put：添加
-
-2. remove：根据键删除映射关系
-
-3. get：根据键获取值
-
-4. size：获取元素个数
-
-5. isEmpty：判断个数是否为0
-
-6. clear：清除
-
-7. containsKey：查找键是否存在
-
-   
-
-   
-
-***
 
 #### 2.3.3.1 Node
 
-HashMap的成员内部类，**链表节点Node**是**Map.Entry**的实现类
+HashMap的**静态成员内部类**，**链表节点Node**是**Map.Entry**的实现类
 
 看源码可知，每个Node都有一个next，**由此可知，这是一个单链表**
 
@@ -3472,6 +3149,8 @@ static class Node<K,V> implements Map.Entry<K,V> {
     }
 }
 ```
+
+***
 
 #### 2.3.3.2 EntrySet
 
@@ -3524,6 +3203,8 @@ final class EntrySet extends AbstractSet<Map.Entry<K,V>> {
 }
 ```
 
+***
+
 #### 2.3.3.3 KeySet
 
 HashMap的成员内部类，**KeySet**是**AbstractSet**抽象类的实现子类
@@ -3532,6 +3213,7 @@ HashMap的成员内部类，**KeySet**是**AbstractSet**抽象类的实现子类
 final class KeySet extends AbstractSet<K> {
     public final int size()                 { return size; }
     public final void clear()               { HashMap.this.clear(); }
+    // 一般使用iterator方法获取一个迭代器
     public final Iterator<K> iterator()     { return new KeyIterator(); }
     public final boolean contains(Object o) { return containsKey(o); }
     public final boolean remove(Object key) {
@@ -3556,6 +3238,8 @@ final class KeySet extends AbstractSet<K> {
     }
 }
 ```
+
+***
 
 #### 2.3.3.4 Values
 
@@ -3586,6 +3270,8 @@ final class Values extends AbstractCollection<V> {
     }
 }
 ```
+
+***
 
 #### 2.3.3.5 HashIterator
 
@@ -3642,6 +3328,8 @@ abstract class HashIterator {
 }
 ```
 
+***
+
 #### 2.3.3.6 EntryIterator
 
 HashMap的成员内部类，**EntryIterator**继承**HashIterator**抽象类，并且实现**Iterator**接口【Iterator接口中的**hasNext方法**在它的父类**HashIterator**进行了重写，而**next方法**在本类中进行了重写（但实际还是调用的父类中的**nextNode方法**），所以迭代的逻辑都是在父类**HashIterator**中进行的实现】
@@ -3654,6 +3342,8 @@ final class EntryIterator extends HashIterator implements Iterator<Map.Entry<K,V
 }
 ```
 
+***
+
 #### 2.3.3.7 KeyIterator
 
 HashMap的成员内部类，**KeyIterator**继承**HashIterator**抽象类，并且实现**Iterator**接口【参考上面EntryIterator】
@@ -3664,6 +3354,8 @@ final class KeyIterator extends HashIterator
     public final K next() { return nextNode().key; }
 }
 ```
+
+***
 
 #### 2.3.3.8 ValueIterator
 
@@ -3676,96 +3368,519 @@ final class ValueIterator extends HashIterator
 }
 ```
 
+***
+
 #### 2.3.3.9 Order Class
 
 HashMap的成员内部类【UnsafeHolder、HashMapSpliterator、KeySpliterator、ValueSpliterator、EntrySpliterator、TreeNode】，暂不清楚用途//TODO
 
 ***
 
+> 遍历HashMap小练习
+
+```java
+HashMap map = new HashMap();
+map.put("no1","Wing");
+Set set = map.entrySet();
+System.out.println("set【entrySet】运行类型："+set.getClass()); // 
+for (Object obj : set) {
+    System.out.println("set【entrySet】遍历后的运行类型："+obj.getClass());
+    // 为了从 HashMap$Node 取出k-V
+    // 1．先做一个向下转型
+    Map.Entry entry = (Map.Entry)obj;
+    // 2. 这样就能轻松获取到k和v
+    System.out.println(entry.getKey() + "->" + entry.getValue());
+}
+System.out.println("==================================================");
+// 也可以只获取key，不需要value【输出是无序的】
+Set set1 = map.keySet();
+System.out.println("set1【keySet】运行类型："+set1.getClass());
+for (Object k : set1) {
+    System.out.println("set1【keySet】遍历后的运行类型："+k.getClass());
+    System.out.println("k：" + k);
+}
+System.out.println("==================================================");
+// 只是获取value 【输出是无序的】
+Collection values = map.values();
+System.out.println("values【values】运行类型："+values.getClass());
+for (Object v : values) {
+    System.out.println("values【values】遍历后的运行类型："+v.getClass());
+    System.out.println("只获取v：" + v);
+}
+// 结果
+set【entrySet】运行类型：class java.util.HashMap$EntrySet
+set【entrySet】遍历后的运行类型：class java.util.HashMap$Node
+no1->Wing
+==================================================
+set1【keySet】运行类型：class java.util.HashMap$KeySet
+set1【keySet】遍历后的运行类型：class java.lang.String
+k：no1
+==================================================
+values【values】运行类型：class java.util.HashMap$Values
+values【values】遍历后的运行类型：class java.lang.String
+只获取v：Wing
+```
+
+> HashMap底层的entryset成员变量什么时候被赋值的呀？
+>
+> 帖子：https://www.zhihu.com/question/519542699?utm_id=0
+
+***
+
 ### 2.3.4 LinkedHashMap
+
+**优质博客：[LinkedHashMap源码解析](https://zhangxutong.blog.csdn.net/article/details/77429150?spm=1001.2014.3001.5502)**
+
+概括的说，**LinkedHashMap** 是一个**关联数组、哈希表**，它是**线程不安全**的，允许**key为null,value为null**。
+它继承自**HashMap**，实现了**Map<K,V>**接口。其内部还维护了一个**双向链表**，在每次**插入数据，或者访问、修改数据时，会增加节点、或调整链表的节点顺序**。以决定迭代时输出的顺序。
+
+默认情况，遍历时的顺序是**按照插入节点的顺序**。这也是其与**HashMap**最大的区别。
+也可以在构造时传入**accessOrder**参数，使得其遍历顺序**按照访问的顺序**输出
+
+因继承自**HashMap**，所以**HashMap**除了输出无序，其他**LinkedHashMap**都有，比如扩容的策略，哈希桶长度一定是2的N次方等等。
+**LinkedHashMap**在实现时，就是重写override了几个方法。以满足其输出序列有序的需求
+
+> HashMap实现类介绍
+
+> 一、类成员介绍
+
+> 1.常量和变量
+
+```java
+/* 同时类里有两个成员变量head tail,分别指向内部双向链表的表头、表尾 */
+transient LinkedHashMap.Entry<K,V> head;
+transient LinkedHashMap.Entry<K,V> tail;
+
+//默认是false，则迭代时输出的顺序是插入节点的顺序。若为true，则输出的顺序是按照访问节点的顺序。
+//为true时，可以在这基础之上构建一个LruCach
+final boolean accessOrder;
+```
+
+> 2.五个构造方法
+
+```java
+/* 1)无参构造 */
+public LinkedHashMap() {
+    super();
+    accessOrder = false;
+}
+/* 2)指定初始化容量的构造函数 */
+public LinkedHashMap(int initialCapacity) {
+    super(initialCapacity);
+    accessOrder = false;
+}
+/* 3)同时指定初始化容量 以及 加载因子， 用的很少，一般不会修改loadFactor */
+public LinkedHashMap(int initialCapacity, float loadFactor) {
+    super(initialCapacity, loadFactor);
+    accessOrder = false;
+}
+/* 4)同时指定初始化容量 以及 加载因子，以及迭代输出节点的顺序 */
+public LinkedHashMap(int initialCapacity,
+                     float loadFactor,
+                     boolean accessOrder) {
+    super(initialCapacity, loadFactor);
+    this.accessOrder = accessOrder;
+}
+/* 5)利用另一个Map 来构建 */
+public LinkedHashMap(Map<? extends K, ? extends V> m) {
+    super();
+    accessOrder = false;
+    //批量插入一个map中的所有数据到 本集合中
+    putMapEntries(m, false);
+}
+```
+
+> 小结
+
+构造函数和`HashMap`相比，就是增加了一个`accessOrder`参数。用于控制迭代时的节点顺序
+
+***
+
+> 3.1 成员方法-**增**
+
+**LinkedHashMap**并没有重写任何put方法。但是其重写了构建新节点的**newNode()**方法
+
+**newNode()**会在HashMap的**putVal()**方法里被调用，**putVal()**方法会在批量插入数据**putMapEntries(Map<? extends K, ? extends V> m, boolean evict)**或者插入单个数据**public V put(K key, V value)**时被调用
+
+```java
+ //在构建新节点时，构建的是LinkedHashMap.Entry 不再是Node
+Node<K,V> newNode(int hash, K key, V value, Node<K,V> e) {
+    LinkedHashMap.Entry<K,V> p =
+        new LinkedHashMap.Entry<K,V>(hash, key, value, e);
+    linkNodeLast(p);
+    return p;
+}
+//将新增的节点，连接在链表的尾部
+private void linkNodeLast(LinkedHashMap.Entry<K,V> p) {
+    LinkedHashMap.Entry<K,V> last = tail;
+    tail = p;
+    //集合之前是空的
+    if (last == null)
+        head = p;   // 那么头尾都指向这个节点
+    else {//将新节点连接在链表的尾部
+        p.before = last;
+        last.after = p;
+    }
+}
+```
+
+以及`HashMap`专门预留给`LinkedHashMap`的`afterNodeAccess() afterNodeInsertion() afterNodeRemoval()` 方法
+
+```java
+// Callbacks to allow LinkedHashMap post-actions
+void afterNodeAccess(Node<K,V> p) {}
+void afterNodeInsertion(boolean evict) {}
+/* 删除节点时回调这个方法，目的是处理节点的before、after和LinkedHashMap的head和tail */
+void afterNodeRemoval(Node<K,V> p) {}
+
+//LinkedHashMap 默认返回false 则不删除节点。 返回true 代表要删除最早的节点。通常构建一个LruCache会在达到Cache的上限是返回true
+protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
+    return false;
+}
+```
+
+`void afterNodeInsertion(boolean evict)`以及`boolean removeEldestEntry(Map.Entry<K,V> eldest)`是构建LruCache需要的回调，在`LinkedHashMap`里可以忽略它们。
+
+> 3.2 成员方法-**删**
+
+**LinkedHashMap**也没有重写**remove()**方法，因为它的删除逻辑和**HashMap**并无区别。
+但它重写了**afterNodeRemoval()**这个回调方法。该方法会在**Node<K,V> removeNode(int hash, Object key, Object value,
+boolean matchValue, boolean movable)**方法中回调，**removeNode()**会在所有涉及到删除节点的方法中被调用，**是删除节点操作的真正执行者**
+
+```java
+//在删除节点e时，同步将e从双向链表上删除
+void afterNodeRemoval(Node<K,V> e) { // unlink
+    LinkedHashMap.Entry<K,V> p =
+        (LinkedHashMap.Entry<K,V>)e, b = p.before, a = p.after;
+    //待删除节点 p 的前置后置节点都置空
+    p.before = p.after = null;
+    //如果前置节点是null，说明删的是头节点，则现在的头结点应该是后置节点a
+    if (b == null)
+        head = a;
+    else//否则将前置节点b的后置节点指向a
+        b.after = a;
+    //同理如果后置节点时null ，则尾节点应是b
+    if (a == null)
+        tail = b;
+    else//否则更新后置节点a的前置节点为b
+        a.before = b;
+}
+```
+
+> 3.3 成员方法-**查**
+
+**LinkedHashMap**重写了**get()**和**getOrDefault()**方法
+
+```java
+public V get(Object key) {
+    Node<K,V> e;
+    if ((e = getNode(hash(key), key)) == null)
+        return null;
+    if (accessOrder)
+        afterNodeAccess(e);
+    return e.value;
+}
+public V getOrDefault(Object key, V defaultValue) {
+   Node<K,V> e;
+   if ((e = getNode(hash(key), key)) == null)
+       return defaultValue;
+   if (accessOrder)
+       afterNodeAccess(e);
+   return e.value;
+}
+```
+
+对比`HashMap`中的实现,`LinkedHashMap`只是增加了在成员变量(构造函数时赋值)`accessOrder`为true的情况下，要去回调`void afterNodeAccess(Node<K,V> e)`函数。
+
+在`afterNodeAccess()`函数中，**会将当前被访问到的节点e，移动至内部的双向链表的尾部**【暂不研究//TODO】
+
+```java
+void afterNodeAccess(Node<K,V> e) { // move node to last
+    LinkedHashMap.Entry<K,V> last; //原尾节点
+    //如果accessOrder 是true ，且原尾节点不等于e
+    if (accessOrder && (last = tail) != e) {
+        LinkedHashMap.Entry<K,V> p =
+            (LinkedHashMap.Entry<K,V>)e, b = p.before, a = p.after;
+        p.after = null;
+        if (b == null)
+            head = a;
+        else
+            b.after = a;
+        if (a != null)
+            a.before = b;
+        else
+            last = b;
+        if (last == null)
+            head = p;
+        else {
+            p.before = last;
+            last.after = p;
+        }
+        tail = p;
+        ++modCount;
+    }
+}
+```
+
+值得注意的是，`afterNodeAccess()`函数中，会修改`modCount`,因此当你正在`accessOrder=true`的模式下,迭代`LinkedHashMap`时，如果同时查询访问数据，也会导致`fail-fast`，因为迭代的顺序已经改变
+
+> 博客评论
+
+原评论：确实得先理解 HashMap 的 特征，毕竟 LinkedHashMap 是仰仗了 HashMap, 然后自己内部的结点都带有 after, 和 before 指针，直接维护了所有结点的顺序。 后续遍历时有序的，这个有序跟 accessOrder (访问顺序) 属性有关，如果该属性为 true，表示不是按插入顺序了，因为 get 方法等访问会将最近访问的结点移到所在链表的尾部。 而 accessOrder 为false则还是按插入顺序，默认是false
+
+> 4.成员方法-**containsValue**
+
+**LinkedHashMap**重写了该方法，相比**HashMap**的实现，**更为高效**
+
+```java
+//遍历一遍链表，去比较有没有value相等的节点，并返回
+public boolean containsValue(Object value) {
+    for (LinkedHashMap.Entry<K,V> e = head; e != null; e = e.after) {
+        V v = e.value;
+        if (v == value || (value != null && value.equals(v)))
+            return true;
+    }
+    return false;
+}
+```
+
+对比`HashMap`，是用两个for循环遍历，相对低效
+
+> 5.遍历
+
+***
+
+#### 2.3.4.1 Entry
+
+**LinkedHashMap**的**静态成员内部类**
+
+**LinkedHashMap**的节点**Entry<K,V>**继承自**HashMap.Node<K,V>**，在其基础上扩展了一下。改成了一个**双向链表**
+
+```java
+static class Entry<K,V> extends HashMap.Node<K,V> {
+    Entry<K,V> before, after;  // 保存前一个节点和后一个节点的引用
+    Entry(int hash, K key, V value, Node<K,V> next) {
+        super(hash, key, value, next);
+    }
+}
+```
+
+#### 2.3.4.2 LinkedEntrySet
+
+LinkedHashMap的成员内部类，**LinkedEntrySet**是**AbstractSet**抽象类的实现子类
+
+```java
+final class LinkedEntrySet extends AbstractSet<Map.Entry<K,V>> {
+    public final int size()                 { return size; }
+    public final void clear()               { LinkedHashMap.this.clear(); }
+    //一般我们用到LinkedEntrySet，都是为了获取iterator
+    public final Iterator<Map.Entry<K,V>> iterator() {
+        return new LinkedEntryIterator();
+    }
+    //最终还是调用getNode方法
+    public final boolean contains(Object o) {
+        if (!(o instanceof Map.Entry))
+            return false;
+        Map.Entry<?,?> e = (Map.Entry<?,?>) o;
+        Object key = e.getKey();
+        Node<K,V> candidate = getNode(hash(key), key);
+        return candidate != null && candidate.equals(e);
+    }
+    //最终还是调用removeNode方法
+    public final boolean remove(Object o) {
+        if (o instanceof Map.Entry) {
+            Map.Entry<?,?> e = (Map.Entry<?,?>) o;
+            Object key = e.getKey();
+            Object value = e.getValue();
+            return removeNode(hash(key), key, value, true, true) != null;
+        }
+        return false;
+    }
+    public final Spliterator<Map.Entry<K,V>> spliterator() {
+        return Spliterators.spliterator(this, Spliterator.SIZED |
+                                            Spliterator.ORDERED |
+                                            Spliterator.DISTINCT);
+    }
+    public final void forEach(Consumer<? super Map.Entry<K,V>> action) {
+        if (action == null)
+            throw new NullPointerException();
+        int mc = modCount;
+        for (LinkedHashMap.Entry<K,V> e = head; e != null; e = e.after)
+            action.accept(e);
+        if (modCount != mc)
+            throw new ConcurrentModificationException();
+    }
+}
+```
+
+#### 2.3.4.3 LinkedKeySet
+
+LinkedHashMap的成员内部类，**LinkedKeySet**是**AbstractSet**抽象类的实现子类
+
+```java
+final class LinkedKeySet extends AbstractSet<K> {
+    public final int size()                 { return size; }
+    public final void clear()               { LinkedHashMap.this.clear(); }
+    public final Iterator<K> iterator() {
+        return new LinkedKeyIterator();
+    }
+    public final boolean contains(Object o) { return containsKey(o); }
+    public final boolean remove(Object key) {
+        return removeNode(hash(key), key, null, false, true) != null;
+    }
+    public final Spliterator<K> spliterator()  {
+        return Spliterators.spliterator(this, Spliterator.SIZED |
+                                            Spliterator.ORDERED |
+                                            Spliterator.DISTINCT);
+    }
+    public final void forEach(Consumer<? super K> action) {
+        if (action == null)
+            throw new NullPointerException();
+        int mc = modCount;
+        for (LinkedHashMap.Entry<K,V> e = head; e != null; e = e.after)
+            action.accept(e.key);
+        if (modCount != mc)
+            throw new ConcurrentModificationException();
+    }
+}
+```
+
+#### 2.3.4.4 LinkedValues
+
+LinkedHashMap的成员内部类，**LinkedValues**是**AbstractCollection**抽象类的实现子类
+
+```java
+final class LinkedValues extends AbstractCollection<V> {
+    public final int size()                 { return size; }
+    public final void clear()               { LinkedHashMap.this.clear(); }
+    public final Iterator<V> iterator() {
+        return new LinkedValueIterator();
+    }
+    public final boolean contains(Object o) { return containsValue(o); }
+    public final Spliterator<V> spliterator() {
+        return Spliterators.spliterator(this, Spliterator.SIZED |
+                                            Spliterator.ORDERED);
+    }
+    public final void forEach(Consumer<? super V> action) {
+        if (action == null)
+            throw new NullPointerException();
+        int mc = modCount;
+        for (LinkedHashMap.Entry<K,V> e = head; e != null; e = e.after)
+            action.accept(e.value);
+        if (modCount != mc)
+            throw new ConcurrentModificationException();
+    }
+}
+```
+
+#### 2.3.4.5 LinkedHashIterator
+
+LinkedHashMap的成员内部类，**LinkedHashIterator**是一个抽象类，注意它是单独的一个抽象类，并没有去实现**Iterator**，**LinkedHashIterator用于迭代使用**
+
+```java
+ abstract class LinkedHashIterator {
+     LinkedHashMap.Entry<K,V> next;
+     LinkedHashMap.Entry<K,V> current;
+     int expectedModCount;
+     LinkedHashIterator() {
+         next = head;     // 头节点开始遍历
+         expectedModCount = modCount;
+         current = null;
+     }
+     public final boolean hasNext() {
+         return next != null;
+     }
+     final LinkedHashMap.Entry<K,V> nextNode() {
+         LinkedHashMap.Entry<K,V> e = next;
+         if (modCount != expectedModCount)
+             throw new ConcurrentModificationException();
+         if (e == null)
+             throw new NoSuchElementException();
+         current = e;
+         next = e.after;   //通过节点保存的after找到下一个节点
+         return e;
+     }
+     public final void remove() {
+         Node<K,V> p = current;
+         if (p == null)
+             throw new IllegalStateException();
+         if (modCount != expectedModCount)
+             throw new ConcurrentModificationException();
+         current = null;
+         K key = p.key;
+         removeNode(hash(key), key, null, false, false);
+         expectedModCount = modCount;
+     }
+ }
+```
+
+#### 2.3.4.6 LinkedEntryIterator
+
+LinkedHashMap的成员内部类，**LinkedEntryIterator**继承**LinkedHashIterator**抽象类，并且实现**Iterator**接口【Iterator接口中的**hasNext方法**在它的父类**HashIterator**进行了重写，而**next方法**在本类中进行了重写（但实际还是调用的父类中的**nextNode方法**），所以迭代的逻辑都是在父类**LinkedHashIterator**中进行的实现】
+
+```java
+final class LinkedEntryIterator extends LinkedHashIterator
+    implements Iterator<Map.Entry<K,V>> {
+    public final Map.Entry<K,V> next() { return nextNode(); }
+}
+```
+
+#### 2.3.4.7 LinkedKeyIterator
+
+LinkedHashMap的成员内部类，**LinkedKeyIterator**继承**LinkedHashIterator**抽象类，并且实现**Iterator**接口【参考上面LinkedEntryIterator】
+
+```java
+final class LinkedKeyIterator extends LinkedHashIterator
+    implements Iterator<K> {
+    public final K next() { return nextNode().getKey(); }
+}
+```
+
+#### 2.3.4.8 LinkedValueIterator
+
+LinkedHashMap的成员内部类，**LinkedValueIterator**继承**LinkedHashIterator**抽象类，并且实现**Iterator**接口【参考上面LinkedEntryIterator】
+
+```java
+final class LinkedValueIterator extends LinkedHashIterator
+    implements Iterator<V> {
+    public final V next() { return nextNode().value; }
+}
+```
+
+> 总结
+
+`LinkedHashMap`相对于`HashMap`的源码比，是很简单的。因为大树底下好乘凉。它继承了`HashMap`，仅重写了几个方法，以**改变它迭代遍历时的顺序**。这也是其与`HashMap`相比最大的不同
+
+在每次**插入数据，或者访问、修改数据**时，**会增加节点、或调整链表的节点顺序**。以决定迭代时输出的顺序
+
+- `accessOrder` ,默认是false，则迭代时输出的顺序是**插入节点的顺序**。若为true，则输出的顺序是按照访问节点的顺序。为true时，可以在这基础之上构建一个`LruCache`.
+- `LinkedHashMap`并没有重写任何put方法。但是其重写了构建新节点的`newNode()`方法.在每次构建新节点时，将**新节点链接在内部双向链表的尾部**
+- `LinkedHashMap`并没有重写任何put方法。但是其重写了构建新节点的`newNode()`方法.在每次构建新节点时，将**新节点链接在内部双向链表的尾部**
+- `accessOrder=true`的模式下,在`afterNodeAccess()`函数中，会将当前**被访问**到的节点e，**移动**至内部的双向链表**的尾部**。值得注意的是，`afterNodeAccess()`函数中，会修改`modCount`,因此当你正在`accessOrder=true`的模式下迭代`LinkedHashMap`时，如果同时查询访问数据，也会导致`fail-fast`，因为迭代的顺序已经改变
+- `nextNode()` 就是迭代器里的`next()`方法 。
+  该方法的实现可以看出，迭代`LinkedHashMap`，就是从**内部维护的双链表的表头开始循环输出**（没有从表尾开始循环）。
+  而双链表节点的顺序在`LinkedHashMap`的**增、删、改、查时都会更新。以满足按照插入顺序输出，还是访问顺序输出**
+- 它与`HashMap`比，还有一个小小的优化，重写了`containsValue()`方法，直接遍历内部链表去比对value值是否相等
+
+> 思考
+
+那么，还有最后一个小问题？为什么它不重写`containsKey()`方法，也去循环比对内部链表的key是否相等呢？
+
+`博客评论1:`
+
+HashMap最大的优点就是通过对key取hash来快速地位key在桶中的位置，这是结合了数组查找的优点，同时也是对链表节点查找的改进。所以如果LinkedHashMap覆写containsKey()方法，去循环比对内部链表的key是否相等，是低效的
+
+`博客评论2:`
+
+containsKey()是找Key，在HashMap中只需要遍历hash table数组，复杂度相对固定，如果重写的话复杂度就和实际size相关了，在冲突严重时效率下降
+
+***
 
 ### 2.3.5 HashTable
 
 ### 2.3.6 TreeMap
 
-
-
-#### 四 、Set接口和常用方法
-
-#### 课后练习
-
-一、equals和hashCode示例1:
-
-```
-练习要求：
-1、创建3个Workers放入HashSet 中
-2、当name和age一样时就不能添加到HashSet
-```
-
-`示例1见代码：com.hspedu.set_.Employee `
-
-二、equals和hashCode示例2:重写2次
-
-```
-练习要求：
-1、Employ 里只要名字name和出生年份birthday相同就不能添加到HashSet
-```
-
-`示例1见代码：com.hspedu.set_.Employee02 `
-
-三、equals和hashCode示例2:重写1次
-
-```
-练习要求：
-1、Employ 里只要名字name和出生年份birthday相同就不能添加到HashSet
-```
-
-`示例1见代码：com.hspedu.set_.Employee03 `
-
-##### 3 LinkedHashSet
-
-> LinkedHashSet的全面说明
-
-- LinkedHashSet是HashSet的子类
-- LinkedHashSet底层是一个LinkedHashMap，底层维护了一个**数组+双向链表**
-- LinkedHashSet根据元素的hashCode值来决定元素的存储位置，同时使用链表维护元素的次序图(图)，这使得元素看起来是以插入顺序保存的。
-- LinkedHashSet不允许添加重复元素
-
-> 说明
-
-- 在LinkedHashSet中维护一个hash表和双向链表(LinkedHashSet 有head和tail)
-
-
-- 每一个结点有before和after属性，这样可以形成双向链表
-
-
-- 在添加一个元素时，先求hash值，再求索引，确定该元素在table的位置，然后将添加的元素加入到双向链表(如果已经存在，不添加[原则和hashset一样])
-
-​       tail.next = newElement
-​      newElement.pre = tail
-​      tail = newElement;
-
-- 这样的话，我们遍历LinkedHashSet 也能确保插入顺序和遍历顺序一致
-
-![](/Users/wing/IdeaProjects/hsp_study/chapter14/picture/img01.png)
-
-
-
-#### Collections 工具类
-
-```ceylon
-Collections 中提供了大量对集合元素进行排序、查询和修改等操作的方法，还提供了对集合对象设置不可变、对集合对象实现同步控制等方法。以下定义的方法既可用于操作 List集合，也可用于操作Set 和 Queue 
-```
-
-> 常用操作
-
-```java
-后续补充Collections工具类的常用方法
-```
-
-
-
-
+***
 
 ## 2.4 Iterable
 
@@ -3863,6 +3978,18 @@ int[] other = new int[5];
 System.arraycopy(ids, 1, other, 0, 3);
 System.out.println(Arrays.toString(ids));//[1, 2, 3, 4, 5]深赋值
 System.out.println(Arrays.toString(other));//[2, 3, 4, 0, 0]
+```
+
+## 2.6 Collections 工具类
+
+```ceylon
+Collections 中提供了大量对集合元素进行排序、查询和修改等操作的方法，还提供了对集合对象设置不可变、对集合对象实现同步控制等方法。以下定义的方法既可用于操作 List集合，也可用于操作Set 和 Queue 
+```
+
+> 常用操作
+
+```java
+后续补充Collections工具类的常用方法
 ```
 
 
