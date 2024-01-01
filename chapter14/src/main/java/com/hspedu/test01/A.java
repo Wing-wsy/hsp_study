@@ -5,6 +5,7 @@ package com.hspedu.test01;
  * @create 2023/12/24
  *
  */
-public interface A {
-    void containsAll();
+public abstract class A {
+    public void test(int index){
+    }
 }

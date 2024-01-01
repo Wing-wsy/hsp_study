@@ -1,44 +1,44 @@
 package com.hspedu.list_;
 
-import com.hspedu.test01.A;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author wing
  * @create 2023/11/29
  */
-public class LinkedListCRUD {
-
-    @Test
-    public void linkedListCRUD() {
-
-       List one = new ArrayList();
-       one.add("1");
-       one.add("2");
-       one.add("3");
-       one.add("4");
-       System.out.println(one);
-       System.out.println(one.getClass());
-
-       List two = one.subList(1, 3);
-       System.out.println(two);
-       System.out.println(two.getClass());
-       two.set(0,"a");
-       System.out.println(two);
-       System.out.println(one);
-       List three = two.subList(1, 2);
-       System.out.println(three);
-       System.out.println(three.getClass());
-       three.set(0,"b");
-       System.out.println(three);
-       System.out.println(two);
-       System.out.println(one);
+@SuppressWarnings({"all"})
+public class LinkedListCRUD{
 
 
+    public static void main(String[] args) {
+        HashMap<String,String> map = new HashMap<>();
+        map.put("1","1");
+        map.put("1","11");
+        map.putIfAbsent("1","111");
+        map.put("2","1");
+        map.put("3","1");
+        map.put("4","1");
+        map.put("5","1");
+        map.put("6","1");
+        map.put("7","1");
+        map.put("8","1");
+        map.put("9","1");
+        map.put("10","1");
+        map.put("11","1");
+        map.put("12","1");
+        map.put("abc","1");
+        map.put("14","1");
+        map.put("15","1");
+        map.put("16","1");
+        map.put("17","1");
+        Set<Map.Entry<String, String>> entries = map.entrySet();
+
+
+        System.out.println(map);
     }
 }
