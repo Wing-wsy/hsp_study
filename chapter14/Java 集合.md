@@ -1706,7 +1706,7 @@ public HashSet(int initialCapacity) {
 public HashSet(int initialCapacity, float loadFactor) {
     map = new HashMap<>(initialCapacity, loadFactor);
 }
-/* 4)有参构造【了解即可】 */
+/* 4)有参构造,dummy忽略，目的将此构造函数与其他int, float构造函数区分开【注意这里new的是LinkedHashMap】 */
 HashSet(int initialCapacity, float loadFactor, boolean dummy) {
     map = new LinkedHashMap<>(initialCapacity, loadFactor);
 }
@@ -1756,15 +1756,15 @@ System.out.println(hashSet);
 因为，如果单使用数组或者链表的方式，将来数据越来越多，读取或者新增效率会越来越低，所以设计者使用了“数组+链表+红黑树”的结构，大大提高了效率
 ```
 
-> 因为HashSet底层就是HashMap，所以源码内容参考HashMap，这里不再赘述
+> 因为HashSet底层就是HashMap，所以源码内容参考HashMap，这里不再赘述......
 
 ** **
 
 #### 2.2.2.2 LinkedHashSet
 
-> 说明：详细源码分析见 LinkedHashMap
+**LinkedHashSet**继承于**HashSet**,它的源码很少，只有几个构造函数，基本上都是调用父类HashSet的构造函数
 
-- LinkedHashSet是HashSet的子类
+- **LinkedHashSet**继承**HashSet**，并实现 **Set** 接口
 - **LinkedHashSet**底层是一个 **LinkedHashMap**，底层维护了一个 **数组 + 链表 + 双向链表**【虽然没有了红黑树效率没有这么高，但是有顺序了】
 - LinkedHashSet根据元素的 hashCode 值来决定元素的存储位置，同时使用链表维护元素的次序，这使得元素看起来是以插入顺序保存的。
 
@@ -1772,78 +1772,42 @@ System.out.println(hashSet);
 
 > 底层源码说明
 
-1. 在**LinkedHastset** 中维护了—个**数组** + **链表** +**双向链表**(LinkedHashset 有 head 和tail)【解释：数组：就是上面图左边的0～7；链表：上面图索引0，123的next指向HSP，这个就是跟HashSet一样的】
+1. 在**LinkedHastset** 中维护了—个**数组** + **链表** +**双向链表**(LinkedHashset 有 head 和tail)【解释：数组：就是上面图左边的0～7；链表：上面"123"的next指向"HSP"，这个就是跟HashSet一样的】
 2. 每一个节点有 **before** 和**after** 属性，这样可以形成双向链表
 3. 在添加一个元素时，**先求hash值，在求索引**，确定该元素在table的位置，然后将添加的元素加入到双向链表(如果已经存在，不添加[原则和hashset一样]）
 4. 这样的话，我们遍历LinkedHashset 也能确保**插入顺序和遍历顺序一致**
 
-> LinkedHashSet 源码解读
+> 一、类成员介绍
 
-> 1.main方法debug语句
+> 1.常量和变量
 
 ```java
-HashSet hashSet = new LinkedHashSet();
-hashSet.add("java");
+无
 ```
 
-** **
+> 2.四个构造方法
 
-> 2.无参构造器
+```java
+/* 1)无参构造-默认调用HashSet的构造方法，指定初始化容量16和负载因子0.75，dummy=true忽略，目的将此构造函数与其他int, float构造函数区分开，无特别含义 */
+public LinkedHashSet() {
+    super(16, .75f, true);
+}
+/* 2)有参构造，入参是初始容量值 */
+public LinkedHashSet(int initialCapacity) {
+    super(initialCapacity, .75f, true);
+}
+/* 3)有参构造，在2的基础上，增加一个负载因子【了解即可】 */
+public LinkedHashSet(int initialCapacity, float loadFactor) {
+    super(initialCapacity, loadFactor, true);
+}
+/* 4)有参构造【了解即可】 */
+ public LinkedHashSet(Collection<? extends E> c) {
+     super(Math.max(2*c.size(), 11), .75f, true);
+     addAll(c);
+ }
+```
 
-![](picture/img33.png)
-
-![](picture/img34.png)
-
-**源码解读**：
-
-1. LinkedHashSet无参构造器实际是创建了一个LinkedHashMap的对象实例，**所以LinkedHashSet底层就是一个LinkedHashMap**
-
-** **
-
-> 3.第一次 add添加操作
-
-![](picture/img35.png)
-
-**源码解读**：
-
-1. 添加一个元素后，table数组的类型是 **HashMap$Node（Node是HashMap的一个静态内部类）**，但是真实加进去的却是 **LinkedHashMap$Entry（Entry是LinkedHashMap的一个静态内部类）**，所以根据数据多态原则，**Entry一定继承了Node**，否则是加不进去的，验证下源码果然有继承关系（见下图）【注意这个继承关系是两个内部类之间的继承，比较复杂，不像平时联系的继承A继承B这样简单】
-2. 看下面 3.1
-
-![](picture/img36.png)
-
-> 3.1 研究哪里添加了**LinkedHashMap$Entry**
-
-**源码解读**：
-
-1. 第一次add时，依然接着进入熟悉的**put方法**
-
-   ![](picture/img37.png)
-
-   2. 继续进入**putVal方法**，注意此时map的类型已经是 **LinkedHashMap**
-
-   ![](picture/img38.png)
-
-   3. 关键在 `627行`，因为当前是map调用了put方法才进入到这里，map类型上面已经说了是 **LinkedHashMap**，因此会先从 **LinkedHashMap**类中查是否有**newNode方法**
-
-   ![](picture/img39.png)
-
-   4. 续上，刚好查出来**LinkedHashMap**类中有**newNode方法**，所以会执行到256行，所以创建出来了 **LinkedHashMap$Entry**保存到了数组中。这就解释了上面 （3.add添加操作，源码解读 1）
-
-   ![](picture/img40.png)
-
-> 4. 第二次 add添加操作，就只看数据格式，不再继续debug了，看下面依然形成了双向链表
-
-![](picture/img41.png)
-
-> 5. 看头节点**head**指向哪里，会发现before和 after循环点，就是无穷无尽的。（尾节点tail跟head查看方式一致，这里不再阐述）
-
-![](picture/img42.png)
-
-> 6.补充说明：head和tail 是LinkedHashMap的属性
-
-![](picture/img43.png)
-
-> 7. 实际上LinkedHashSet相比HashSet只是增加了双向链表，next还是跟之前一样，如果同一个索引有多个元素，next依然会保存下一个元素的地址（下面验证这个情况）
+> 补充说明：实际上LinkedHashSet相比HashSet只是增加了双向链表，next还是跟之前一样，如果同一个索引有多个元素，next依然会保存下一个元素的地址（下面验证这个情况）
 
 ```java
 class Person{
@@ -1864,20 +1828,13 @@ class Person{
  hashSet.add(new Person("wing"));
  hashSet.add(new Person("li"));
  hashSet.add(new Person("liu"));
-
 ```
 
 > 注意观察next是有值的，验证猜想，**LinkedHashSet**是**数组 + 链表 + 双向链表**
 
 ![](picture/img44.png)
 
-> 应用场景
-
-- **有序可重复：使用List**
-- **无序不可重复：使用HashSet**
-- **有序不可重复：LinkHashSet**
-
-
+> 因为**LinkedHashSet**底层就是**LinkedHashMap**，所以源码内容参考**LinkedHashMap**，这里不再赘述......
 
 ****
 
@@ -3876,9 +3833,21 @@ containsKey()是找Key，在HashMap中只需要遍历hash table数组，复杂�
 
 ***
 
-### 2.3.5 HashTable
+### 2.3.5 SortedMap
 
-### 2.3.6 TreeMap
+**SortedMap**接口是**Map**的子接口，**SortedMap**中增加了元素的排序，这意味着**可以给SortedMap中的元素排序。**
+
+### 2.3.6 NavigableMap
+
+### 2.3.7 TreeMap // TODO学完数据结构回来继续...
+
+**优质博客：[TreeMap](https://blog.csdn.net/weixin_49307478/article/details/126835483)**
+
+> 概述
+
+**TreeMap** 是 **Map** 家族中的一员，也是用来存放key-value键值对的。平时在工作中使用的可能并不多，它最大的特点是遍历时是有顺序的，**根据key的排序规则来**（之前学过的有序集合比如：LinkedHashMap是根据添加顺序来的）
+
+### 2.3.8 HashTable
 
 ***
 
@@ -3959,7 +3928,22 @@ System.out.println(Arrays.toString(ids)); // [1, 2, 3, 4, 5]
 System.out.println(Arrays.toString(result));//[1, 2, 3, 4, 5, 0, 0]
 ```
 
-> 3. System.arraycopy()
+> 3. Arrays.sort()
+
+```java
+// 支持对数组进行排序，默认会调用数组类型实现Comparable接口实现的compareTo方法进行的排序
+// 如果待排序的数组是自定义类型的类比如Person，那么Person要实现Comparable接口实现的compareTo方法，否则Arrays.sort会报错
+// eg
+String[] arr = new String[]{"AA", "SS", "FF", "OO", "EE", "HH"};
+System.out.println("排序之前： " + Arrays.toString(arr));
+Arrays.sort(arr);
+System.out.println("排序之后： " + Arrays.toString(arr));
+/* 结果 */
+排序之前： [AA, SS, FF, OO, EE, HH]
+排序之后： [AA, EE, FF, HH, OO, SS]
+```
+
+> 4. System.arraycopy()
 
 ```java
 public static void arraycopy(Object src,int srcPos,Object dest,int destPos,int length)
@@ -3994,19 +3978,465 @@ Collections 中提供了大量对集合元素进行排序、查询和修改等�
 
 
 
+***
+
+# 3 比较器
+
+***Java 实现对象排序的方式有两种：***
+
+**`自然排序`**： java.lang.Comparable
+
+**`定制排序`**： java.util.Comparator
+
+## 3.1 Comparable
+
+**优质博客：[Comparable详解](https://blog.csdn.net/qq_21484461/article/details/132842060)**
+
+> 引言
+
+在**Java**编程中，我们经常需要对对象进行排序。为了实现排序，Java 提供了 `java.lang.Comparable` 接口，它允许我们定义对象之间的自然顺序。下面讲解如何使用 `Comparable` 接口来进行**自然排序**
+
+> 什么是自然排序？
+
+**自然排序是一种默认的对象排序方式**，它是根据对象的内在特征或属性来排序的。例如，对于整数，自然排序是按照数字的大小进行排序；对于字符串，自然排序是按照字母的字典顺序进行排序。自然排序通常是最直观和常见的排序方式，它使得对象在集合中以一种有序的方式存储和检索。
+
+在 Java 中，自然排序是通过 `Comparable` 接口来实现的。这个接口定义了一个 `compareTo` 方法，允许程序员自己来决定当前对象如何与其他对象进行比较。
+
+***
+
+> 介绍
+
+ **Comparable**是排序接口。**若一个类实现了Comparable接口，就意味着该类支持排序**。
+
+> Comparable是一个泛型接口，声明如下：
+
+```java
+public interface Comparable<T> {
+  public int compareTo(T o);
+}
+```
+
+**compareTo()** 方法接受一个 **类型为T** 的参数，并返回一个**整数值**。该方法通常用于比较对象的某个属性或特征，并按照一定的规则定义了比较的结果。返回值的意义如下：
+
+- 如果返回值小于0，表示当前对象小于传入的对象。
+- 如果返回值等于0，表示当前对象等于传入的对象。
+- 如果返回值大于0，表示当前对象大于传入的对象。
+
+**通过实现Comparable接口，我们可以使用Java提供的排序算法对对象进行排序。例如，使用Arrays.sort()方法对数组进行排序，或者使用Collections.sort()方法对集合进行排序。**
+
+> java中的sort()方法排序演示（自然排序）
+
+```java
+public class CompareTest1 {
+    @Test
+    public void test() {
+        String[] arr = new String[]{"AA", "SS", "FF", "OO", "EE", "HH"};
+        System.out.println("排序之前： " + Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println("排序之后： " + Arrays.toString(arr));
+    }
+}
+排序之前： [AA, SS, FF, OO, EE, HH]
+排序之后： [AA, EE, FF, HH, OO, SS]
+  
+//问：这里我们是没有自定义比较器的，那么它是怎么比较的呢？
+//答：因为这里比较的是String,String这个类已经定义了compareTo方法（按自然排序，意思就是首字母从a-z等来排序），如果是Integet数组排序也是一样的意思，Integer也定义了compareTo方法（按自然排序，数字从小到大排序）。
+  
+//所以到这可能上面提到的“自然排序”就是这个意思，按照实现好的来进行排序。
+```
+
+```java
+Fruit[] arr = new Fruit[5];   //Fruit没有实现Comparable接口
+arr[0] = new Fruit("apple", 18);
+arr[1] = new Fruit("pear", 6);
+// 排序
+Arrays.sort(arr);  //java.lang.ClassCastException: xxx.Fruit cannot be cast to java.lang.Comparable
+// 执行到这会报错，因为Fruit没有实现Comparable接口并实现compareTo方法
+```
+
+> 为了解决这个错误，对象之间的排序将用到比较器，这样调用Arrays.sort(arr)就能找到compareTo方法了 
+> Java 实现对象排序的方式有两种：
+
+> 自然排序： java.lang.Comparable
+
+```java
+public class Fruit implements Comparable<Fruit> {
+    private String name;
+    private double price;
+    public Fruit() {
+    }
+    public Fruit(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+    // 水果价格从低到高进行排序，若价格相同则按水果名称从高到低排序
+    @Override
+    public int compareTo(Fruit fruit) {
+        if (this.price > fruit.price) {
+            return 1;
+        } else if (this.price < fruit.price) {
+            return -1;
+        } else {
+            // this.name.compareTo(fruit.name) 按名称从低到高，前面加负号，表示相反
+            return -this.name.compareTo(fruit.name);
+        }
+    }
+}
+Fruit[] arr = new Fruit[5];   //Fruit已经实现Comparable接口
+arr[0] = new Fruit("apple", 18);
+arr[1] = new Fruit("pear", 6);
+// 排序
+Arrays.sort(arr);   // 正常，可以按照指定要求进行排序
+```
+
+> 定制排序： java.util.Comparator
+
+```java
+Fruit[] arr = new Fruit[5]          //Fruit没有实现任何接口，是一个普通类
+arr[0] = new Fruit("apple", 18);
+arr[1] = new Fruit("pear", 6);
+System.out.println("排序之前： " + Arrays.toString(arr));
+Arrays.sort(arr, new Comparator<Fruit>() { // 使用匿名内部类传参，也可以定义一个类实现Comparator，然后传实现了的引用也可以
+    // 按照水果名称从低到高排序,若名称相同则按照价格从高到低排序
+    @Override
+    public int compare(Fruit o1, Fruit o2) {
+        if (o1.getName().equals(o2.getName())) {
+            return -Double.compare(o1.getPrice(), o2.getPrice());
+        } else {
+            return o1.getName().compareTo(o2.getName());
+        }
+    }
+});
+```
+
+***
+
+要使一个类可以进行自然排序，需要实现 `Comparable` 接口并提供 `compareTo` 方法的具体实现。在 `compareTo` 方法中，您需要指定对象之间的比较规则。
+
+下面是一个示例，展示了如何实现 `Comparable` 接口来对自定义类进行排序：
+
+```java
+public class Student implements Comparable<Student> {
+    private String name;
+    private int age;
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    @Override
+    public int compareTo(Student other) {
+        // 按照年龄升序排序
+        return this.age - other.age;
+    }
+}
+```
+
+在上述示例中，`Student` 类实现了 `Comparable<Student>` 接口，并重写了 `compareTo` 方法。按照年龄升序排序是通过比较当前对象的年龄属性和另一个对象的年龄属性来实现的。
+
+> 一、使用自然排序
+
+一旦类实现了 `Comparable` 接口，对象就可以被用于自然排序，例如放入 `TreeSet` 或通过 `Collections.sort` 方法进行排序。
+
+> 1 使用 **TreeSet** 进行自然排序【未学，等学完了TreeSet回头来看//TODO】
+
+`TreeSet` 是一个有序集合，它使用自然排序来维护元素的顺序。在将对象添加到 `TreeSet` 中时，会自动调用对象的 `compareTo` 方法来确定它们的排序位置。
+
+```java
+public static void main(String[] args) {
+    TreeSet<Student> studentSet = new TreeSet<>();
+    studentSet.add(new Student("Alice", 22));
+    studentSet.add(new Student("Bob", 20));
+    studentSet.add(new Student("Charlie", 25));
+}
+```
+
+在上述示例中，`Student` 对象被添加到 `TreeSet` 中，由于 `Student` 类实现了 `Comparable` 接口，`TreeSet` 会根据年龄属性自动对学生对象进行排序
+
+***
+
+> 2 使用 **Collections.sort** 进行自然排序
+
+如果您有一个列表或数组，想要对其中的元素进行排序，可以使用 `Collections.sort` 方法。这个方法要求列表中的元素必须实现 `Comparable` 接口。
+
+```java
+public static void main(String[] args) {
+    List<Student> students = new ArrayList<>();
+    students.add(new Student("Alice", 22));
+    students.add(new Student("Bob", 20));
+    students.add(new Student("Charlie", 25));
+    Collections.sort(students);
+}
+```
+
+在上述示例中，`Collections.sort`方法对学生列表进行了排序。由于 `Student` 类实现了 `Comparable` 接口，它根据年龄属性自动进行了升序排序。
+
+***
+
+> 二、自然排序的更多用法
+
+当使用 `Comparable` 接口进行自然排序时，除了基本的对象比较之外，还可以应用一些高级用法来实现更多的排序需求。下面将介绍一些常见的 `Comparable` 接口的更多用法：
+
+> 1 多属性排序
+
+有时需要对对象进行多属性排序，例如，先按年龄升序排序，然后按姓名字母顺序排序。为了实现多属性排序，可以在 `compareTo` 方法中逐一比较不同属性，确保按照所需顺序比较
+
+```java
+public class Student implements Comparable<Student> {
+    private String name;
+    private int age;
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    @Override
+    public int compareTo(Student other) {
+        // 先按年龄升序排序
+        int ageComparison = this.age - other.age;
+        if (ageComparison != 0) {
+            return ageComparison;
+        }
+        // 如果年龄相等，则按姓名字母顺序排序
+        return this.name.compareTo(other.name);  // String类定义的compareTo比较方法
+    }
+}
+```
+
+在上述示例中，`compareTo` 方法首先比较年龄属性，如果年龄相等，则再比较姓名属性
+
+***
+
+> 2 排序顺序反转
+
+如果需要按相反的顺序进行排序，可以在 `compareTo` 方法中反转比较结果。通常，可以使用 `-` 运算符来实现反转
+
+```java
+public class ReverseStringComparator implements Comparable<String> {
+    @Override
+    public int compareTo(String str) {
+        // 反转字符串的比较结果
+        return -str.compareTo(this.toString());
+    }
+}
+```
+
+在上述示例中，`ReverseStringComparator` 类实现了 `Comparable` 接口，但在 `compareTo` 方法中使用了 `-` 运算符来反转字符串的比较结果。
+
+***
+
+> 3 复杂对象排序
+
+如果要对复杂对象进行排序，可能需要在 `compareTo` 方法中考虑多个属性和子对象的比较。这可以通过递归比较或使用嵌套 `Comparable` 接口来实现。
+
+```java
+/* Address类 */
+public class Address implements Comparable<Address>{
+    String province;
+    public Address(String province) {
+        this.province = province;
+    }
+    @Override
+    public int compareTo(Address o) {
+        return this.province.compareTo(o.province);
+    }
+    @Override
+    public String toString() {
+        return "Address{" +
+                "province='" + province + '\'' +
+                '}';
+    }
+}
+/* Person类 */
+public class Person implements Comparable<Person>{
+    private String name;
+    private int age;
+    private Address address;
+    public Person(String name, int age, Address address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
+    @Override
+    public int compareTo(Person other) {
+        // 先按年龄升序排序
+        int ageComparison = this.age - other.age;
+        if (ageComparison != 0) {
+            return ageComparison;
+        }
+        // 如果年龄相等，则按姓名字母顺序排序
+        int nameComparison = this.name.compareTo(other.name);
+        if (nameComparison != 0) {
+            return nameComparison;
+        }
+        // 如果姓名相等，则比较居住地址对象
+        return this.address.compareTo(other.address);
+    }
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + ", address=" + address + '}';
+    }
+}
+/* main方法 */
+public static void main(String[] args) {
+    List<Person> persons = new ArrayList<Person>();
+    persons.add(new Person("小A",35,new Address("1")));
+    persons.add(new Person("小C",25,new Address("2")));
+    persons.add(new Person("小B",25,new Address("5")));
+    persons.add(new Person("小B",25,new Address("3")));
+    // 排序
+    Collections.sort(persons);
+    // 循环
+    for (Person person : persons) {
+        System.out.println(person);
+    }
+}
+/* 输出结果 */
+Person{name='小B', age=25, address=Address{province='3'}}
+Person{name='小B', age=25, address=Address{province='5'}}
+Person{name='小C', age=25, address=Address{province='2'}}
+Person{name='小A', age=35, address=Address{province='1'}}
+```
+
+在上述示例中，`Person` 类实现了 `Comparable` 接口，通过逐一比较年龄、姓名和地址属性，以实现复杂对象的排序
+
+***
+
+> 4 使用泛型定义自己的Comparable（策略模式）【后续研究//TODO】
 
 
 
+***
 
+## 3.2 Comparator
 
+**优质博客：[Comparable和Comparator](https://blog.csdn.net/weixin_43570367/article/details/102961660)**
 
+> 引入
 
+**在实际开发中，遇到当元素的类型实现了Comparable 接口，但是它的排序方式不适合当前的操作；或者根本没有实现Comparable
+接口，而又不方便修改代码（比如第三方提供的jar包代码）。那么可以考虑使用 Comparator 的对象进行排序**
 
+> Comparator接口的介绍与使用
 
+**什么是Comparator接口？**
 
+**Comparator接口是一个用于比较两个对象大小的接口**，它定义了一个抽象方法**compare(T o1, T o2)**，根据o1和o2的大小返回一个**整数值**。Comparator接口位于java.util包中，它是一个泛型接口，可以指定比较的对象类型
 
+***
 
+> Comparator接口的作用
 
+提供一种**自定义的比较规则**，可以用于对没有实现Comparable接口的类的对象进行排序，或者对实现了Comparable接口的类的对象进行不同的排序。Comparable接口是另一个用于比较对象大小的接口，它定义了一个抽象方法compareTo(T o)，根据this和o的大小返回一个整数值。Comparable接口位于java.lang包中，它也是一个泛型接口，可以指定比较的对象类型
 
+***
+
+> **Comparator**与**Comparable**接口不同之处
+
+1. Comparator位于包`java.util`下，而Comparable位于包`java.lang`下
+2. **Comparable接口将比较代码嵌入需要进行比较的类的自身代码中，而Comparator接口在一个独立的类中实现比较**
+3. 如果前期类的设计没有考虑到类的Compare问题而没有实现Comparable接口，后期可以通过Comparator接口来实现比较算法进行排序，并且为了使用不同的排序标准做准备，比如：升序、降序
+4. **Comparable接口强制进行自然排序，而Comparator接口不强制进行自然排序，可以指定排序顺序**
+
+> 演示第二点不同
+
+```java
+/* 待比较的实体类没有继承Comparable接口 */
+public class Person {
+    private String name;
+    private int age;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    /* get、set方法 */
+}
+/* 定义一个比较器类（如果只是比较一次，可以不用专门定义一个类，可以使用匿名内部类） */
+public class ComparatorPerson implements Comparator<Person> {
+    @Override
+    public int compare(Person o1, Person o2) {
+        // 先按年龄升序排序
+        int ageComparison = o1.getAge() - o2.getAge();
+        if (ageComparison != 0) {
+            return ageComparison;
+        }
+        // 如果年龄相等，则按姓名字母顺序排序
+        return o1.getName().compareTo(o2.getName());
+    }
+}
+/* main*/
+List<Person> persons = new ArrayList<Person>();
+persons.add(new Person("小A",35));
+persons.add(new Person("小C",25));
+persons.add(new Person("小D",25));
+persons.add(new Person("小B",25));
+ComparatorPerson comparatorPerson = new ComparatorPerson();//比较器
+// 方式1
+// Collections.sort(persons,comparatorPerson);//排序
+// 方式2:匿名内部类(这样的好处就不用再去专门定义一个comparatorPerson类去实现Comparator接口)
+Collections.sort(persons,new Comparator<Person>(){
+    @Override
+    public int compare(Person o1, Person o2) {
+        // 先按年龄升序排序
+        int ageComparison = o1.getAge() - o2.getAge();
+        if (ageComparison != 0) {
+            return ageComparison;
+        }
+        // 如果年龄相等，则按姓名字母顺序排序
+        return o1.getName().compareTo(o2.getName());
+    }
+});
+// 循环
+for (Person person : persons) {
+    System.out.println(person);
+}
+/* 输出结果 */
+Person{name='小B', age=25}
+Person{name='小C', age=25}
+Person{name='小D', age=25}
+Person{name='小A', age=35}
+```
+
+> java中的sort()方法排序演示（自然排序）
+
+```java
+public class CompareTest1 {
+    @Test
+    public void test() {
+        String[] arr = new String[]{"AA", "SS", "FF", "OO", "EE", "HH"};
+        System.out.println("排序之前： " + Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println("排序之后： " + Arrays.toString(arr));
+    }
+}
+排序之前： [AA, SS, FF, OO, EE, HH]
+排序之后： [AA, EE, FF, HH, OO, SS]
+```
+
+> 示例代码2
+
+```java
+public class CompareTest3 {
+    /**
+     * 按字符从大到小进行排序
+     */
+    @Test
+    public void test() {
+        String[] arr = new String[]{"AA", "CC", "KK", "MM", "GG", "FF", "DD"};
+        System.out.println("原来的字符串： " + Arrays.toString(arr));
+        Arrays.sort(arr, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return -o1.compareTo(o2);
+            }
+        });
+        System.out.println("按字符从大到小排序后的字符串： " + Arrays.toString(arr));
+    }
+}
+原来的字符串： [AA, CC, KK, MM, GG, FF, DD]
+按字符从大到小排序后的字符串： [MM, KK, GG, FF, DD, CC, AA]
+```
+
+> 总结
+
+**当定制排序和自然排序同时存在时，最终的排序结果是按照定制排序进行排序的**
 
 
