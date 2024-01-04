@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="chapter02" />
-        <module name="chapter14" />
         <module name="chapter19" />
+        <module name="chapter14" />
+        <module name="chapter03" />
+        <module name="chapter04" />
       </profile>
     </annotationProcessing>
   </component>

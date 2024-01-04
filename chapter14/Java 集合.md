@@ -3943,7 +3943,14 @@ System.out.println("排序之后： " + Arrays.toString(arr));
 排序之后： [AA, EE, FF, HH, OO, SS]
 ```
 
-> 4. System.arraycopy()
+> 4. Arrays.binarySearch()
+
+```java
+二分查找，看数据结构和算法笔记
+如果方法查不到，那么返回值可以算出当前元素在数组中的插入点
+```
+
+> 5. System.arraycopy()
 
 ```java
 public static void arraycopy(Object src,int srcPos,Object dest,int destPos,int length)
@@ -4438,5 +4445,4 @@ public class CompareTest3 {
 > 总结
 
 **当定制排序和自然排序同时存在时，最终的排序结果是按照定制排序进行排序的**
-
 
