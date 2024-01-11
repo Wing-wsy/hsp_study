@@ -49,7 +49,7 @@ Collection 是集合类中的单列集合。他是所有单列集合的父接口
 
 > 下面对Collection定义的方法进行说明
 
-**Collection** 是集合容器的顶级接口，他继承了**Iterable 接口**，即凡是 Collection 的实现类都可以迭代
+`Collection` 是集合容器的顶级接口，他继承了`Iterable 接口`，即凡是 `Collection` 的实现类都可以迭代
 
 可以看到， Collection 接口提供了**十九个抽象方法**，这些方法的命名都很直观的反应的这些方法的功能。通过这些方法规定了 Collection的实现类的一些基本特性：**可迭代，可转化为数组，可对节点进行添加删除，集合间可以合并或者互相过滤，可以使用 Stream 进行流式处理。**
 
@@ -653,9 +653,69 @@ Vector底层也维护了一个**Object类型的数组**
 
 ****
 
+##### 2.2.1.2.1 Stack
+
+`Stack`类是`Vector`类的一个子类，它实现了标准的**后进先出**堆栈。`Stack`类仅定义默认构造函数，该构造函数创建一个空堆栈。 `Stack`包含`Vector`定义的所有方法，并添加了几个自己的方法
+
+除了从父类`Vector`继承的方法之外，`Stack`还定义了以下方法:
+
+> 1、 empty  测试此堆栈是否为空
+
+```java
+public boolean empty() {
+    return size() == 0;
+}
+```
+
+> 2、 push 将元素推入堆栈，并返回此元素
+
+```java
+public E push(E item) {
+    addElement(item);
+    return item;
+}
+```
+
+> 3、 peek 返回堆栈顶部的元素，但不删除它
+
+```java
+public synchronized E peek() {
+    int len = size();
+    if (len == 0)
+        throw new EmptyStackException();
+    return elementAt(len - 1);
+}
+```
+
+> 4、 返回堆栈顶部的元素，并删除它
+
+```java
+public synchronized E pop() {
+    E obj;
+    int len = size();
+    obj = peek();
+    removeElementAt(len - 1);
+    return obj;
+}
+```
+
+> 5、 search 搜索堆栈中的元素。如果找到，则返回从堆栈顶部的偏移量。否则返回`-1`
+
+```java
+public synchronized int search(Object o) {
+    int i = lastIndexOf(o);
+    if (i >= 0) {
+        return size() - i;
+    }
+    return -1;
+}
+```
+
+***
+
 #### 2.2.1.3 LinkedList 
 
-**LinkedList** 同时实现了 **List 接口**和 **Deque 接口**，也就是说它既可以看作一个顺序容器，又可以看作一个队列（Queue）。但 **LinkedList 是采用链表结构的方式来实现List接口的**，因此在进行insert和remove动作时效率要比ArrayList高。LinkedList 是不同步的，也就是不保证线程安全
+**LinkedList** 同时实现了 **List 接口**和 **Deque 接口**，也就是说它既可以看作一个顺序容器，又可以看作一个队列（Queue），又能当成一个栈（身兼数职）。但 **LinkedList 是采用链表结构的方式来实现List接口的**，因此在进行insert和remove动作时效率要比ArrayList高。LinkedList 是不同步的，也就是不保证线程安全
 
 ![](https://img-blog.csdnimg.cn/45cfdd218988441ea8005b8686cba1f2.png#pic_center)
 
@@ -1915,7 +1975,53 @@ AbstractSet的源码比较简单，结合源码比较容易看懂
 
 ****
 
-### 2.2.3 Iterator
+### 2.2.3 Queue
+
+![](https://images2018.cnblogs.com/blog/1090617/201806/1090617-20180619211218941-1440759997.png)
+
+**Queue**是集合中的接口，继承**Collection**接口，用于模拟队列这种数据结构，队列通常是指"**先进先出**"（FIFO） 的容器 。 队列的头部保存在队列中存放时间最长的元素 ， 队列的尾部保存在队列中存放时间最短的元素 
+
+> 方法描述
+
+```java
+boolean add(E e);         // 将元素添加到队列
+boolean offer(E e);       // 当使用有容量限制的队列时，此方法通常优于add方法，因为add方法只能通过抛出异常而无法插入元素
+E remove();               // 检索并删除此队列的头部。此方法与poll的唯一不同之处在于，如果此队列为空，它将抛出异常。
+E poll();                 // 检索并删除此队列的头部，如果此队列为空，则返回null
+E element();              // 检索但不删除此队列的头部。此方法与peek的唯一不同之处在于，如果此队列为空，它将抛出异常
+E peek();                 // 检索但不删除此队列的头部，如果此队列为空则返回null。
+```
+
+***
+
+#### 2.2.3.1 PriorityQueue
+
+优先队列 **PriorityQueue** 是 接口 **Queue** 的实现，可以对其中元素进行排序，可以放基本的包装类型或自定义类型，对于**包装类型默认为升序**，对于自定义类型需手动实现 Comparator 接口
+
+> 实现
+
+`PriorityQueue` 采用 **堆排序**，头是按指定排序方式的最小元素，堆排序只能保证根是最大 / 最小，整个堆并不是有序的。若想按特定顺序遍历，可先调用`toArray`方法将其转为数组，然后使用`Arrays.sort()`排序遍历。
+
+> PriorityQueue实现类介绍
+
+> 一、类成员介绍
+
+> 1.常量和变量
+
+```java
+/* 队列内置数组默认长度 */
+private static final int DEFAULT_INITIAL_CAPACITY = 11;
+/* 元素数量 */
+private int size = 0;
+/* 平衡二叉堆（数组） */
+transient Object[] queue;
+```
+
+> 2.三个构造方法
+
+***
+
+### 2.2.4 Iterator
 
 本身并不提供存储对象的能力，主要用于`遍历`Collection中的元素，Collection的实现子类需要提供**iterator()**方法，该方法返回一个**Iterator迭代器**
 
@@ -1929,7 +2035,7 @@ AbstractSet的源码比较简单，结合源码比较容易看懂
 
 ****
 
-### 2.2.4 AbstractCollection
+### 2.2.5 AbstractCollection
 
 > 什么是 AbstractCollection
 
@@ -2142,7 +2248,7 @@ public String toString() {
 
 ****
 
-### 2.2.5 RandomAccess
+### 2.2.6 RandomAccess
 
 - **标记接口，没有方法体**，如果**List普通for循环运行速度比迭代器循环快**，这样的List实现通常应该实现这个接口
 - 这个接口是被用来List实现的**标记**接口，支持**快速随机**访问，且只要你实现了它，你使用for循环遍历，效率会高于迭代器的遍历（说明一下，这里说的 for 循环是普通循环,而 增强 for-each 本质就等同于 迭代器遍历）
@@ -3950,7 +4056,13 @@ System.out.println("排序之后： " + Arrays.toString(arr));
 如果方法查不到，那么返回值可以算出当前元素在数组中的插入点
 ```
 
-> 5. System.arraycopy()
+> 5. Arrays.fill()
+
+```java
+使用指定的内容填充数组
+```
+
+> 6. System.arraycopy()
 
 ```java
 public static void arraycopy(Object src,int srcPos,Object dest,int destPos,int length)

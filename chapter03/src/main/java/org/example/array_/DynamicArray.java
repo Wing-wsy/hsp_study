@@ -3,46 +3,62 @@ package org.example.array_;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * @author wing
  * @create 2024/1/4
  */
 public class DynamicArray {
 
-    @Test
-    @DisplayName("array 测试通过")
-    public void test1() {
-        int rows = 1000000;
-        int columns = 14;
-        int[][] a = new int[rows][columns];
+    static LinkedList<Integer> a = new LinkedList<>();
+    static LinkedList<Integer> b = new LinkedList<>();
+    static LinkedList<Integer> c = new LinkedList<>();
 
-        long start1 = System.currentTimeMillis();
-        ij(a,rows,columns);
-        long end1 = System.currentTimeMillis();
-        System.out.println("ij耗时：" + (end1 - start1));
-
-        long start2 = System.currentTimeMillis();
-        ji(a,rows,columns);
-        long end2 = System.currentTimeMillis();
-        System.out.println("ji耗时：" + (end2 - start2));
-    }
-
-    /* 先遍历行，再遍历列 */
-    public static void ij(int[][] a, int rows, int columns){
-        long sum = 0L;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                sum += a[i][j];
-            }
+    static void init(int n){
+        for (int i = n; i >= 1 ; i--) {
+            a.addLast(i);
         }
     }
-    /* 先遍历列，再遍历行 */
-    public static void ji(int[][] a, int rows, int columns){
-        long sum = 0L;
-        for (int j = 0; j < columns; j++) {
-            for (int i = 0; i < rows; i++) {
-                sum += a[i][j];
-            }
-        }
+
+    public static void main(String[] args) {
+        init(3);
+        print();
+        move(3, a, b, c);
     }
+
+    private static void move(int n, LinkedList<Integer> a,
+                             LinkedList<Integer> b,
+                             LinkedList<Integer> c){
+        if(n == 0){
+            return;
+        }
+        move(n - 1, a, c, b);
+        c.addLast(a.removeLast());   // 中间
+        print();
+        move(n - 1, b, a, c);
+
+    }
+
+    private static void print(){
+        System.out.println("-------------");
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+    }
+
+//    @Test
+//    @DisplayName("array 测试通过")
+//    public void test1() {
+//        int[] a = {6, 5, 4, 3, 2, 1};
+//        System.out.println(sum(30000));
+//    }
+
+
+
+
+
 }
