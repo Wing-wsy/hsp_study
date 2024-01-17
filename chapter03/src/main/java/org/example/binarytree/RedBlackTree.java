@@ -22,7 +22,7 @@ public class RedBlackTree {
         Node left;
         Node right;
         Node parent;    // 父节点，相比平衡二叉树增加的属性
-        Color color = RED;    // 相比平衡二叉树增加的属性
+        Color color = RED;    // 新增节点默认都是红色
 
         public Node(int key, Object value) {
             this.key = key;
@@ -70,7 +70,7 @@ public class RedBlackTree {
         return node != null && node.color == BLACK;
     }
 
-    // 右旋
+    // 右旋（仅仅是旋转，维护好树的父子关系，但是不维护节点的颜色）
     private void rightRotate(Node pink) {
         Node parent = pink.parent;
         Node yellow = pink.left;
@@ -106,6 +106,7 @@ public class RedBlackTree {
             } else if (key > p.key) {
                 p = p.right;
             } else {
+                // 找到，更新
                 p.value = value;
                 return;
             }
@@ -120,9 +121,11 @@ public class RedBlackTree {
             parent.right = inserted;
             inserted.parent = parent;
         }
+        // 插入遇到红红则进行调整
         fixRedRed(inserted);
     }
 
+    // 红红则进行调整
     void fixRedRed(Node x) {
         // Case1: 插入节点为根节点，将根节点变黑
         if (x == root) {
@@ -133,7 +136,11 @@ public class RedBlackTree {
         if (isBlack(x.parent)) {
             return;
         }
-        // Case3:  叔叔为红色（需要将父亲、叔叔变黑、祖父变红，然后对祖父做递归处理）
+        // Case3 和 Case4 会触发红红相邻
+        // Case3:  叔叔为红色（操作步骤如下）【变色就能解决平衡】
+        //    1）父亲变为黑色，为了保证黑色平衡，连带的叔叔也变为黑色
+        //    2）祖父如果是黑色不变的话会造成这颗子树黑色过多，因此祖父节点变为红色
+        //    3）祖父变为红色的话，可能会接着触发红红相邻，因此对祖父进行递归调整
         Node parent = x.parent;
         Node uncle = x.uncle();
         Node grandParent = parent.parent;
@@ -141,33 +148,36 @@ public class RedBlackTree {
             parent.color = BLACK;
             uncle.color = BLACK;
             grandParent.color = RED;
+            // 递归调用
             fixRedRed(grandParent);
             return;
         }
-
-        // Case4:  叔叔为黑色
-        if (parent.isLeftChild() && x.isLeftChild()) { // LL 不平衡
+        // Case4:  叔叔为黑色（分下面四种情况）【当有父亲，没有叔叔时，null为黑色，也属于叔叔为黑色的情况】【变色后还不能解决平衡，还需要配合旋转】
+        if (parent.isLeftChild() && x.isLeftChild()) {
+            // 1）父亲为左孩子，插入节点也是左孩子，此时即 LL 不平衡【操作：父亲变黑，祖父变红，右旋】
             parent.color = BLACK;
             grandParent.color = RED;
             rightRotate(grandParent);
-        } else if (parent.isLeftChild()) { // LR 不平衡
+        } else if (parent.isLeftChild()) {
+            // 2）父亲为左孩子，插入节点是右孩子，此时即 LR 不平衡
             leftRotate(parent);
             x.color = BLACK;
             grandParent.color = RED;
             rightRotate(grandParent);
-        } else if (!x.isLeftChild()) { // RR 不平衡
+        } else if (!x.isLeftChild()) {
+            // 3）父亲为右孩子，插入节点也是右孩子，此时即 RR 不平衡
             parent.color = BLACK;
             grandParent.color = RED;
-            leftRotate(grandParent);      // RL 不平衡
+            leftRotate(grandParent);
         } else {
+            // 4）父亲为右孩子，插入节点是左孩子，此时即 RL 不平衡
             rightRotate(parent);
             x.color = BLACK;
             grandParent.color = RED;
             leftRotate(grandParent);
         }
-
-
     }
+
     // 删除（正常删，会用到李代桃僵技巧，遇到黑黑不平衡进行调整）
     public void remove(int key) {
         Node deleted = find(key);
@@ -175,7 +185,6 @@ public class RedBlackTree {
             return;
         }
         doRemove(deleted);
-
     }
 
     private void fixDouleBlack(Node x) {
@@ -257,7 +266,7 @@ public class RedBlackTree {
                 } else {
                     parent.right = null;
                 }
-                deleted.parent = null;
+                deleted.parent = null;  // help gc
             }
             return;
         }
@@ -285,7 +294,8 @@ public class RedBlackTree {
             }
             return;
         }
-        // case 0：有两个孩子(李代桃僵技巧 -> 将有两个孩子专成有一个孩子或者没有孩子的节点来删除，复杂问题简单化)
+
+        // case 0：有两个孩子(李代桃僵技巧 -> 将有两个孩子转成有一个孩子或者没有孩子的节点来删除，复杂问题简单化)
         int t = deleted.key;
         deleted.key = replaced.key;
         replaced.key = t;
@@ -311,7 +321,7 @@ public class RedBlackTree {
         return null;
     }
 
-    // 查找剩余节点
+    // 查找后继节点
     Node findReplaced(Node deleted) {
         if (deleted.left == null && deleted.right == null) {
            return null;
