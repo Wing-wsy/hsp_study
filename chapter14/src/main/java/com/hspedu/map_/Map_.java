@@ -1,8 +1,19 @@
 package com.hspedu.map_;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * @author wing
@@ -10,14 +21,21 @@ import java.util.Set;
  */
 public class Map_ {
 
-    @SuppressWarnings({"all"})
-    public static void main(String[] args) {
-        Map map = new HashMap();
-        map.put("no1","Wing");
-        map.put("no2","Li");
-        map.put("no1","xiao");
-        Set set = map.entrySet();
-        System.out.println(set);
-
+    // 原来的匿名内部类
+    @Test
+    public void test1(){
+        Comparator<Integer> com = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        };
+        TreeSet<Integer> ts = new TreeSet<>(com);
+    }
+    // Lambda 表达式
+    @Test
+    public void test2(){
+        Comparator<Integer> com = (x, y) -> Integer.compare(x, y);
+        TreeSet<Integer> ts = new TreeSet<>(com);
     }
 }

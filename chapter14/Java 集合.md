@@ -1,3 +1,5 @@
+
+
 # 1 数组与集合的区别
 
 ## 1.1 数组
@@ -1899,6 +1901,8 @@ class Person{
 ****
 
 #### 2.2.2.3 TreeSet
+
+TreeSet 参考 TreeMap ，这里不再赘述。。。
 
 ****
 
@@ -3943,9 +3947,62 @@ containsKey()是找Key，在HashMap中只需要遍历hash table数组，复杂�
 
 **SortedMap**接口是**Map**的子接口，**SortedMap**中增加了元素的排序，这意味着**可以给SortedMap中的元素排序。**
 
+> SortedMap 六个特有抽象方法
+
+```java
+// 1)
+Comparator<? super K> comparator();
+// 2)
+SortedMap<K,V> subMap(K fromKey, K toKey);
+// 3)
+SortedMap<K,V> headMap(K toKey);
+// 4)
+SortedMap<K,V> tailMap(K fromKey);
+// 5)
+K firstKey();
+// 6)
+K lastKey();
+```
+
+***
+
 ### 2.3.6 NavigableMap
 
-### 2.3.7 TreeMap // TODO学完数据结构回来继续...
+`NavigableMap` 扩展了 `SortedMap`，具有了针对给定搜索目标返回最接近匹配项的导航方法。方法 lowerEntry、floorEntry、ceilingEntry 和 higherEntry 分别返回与小于、小于等于、大于等于、大于给定键的键关联的 Map.Entry 对象，如果不存在这样的键，则返回 null。类似地，方法 lowerKey、floorKey、ceilingKey 和 higherKey 只返回关联的键。所有这些方法是为查找条目而不是遍历条目而设计的。
+
+```java
+/* 查 */
+Map.Entry<K,V> lowerEntry(K key)               // 返回小于指定 key 的 k-v 映射
+K lowerKey(K key)                              // 返回小于指定 key 的 k 映射
+Map.Entry<K,V> floorEntry(K key)               // 返回小于或等于指定 key 的 k-v 映射
+K floorKey(K key)                              // 返回小于或等于指定 key 的 k 映射
+Map.Entry<K,V> ceilingEntry(K key)             // 返回大于或等于指定 key 的 k-v 映射
+K ceilingKey(K key)                            // 返回大于或等于指定 key 的 k 映射
+Map.Entry<K,V> higherEntry(K key)              // 返回大于指定 key 的 k-v 映射
+K higherKey(K key);                            // 返回大于指定 key 的 k 映射
+Map.Entry<K,V> firstEntry()                    // 返回最小 k-v 映射
+Map.Entry<K,V> lastEntry()                     // 返回最大 k-v 映射
+  
+/* 查整个视图 */
+NavigableMap<K,V> descendingMap()              // 返回倒序视图
+NavigableSet<K> navigableKeySet()              // 返回升序的 k 列表
+NavigableSet<K> descendingKeySet()             // 返回降序的 k 列表
+SortedMap<K,V> subMap(K fromKey, K toKey)      // 返回部分视图(前闭后开)
+SortedMap<K,V> headMap(K toKey)                // 返回小于指定key的部分视图
+SortedMap<K,V> tailMap(K fromKey)              // 返回小于或等于指定key的部分视图
+  
+/* 删 */
+Map.Entry<K,V> pollFirstEntry()                // 删除并返回最小 k-v 映射
+Map.Entry<K,V> pollLastEntry()                 // 删除并返回最大 k-v 映射
+```
+
+
+
+
+
+***
+
+### 2.3.7 TreeMap 
 
 **优质博客：[TreeMap](https://blog.csdn.net/weixin_49307478/article/details/126835483)**
 
@@ -3953,7 +4010,453 @@ containsKey()是找Key，在HashMap中只需要遍历hash table数组，复杂�
 
 **TreeMap** 是 **Map** 家族中的一员，也是用来存放key-value键值对的。平时在工作中使用的可能并不多，它最大的特点是遍历时是有顺序的，**根据key的排序规则来**（之前学过的有序集合比如：LinkedHashMap是根据添加顺序来的）
 
+TreeMap是一个基于key有序的key value[散列表](https://so.csdn.net/so/search?q=散列表&spm=1001.2101.3001.7020)。
+
+- map根据其键的自然顺序排序，或者根据map创建时提供的Comparator排序
+- 不是线程安全的
+- key 不可以存入null
+- 底层是基于**红黑树**实现的
+
+![](https://img-blog.csdnimg.cn/img_convert/26231590053a6617afad4b9e92747996.webp?x-oss-process=image/format,png)
+
+以上是TreeMap的类结构图：
+
+1. 实现了`NavigableMap` 接口，`NavigableMap`又实现了`Map`接口，提供了导航相关的方法。
+2. 继承了`AbstractMap`，该方法实现 `Map` 操作的骨干逻辑。
+3. 实现了`Cloneable`接口，标记该类支持`clone`方法复制
+4. 实现了`Serializable`接口，标记该类支持序列化
+
+> 一、类成员介绍
+
+> 1.常量和变量
+
+```java
+private transient Entry<K,V> root;  // 节点-红黑树
+private final Comparator<? super K> comparator;   // 比较器
+private transient int size = 0;  // 元素个数
+```
+
+> 2.四个构造方法
+
+```java
+/* 1)无参构造-比较器是null（比如排序String，我们不用传入比较器，因为String类已经实现了比较器） */
+public TreeMap() {
+    comparator = null;
+}
+/* 2)有参构造-传入比较器（比如自定义Person类需要排序，则要传入排序的比较器）*/
+public TreeMap(Comparator<? super K> comparator) {
+    this.comparator = comparator;
+}
+/* 3)有参构造-暂不研究*/
+public TreeMap(Map<? extends K, ? extends V> m) {
+    comparator = null;
+    putAll(m);
+}
+/* 4)有参构造-暂不研究*/
+public TreeMap(SortedMap<K, ? extends V> m) {
+    comparator = m.comparator();
+    try {
+        buildFromSorted(m.size(), m.entrySet().iterator(), null, null);
+    } catch (java.io.IOException cannotHappen) {
+    } catch (ClassNotFoundException cannotHappen) {
+    }
+}
+```
+
+> 3.成员方法
+
+> put - 添加节点
+
+```java
+public V put(K key, V value) {
+    Entry<K,V> t = root;
+    if (t == null) {
+        compare(key, key); // 这一行应该是用来判断key的合法性（不能比较的key会出现异常）
+        root = new Entry<>(key, value, null);   // 根节点为空时，直接新增节点赋给根节点
+        size = 1;
+        modCount++;
+        return null;
+    }
+    int cmp; // 临时变量
+    Entry<K,V> parent;  // 保存待添加元素的父节点
+    Comparator<? super K> cpr = comparator;
+    if (cpr != null) {  // 传入了比较器
+        do {
+            parent = t;
+            cmp = cpr.compare(key, t.key);
+            if (cmp < 0)
+                t = t.left;
+            else if (cmp > 0)
+                t = t.right;
+            else
+                return t.setValue(value);
+        } while (t != null);
+    }
+    else {    // 没有传入比较器
+        if (key == null)              // key 不能为空在这里体现
+            throw new NullPointerException();
+        @SuppressWarnings("unchecked")
+            Comparable<? super K> k = (Comparable<? super K>) key;
+        // 下面开始遍历红黑树，如果查找到相同的key，则进行更新，否则添加
+        do {
+            parent = t;
+            cmp = k.compareTo(t.key); // 两个key进行比较，得到cmp
+            if (cmp < 0)              // key 比当前节点小，向左找
+                t = t.left;
+            else if (cmp > 0)         // key 比当前节点大，向右找
+                t = t.right;
+            else
+                return t.setValue(value); // 找到了和当前key相等的节点，进行更新value操作
+        } while (t != null);
+    }
+    Entry<K,V> e = new Entry<>(key, value, parent);  // 上面循环结束，找到了可插入的位置，parent也找到了，创建节点信息
+    if (cmp < 0)
+        parent.left = e;             // 维护父节点和当前节点的引用
+    else
+        parent.right = e;
+    fixAfterInsertion(e);
+    size++;
+    modCount++;
+    return null;
+}
+```
+
+> get-获取元素
+
+```java
+public V get(Object key) {
+    Entry<K,V> p = getEntry(key);
+    return (p==null ? null : p.value);
+}
+```
+
+> remove-删除元素
+
+```java
+public V remove(Object key) {
+    Entry<K,V> p = getEntry(key);     // 获取元素
+    if (p == null)                    
+        return null;                  // 查不到删除的元素，返回null
+    V oldValue = p.value;
+    deleteEntry(p);                   // 执行删除
+    return oldValue;
+}
+```
+
+> 私有方法-辅助方法
+
+```java
+/* 插入红红调整 */ 
+private void fixAfterInsertion(Entry<K,V> x) {
+     x.color = RED;                                               // 插入默认为红色
+     while (x != null && x != root && x.parent.color == RED) {    // 父亲为红触发红红相邻进行下面调整
+         if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {      // 父亲是祖父的左节点
+             Entry<K,V> y = rightOf(parentOf(parentOf(x)));       // 叔叔节点【叔叔不存在，也当黑处理】
+             if (colorOf(y) == RED) {                             // 叔叔节点为红的情况(简单)
+                 setColor(parentOf(x), BLACK);                    // 父亲节点变黑
+                 setColor(y, BLACK);                              // 父亲变黑了，叔叔也要变黑
+                 setColor(parentOf(parentOf(x)), RED);            // 父亲和叔叔都变黑了，路径就多了一个黑，则祖父要变红
+                 x = parentOf(parentOf(x));                       // 把当前祖父引用给x，继续循环操作
+             } else {                                             // 叔叔节点为黑的情况(复杂)
+                 if (x == rightOf(parentOf(x))) {                 // 判断添加的节点是否是父亲的右孩子
+                     x = parentOf(x);                             // 将LR不平衡左旋成LL不平衡在下面统一处理
+                     rotateLeft(x);
+                 }
+                 setColor(parentOf(x), BLACK);                    // LL不平衡【操作：父亲变黑，祖父变红，右旋】
+                 setColor(parentOf(parentOf(x)), RED);
+                 rotateRight(parentOf(parentOf(x)));
+             }
+         } else {                                                 // 父亲是祖父的右节点【处理和上面相反，不再赘述】
+             Entry<K,V> y = leftOf(parentOf(parentOf(x)));        
+             if (colorOf(y) == RED) {
+                 setColor(parentOf(x), BLACK);
+                 setColor(y, BLACK);
+                 setColor(parentOf(parentOf(x)), RED);
+                 x = parentOf(parentOf(x));
+             } else {
+                 if (x == leftOf(parentOf(x))) {
+                     x = parentOf(x);
+                     rotateRight(x);
+                 }
+                 setColor(parentOf(x), BLACK);
+                 setColor(parentOf(parentOf(x)), RED);
+                 rotateLeft(parentOf(parentOf(x)));
+             }
+         }
+     }
+     root.color = BLACK;
+ }
+```
+
+
+
+```java
+/* 删除调整 */
+private void fixAfterDeletion(Entry<K,V> x) {
+    while (x != root && colorOf(x) == BLACK) {           // 删除节点是黑色
+        if (x == leftOf(parentOf(x))) {                  // 删除节点是左孩子
+            Entry<K,V> sib = rightOf(parentOf(x));       // 兄弟节点
+            if (colorOf(sib) == RED) {                   // 兄弟节点是红色
+                setColor(sib, BLACK);
+                setColor(parentOf(x), RED);
+                rotateLeft(parentOf(x));
+                sib = rightOf(parentOf(x));
+            }
+            if (colorOf(leftOf(sib))  == BLACK &&
+                colorOf(rightOf(sib)) == BLACK) {
+                setColor(sib, RED);
+                x = parentOf(x);
+            } else {
+                if (colorOf(rightOf(sib)) == BLACK) {
+                    setColor(leftOf(sib), BLACK);
+                    setColor(sib, RED);
+                    rotateRight(sib);
+                    sib = rightOf(parentOf(x));
+                }
+                setColor(sib, colorOf(parentOf(x)));
+                setColor(parentOf(x), BLACK);
+                setColor(rightOf(sib), BLACK);
+                rotateLeft(parentOf(x));
+                x = root;
+            }
+        } else { // symmetric
+            Entry<K,V> sib = leftOf(parentOf(x));
+            if (colorOf(sib) == RED) {
+                setColor(sib, BLACK);
+                setColor(parentOf(x), RED);
+                rotateRight(parentOf(x));
+                sib = leftOf(parentOf(x));
+            }
+            if (colorOf(rightOf(sib)) == BLACK &&
+                colorOf(leftOf(sib)) == BLACK) {
+                setColor(sib, RED);
+                x = parentOf(x);
+            } else {
+                if (colorOf(leftOf(sib)) == BLACK) {
+                    setColor(rightOf(sib), BLACK);
+                    setColor(sib, RED);
+                    rotateLeft(sib);
+                    sib = leftOf(parentOf(x));
+                }
+                setColor(sib, colorOf(parentOf(x)));
+                setColor(parentOf(x), BLACK);
+                setColor(leftOf(sib), BLACK);
+                rotateRight(parentOf(x));
+                x = root;
+            }
+        }
+    }
+    setColor(x, BLACK);
+}
+```
+
+
+
+```java
+/* 获取父节点 */
+private static <K,V> Entry<K,V> parentOf(Entry<K,V> p) {
+    return (p == null ? null: p.parent);
+}
+/* 获取左节点 */
+private static <K,V> Entry<K,V> leftOf(Entry<K,V> p) {
+    return (p == null) ? null: p.left;
+}
+/* 获取右节点 */
+private static <K,V> Entry<K,V> rightOf(Entry<K,V> p) {
+    return (p == null) ? null: p.right;
+}
+/* 右旋 */
+private void rotateRight(Entry<K,V> p) {
+    if (p != null) {
+        Entry<K,V> l = p.left;
+        p.left = l.right;
+        if (l.right != null) l.right.parent = p;
+        l.parent = p.parent;
+        if (p.parent == null)
+            root = l;
+        else if (p.parent.right == p)
+            p.parent.right = l;
+        else p.parent.left = l;
+        l.right = p;
+        p.parent = l;
+    }
+}
+/* 左旋 */
+private void rotateLeft(Entry<K,V> p) {
+    if (p != null) {
+        Entry<K,V> r = p.right;
+        p.right = r.left;
+        if (r.left != null)
+            r.left.parent = p;
+        r.parent = p.parent;
+        if (p.parent == null)
+            root = r;
+        else if (p.parent.left == p)
+            p.parent.left = r;
+        else
+            p.parent.right = r;
+        r.left = p;
+        p.parent = r;
+    }
+}
+/* 获取元素 */
+final Entry<K,V> getEntry(Object key) {
+    if (comparator != null)
+        return getEntryUsingComparator(key);                    // 如果传入了比较器按比较器来比较
+    if (key == null)
+        throw new NullPointerException();
+    @SuppressWarnings("unchecked")
+        Comparable<? super K> k = (Comparable<? super K>) key;
+    Entry<K,V> p = root;
+    while (p != null) {                                        // 循环比较大小，然后查找左右子树
+        int cmp = k.compareTo(p.key); 
+        if (cmp < 0)
+            p = p.left;
+        else if (cmp > 0)
+            p = p.right;
+        else
+            return p;
+    }
+    return null;
+}
+/* 删除元素 */
+private void deleteEntry(Entry<K,V> p) {
+    modCount++;
+    size--;
+    if (p.left != null && p.right != null) {   // 判断是否有两个孩子
+        Entry<K,V> s = successor(p);
+        p.key = s.key;
+        p.value = s.value;
+        p = s;
+    } 
+    Entry<K,V> replacement = (p.left != null ? p.left : p.right);
+    if (replacement != null) {
+        replacement.parent = p.parent;
+        if (p.parent == null)
+            root = replacement;
+        else if (p == p.parent.left)
+            p.parent.left  = replacement;
+        else
+            p.parent.right = replacement;
+        // Null out links so they are OK to use by fixAfterDeletion.
+        p.left = p.right = p.parent = null;
+        // Fix replacement
+        if (p.color == BLACK)
+            fixAfterDeletion(replacement);
+    } else if (p.parent == null) {             // 没有左右孩子，也没有父亲，说明该树只有一个节点，直接删除
+        root = null;                           
+    } else {                                   // 没有左右孩子，有父亲
+        if (p.color == BLACK)
+            fixAfterDeletion(p);
+      
+        if (p.parent != null) {
+            if (p == p.parent.left)
+                p.parent.left = null;
+            else if (p == p.parent.right)
+                p.parent.right = null;
+            p.parent = null;
+        }
+    }
+}
+```
+
+> NavigableMap中的接口实现
+
+```java
+/* 查 */
+Map.Entry<K,V> lowerEntry(K key)               // 返回小于指定 key 的 k-v 映射
+K lowerKey(K key)                              // 返回小于指定 key 的 k 映射
+Map.Entry<K,V> floorEntry(K key)               // 返回小于或等于指定 key 的 k-v 映射
+K floorKey(K key)                              // 返回小于或等于指定 key 的 k 映射
+Map.Entry<K,V> ceilingEntry(K key)             // 返回大于或等于指定 key 的 k-v 映射
+K ceilingKey(K key)                            // 返回大于或等于指定 key 的 k 映射
+Map.Entry<K,V> higherEntry(K key)              // 返回大于指定 key 的 k-v 映射
+K higherKey(K key);                            // 返回大于指定 key 的 k 映射
+Map.Entry<K,V> firstEntry()                    // 返回最小 k-v 映射
+Map.Entry<K,V> lastEntry()                     // 返回最大 k-v 映射
+  
+/* 查整个视图 */
+NavigableMap<K,V> descendingMap()              // 返回倒序视图
+NavigableSet<K> navigableKeySet()              // 返回升序的 k 列表
+NavigableSet<K> descendingKeySet()             // 返回降序的 k 列表
+SortedMap<K,V> subMap(K fromKey, K toKey)      // 返回部分视图(前闭后开)
+SortedMap<K,V> headMap(K toKey)                // 返回小于指定key的部分视图
+SortedMap<K,V> tailMap(K fromKey)              // 返回小于或等于指定key的部分视图
+  
+/* 删 */
+Map.Entry<K,V> pollFirstEntry()                // 删除并返回最小 k-v 映射
+Map.Entry<K,V> pollLastEntry()                 // 删除并返回最大 k-v 映射
+```
+
+TreeMap其他不叙述。。。
+
+
+
+***
+
+#### 2.3.7.1 Entry 
+
+Entry是TreeMap的静态内部类，用来保存每个节点数据，节点保存的数据结构是红黑树
+
+```java
+static final class Entry<K,V> implements Map.Entry<K,V> {
+    K key;                    // 节点key
+    V value;                  // 节点值
+    Entry<K,V> left;          // 左孩子
+    Entry<K,V> right;         // 右孩子
+    Entry<K,V> parent;        // 父亲
+    boolean color = BLACK;    // 默认是黑色
+    Entry(K key, V value, Entry<K,V> parent) {
+        this.key = key;
+        this.value = value;
+        this.parent = parent;
+    }
+    /* 获取key */
+    public K getKey() {
+        return key;
+    }
+    /* 获取value */
+    public V getValue() {
+        return value;
+    }
+    /* 设置value */
+    public V setValue(V value) {
+        V oldValue = this.value;
+        this.value = value;
+        return oldValue;
+    }
+    public boolean equals(Object o) {
+        if (!(o instanceof Map.Entry))
+            return false;
+        Map.Entry<?,?> e = (Map.Entry<?,?>)o;
+        return valEquals(key,e.getKey()) && valEquals(value,e.getValue());
+    }
+    public int hashCode() {
+        int keyHash = (key==null ? 0 : key.hashCode());
+        int valueHash = (value==null ? 0 : value.hashCode());
+        return keyHash ^ valueHash;
+    }
+    public String toString() {
+        return key + "=" + value;
+    }
+}
+```
+
+
+
+***
+
 ### 2.3.8 HashTable
+
+**HashTable与HashMap的主要异同点**
+
+- 它们都是通过哈希表来实现的，而且都是通过链表来解决哈希冲突的，但是HashMap在链表达到一定长度之后，会将其转化为红黑树。
+- 它们计算节点哈希值的方式不同，若key的hashcode为h，则HashMap通过h ^ (h >>> 16)来计算节点的哈希值，而HashTable则将h作为节点的哈希值。
+- 它们计算节点对应数组索引下标的方式也不同，HashMap通过haseCode & (capacity - 1)是用来计算节点对应的数组下标，HashTable通过(hashCode & 0x7FFFFFFF) % capacity来计算节点对应的数组下标。hashCode & 0x7FFFFFFF的目的是为了将负的hash值转化为正值。
+- HashTable的默认容量为11，而HashMap默认容量为16，Hashtable不要求底层数组的容量一定要为2的整数次幂，而HashMap则要求一定为2的整数次幂。但是，它们的默认负载因子都是0.75。
+- Hashtable扩容时，会将容量变为原来的2倍加1，而HashMap扩容时，会将容量变为原来的2倍。
+- Hashtable中key和value都不允许为null，而HashMap中key和value都允许为null（key只能有一个为null，而value则可以有多个为null）。若Hashtable中的key或者value为null，则程序运行时会抛出NullPointerException异常。
+- HashTable中的大部分的方法都被synchronized修饰，所以HashTable是线程安全的，可以用于多线程环境中，而HashMap则不行
 
 ***
 
@@ -4089,13 +4592,51 @@ System.out.println(Arrays.toString(other));//[2, 3, 4, 0, 0]
 Collections 中提供了大量对集合元素进行排序、查询和修改等操作的方法，还提供了对集合对象设置不可变、对集合对象实现同步控制等方法。以下定义的方法既可用于操作 List集合，也可用于操作Set 和 Queue 
 ```
 
-> 常用操作
+> 一、排序操作
+
+- sort(List<T> list)        自然升序
+- sort(List list, Comparator c)   按照自定义的比较器排序
 
 ```java
-后续补充Collections工具类的常用方法
+List<String> list = new ArrayList<>();
+list.add("1");
+list.add("5");
+list.add("2");
+list.add("8");
+list.add("4");
+// 自然升序
+Collections.sort(list);
+System.out.println("自然升序后：" + list);
+
+//自然升序后：[1, 2, 4, 5, 8]
 ```
 
+> 二、查找操作
 
+- binarySearch(List list, Object key)： 二分查找法，前提是 List 已经排序过了
+
+```java
+
+```
+
+> 三、同步控制
+
+```java
+
+```
+
+> 四、其他
+
+```java
+1）addAll(Collection<? super T> c, T... elements)   // 往集合中添加元素
+  
+List<String> allList = new ArrayList<>();
+Collections.addAll(allList, "10","2","6");
+System.out.println("addAll：" + allList);
+// addAll：[10, 2, 6]
+```
+
+太多，后续可以回头看看这个工具类，挺齐全的。。。
 
 ***
 
