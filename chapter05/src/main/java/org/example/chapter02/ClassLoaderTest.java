@@ -1,0 +1,31 @@
+package org.example.chapter02;
+
+/**
+ * @author wing
+ * @create 2024/1/24
+ */
+public class ClassLoaderTest {
+
+    public static void main(String[] args) {
+        // 获取系统类加载器
+        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+        System.out.println(systemClassLoader); // sun.misc.Launcher$AppClassLoader@18b4aac2
+
+        // 获取其上层：扩展类加载器
+        ClassLoader extClassLoader = systemClassLoader.getParent();
+        System.out.println(extClassLoader); // sun.misc.Launcher$ExtClassLoader@1540e19d
+
+        // 获取其上层：获取不到引导类加载器
+        ClassLoader bootClassLoader = extClassLoader.getParent();
+        System.out.println(bootClassLoader); // null
+
+        // 对于用户自定义类来说，默认使用系统类加载器进行加载
+        ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
+        System.out.println(classLoader); // sun.misc.Launcher$AppClassLoader@18b4aac2
+
+        // String类使用 引导类加载器进行加载 --> java核心类库都是使用引导类进行加载
+        ClassLoader stringLoader = String.class.getClassLoader();
+        System.out.println(stringLoader); //null
+
+    }
+}

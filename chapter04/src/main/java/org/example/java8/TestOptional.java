@@ -12,7 +12,7 @@ public class TestOptional {
 
     @Test
     public void test1() {
-        Optional<Employee> op = Optional.of(new Employee());
+        Optional.of(new Employee())
     }
 
 }
