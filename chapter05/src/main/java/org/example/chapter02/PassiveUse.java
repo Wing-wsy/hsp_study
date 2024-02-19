@@ -9,7 +9,9 @@ import org.junit.Test;
 public class PassiveUse {
     @Test
     public void test() {
-        System.out.println(Child.num1);
+//        System.out.println(Child.num1);
+//        Parent[] p = new Parent[10];
+        Parent p1 = new Parent();
     }
 }
 
