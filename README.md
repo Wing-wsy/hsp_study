@@ -5,6 +5,7 @@
 #### chapter-03 - 数据结构与算法        【 △ 】
 #### chapter-04 - java8新特性-lambda   【 √ 】
 #### chapter-05 - JVM                 【 △ 】
+#### chapter-06 - 多线程               【 △ 】
 #### chapter-14 - java 集合           【 √ 】
 #### chapter-19 - java IO 流         【 √ 】
 #### chapter-23 - java 反射          【 × 】
