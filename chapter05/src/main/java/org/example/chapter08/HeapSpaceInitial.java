@@ -21,12 +21,43 @@ package org.example.chapter08;
 public class HeapSpaceInitial {
 
     public static void main(String[] args) {
-        long initialMemory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
-        long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-        System.out.println("-Xms:" + initialMemory + "M");
-        System.out.println("-Xmx:" + maxMemory + "M");
-
-        System.out.println("系统内存大小为:" + initialMemory * 64.0 / 1024 + "G");
-        System.out.println("系统内存大小为:" + maxMemory * 4.0 / 1024 + "G");
+        new HeapSpaceInitial().method1(2);
     }
+
+    public void method1(int select){
+        int num;
+        switch (select){
+            case 100:
+                num = 10;
+                break;
+            case 500:
+                num = 20;
+                break;
+            case 200:
+                num = 30;
+                break;
+            default:
+                num = 40;
+        }
+    }
+
+    public void method2(String season){
+        switch (season){
+            case "SPRING":
+                break;
+            case "SUMMER":
+                break;
+            case "AUTUMN":
+                break;
+            case "WINTER":
+                break;
+        }
+    }
+
+
+}
+
+class Order{
+    int id;
+    static String name;
 }
