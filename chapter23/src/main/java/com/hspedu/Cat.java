@@ -1,4 +1,4 @@
-package com.hspedu;
+package src.main.java.com.hspedu;
 
 /**
  * @author wing
