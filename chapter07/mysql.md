@@ -2029,6 +2029,11 @@ UPDATE employees e
 SET department_name = (SELECT department_name 
 	                       FROM departments d
 	                       WHERE e.department_id = d.department_id);
+	                       
+# 例子
+update t_loan_order a set a.app_user_name = (
+    select d.name from t_app_user_info as d where d.item_code = a.item_code and d.product_item_code = a.item_code and d.app_user_id = a.app_user_id
+    ) where  a.loan_type = 1 and a.loan_order_status = 7 and length(app_user_name) < 1 and a.request_date < '2024-04-16 12:00:00' -- order by request_date limit 500
 ```
 
 ***
@@ -4927,6 +4932,20 @@ END IF;
 # 6 MySQL架构篇
 
 ## 6.1 Linux环境下MySQL安装与使用
+
+### 6.1.1 安装前说明
+
+### 6.1.2 MySQL的Linux版安装
+
+### 6.1.3 MySQL登录
+
+### 6.1.4 MySQL8的密码强度评估（了解）
+
+### 6.1.5 字符集的相关操作
+
+### 6.1.6 SQL大小写规范
+
+### 6.1.7 sql_mode的合理设置
 
 ## 6.2 MySQL的数据目录
 
