@@ -1855,28 +1855,20 @@ Yum 是一个shell 前端软件包管理器。基于RPM包管理，能够从指�
 ## 8.3 安装mysql
 
 ```shell
-# 第一步：新建文件夹 /opt/mysql，并cd进去
-mkdir /opt/mysql
-# 第二步：下载tar包
-wget http://dev.mysql.com/get/mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar
-# 第三步：解压tar
-tar -xvf mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar
-# 第四步：centos7.6自带的类mysql数据库是mariadb，会跟mysql冲突，要先删除。
-# 4.1步，查询mariadb相关安装包
-rpm -qa | grep marisa
-# 4.2步，卸载
-rpm -e --nodeps mariadb-libs
-# 第五步：真正安装mysql,依次运行以下几条指令
-rpm -ivh mysql-community-common-5.7.26-1.el7.x86_64.rpm
-rpm -ivh mysql-community-libs-5.7.26-1.el7.x86_64.rpm
-rpm -ivh mysql-community-client-5.7.26-1.el7.x86_64.rpm
-rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm
+cd /usr/local/
+tar -xvf mysql-boost-5.7.24.tar.gz
 
-# 如果出现 error: Failed dependencies:
-# 解决办法：后面加上 --force --nodeps,如：
-# rpm -ivh mysql-community-client-5.7.40-1.el7.x86_64.rpm --force --nodeps
-... 后面看视频
+# 创建组
+groupadd mysql
+# 创建mysql并加入到mysql组中
+useradd -g mysql mysql 
 ```
+
+官网下载Linux博客：https://blog.csdn.net/qq_44089897/article/details/119872754
+
+
+
+彻底卸载MySQL：https://cloud.tencent.com/developer/article/1494560
 
 
 
@@ -1889,8 +1881,37 @@ rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm
 ## 9.1 Shel编程
 
 1. Linux运维工程师在进行服务器集群管理时，需要编写Shell程序来进行服务器管理
+
 2. 对于JavaEE和Python程序员来说，工作的需要，你的老大会要求你编写一些Shell脚本进行程序或者是服务器的维护，比如编写一个定时备份数据库的脚本。
+
 3. 对于大数据程序员来说，需要编写Shell程序来管理集群。
+
+   ```mysql
+   [mysql]
+   # 设置mysq1客户端默认字符集
+   default-character-set=utf8
+   
+   [mysqld]
+   # 设置端口
+   port=3306
+   socket=/tmp/mysql.sock
+   #设置mysq1根目录
+   basedir=/usr/local/mysql 
+   #设置数据库的数据存放目录
+   datadir=/usr/local/mysql/data
+   #设置最大连接数
+   max_connections=200
+   #设置mysq1服务端字符集，默认为1atinl
+   character-set-server=utf8
+   #设置默认存储引擎
+   default-storage-engine=INNODB
+   #设置密码永不过期
+   default_password_lifetime=0
+   #设置 server接受的数据包大小
+   max_allowed_packet=16M
+   ```
+
+   
 
 **Shell是什么**
 
@@ -2506,3 +2527,124 @@ total 20
 # 10 日志管理
 
 # 11 云平台技术
+
+
+
+# mysql5.7 linux安装
+
+###### 2.4.1 官网压缩包（推荐）
+
+```bash
+cd /opt/mysql                                        
+tar -xvzf mysql-5.7.44-linux-glibc2.12-x86_64.tar.gz -C /usr/local/ # 解压到指定位置
+cd /usr/local/
+mv mysql-8.0.34-linux-glibc2.28-aarch64 mysql # 重命名为mysql
+mkdir data # 新建 /user/local/mysql/data 目录，后续备用
+```
+
+###### 2.4.2 配置mysql用户权限
+
+```bash
+# 创建MYSQL用户和用户组
+groupadd mysql
+useradd -g mysql mysql
+# 修改MYSQL目录的归属用户
+cd /usr/local/mysql
+chown -R mysql:mysql ./
+```
+
+###### 2.4.3 MySQL的配置文件
+
+```bash
+cd /etc/
+vim /etc/my.cnf
+# 写入文件内容
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+socket=/var/lib/mysql/mysql.sock
+[mysqld]
+skip-name-resolve
+# 设置3308端⼝
+port = 3308
+socket=/var/lib/mysql/mysql.sock
+# 设置mysql的安装⽬录
+basedir=/usr/local/mysql
+# 设置mysql数据库的数据的存放⽬录
+datadir=/usr/local/mysql/data
+# 允许最⼤连接数
+max_connections=200
+# 服务端使⽤的字符集默认为8⽐特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使⽤的默认存储引擎
+default-storage-engine=INNODB
+lower_case_table_names=1
+max_allowed_packet=16M
+
+# 创建/var/lib/mysql目录
+mkdir /var/lib/mysql
+chmod 777 /var/lib/mysql
+```
+
+###### 2.4.4 开始安装mysql
+
+```bash
+yum install -y libaio # 安装必须软件包
+yum -y install numactl # 安装必须软件包
+cd /usr/local/mysql
+./bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+# 初始化运行mysql随机密码，后续需要修改
+A temporary password is generated for root@localhost: oY*(Yz6S63z7
+A temporary password is generated for root@localhost: Nd*eoc-xp6Do
+A temporary password is generated for root@localhost: vV(kh0.Hf;gC
+
+A temporary password is generated for root@localhost: %>pcgnwSk01/
+
+
+2024-04-07T11:30:34.799421Z 1 [Note] A temporary password is generated for root@localhost: fteIlU*zs5*7
+```
+
+###### 2.4.5 配置启动脚本
+
+```bash
+cp ./support-files/mysql.server /etc/init.d/mysqld
+# 修改/etc/init.d/mysqld
+vim /etc/init.d/mysqld
+basedir='/usr/local/mysql'
+datadir='/usr/local/mysql/data'
+# 配置开机自启动
+chmod +x /etc/init.d/mysqld
+chkconfig --add mysqld
+chkconfig --list mysqld # 检查服务状态
+# 启动mysqld
+service mysqld start
+```
+
+###### 2.4.6 配置全局环境变量
+
+```bash
+vim ~/.bash_profile # 编辑环境变量文件
+# 文件末尾处追加如下的信息
+export PATH=$PATH:/usr/local/mysql/bin
+source ~/.bash_profile # 使环境变量生效
+```
+
+###### 2.4.7 远程主机登录
+
+```bash
+mysql -u root -p 
+密码：P@ssw0rd123!
+# 进入mysql后修改密码
+mysql> alter user user() identified by "P@ssw0rd123!";
+mysql> flush privileges;
+# 配置root用户远程登录
+mysql> use mysql;
+mysql> update user set user.Host='%' where user.User='root';
+mysql> flush privileges;
+```
+
+systemctl start mysqld
+
+systemctl status mysqld
+
+systemctl stop mysqld
