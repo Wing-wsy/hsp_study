@@ -6,8 +6,15 @@
 #### chapter-04 - java8新特性-lambda   【 √ 】
 #### chapter-05 - JVM                 【 △ 】
 #### chapter-06 - 多线程               【 △ 】
-#### chapter-07 - mysql               【 △ 】
+#### chapter-07 - mysql & jdbc        【 △ 】
+#### chapter-08 - linux              【 △ 】
+#### chapter-09 - 正则表达式            【 √ 】
+#### chapter-10 - mycat2            【 × 】
+#### chapter-11 - sharding-jdbc       【 × 】
+#### chapter-12 - redis              【 △ 】
+#### chapter-13 - nginx              【 × 】
 #### chapter-14 - java 集合           【 √ 】
+#### chapter-15 - mybatis-plus        【 × 】
 #### chapter-19 - java IO 流         【 √ 】
 #### chapter-23 - java 反射          【 √ 】
 

@@ -8,7 +8,7 @@
 - Remote Repository 远程仓库
 
 #### 一、新建代码库
-test
+
 ```bash
 # 在当前目录新建一个Git代码库,"初始化的目录"相当于被git管理了，该目录下会生成一个.git隐藏文件
 $ git init
