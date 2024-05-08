@@ -15,6 +15,8 @@
 #### chapter-13 - nginx              【 × 】
 #### chapter-14 - java 集合           【 √ 】
 #### chapter-15 - mybatis-plus        【 × 】
+#### chapter-16 - rabbitmq           【 × 】
+#### chapter-17 - JUC并发编程           【 × 】
 #### chapter-19 - java IO 流         【 √ 】
 #### chapter-23 - java 反射          【 √ 】
 
