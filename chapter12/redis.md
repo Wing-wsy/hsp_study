@@ -699,11 +699,11 @@ void testHash() throws JsonProcessingException {
 
 # 2 案例实战
 
-![](../chapter07/picture2/img05.png)
+![](picture/img05.png)
 
 ## 2.1 短信验证码登录注册功能
 
-![](../chapter07/picture2/img06.png)
+![](picture/img06.png)
 
 - 该项目采用的是前后端分离开发模式
 - 手机或者app端发起请求，请求我们的Nginx服务器，Nginx基于七层模型走的事HTTP协议，可以实现基于Lua直接绕开Tomcat访问Redis，也可以作为静态资源服务器，轻松扛下上万并发， 负载均衡到下游Tomcat服务器，打散流量，我们都知道一台4核8G的Tomcat，在优化和处理简单业务的加持下，大不了就处理1000左右的并发， 经过Nginx的负载均衡分流后，利用集群支撑起整个项目，同时Nginx在部署了前端项目后，更是可以做到动静分离，进一步降低Tomcat服务的压力，这些功能都得靠Nginx起作用，所以Nginx是整个项目中重要的一环。
@@ -713,42 +713,42 @@ void testHash() throws JsonProcessingException {
 
 ### 2.1.1 基于Session实现登录
 
-![](../chapter07/picture2/img07.png)
+![](picture/img07.png)
 
 ***
 
 **登录验证功能**
 
-![](../chapter07/picture2/img08.png)
+![](picture/img08.png)
 
 ### 2.1.2 集群的session共享问题
 
-![](../chapter07/picture2/img09.png)
+![](picture/img09.png)
 
 ### 2.1.3 Redis实现共享Session
 
-![](../chapter07/picture2/img10.png)
+![](picture/img10.png)
 
 **登录拦截器优化**
 
-![](../chapter07/picture2/img11.png)
+![](picture/img11.png)
 
 ## 2.2 商家查询的缓存功能
 
 ### 2.2.1 添加redis缓存
 
-![](../chapter07/picture2/img12.png)
+![](picture/img12.png)
 
 ### 2.2.2 缓存更新策略
 
-![](../chapter07/picture2/img13.png)
+![](picture/img13.png)
 
 业务场景：
 
 - ﻿低一致性需求：使用内存淘汰机制。例如店铺类型的查询缓存
 - ﻿高一致性需求：主动更新，并以超时剔除作为兜底方案。例如店铺详情查询的缓存
 
-![](../chapter07/picture2/img14.png)
+![](picture/img14.png)
 
 ***
 
@@ -756,17 +756,17 @@ void testHash() throws JsonProcessingException {
 
 正常的线程处理：线程1要执行删除缓存，然后更新数据库；而线程而只是进行查询
 
-![](../chapter07/picture2/img15.png)
+![](picture/img15.png)
 
 
 
 不正常的线程处理（每个线程的执行，程序员无法控制，由CPU调度）：线程1执行删除缓存后，由于更新逻辑长，恰巧线程2进行了读取，这就导致线程不安全。
 
-![](../chapter07/picture2/img16.png)
+![](picture/img16.png)
 
 ***
 
-![](../chapter07/picture2/img17.png)
+![](picture/img17.png)
 
 为什么胜出？因为在线程1查询缓存和写入缓存之间（时间很短），还能塞入操作流程更长的更新数据库和删除缓存两个操作，概率很低。
 
@@ -806,11 +806,11 @@ void testHash() throws JsonProcessingException {
   - 优点：内存占用较少，没有多余key
   - 缺点：1）实现复杂；2）﻿存在误判可能
 
-<img src="../chapter07/picture2/img18.png" style="zoom:50%;" />
+<img src="picture/img18.png" style="zoom:50%;" />
 
 代码演示`缓存空对象`的方案：
 
-![](../chapter07/picture2/img19.png)
+![](picture/img19.png)
 
 ### 2.2.4 缓存雪崩
 
@@ -827,7 +827,7 @@ void testHash() throws JsonProcessingException {
 - ﻿给缓存业务添加降级限流策略
 - ﻿给业务添加多级缓存
 
-<img src="../chapter07/picture2/img20.png" style="zoom:50%;" />
+<img src="picture/img20.png" style="zoom:50%;" />
 
 ### 2.2.5 缓存击穿（热点key）
 
@@ -835,7 +835,7 @@ void testHash() throws JsonProcessingException {
 
 缓存击穿问题也叫热点Key问题，就是一个被高并发访问井且缓存重建业务较复杂的key突然失效了，无数的请求访问会在瞬问给数据库带来巨大的冲击。
 
-<img src="../chapter07/picture2/img21.png" style="zoom:50%;" />
+<img src="picture/img21.png" style="zoom:50%;" />
 
 #### 2.2.5.2 解决方案
 
@@ -844,21 +844,21 @@ void testHash() throws JsonProcessingException {
 - 互斥锁
 - 逻辑过期
 
-![](../chapter07/picture2/img22.png)
+![](picture/img22.png)
 
-![](../chapter07/picture2/img23.png)
+![](picture/img23.png)
 
 ##### 2.1.5.2.1 基于互斥锁方式解决缓存击穿问题
 
 需求：修改根据id查询商铺的业务，基于互斥锁方式来解决缓存击穿问题
 
-<img src="../chapter07/picture2/img24.png" style="zoom:50%;" />
+<img src="picture/img24.png" style="zoom:50%;" />
 
 ##### 2.1.5.2.2基于逻辑过期方式解决缓存击穿问题
 
 需求：修改根据id查询商铺的业务，基于逻辑过期方式来解决缓存击穿问题
 
-<img src="../chapter07/picture2/img25.png" style="zoom:50%;" />
+<img src="picture/img25.png" style="zoom:50%;" />
 
 ### 2.2.6 缓存工具封装
 
@@ -879,7 +879,7 @@ void testHash() throws JsonProcessingException {
 
 每个店铺都可以发布优惠券：
 
-<img src="../chapter07/picture2/img26.png" style="zoom:50%;" />
+<img src="picture/img26.png" style="zoom:50%;" />
 
 当用户抢购时，就会生成订单并保存到 t_voucher_order这张表中，而订单表如果使用数据库自增ID就存在一些问题：
 
@@ -890,11 +890,11 @@ void testHash() throws JsonProcessingException {
 
 全局ID生成器，是一种在分布式系统下用来生成全局唯一ID的工具，一般要满足下列特性：
 
-<img src="../chapter07/picture2/img27.png" style="zoom:50%;" />
+<img src="picture/img27.png" style="zoom:50%;" />
 
 为了增加ID的安全性，我们可以不直接使用Redis自增的数值，而是拼接一些其它信息：
 
-![](../chapter07/picture2/img28.png)
+![](picture/img28.png)
 
 ID的组成部分：
 
@@ -913,7 +913,7 @@ ID的组成部分：
 
 每个店铺都可以发布优惠券，分为平价券和特价券。平价券可以任意购买，而特价券需要秒杀抢购：
 
-![](../chapter07/picture2/img29.png)
+![](picture/img29.png)
 
 表关系如下：
 
@@ -929,63 +929,63 @@ ID的组成部分：
 - ﻿秒杀是否开始或结束，如果尚末开始或已经结束则无法下单
 - ﻿库存是否充足，不足则无法下单
 
-<img src="../chapter07/picture2/img30.png" style="zoom:50%;" />
+<img src="picture/img30.png" style="zoom:50%;" />
 
 ### 2.3.3 超卖问题
 
-<img src="../chapter07/picture2/img31.png" style="zoom:50%;" />
+<img src="picture/img31.png" style="zoom:50%;" />
 
 超卖问题是典型的多线程安全问题，针对这一问题的常见解决方案就是加锁：
 
-<img src="../chapter07/picture2/img32.png" style="zoom:50%;" />
+<img src="picture/img32.png" style="zoom:50%;" />
 
 **乐观锁**
 
 乐观锁的关键是判断之前查询得到的数据是否有被修改过，常见的方式有两种：
 
-![](../chapter07/picture2/img33.png)
+![](picture/img33.png)
 
-<img src="../chapter07/picture2/img34.png" style="zoom:50%;" />
+<img src="picture/img34.png" style="zoom:50%;" />
 
 ### 2.3.4 一人一单
 
 需求：修改秒杀业务，要求同一个优惠券，一个用户只能下一单
 
-<img src="../chapter07/picture2/img35.png" style="zoom:50%;" />
+<img src="picture/img35.png" style="zoom:50%;" />
 
 **一人一单的井发安全问题**
 
 通过加锁可以解决在单机情况下的一人一单安全问题，但是在集群模式下就不行了。
 
-<img src="../chapter07/picture2/img36.png" style="zoom:50%;" />
+<img src="picture/img36.png" style="zoom:50%;" />
 
-![](../chapter07/picture2/img37.png)
+![](picture/img37.png)
 
 ### 2.3.5 分布式锁
 
 分布式锁：满足分布式系统或集群模式 下多进程可见并且互斥的锁。
 
-<img src="../chapter07/picture2/img39.png" style="zoom:50%;" />
+<img src="picture/img39.png" style="zoom:50%;" />
 
-![](../chapter07/picture2/img38.png)
+![](picture/img38.png)
 
 **分布式锁的实现**
 
 分布式锁的核心是实现多进程之间互斥，而满足这一点的方式有很多，常见的有三种：
 
-![](../chapter07/picture2/img40.png)
+![](picture/img40.png)
 
 #### 2.3.5.1 基于Redis的分布式锁
 
-![](../chapter07/picture2/img41.png)
+![](picture/img41.png)
 
 业务处理时间超过了锁的有效期：依然会出现线程安全问题
 
-![](../chapter07/picture2/img42.png)
+![](picture/img42.png)
 
 为了解决上面问题，释放锁前先查看锁标识，是才删除。
 
-<img src="../chapter07/picture2/img43.png" style="zoom:50%;" />
+<img src="picture/img43.png" style="zoom:50%;" />
 
 **改进Redis的分布式锁**
 
@@ -1001,7 +1001,7 @@ ID的组成部分：
 
 当判断锁一致后，准备执行释放锁时出现了阻塞（可能执行垃圾回收导致了阻塞），那么阻塞期间超时释放了锁，而其它线程又创建了锁，这个时候阻塞恢复后就执行了释放锁（阻塞前已经判断过锁标识已经一致），此时锁不是自己的了。这时又导致线程问题。
 
-<img src="../chapter07/picture2/img44.png" style="zoom:50%;" />
+<img src="picture/img44.png" style="zoom:50%;" />
 
 解决方案：
 
@@ -1009,7 +1009,7 @@ ID的组成部分：
 
 Redis提供了Lua脚本功能，在一个脚本中编写多条Redis命令，确保多条命令执行时的原子性。Lua是一种编程语言，它的基本语法大家可以参考网站：https://www.runoob.com/lua/lua-tutorial.html
 
-<img src="../chapter07/picture2/img45.png" style="zoom:50%;" />
+<img src="picture/img45.png" style="zoom:50%;" />
 
 **再次改进Redis的分布式锁**
 
@@ -1017,13 +1017,13 @@ Redis提供了Lua脚本功能，在一个脚本中编写多条Redis命令，确�
 
 提示：RedisTemplate调用Lua脚本的API如下：
 
-<img src="../chapter07/picture2/img46.png" style="zoom:50%;" />
+<img src="picture/img46.png" style="zoom:50%;" />
 
 **基于Redis的分布式锁优化**
 
 上面基于setnx实现的分布式锁存在下面的问题：
 
-<img src="../chapter07/picture2/img47.png" style="zoom:50%;" />
+<img src="picture/img47.png" style="zoom:50%;" />
 
 怎么解决上面的问题呢？自己实现？或者看看有没有框架已经实现好了，我们拿来用。刚好Redisson就实现了该功能。
 
@@ -1035,7 +1035,7 @@ Redis提供了Lua脚本功能，在一个脚本中编写多条Redis命令，确�
 
 Redisson是一个在Redis的基础上实现的Java驻内存数据网格(In-Memory Data Grid)。它不仅提供了一系列的分布式的Java常用对象，还提供了许多分布式服务，其中就包含了各种分布式锁的实现。
 
-<img src="../chapter07/picture2/img48.png" style="zoom:50%;" />
+<img src="picture/img48.png" style="zoom:50%;" />
 
 官网地址：https://redisson.org
 
@@ -1045,29 +1045,29 @@ GitHub地址：https://github.com/redisson/redisson
 
 **Redisson入门**
 
-![](../chapter07/picture2/img49.png)
+![](picture/img49.png)
 
-<img src="../chapter07/picture2/img50.png" style="zoom:50%;" />
+<img src="picture/img50.png" style="zoom:50%;" />
 
 #### 2.3.5.3 Redisson 可重入锁原理
 
 **1.解决超时释放**
 
-![](../chapter07/picture2/img51.png)
+![](picture/img51.png)
 
 ***
 
 **获取锁的Lua脚本：Redisson查看源码里面也有Lua脚本，原理和下面的基本一致**
 
-![](../chapter07/picture2/img52.png)
+![](picture/img52.png)
 
 **释放锁的Lua脚本：Redisson查看源码里面也有Lua脚本，原理和下面的基本一致**
 
-![](../chapter07/picture2/img53.png)
+![](picture/img53.png)
 
 ***
 
-<img src="../chapter07/picture2/img47.png" style="zoom:50%;" />
+<img src="picture/img47.png" style="zoom:50%;" />
 
 自定义基于setnx实现的分布式锁存在上面的问题：
 
@@ -1103,7 +1103,7 @@ private long lockWatchdogTimeout = 30 * 1000; // 源码
 
 如果传入了 `redisLock.tryLock(1L,60L,TimeUnit.SECONDS);`，第二个参数 60L，主动设置锁超时时间，那么`leaseTime != -1`，看源码就不会开启watchDog，那么就不会重置锁的时间。
 
-![](../chapter07/picture2/img54.png)
+![](picture/img54.png)
 
 **总结：**
 
@@ -1121,11 +1121,11 @@ Redisson分布式锁原理：
 
 现在是集群模式，当应用向主节点写入一个锁时，还没等主节点同步到其它节点就宕机了，这时会在从节点选出一个充当主节点，而应用向新的主节点获取锁时，发现获取失败了，因为旧的主节点还没有及时将数据同步到其它节点。
 
-![](../chapter07/picture2/img55.png)
+![](picture/img55.png)
 
 出现主从不一致了，那Redisson是如何解决的呢？
 
-![](../chapter07/picture2/img56.png)
+![](picture/img56.png)
 
 使用方法
 
@@ -1159,11 +1159,11 @@ redissonClient.getMultiLock()
 
 一个请求过来，都要从头到尾执行Tomcat中的全部流程，所以吞吐量低，为了提高并发能力，参考前台小姐接单，然后`异步`开启线程（后厨）来执行比较耗时的减库存、创建订单的操作。
 
-![](../chapter07/picture2/img57.png)
+![](picture/img57.png)
 
 ***
 
-![](../chapter07/picture2/img58.png)
+![](picture/img58.png)
 
 ***
 
@@ -1193,7 +1193,7 @@ Lua脚本看代码`seckill.lua`
 - ﻿生产者：发送消息到消息队列
 - ﻿消费者：从消息队列获取消息并处理消息
 
-![](../chapter07/picture2/img59.png)
+![](picture/img59.png)
 
 > 消息队列替换成阻塞队列不是一样的吗？
 >
@@ -1224,11 +1224,11 @@ Lua脚本看代码`seckill.lua`
 
 因此这里应该使用`BRPOP`或者`BLPOP`来实现阻塞效果。
 
-![](../chapter07/picture2/img60.png)
+![](picture/img60.png)
 
 开启两个窗口演示效果：
 
-![](../chapter07/picture2/img62.png)
+![](picture/img62.png)
 
 > 使用Redis的List来替代BlockingQueue阻塞队列有什么好处呢：
 >
@@ -1252,11 +1252,11 @@ pubsub（发布订阅）是Redis2.0版本引入的消息传递模型。顾名思
 
 - `PSUBSCRIBE pattern[pattern]`：订阅与pattern格式匹配的所有频道
 
-![](../chapter07/picture2/img61.png)
+![](picture/img61.png)
 
 开启三个窗口演示效果：
 
-<img src="../chapter07/picture2/img63.png" style="zoom:50%;" />
+<img src="picture/img63.png" style="zoom:50%;" />
 
 > 基于PubSub的消息队列有哪些优缺点？
 >
@@ -1276,15 +1276,15 @@ pubsub（发布订阅）是Redis2.0版本引入的消息传递模型。顾名思
 
 Stream 是 Redis 5.0 引入的一种新`数据类型`（数据类型可以做持久化，上面有提到），可以实现一个功能非常完善的消息队列。
 
-![](../chapter07/picture2/img64.png)
+![](picture/img64.png)
 
-![](../chapter07/picture2/img65.png)
+![](picture/img65.png)
 
 读取演示：BLOCK 0 就是永久阻塞
 
-![](../chapter07/picture2/img66.png)
+![](picture/img66.png)
 
-![](../chapter07/picture2/img67.png)
+![](picture/img67.png)
 
 当执行到处理消息时，又来了5条消息，那么处理完重新执行循环再次获取队列消息时，获取的是最后一条消息，那么就漏读了4条消息。
 
@@ -1301,17 +1301,17 @@ Stream 是 Redis 5.0 引入的一种新`数据类型`（数据类型可以做持
 
 消费者组(Consumer Group)：将多个消费者划分到一个组中，监听同一个队列。具备下列特点：
 
-![](../chapter07/picture2/img68.png)
+![](picture/img68.png)
 
-![](../chapter07/picture2/img69.png)
+![](picture/img69.png)
 
-![](../chapter07/picture2/img70.png)
+![](picture/img70.png)
 
 ***
 
 消费者监听消息的基本思路：伪代码
 
-![](../chapter07/picture2/img71.png)
+![](picture/img71.png)
 
 >STREAM类型消息队列的XREADGROUP命令特点：
 >
@@ -1323,7 +1323,7 @@ Stream 是 Redis 5.0 引入的一种新`数据类型`（数据类型可以做持
 
 #### 2.3.7.5 Redis消息队列比较
 
-![](../chapter07/picture2/img72.png)
+![](picture/img72.png)
 
 推荐使用Stream，但是Stream只支持消费者确认机制，不支持生产者确认机制，生产消息时失败丢失又怎么办呢？如果公司业务强大，那么更推荐专业的消息队列中间件，RabbitMQ、RockMQ等。
 
@@ -1356,49 +1356,31 @@ Stream 是 Redis 5.0 引入的一种新`数据类型`（数据类型可以做持
 - ﻿tb_blog：探店笔记表，包含笔记中的标题、文字、图片等
 - ﻿tb_blog_comments：其他用户对探店笔记的评价
 
+看代码实现
 
+***
 
+### 2.4.2 点赞
 
+需求：
 
+- ﻿﻿同一个用户只能点赞一次，再次点击则取消点赞
+- ﻿如果当前用户已经点赞，则点赞按钮高亮显示（前端已实现，判断字段Blog类的isLike属性）
 
+实现步骤：
 
+1. 给Blog类中添加一个isLike字段，标示是否被当前用户点赞
+2. ﻿﻿修改点赞功能，利用Redis的set集合判断是否点赞过，未点赞过则点赞数＋1，已点赞过则点赞数-1
+3. 修改根据id查询Blog的业务，判断当前登录用户是否点赞过，赋值给isLike字段
+4. ﻿﻿修改分页查询Blog业务，判断当前登录用户是否点赞过，赋值给isLike字段
 
+***
 
+### 2.4.3 点赞排行榜
 
+在探店笔记的详情页面，应该把给该笔记点赞的人显示出来，比如最早点赞的TOP5，形成点赞排行榜：
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 2.4.2
-
-### 2.4.3  
-
-
-
-
+需求：按照点赞时间先后排序，返回Top5的用户
 
 
 
