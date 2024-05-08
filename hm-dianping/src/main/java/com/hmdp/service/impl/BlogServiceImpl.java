@@ -128,10 +128,14 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         }
         // 2.解析出其中的用户id
         List<Long> ids = top5.stream().map(Long::valueOf).collect(Collectors.toList());
+        // 按指定字符进行拼接
         String idStr = StrUtil.join(",", ids);
         // 3.根据用户id查询用户 WHERE id IN ( 5 , 1 ) ORDER BY FIELD(id, 5, 1)
+        // id IN (5,1) 但是最终查询结果不是按照这个排序，所以可以在最后拼接上 ORDER BY FIELD(id, 5, 1)
         List<UserDTO> userDTOS = userService.query()
-                .in("id", ids).last("ORDER BY FIELD(id," + idStr + ")").list()
+                .in("id", ids)
+                // last 往SQL语句最后拼接字符串
+                .last("ORDER BY FIELD(id," + idStr + ")").list()
                 .stream()
                 .map(user -> BeanUtil.copyProperties(user, UserDTO.class))
                 .collect(Collectors.toList());
