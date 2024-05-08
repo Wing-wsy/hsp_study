@@ -1,4 +1,4 @@
-# 1 Redis 基础篇
+# 1 基础篇
 
 >redis-cli -h 47.76.68.216 -p 6379 -a 123456abc
 
@@ -697,7 +697,7 @@ void testHash() throws JsonProcessingException {
 
 ***
 
-# 2 案例实战
+# 2 实战篇
 
 ![](picture/img05.png)
 
