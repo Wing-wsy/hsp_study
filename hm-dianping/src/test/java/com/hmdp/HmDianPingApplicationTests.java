@@ -1,5 +1,6 @@
 package com.hmdp;
 
+import com.hmdp.dto.Result;
 import com.hmdp.entity.Shop;
 import com.hmdp.service.IShopService;
 import com.hmdp.utils.CacheClient;
@@ -90,6 +91,43 @@ class HmDianPingApplicationTests {
             }
             stringRedisTemplate.opsForGeo().add(key, locations);
         }
+    }
+
+    @Test
+    void testHyperLogLog() {
+        String[] values = new String[1000];
+        int j = 0;
+        for (int i = 0; i < 1000000; i++) {
+            j = i % 1000;
+            values[j] = "user_" + i;
+            if(j == 999){
+                // 发送到Redis
+                stringRedisTemplate.opsForHyperLogLog().add("hl2", values);
+            }
+        }
+        // 统计数量
+        Long count = stringRedisTemplate.opsForHyperLogLog().size("hl2");
+        System.out.println("count = " + count);
+    }
+
+    @Test
+    void test() {
+//        Long num = 15L;
+//        // 6.循环遍历
+//        int count = 0;
+//        while (true) {
+//            // 6.1.让这个数字与1做与运算，得到数字的最后一个bit位  // 判断这个bit位是否为0
+//            if ((num & 1) == 0) {
+//                // 如果为0，说明未签到，结束
+//                break;
+//            }else {
+//                // 如果不为0，说明已签到，计数器+1
+//                count++;
+//            }
+//            // 把数字右移一位，抛弃最后一个bit位，继续下一个bit位
+//            num >>>= 1;
+//        }
+//        System.out.println(count);
     }
 
 }

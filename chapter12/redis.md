@@ -1572,6 +1572,196 @@ x,y是当前用户手机开启定位后的坐标，这里前段写死。
 
 ### 2.7.3 签到统计
 
+![](picture/img91.png)
+
+![](picture/img92.png)
+
+关键代码：
+
+```java
+ // 6.循环遍历
+ int count = 0;
+ while (true) {
+     // 6.1.让这个数字与1做与运算，得到数字的最后一个bit位  // 判断这个bit位是否为0
+     if ((num & 1) == 0) {
+         // 如果为0，说明未签到，结束
+         break;
+     }else {
+         // 如果不为0，说明已签到，计数器+1
+         count++;
+     }
+     // 把数字右移一位，抛弃最后一个bit位，继续下一个bit位
+     num >>>= 1;
+ }
+```
+
+***
+
+## 2.8 UV统计
+
+首先我们搞懂两个概念：
+
+- ﻿**uv**：全称**U**nique **V**isitor，也叫独立访客量，是指通过 互联网访问、浏览这个网页的自然人。1天内同一个用户多次访问该网站，只记录1次。
+- ﻿**PV**：全称**P**age **V**iew，也叫页面访问量或点击量，用户每访问网站的一个页面，记录1次PV，用户多次打开页面，则记录多次PV。往往用来衡量网站的流量。
+
+uv统计在服务端做会比较麻烦，因为要判断该用户是否已经统计过了，需要将统计过的用户信息保存。但是如果每个访问的用户都保存到Redis中，数据量会非常恐怖。
+
+***
+
+### 2.8.1 HyperLogLog用法
+
+![](picture/img93.png)
+
+```sh
+6379> PFADD hl1 e1 e2 e3 e4 e5
+6379> PFCOUNT hl1
+(integer) 5
+6379> PFADD hl1 e1 e2 e3 e4 e5
+6379> PFCOUNT hl1
+(integer) 5
+ # 说明加入重复元素，只统计一次
+```
+
+> 所以HyperLogLog天生适合用来做唯一统计。
+
+***
+
+### 2.8.2 实现UV统计
+
+![](picture/img94.png)
+
+查看redis内存命令：
+
+```sh
+6379> info memory 
+# used_memory:1476080
+```
+
+```java
+@Test
+void testHyperLogLog() {
+    String[] values = new String[1000];
+    int j = 0;
+    for (int i = 0; i < 1000000; i++) {
+        j = i % 1000;
+        values[j] = "user_" + i;
+        if(j == 999){
+            // 发送到Redis
+            stringRedisTemplate.opsForHyperLogLog().add("hl2", values);
+        }
+    }
+    // 统计数量
+    Long count = stringRedisTemplate.opsForHyperLogLog().size("hl2");
+    System.out.println("count = " + count);
+}
+```
+
+> 真实数据：1000000
+>
+> 统计数据：997593
+>
+> 997593 / 1000000 = 0.997593
+
+***
+
+# 3 高级篇
+
+## 3.1 分布式缓存
+
+**单点Redis存在的问题：**
+
+**数据丟失问题**
+
+Redis是内存存储，服务重启可能会丢失数据
+
+**并发能力问题**
+
+单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景
+
+**故障恢复问题**
+
+如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段
+
+**存储能力问题**
+
+Redis基于内存，单节点能存储的数据量难以满足海量数据需求
+
+![](picture/img95.png)
+
+***
+
+### 3.1.1 Redis持久化
+
+**RDB**
+
+RDB全称Redis Database Backup file (Redis数据备份文件），也被叫做Redis数据快照。简单来说就是把内存中的所有数据都记录到磁盘中。当Redis实例故障重启后，从磁盘读取快照文件，恢复数据。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 3.1.2 Redis主从
+
+### 3.1.3 Redis哨兵
+
+### 3.1.4 Redis分片集群
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
