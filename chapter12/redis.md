@@ -1692,45 +1692,345 @@ Redis基于内存，单节点能存储的数据量难以满足海量数据需求
 
 ### 3.1.1 Redis持久化
 
-**RDB**
+**第一种：RDB 持久化**
 
 RDB全称Redis Database Backup file (Redis数据备份文件），也被叫做Redis数据快照。简单来说就是把内存中的所有数据都记录到磁盘中。当Redis实例故障重启后，从磁盘读取快照文件，恢复数据。
 
+![](picture/img96.png)
 
+redis默认就有持久化功能，但是上面RDB默认持久化是关机时执行，但是如果项目运行了很久，那么关机才持久化这样不好，万一中途宕机数据就丢失了。所以可以隔一段时间执行备份，看下面。
 
+![](picture/img97.png)
 
+***
 
+![](picture/img98.png)
 
+***
 
+**总结**
 
+**RDB方式bgsave的基本流程？**
 
+- ﻿fork主进程得到一个子进程，共享内存空间
+- ﻿子进程读取内存数据并写入新的RDB文件
+- ﻿用新RDB文件替换旧的RDB文件。
 
+**RDB会在什么时候执行？save 60 1000代表什么含义？**
 
+- ﻿默认是服务停止时。
+- ﻿代表60秒内至少执行1000次修改则触发RDB
 
+**RDB的缺点？**
 
+- ﻿RDB执行间隔时间长，两次RDB之间写入数据有丢失的风险
+- ﻿﻿fork子进程、压缩、写出RDB文件都比较耗时
 
+***
 
+**第二种：AOF 持久化**
 
+AOF全称为Append Only File（追加文件）。Redis处理的每一个写命令都会记录在AOF文件，可以看做是命令日志文件。
 
+![](picture/img99.png)
 
+![](picture/img100.png)
 
+![](picture/img101.png)
 
+***
 
+**总结**
 
+![](picture/img102.png)
 
-
+***
 
 ### 3.1.2 Redis主从
 
+#### 3.1.2.1 搭建主从架构
+
+单节点Redis的并发能力是有上限的，要进一步提高Redis的并发能力，就需要搭建主从集群，实现读写分离。
+
+![](picture/img103.png)
+
+***
+
+**总结**
+
+假设有A、B两个Redis 实例，如何让B作为A的slave节点？
+
+- 在B节点执行命令：slaveof A的IP A的port
+
+***
+
+#### 3.1.2.2 数据同步原理
+
+主从第一次同步是`全量同步`： 
+
+![](picture/img104.png)
+
+![](picture/img105.png)
+
+对比上面原理图的部分改动：
+
+![](picture/img106.png)
+
+***
+
+**总结**
+
+简述全量同步的流程？
+
+- ﻿﻿slave节点请求增量同步
+- ﻿master节点判断replid，发现不一致，拒绝增量同步
+- ﻿master将完整内存数据生成RDB，发送RDB到slave
+- ﻿slave清空本地数据，加载master的RDB
+- ﻿master将RDB期间的命令记录在replbaklog，并持续将log中的命令发送给slave
+- ﻿slave执行接收到的命令，保持与master之间的同步
+
+> 全量同步：第一次来同步全部数据。
+>
+> 增量同步：后续主节点接收到写命令，通过偏移量offset来增量同步后面的数据。
+
+***
+
+主从第一次同步是`全量同步`，但如果slave重启后同步，则执行`增量同步`
+
+![](picture/img107.png)
+
+***
+
+可以从以下几个方面来优化Redis主从就集群：
+
+- ﻿在master中配置repl-diskless-sync yes启用无磁盘复制，避免全量同步时的磁盘IO
+- ﻿﻿Redis单节点上的内存占用不要太大，减少RDB导致的过多磁盘IO
+- ﻿适当提高repl_baklog的大小，发现slave宕机时尽快实现故障恢复，尽可能避免全量同步
+- 限制一个master上的slave节点数量，如果实在是太多slave（每个slave会找master同步数据，master压力太大），则可以采用主-从-从链式结构，减少master压力。
+
+![](picture/img108.png)
+
+***
+
+**总结**
+
+**简述全量同步和增量同步区别？**
+
+- ﻿全量同步：master将完整内存数据生成RDB，发送RDB到slave。后续命令则记录在replbaklog，逐个发送给slave。
+- ﻿增量同步：slave提交自己的offset到master, master获取 replbaklog中从offset之后的命令给slave
+
+**什么时候执行全量同步？**
+
+- ﻿﻿slave节点第一次连接master节点时
+- ﻿slave节点断开时间太久，repl_baklog中的offset己经被覆盖时
+
+**什么时候执行增量同步？**
+
+• slave节点断开又恢复，并且在repl_baklog中能找到offset时
+
+***
+
 ### 3.1.3 Redis哨兵
+
+> 思考：slave节点宕机恢复后可以找master节点同步数据，那master节点宕机怎么办？
+
+#### 3.1.3.1 哨兵的作用和原理
+
+Redis提供了哨兵 (Sentinel）机制来实现主从集群的自动故障恢复。哨兵的结构和作用如下：
+
+- `监控`：Sentinel 会不断检查您的master和slave是否按预期工作
+
+- `自动故障恢复`：如果master故障，Sentinel会将一个slave提升为master。当故障实例恢复后也以新的master为主
+
+- `通知`：Sentinel充当Redis客户端的服务发现来源，当集群发生故障转移时，会将最新信息推送给Redis的客户端
+
+<img src="picture/img109.png" style="zoom:50%;" />
+
+***
+
+**服务状态监控**
+
+sentinel基于心跳机制监测服务状态，每隔1秒向集群的每个实例发送ping命令：
+
+- `主观下线`：如果某sentinel书点发现某实例末在规定时间响应，则认为该实例主观下线。
+
+- `客观下线`：若超过指定数量（quorum）的sentinel都认为该实例主观下线，则该实例客观下线。quorum值最好超过Sentine l实例数量的一半。
+
+<img src="picture/img110.png" style="zoom:50%;" />
+
+***
+
+**选举新的master**
+
+一旦发现master故障，sentinel需要在salve中选择一个作为新的master，选择依据是这样的：
+
+- ﻿首先会判断slave节点与master节点断开时间长短，如果超过指定值 (down-after-miliseconds *10）则会排除该slave节点
+- ﻿然后判断slave节点的slave-priority值，越小优先级越高，如果是0则永不参与选举
+- ﻿**如果slave-prority一样，则判断slave节点的offset值，越大说明数据越新，优先级越高**
+- ﻿最后是判断slave节点的运行id大小，越小优先级越高(随便挑的一个，无所谓)。
+
+***
+
+**如何实现故障转移**
+
+当选中了其中一个slave为新的master后（例如slave1），故障的转移的步骤如下：
+
+- sentinel给备选的slave1节点发送 slaveof no one命令，让该节点成为master
+
+- sentinel给所有其它slave发送slaveof 192.168.150.101 7002 命令，让这些slave成为新master的从节点，开始从新的master上同步数据。
+
+- 最后，sentinel将故障节点标记为slave，当故障节点恢复后会自动成为新的master的slave节点
+
+<img src="picture/img111.png" style="zoom:50%;" />
+
+***
+
+**总结**
+
+sentinel的三个作用是什么？
+
+- ﻿监控
+- ﻿故障转移
+- ﻿通知
+
+sentine l如何判断一个redis实例是否健康？
+
+- ﻿每隔1秒发送一次ping命令，如果超过一定时间没有相向则认为是主观下线
+- ﻿如果大多数sentinel都认为实例主观下线，则判定服务 下线
+
+故障转移步骤有哪些？
+
+- ﻿﻿首先选定一个slave作为新的master，执行slaveof no ones
+- ﻿然后让所有节点都执行slaveof 新master
+- ﻿修改故障节点配置，添加slaveof 新master
+
+***
+
+#### 3.1.3.2 搭建哨兵集群
+
+![](picture/img112.png)
+
+其它步骤略。懂原理即可。
+
+***
+
+#### 3.1.3.3 RedisTemplate的哨兵模式
+
+在Sentinel集群监管下的Redis主从集群，其节点会因为自动故障转移而发生变化，Redis的客户端必须感知这种变化，及时更新连接信息。Spring的RedisTemplate底层利用lettuce实现了节点的感知和自动切换。
+
+![](picture/img113.png)
+
+注意：这里指定的不是redis集群的地址，而是哨兵sentinel的地址，系统不用管redis在哪（redis服务可能会挂），只认sentine就行，它会告诉我们redis的地址。
+
+![](picture/img114.png)
+
+***
 
 ### 3.1.4 Redis分片集群
 
+#### 3.1.4.1 搭建分片集群
 
+**分片集群结构**
 
+主从和哨兵可以解决高可用、高井发读的问题。但是依然有两个问题没有解决：
 
+- ﻿海量数据存储问题
+- ﻿高并发写的问题
 
+使用分片集群可以解决上述问题，分片集群特征：
 
+- 集群中有多个master，每个master保存不同数据
+
+- 每个master都可以有多个slave节点
+- ﻿master之间通过ping监测彼此健康状态
+- 客户端请求可以访问集群任意节点，最终都会被转发到正确节点（不用哨兵了）
+
+<img src="picture/img115.png" style="zoom:50%;" />
+
+![](picture/img116.png)
+
+![](picture/img117.png)
+
+其它步骤略。懂原理即可。
+
+***
+
+#### 3.1.4.2 散列插槽
+
+![](picture/img118.png)
+
+<img src="picture/img119.png" style="zoom:50%;" />
+
+***
+
+**总结**
+
+Redis如何判断某个key应该在哪个实例？
+
+- ﻿将16384个插槽分配到不同的实例
+- ﻿根据key的有效部分计算哈希值，对16384取余
+- ﻿余数作为插槽，寻找插槽所在实例即可
+
+如何将同一类数据固定的保存在同一个Redis实例？
+
+- 这一类数据使用相同的有效部分，例如key都以{typeld}为前缀（比如都是手机类型的数据保存到同一个实例，这样查询的时候避免重定向到其它实例查，有性能损耗）
+
+<img src="picture/img120.png" style="zoom:50%;" />
+
+***
+
+#### 3.1.4.3 集群伸缩
+
+**添加一个节点到集群**
+
+<img src="picture/img121.png" style="zoom:50%;" />
+
+<img src="picture/img122.png" style="zoom:50%;" />
+
+加入到集群：
+
+![](picture/img123.png)
+
+分配对应插槽：
+
+```sh
+[linux下]redis-cli --cluster reshard 192.168.150.101:7001
+```
+
+回车后按照提示进行后续操作即可。
+
+***
+
+#### 3.1.4.4 故障转移
+
+分片集群虽然没有哨兵，但是也具备故障转移的功能。
+
+![](picture/img124.png)
+
+这是被动的选出新的主节点。
+
+***
+
+如果我们想让新的服务器充当主节点，手动设置，怎么做呢？
+
+![](picture/img125.png)
+
+***
+
+案例：在7002这个slave节点执行手动故障转移，重新夺回master地位
+
+步骤如下：
+
+1. ﻿﻿利用redis-cli连接7002这个节点
+2. ﻿﻿执行`cluster failover`命令
+
+***
+
+#### 3.1.4.5 RedisTemplate访问分片集群
+
+前面学的都是指令，最终还是需要java代码去实现。
+
+![](picture/img126.png)
 
 
 
