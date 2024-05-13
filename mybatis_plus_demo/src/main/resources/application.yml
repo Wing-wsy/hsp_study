@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: jdbc:mysql://47.76.68.216:3306/mybatis_plus?useSSL=false&serverTimezone=UTC
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: P@ssw0rd123!
+        slave_1:
+          url: jdbc:mysql://47.76.68.216:3306/mybatis_plus_1?useSSL=false&serverTimezone=UTC
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: P@ssw0rd123!
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # ???????????
+  type-aliases-package: com.atguigu.mybatisplus.pojo
+  # ????????
+  type-enums-package: com.atguigu.mybatisplus.enums

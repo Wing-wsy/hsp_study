@@ -51,6 +51,7 @@ public class BlogController {
                 .eq("user_id", user.getId()).page(new Page<>(current, SystemConstants.MAX_PAGE_SIZE));
         // 获取当前页数据
         List<Blog> records = page.getRecords();
+        // 这里还可以获取总记录数、总页数等等
         return Result.ok(records);
     }
 
