@@ -14,7 +14,7 @@
 #### chapter-12 - redis              【 √ 】
 #### chapter-13 - nginx              【 × 】
 #### chapter-14 - java 集合           【 √ 】
-#### chapter-15 - mybatis-plus        【 × 】
+#### chapter-15 - mybatis-plus        【 √ 】
 #### chapter-16 - rabbitmq           【 × 】
 #### chapter-17 - JUC并发编程           【 × 】
 #### chapter-18 - Java设计模式           【 × 】
