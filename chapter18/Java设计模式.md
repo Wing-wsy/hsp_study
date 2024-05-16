@@ -1,5 +1,13 @@
 # 1 设计模式概述
 
+策略模式
+
+- 定义了一个算法族，分别封装起来，使得它们之间可以互相变换。策略让算法的变化独立于使用它的客户。
+
+
+
+***
+
 ## 1.1 软件设计模式的概念
 
 软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断重复发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。
@@ -1948,7 +1956,6 @@ public class Director {
         return mBuilder.createBike();
     }
 }
-
 //测试类
 public class Client {
     public static void main(String[] args) {
@@ -2000,16 +2007,12 @@ public abstract class Builder {
 
 造者模式所创建的产品一般具有较多的共同点，其组成部分相似，如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制。
 
-
-
 ### 4.4.5 使用场景
 
 建造者（Builder）模式创建的是复杂对象，其产品的各个部分经常面临着剧烈的变化，但将它们组合在一起的算法却相对稳定，所以它通常在以下场合使用。
 
 - 创建的对象较复杂，由多个部件构成，各部件面临着复杂的变化，但构件间的建造顺序是稳定的（自行车的车座，车架材质可能变，但是组装顺序方式都是一样的）。
 - 创建复杂对象的算法独立于该对象的组成部分以及它们的装配方式，即产品的构建过程和最终的表示是独立的。
-
-
 
 ### 4.4.6 模式扩展
 
@@ -2023,55 +2026,13 @@ public class Phone {
     private String screen;
     private String memory;
     private String mainboard;
-
     public Phone(String cpu, String screen, String memory, String mainboard) {
         this.cpu = cpu;
         this.screen = screen;
         this.memory = memory;
         this.mainboard = mainboard;
     }
-
-    public String getCpu() {
-        return cpu;
-    }
-
-    public void setCpu(String cpu) {
-        this.cpu = cpu;
-    }
-
-    public String getScreen() {
-        return screen;
-    }
-
-    public void setScreen(String screen) {
-        this.screen = screen;
-    }
-
-    public String getMemory() {
-        return memory;
-    }
-
-    public void setMemory(String memory) {
-        this.memory = memory;
-    }
-
-    public String getMainboard() {
-        return mainboard;
-    }
-
-    public void setMainboard(String mainboard) {
-        this.mainboard = mainboard;
-    }
-
-    @Override
-    public String toString() {
-        return "Phone{" +
-                "cpu='" + cpu + '\'' +
-                ", screen='" + screen + '\'' +
-                ", memory='" + memory + '\'' +
-                ", mainboard='" + mainboard + '\'' +
-                '}';
-    }
+   get/set/toString...
 }
 
 public class Client {
@@ -2089,27 +2050,23 @@ public class Client {
 
 ```java
 public class Phone {
-
     private String cpu;
     private String screen;
     private String memory;
     private String mainboard;
-
+    // 私有构造方法
     private Phone(Builder builder) {
         cpu = builder.cpu;
         screen = builder.screen;
         memory = builder.memory;
         mainboard = builder.mainboard;
     }
-
     public static final class Builder {
         private String cpu;
         private String screen;
         private String memory;
         private String mainboard;
-
         public Builder() {}
-
         public Builder cpu(String val) {
             cpu = val;
             return this;
@@ -2129,17 +2086,7 @@ public class Phone {
         public Phone build() {
             return new Phone(this);}
     }
-    @Override
-    public String toString() {
-        return "Phone{" +
-                "cpu='" + cpu + '\'' +
-                ", screen='" + screen + '\'' +
-                ", memory='" + memory + '\'' +
-                ", mainboard='" + mainboard + '\'' +
-                '}';
-    }
 }
-
 public class Client {
     public static void main(String[] args) {
         Phone phone = new Phone.Builder()
@@ -2154,8 +2101,6 @@ public class Client {
 ```
 
 重构后的代码在使用起来更方便，某种程度上也可以提高开发效率。从软件设计上，对程序员的要求比较高。
-
-
 
 ## 4.5 创建者模式对比
 
@@ -2172,6 +2117,1526 @@ public class Client {
 建造者模式则是要求按照指定的蓝图建造产品，它的主要目的是通过组装零配件而产生一个新产品。
 
 如果将抽象工厂模式看成汽车配件生产工厂，生产一个产品族的产品，那么建造者模式就是一个汽车组装工厂，通过对部件的组装可以返回一辆完整的汽车。
+
+# 5 结构型模式
+
+结构型模式描述如何将类或对象按某种布局组成更大的结构。它分为`类结构型模式`和`对象结构型模式`，前者采用`继承`机制来组织接口和类，后者釆用`组合或聚合`来组合对象。
+
+由于组合关系或聚合关系比继承关系耦合度低，满足“合成复用原则”，所以对象结构型模式比类结构型模式具有更大的灵活性。
+
+结构型模式分为以下 7 种：
+
+* 代理模式
+* 适配器模式
+* 装饰者模式
+* 桥接模式
+* 外观模式
+* 组合模式
+* 享元模式
+
+## 5.1 代理模式
+
+### 5.1.1 概述
+
+由于某些原因需要给某对象提供一个代理以控制对该对象的访问。这时，访问对象不适合或者不能直接引用目标对象，代理对象作为访问对象和目标对象之间的中介。
+
+Java中的代理按照代理类生成时机不同又分为`静态代理`和`动态代理`。静态代理代理类在编译期就生成，而动态代理代理类则是在Java运行时动态生成。**动态代理又有JDK代理和CGLib代理两种。**
+
+### 5.1.2 结构
+
+代理（Proxy）模式分为三种角色：
+
+* 抽象主题（Subject）类： 通过接口或抽象类声明真实主题和代理对象实现的业务方法。
+* 真实主题（Real Subject）类： 实现了抽象主题中的具体业务，是代理对象所代表的真实对象，是最终要引用的对象。
+* 代理（Proxy）类 ： 提供了与真实主题相同的接口，其内部含有对真实主题的引用，它可以访问、控制或扩展真实主题的功能。
+
+### 5.1.3 静态代理
+
+我们通过案例来感受一下静态代理。
+
+【例】火车站卖票
+
+如果要买火车票的话，需要去火车站买票，坐车到火车站，排队等一系列的操作，显然比较麻烦。而火车站在多个地方都有代售点，我们去代售点买票就方便很多了。这个例子其实就是典型的代理模式，火车站是目标对象，代售点是代理对象。类图如下：
+
+<img src="img3\静态代理.png" style="zoom:80%;" />
+
+代码如下：
+
+```java
+//卖票接口
+public interface SellTickets {
+    void sell();
+}
+//火车站  火车站具有卖票功能，所以需要实现SellTickets接口
+public class TrainStation implements SellTickets {
+    public void sell() {
+        System.out.println("火车站卖票");
+    }
+}
+//代售点
+public class ProxyPoint implements SellTickets {
+    private TrainStation station = new TrainStation();
+    public void sell() {
+        System.out.println("代理点收取一些服务费用");
+        station.sell();
+    }
+}
+//测试类
+public class Client {
+    public static void main(String[] args) {
+        ProxyPoint pp = new ProxyPoint();
+        pp.sell();
+    }
+}
+```
+
+从上面代码中可以看出测试类直接访问的是ProxyPoint类对象，也就是说ProxyPoint作为访问对象和目标对象的中介。同时也对sell方法进行了增强（代理点收取一些服务费用）。
+
+### 5.1.4 JDK动态代理
+
+接下来我们使用动态代理实现上面案例，先说说JDK提供的动态代理。Java中提供了一个动态代理类Proxy，Proxy并不是我们上述所说的代理对象的类，而是提供了一个创建代理对象的静态方法（newProxyInstance方法）来获取代理对象。
+
+代码如下
+
+方式一：
+
+```java
+//卖票接口
+public interface SellTickets {
+    void sell();
+}
+//火车站  火车站具有卖票功能，所以需要实现SellTickets接口
+public class TrainStation implements SellTickets {
+    public void sell() {
+        System.out.println("火车站卖票");
+    }
+}
+//工厂类
+public class ProxyFactory1 implements InvocationHandler {
+    private Object factory ; //被代理对象的引用
+    public Object getFactory(){
+        return factory;
+    }
+    public void setFactory(Object factory){
+        this.factory = factory;
+    }
+    //反射执行方法
+    //1.Object ：jdk创建的代理类，无需赋值
+    //2.Method : 目标类当中的方法，jdk提供，不需要赋值
+    //3.Object[]：目标类当中的方法参数 ，jdk提供，不需要赋值
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("代售点收取一定的服务费用(jdk动态代理)");
+        method.invoke(factory, args);//执行目标类当中的方法
+        System.out.println("售后服务(jdk动态代理)");
+        return null;
+    }
+    public Object getProxyInstance() {
+        return Proxy.newProxyInstance(factory.getClass().getClassLoader(), factory.getClass().getInterfaces(), this);
+    }
+}
+//测试类
+public static void main(String[] args) {
+    //1,创建代理工厂对象
+    ProxyFactory1 proxy = new ProxyFactory1();
+    TrainStation station = new TrainStation();
+    proxy.setFactory(station);
+    //2,获取代理对象
+    SellTickets sellTickets = (SellTickets)proxy.getProxyInstance();
+    //3,调用代理方法
+    sellTickets.sell();
+}
+代售点收取一定的服务费用(jdk动态代理)
+火车站卖票
+售后服务(jdk动态代理)
+```
+
+方式二：
+
+```java
+//卖票接口
+public interface SellTickets {
+    void sell();
+}
+//火车站  火车站具有卖票功能，所以需要实现SellTickets接口
+public class TrainStation implements SellTickets {
+    public void sell() {
+        System.out.println("火车站卖票");
+    }
+}
+//工厂类
+public class ProxyFactory {
+
+    //声明目标对象
+    private TrainStation station = new TrainStation();
+
+    //获取代理对象的方法
+    public SellTickets getProxyObject() {
+        //返回代理对象
+        /*
+            ClassLoader loader : 类加载器，用于加载代理类。可以通过目标对象获取类加载器
+            Class<?>[] interfaces ： 代理类实现的接口的字节码对象
+            InvocationHandler h ： 代理对象的调用处理程序
+         */
+        SellTickets proxyObject = (SellTickets)Proxy.newProxyInstance(
+                station.getClass().getClassLoader(),
+                station.getClass().getInterfaces(),
+                new InvocationHandler() {
+
+                    /*
+                        Object proxy : 代理对象。和proxyObject对象是同一个对象，在invoke方法中基本不用
+                        Method method ： 对接口中的方法进行封装的method对象
+                        Object[] args ： 调用方法的实际参数
+
+                        返回值： 方法的返回值。
+                     */
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        //System.out.println("invoke方法执行了");
+                        System.out.println("代售点收取一定的服务费用(jdk动态代理)");
+                        //执行目标对象的方法
+                        Object obj = method.invoke(station, args);
+                        return obj;
+                    }
+                }
+        );
+        return proxyObject;
+    }
+}
+//测试类
+public static void main(String[] args) {
+    //获取代理对象
+    //1,创建代理工厂对象
+    ProxyFactory factory = new ProxyFactory();
+    //2,使用factory对象的方法获取代理对象
+    SellTickets proxyObject = factory.getProxyObject();
+    //3,调用卖调用的方法
+    proxyObject.sell();
+}
+代售点收取一定的服务费用(jdk动态代理)
+火车站卖票
+```
+
+<font color="red">使用了动态代理，我们思考下面问题：</font>
+
+* ProxyFactory是代理类吗？
+
+  ProxyFactory不是代理模式中所说的代理类，而代理类是程序在运行过程中动态的在内存中生成的类。
+
+```java
+public final class $Proxy0 extends Proxy implements SellTickets {
+    private static Method m3;
+    public $Proxy0(InvocationHandler invocationHandler) {
+        super(invocationHandler);
+    }
+    static {
+            m3 = Class.forName("com.itheima.proxy.dynamic.jdk.SellTickets").getMethod("sell", new Class[0]);
+    }
+    public final void sell() {
+        this.h.invoke(this, m3, null);
+    }
+}
+```
+
+从上面的类中，我们可以看到以下几个信息：
+
+* 代理类（$Proxy0）实现了SellTickets。这也就印证了我们之前说的真实类和代理类实现同样的接口。
+* 代理类（$Proxy0）将我们提供了的匿名内部类对象传递给了父类。
+
+* 动态代理的执行流程是什么样？
+
+
+
+执行流程如下：
+
+    1. 在测试类中通过代理对象调用sell()方法
+    2. 根据多态的特性，执行的是代理类（$Proxy0）中的sell()方法
+    3. 代理类（$Proxy0）中的sell()方法中又调用了InvocationHandler接口的子实现类对象的invoke方法
+    4. invoke方法通过反射执行了真实对象所属类(TrainStation)中的sell()方法
+
+### 5.1.5 CGLIB动态代理
+
+同样是上面的案例，我们再次使用CGLIB代理实现。
+
+如果没有定义SellTickets接口，只定义了TrainStation(火车站类)。很显然JDK代理是无法使用了，因为<font color="red">JDK动态代理要求必须定义接口</font>，对接口进行代理。
+
+CGLIB是一个功能强大，高性能的代码生成包。它为没有实现接口的类提供代理，为JDK的动态代理提供了很好的补充。
+
+CGLIB是第三方提供的包，所以需要引入jar包的坐标：
+
+```xml
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+    <version>2.2.2</version>
+</dependency>
+```
+
+代码如下：
+
+```java
+//火车站
+public class TrainStation {
+    public void sell() {
+        System.out.println("火车站卖票");
+    }
+}
+//代理对象工厂，用来获取代理对象
+public class ProxyFactory1 implements MethodInterceptor {
+    private Object factory ; //被代理对象的引用
+    public Object getFactory(){
+        return factory;
+    }
+    public void setFactory(Object factory){
+        this.factory = factory;
+    }
+    public TrainStation getProxyObject() {
+        //创建Enhancer对象，类似于JDK代理中的Proxy类
+        Enhancer enhancer = new Enhancer();
+        //设置父类的字节码对象。指定父类
+        enhancer.setSuperclass(TrainStation.class);
+        //设置回调函数
+        enhancer.setCallback(this);
+        //创建代理对象
+        TrainStation proxyObject = (TrainStation) enhancer.create();
+        return proxyObject;
+    }
+    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+        System.out.println("代售点收取一定的服务费用(CGLib代理)");
+        //要调用目标对象的方法
+        Object obj = method.invoke(factory, objects);
+        System.out.println("1");
+        return obj;
+    }
+}
+//测试类
+public static void main(String[] args) {
+    //创建代理工厂对象
+    ProxyFactory1 factory = new ProxyFactory1();
+    TrainStation trainStation = new TrainStation();
+    factory.setFactory(trainStation);
+    //获取代理对象
+    TrainStation proxyObject = factory.getProxyObject();
+    //调用代理对象中的sell方法卖票
+    proxyObject.sell();
+}
+```
+
+### 5.1.6 三种代理的对比
+
+* jdk代理和CGLIB代理
+
+  使用CGLib实现动态代理，CGLib底层采用ASM字节码生成框架，使用字节码技术生成代理类，在JDK1.6之前比使用Java反射效率要高。唯一需要注意的是，**<font color="red">CGLib不能对声明为final的类或者方法进行代理，因为CGLib原理是动态生成目标类的子类。</font>**
+
+  在JDK1.6、JDK1.7、JDK1.8逐步对JDK动态代理优化之后，在调用次数较少的情况下，JDK代理效率高于CGLib代理效率，只有当进行大量调用的时候，JDK1.6和JDK1.7比CGLib代理效率低一点，但是到JDK1.8的时候，JDK代理效率高于CGLib代理。所以**<font color="red">如果有接口使用JDK动态代理，如果没有接口使用CGLIB代理</font>。**
+
+* 动态代理和静态代理
+
+  动态代理与静态代理相比较，最大的好处是接口中声明的所有方法都被转移到调用处理器一个集中的方法中处理（InvocationHandler.invoke）。这样，在接口方法数量比较多的时候，我们可以进行灵活处理，而不需要像静态代理那样每一个方法进行中转。
+
+  如果接口增加一个方法，静态代理模式除了所有实现类需要实现这个方法外，所有代理类也需要实现此方法。增加了代码维护的复杂度。而动态代理不会出现该问题
+
+### 5.1.7 优缺点
+
+**优点：**
+
+- 代理模式在客户端与目标对象之间起到一个中介作用和保护目标对象的作用；
+- 代理对象可以扩展目标对象的功能（增强）；
+- 代理模式能将客户端与目标对象分离，在一定程度上降低了系统的耦合度；
+
+**缺点：**
+
+* 增加了系统的复杂度；
+
+### 5.1.8 使用场景 
+
+* 防火墙（Firewall）代理
+
+  当你将浏览器配置成使用代理功能时，防火墙就将你的浏览器的请求转给互联网；当互联网返回响应时，代理服务器再把它转给你的浏览器。
+
+* 保护（Protect or Access）代理
+
+  控制对一个对象的访问，如果需要，可以给不同的用户提供不同级别的使用权限。
+
+## 5.2 适配器模式
+
+### 5.2.1 概述
+
+如果去欧洲国家去旅游的话，他们的插座如下图最左边，是欧洲标准。而我们使用的插头如下图最右边的。因此我们的笔记本电脑，手机在当地不能直接充电。所以就需要一个插座转换器，转换器第1面插入当地的插座，第2面供我们充电，这样使得我们的插头在当地能使用。生活中这样的例子很多，手机充电器（将220v转换为5v的电压），读卡器等，其实就是使用到了适配器模式。
+
+![](img3\转接头.png)
+
+**定义：**
+
+​	将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。
+
+适配器模式分为`类适配器模式`和`对象适配器模式`，前者类之间的耦合度比后者高(前者继承，后者聚合/组合)，且要求程序员了解现有组件库中的相关组件的内部结构，所以应用相对较少些。
+
+### 5.2.2 结构
+
+适配器模式（Adapter）包含以下主要角色：
+
+* 目标（Target）接口：当前系统业务所期待的接口，它可以是抽象类或接口。
+* 适配者（Adaptee）类【欧洲插座】：它是被访问和适配的现存组件库中的组件接口。
+* 适配器（Adapter）类：它是一个转换器，通过继承或引用适配者的对象，把适配者接口转换成目标接口，让客户按目标接口的格式访问适配者。
+
+### 5.2.3 类适配器模式
+
+实现方式：定义一个适配器类来实现当前系统的业务接口，同时又继承现有组件库中已经存在的组件。
+
+【例】读卡器
+
+现有一台电脑只能读取SD卡，而要读取TF卡中的内容的话就需要使用到适配器模式。创建一个读卡器，将TF卡中的内容读取出来。
+
+类图如下：
+
+<img src="img3/适配器模式.png" style="zoom:80%;" />
+
+代码如下：
+
+```java
+//SD卡的接口
+public interface SDCard {
+    //读取SD卡方法
+    String readSD();
+    //写入SD卡功能
+    void writeSD(String msg);
+}
+//SD卡实现类
+public class SDCardImpl implements SDCard {
+    public String readSD() {
+        return "TFCard read msg ： hello word TFcard";
+    }
+    public void writeSD(String msg) {
+        System.out.println("sd card write msg : " + msg);
+    }
+}
+//TF卡接口
+public interface TFCard {
+    //读取TF卡方法
+    String readTF();
+    //写入TF卡功能
+    void writeTF(String msg);
+}
+//TF卡实现类
+public class TFCardImpl implements TFCard {
+    public String readTF() {
+        return "tf card read msg : hello word tf card";
+    }
+    public void writeTF(String msg) {
+        System.out.println("tf card write a msg : " + msg);
+    }
+}
+//电脑类
+public class Computer {
+    public String readSD(SDCard sdCard) {
+        if(sdCard == null) {
+            throw new NullPointerException("sd card null");
+        }
+        return sdCard.readSD();
+    }
+}
+//定义适配器类（SD兼容TF）
+public class SDAdapterTF extends TFCardImpl implements SDCard {
+    public String readSD() {
+        System.out.println("adapter read tf card ");
+        return readTF();
+    }
+    public void writeSD(String msg) {
+        System.out.println("adapter write tf card");
+        writeTF(msg);
+    }
+}
+//测试类
+public class Client {
+    public static void main(String[] args) {
+        Computer computer = new Computer();
+        SDCard sdCard = new SDCardImpl();
+        System.out.println(computer.readSD(sdCard));
+        System.out.println("------------");
+        SDAdapterTF adapter = new SDAdapterTF();
+        System.out.println(computer.readSD(adapter));
+    }
+}
+```
+
+类适配器模式违背了合成复用原则。类适配器是客户类有一个接口规范的情况下可用，反之不可用（有SDCard这个接口才可用）。
+
+### 5.2.4 对象适配器模式
+
+实现方式：对象适配器模式可釆用将现有组件库中已经实现的组件引入适配器类中，该类同时实现当前系统的业务接口。
+
+【例】读卡器
+
+我们使用对象适配器模式将读卡器的案例进行改写。类图如下：
+
+<img src="img3\对象适配器模式.png" style="zoom:80%;" />
+
+代码如下：
+
+类适配器模式的代码，我们只需要修改适配器类（SDAdapterTF）和测试类。
+
+```java
+//创建适配器对象（SD兼容TF）
+public class SDAdapterTF implements SDCard {
+    private TFCard tfCard;
+    public SDAdapterTF(TFCard tfCard) {
+        this.tfCard = tfCard;
+    }
+    public String readSD() {
+        System.out.println("adapter read tf card ");
+        return tfCard.readTF();
+    }
+    public void writeSD(String msg) {
+        System.out.println("adapter write tf card");
+        tfCard.writeTF(msg);
+    }
+}
+//测试类
+public class Client {
+    public static void main(String[] args) {
+        Computer computer = new Computer();
+        System.out.println(computer.readSD(new SDCardImpl()));
+        System.out.println("------------");
+        SDAdapterTF adapter = new SDAdapterTF(new TFCardImpl());
+        System.out.println(computer.readSD(adapter));
+    }
+}
+```
+
+> 注意：还有一个适配器模式是接口适配器模式。当不希望实现一个接口中所有的方法时，可以创建一个抽象类Adapter ，实现所有方法，只是方法中没有具体实现。而此时我们只需要继承该抽象类即可。
+
+### 5.2.5 应用场景
+
+* 以前开发的系统存在满足新系统功能需求的类，但其接口同新系统的接口不一致。
+* 使用第三方提供的组件，但组件接口定义和自己要求的接口定义不同。
+
+### 5.2.6 JDK源码解析
+
+Reader（字符流）、InputStream（字节流）的适配使用的是InputStreamReader。
+
+InputStreamReader继承自java.io包中的Reader，对他中的抽象的未实现的方法给出实现。如：
+
+```java
+public int read() throws IOException {
+    return sd.read();
+}
+
+public int read(char cbuf[], int offset, int length) throws IOException {
+    return sd.read(cbuf, offset, length);
+}
+```
+
+如上代码中的sd（StreamDecoder类对象），在Sun的JDK实现中，实际的方法实现是对sun.nio.cs.StreamDecoder类的同名方法的调用封装。类结构图如下：
+
+![](img3\适配器模式-jdk源码解析.png)
+
+从上图可以看出：
+
+* InputStreamReader是对同样实现了Reader的StreamDecoder的封装。
+* StreamDecoder不是Java SE API中的内容，是Sun  JDK给出的自身实现。但我们知道他们对构造方法中的字节流类（InputStream）进行封装，并通过该类进行了字节流和字符流之间的解码转换。
+
+<font color="red">结论：</font>
+
+​	从表层来看，InputStreamReader做了InputStream字节流类到Reader字符流之间的转换。而从如上Sun JDK中的实现类关系结构中可以看出，是StreamDecoder的设计实现在实际上采用了适配器模式。
+
+## 5.3 装饰者模式
+
+### 5.3.1 概述
+
+我们先来看一个快餐店的例子。
+
+快餐店有炒面、炒饭这些快餐，可以额外附加鸡蛋、火腿、培根这些配菜，当然加配菜需要额外加钱，每个配菜的价钱通常不太一样，那么计算总价就会显得比较麻烦。
+
+<img src="img3\装饰者模式-使用前.png" style="zoom:80%;" />
+
+使用继承的方式存在的问题：
+
+* 扩展性不好
+
+  如果要再加一种配料（火腿肠），我们就会发现需要给FriedRice和FriedNoodles分别定义一个子类。如果要新增一个快餐品类（炒河粉）的话，就需要定义更多的子类。
+
+* 产生过多的子类
+
+**定义：**
+
+指在不改变现有对象结构的情况下，动态地给该对象增加一些职责（即增加其额外功能）的模式。
+
+### 5.3.2 结构
+
+装饰（Decorator）模式中的角色：
+
+* 抽象构件（Component）角色 ：定义一个抽象接口以规范准备接收附加责任的对象。
+* 具体构件（Concrete  Component）角色 ：实现抽象构件，通过装饰角色为其添加一些职责。
+* 抽象装饰（Decorator）角色 ： 继承或实现抽象构件，并包含具体构件的实例，可以通过其子类扩展具体构件的功能。
+* 具体装饰（ConcreteDecorator）角色 ：实现抽象装饰的相关方法，并给具体构件对象添加附加的责任。
+
+### 5.3.3 案例
+
+我们使用装饰者模式对快餐店案例进行改进，体会装饰者模式的精髓。
+
+类图如下：
+
+<img src="img3/装饰者模式.png" style="zoom:75%;" />
+
+代码如下：
+
+```java
+//快餐接口
+public abstract class FastFood {
+    private float price;
+    private String desc;
+    public FastFood() {}
+    public FastFood(float price, String desc) {
+        this.price = price;
+        this.desc = desc;
+    }
+    get/set...
+    public abstract float cost();  //获取价格
+}
+//炒饭
+public class FriedRice extends FastFood {
+    public FriedRice() {
+        super(10, "炒饭");
+    }
+    public float cost() {
+        return getPrice();
+    }
+}
+//炒面
+public class FriedNoodles extends FastFood {
+    public FriedNoodles() {
+        super(12, "炒面");
+    }
+    public float cost() {
+        return getPrice();
+    }
+}
+//配料类
+public abstract class Garnish extends FastFood {
+    private FastFood fastFood;
+    public FastFood getFastFood() {
+        return fastFood;
+    }
+    public void setFastFood(FastFood fastFood) {
+        this.fastFood = fastFood;
+    }
+    public Garnish(FastFood fastFood, float price, String desc) {
+        super(price,desc);
+        this.fastFood = fastFood;
+    }
+}
+//鸡蛋配料
+public class Egg extends Garnish {
+    public Egg(FastFood fastFood) {
+        super(fastFood,1,"鸡蛋");
+    }
+    public float cost() {
+        return getPrice() + getFastFood().getPrice();
+    }
+    @Override
+    public String getDesc() {
+        return super.getDesc() + getFastFood().getDesc();
+    }
+}
+//培根配料
+public class Bacon extends Garnish {
+    public Bacon(FastFood fastFood) {
+        super(fastFood,2,"培根");
+    }
+    public float cost() {
+        return getPrice() + getFastFood().getPrice();
+    }
+    @Override
+    public String getDesc() {
+        return super.getDesc() + getFastFood().getDesc();
+    }
+}
+//测试类
+public class Client {
+    public static void main(String[] args) {
+        //点一份炒饭
+        FastFood food = new FriedRice();
+        //花费的价格
+        System.out.println(food.getDesc() + " " + food.cost() + "元");
+        System.out.println("========");
+        //点一份加鸡蛋的炒饭
+        FastFood food1 = new FriedRice();
+        food1 = new Egg(food1);
+        //花费的价格
+        System.out.println(food1.getDesc() + " " + food1.cost() + "元");
+        System.out.println("========");
+        //点一份加培根的炒面
+        FastFood food2 = new FriedNoodles();
+        food2 = new Bacon(food2);
+        //花费的价格
+        System.out.println(food2.getDesc() + " " + food2.cost() + "元");
+    }
+}
+```
+
+**好处：**
+
+* 饰者模式可以带来比继承更加灵活性的扩展功能，使用更加方便，可以通过组合不同的装饰者对象来获取具有不同行为状态的多样化的结果。装饰者模式比继承更具良好的扩展性，完美的遵循开闭原则，继承是静态的附加责任，装饰者则是动态的附加责任。
+
+* 装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。
+
+### 5.3.4 使用场景
+
+* 当不能采用继承的方式对系统进行扩充或者采用继承不利于系统扩展和维护时。
+
+  不能采用继承的情况主要有两类：
+
+  * 第一类是系统中存在大量独立的扩展，为支持每一种组合将产生大量的子类，使得子类数目呈爆炸性增长；
+  * 第二类是因为类定义不能继承（如final类）
+
+* 在不影响其他对象的情况下，以动态、透明的方式给单个对象添加职责。
+
+* 当对象的功能要求可以动态地添加，也可以再动态地撤销时。
+
+### 5.3.5 JDK源码解析
+
+IO流中的包装类使用到了装饰者模式。BufferedInputStream，BufferedOutputStream，BufferedReader，BufferedWriter。
+
+我们以BufferedWriter举例来说明，先看看如何使用BufferedWriter
+
+```java
+public class Demo {
+    public static void main(String[] args) throws Exception{
+        //创建BufferedWriter对象
+        //创建FileWriter对象
+        FileWriter fw = new FileWriter("C:\\Users\\Think\\Desktop\\a.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        //写数据
+        bw.write("hello Buffered");
+
+        bw.close();
+    }
+}
+```
+
+使用起来感觉确实像是装饰者模式，接下来看它们的结构：
+
+<img src="img3\装饰者模式-jdk源码.png" style="zoom:80%;" />
+
+> <font color="red">小结：</font>
+>
+> ​	BufferedWriter使用装饰者模式对Writer子实现类进行了增强，添加了缓冲区，提高了写数据的效率。
+
+### 5.3.6 代理和装饰者的区别
+
+静态代理和装饰者模式的区别：
+
+* 相同点：
+  * 都要实现与目标类相同的业务接口
+  * 在两个类中都要声明目标对象
+  * 都可以在不修改目标类的前提下增强目标方法
+* 不同点：
+  * 目的不同
+    装饰者是为了增强目标对象
+    静态代理是为了保护和隐藏目标对象
+  * 获取目标对象构建的地方不同
+    装饰者是由外界传递进来，可以通过构造方法传递
+    静态代理是在代理类内部创建，以此来隐藏目标对象
+
+## 5.4 桥接模式
+
+### 5.4.1 概述
+
+现在有一个需求，需要创建不同的图形，并且每个图形都有可能会有不同的颜色。我们可以利用继承的方式来设计类的关系：
+
+![](img/image-20200207194617620.png)
+
+我们可以发现有很多的类，假如我们再增加一个形状或再增加一种颜色，就需要创建更多的类。
+
+试想，在一个有多种可能会变化的维度的系统中，用继承方式会造成类爆炸，扩展起来不灵活。每次在一个维度上新增一个具体实现都要增加多个子类。为了更加灵活的设计系统，我们此时可以考虑使用桥接模式。
+
+**定义：**
+
+​	将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。
+
+### 5.4.2 结构
+
+桥接（Bridge）模式包含以下主要角色：
+
+* 抽象化（Abstraction）角色 ：定义抽象类，并包含一个对实现化对象的引用。
+* 扩展抽象化（Refined  Abstraction）角色 ：是抽象化角色的子类，实现父类中的业务方法，并通过组合关系调用实现化角色中的业务方法。
+* 实现化（Implementor）角色 ：定义实现化角色的接口，供扩展抽象化角色调用。
+* 具体实现化（Concrete Implementor）角色 ：给出实现化角色接口的具体实现。
+
+### 5.4.3 案例
+
+【例】视频播放器
+
+需要开发一个跨平台视频播放器，可以在不同操作系统平台（如Windows、Mac、Linux等）上播放多种格式的视频文件，常见的视频格式包括RMVB、AVI、WMV等。该播放器包含了两个维度，适合使用桥接模式。
+
+类图如下：
+
+<img src="img3\桥接模式.png" style="zoom:80%;" />
+
+代码如下：
+
+```java
+//视频文件
+public interface VideoFile {
+    void decode(String fileName);
+}
+//avi文件
+public class AVIFile implements VideoFile {
+    public void decode(String fileName) {
+        System.out.println("avi视频文件："+ fileName);
+    }
+}
+//rmvb文件
+public class REVBBFile implements VideoFile {
+    public void decode(String fileName) {
+        System.out.println("rmvb文件：" + fileName);
+    }
+}
+//操作系统版本
+public abstract class OperatingSystemVersion {
+    protected VideoFile videoFile;
+
+    public OperatingSystemVersion(VideoFile videoFile) {
+        this.videoFile = videoFile;
+    }
+    public abstract void play(String fileName);
+}
+//Windows版本
+public class Windows extends OperatingSystem {
+    public Windows(VideoFile videoFile) {
+        super(videoFile);
+    }
+    public void play(String fileName) {
+        videoFile.decode(fileName);
+    }
+}
+//mac版本
+public class Mac extends OperatingSystemVersion {
+    public Mac(VideoFile videoFile) {
+        super(videoFile);
+    }
+    public void play(String fileName) {
+		videoFile.decode(fileName);
+    }
+}
+//测试类
+public class Client {
+    public static void main(String[] args) {
+        OperatingSystem os = new Windows(new AVIFile());
+        os.play("战狼3");
+    }
+}
+```
+
+**好处：**
+
+* 桥接模式提高了系统的可扩充性，在两个变化维度中任意扩展一个维度，都不需要修改原有系统。
+
+  如：如果现在还有一种视频文件类型wmv，我们只需要再定义一个类实现VideoFile接口即可，其他类不需要发生变化。
+
+* 实现细节对客户透明
+
+### 5.4.4 使用场景
+
+* 当一个类存在两个独立变化的维度，且这两个维度都需要进行扩展时。
+* 当一个系统不希望使用继承或因为多层次继承导致系统类的个数急剧增加时。
+* 当一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性时。避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。
+
+## 5.5 外观模式
+
+### 5.5.1 概述
+
+有些人可能炒过股票，但其实大部分人都不太懂，这种没有足够了解证券知识的情况下做股票是很容易亏钱的，刚开始炒股肯定都会想，如果有个懂行的帮帮手就好，其实基金就是个好帮手，支付宝里就有许多的基金，它将投资者分散的资金集中起来，交由专业的经理人进行管理，投资于股票、债券、外汇等领域，而基金投资的收益归持有者所有，管理机构收取一定比例的托管管理费用。
+
+**定义：**
+
+​	又名门面模式，是一种通过为多个复杂的子系统提供一个一致的接口，而使这些子系统更加容易被访问的模式。该模式对外有一个统一接口，外部应用程序不用关心内部子系统的具体的细节，这样会大大降低应用程序的复杂度，提高了程序的可维护性。
+
+​	外观（Facade）模式是“迪米特法则”的典型应用
+
+![](img3\外观模式引入.jpg)
+
+### 5.5.2 结构
+
+外观（Facade）模式包含以下主要角色：
+
+* 外观（Facade）角色：为多个子系统对外提供一个共同的接口。
+* 子系统（Sub System）角色：实现系统的部分功能，客户可以通过外观角色访问它。
+
+### 5.5.3 案例
+
+【例】智能家电控制
+
+小明的爷爷已经60岁了，一个人在家生活：每次都需要打开灯、打开电视、打开空调；睡觉时关闭灯、关闭电视、关闭空调；操作起来都比较麻烦。所以小明给爷爷买了智能音箱，可以通过语音直接控制这些智能家电的开启和关闭。类图如下：
+
+<img src="img3/外观模式.png" style="zoom:80%;" />
+
+代码如下：
+
+```java
+//灯类
+public class Light {
+    public void on() {
+        System.out.println("打开了灯....");
+    }
+    public void off() {
+        System.out.println("关闭了灯....");
+    }
+}
+//电视类
+public class TV {
+    public void on() {
+        System.out.println("打开了电视....");
+    }
+    public void off() {
+        System.out.println("关闭了电视....");
+    }
+}
+//空调类
+public class AirCondition {
+    public void on() {
+        System.out.println("打开了空调....");
+    }
+    public void off() {
+        System.out.println("关闭了空调....");
+    }
+}
+//智能音箱
+public class SmartAppliancesFacade {
+    private Light light;
+    private TV tv;
+    private AirCondition airCondition;
+    public SmartAppliancesFacade() {
+        light = new Light();
+        tv = new TV();
+        airCondition = new AirCondition();
+    }
+    public void say(String message) {
+        if(message.contains("打开")) {
+            on();
+        } else if(message.contains("关闭")) {
+            off();
+        } else {
+            System.out.println("我还听不懂你说的！！！");
+        }
+    }
+    //起床后一键开电器
+    private void on() {
+        System.out.println("起床了");
+        light.on();
+        tv.on();
+        airCondition.on();
+    }
+    //睡觉一键关电器
+    private void off() {
+        System.out.println("睡觉了");
+        light.off();
+        tv.off();
+        airCondition.off();
+    }
+}
+//测试类
+public class Client {
+    public static void main(String[] args) {
+        //创建外观对象
+        SmartAppliancesFacade facade = new SmartAppliancesFacade();
+        //客户端直接与外观对象进行交互
+        facade.say("打开家电");
+        facade.say("关闭家电");
+    }
+}
+```
+
+**好处：**
+
+* 降低了子系统与客户端之间的耦合度，使得子系统的变化不会影响调用它的客户类。
+* 对客户屏蔽了子系统组件，减少了客户处理的对象数目，并使得子系统使用起来更加容易。
+
+**缺点：**
+
+* 不符合开闭原则，修改很麻烦
+
+### 5.5.4 使用场景
+
+* 对分层结构系统构建时，使用外观模式定义子系统中每层的入口点可以简化子系统之间的依赖关系。
+* 当一个复杂系统的子系统很多时，外观模式可以为系统设计一个简单的接口供外界访问。
+* 当客户端与多个子系统之间存在很大的联系时，引入外观模式可将它们分离，从而提高子系统的独立性和可移植性。
+
+### 5.5.5 源码解析
+
+使用tomcat作为web容器时，接收浏览器发送过来的请求，tomcat会将请求信息封装成ServletRequest对象，如下图①处对象。但是大家想想ServletRequest是一个接口，它还有一个子接口HttpServletRequest，而我们知道该request对象肯定是一个HttpServletRequest对象的子实现类对象，到底是哪个类的对象呢？可以通过输出request对象，我们就会发现是一个名为RequestFacade的类的对象。
+
+<img src="img3/image-20200207234545691.png" style="zoom:60%;" />
+
+RequestFacade类就使用了外观模式。先看结构图：
+
+<img src="img3/外观模式-jdk源码解析.png" style="zoom:70%;" />
+
+**为什么在此处使用外观模式呢？**
+
+​	定义 RequestFacade 类，分别实现 ServletRequest和HttpServletRequest ，同时定义私有成员变量 Request ，并且方法的实现调用 Request  的实现。然后，将 RequestFacade上转为 ServletRequest  传给 servlet 的 service 方法，这样即使在 servlet 中被下转为 RequestFacade ，也不能访问私有成员变量对象中的方法。既用了 Request ，又能防止其中方法被不合理的访问。
+
+***
+
+## 5.6 组合模式
+
+### 5.6.1 概述
+
+<img src="img4/image-20200208180417291.png" style="zoom:60%;" />
+
+​	对于这个图片肯定会非常熟悉，上图我们可以看做是一个文件系统，对于这样的结构我们称之为树形结构。在树形结构中可以通过调用某个方法来遍历整个树，当我们找到某个叶子节点后，就可以对叶子节点进行相关的操作。可以将这颗树理解成一个大的容器，容器里面包含很多的成员对象，这些成员对象即可是容器对象也可以是叶子对象。但是由于容器对象和叶子对象在功能上面的区别，使得我们在使用的过程中必须要区分容器对象和叶子对象，但是这样就会给客户带来不必要的麻烦，作为客户而已，它始终希望能够一致的对待容器对象和叶子对象。
+
+**定义：**
+
+​	又名部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。
+
+### 5.6.2 结构
+
+组合模式主要包含三种角色：
+
+* 抽象根节点（Component）：定义系统各层次对象的共有方法和属性，可以预先定义一些默认行为和属性。
+* 树枝节点（Composite）：定义树枝节点的行为，存储子节点，组合树枝节点和叶子节点形成一个树形结构。
+* 叶子节点（Leaf）：叶子节点对象，其下再无分支，是系统层次遍历的最小单位。
+
+### 5.6.3 案例实现
+
+【例】软件菜单
+
+如下图，我们在访问别的一些管理系统时，经常可以看到类似的菜单。一个菜单可以包含菜单项（菜单项是指不再包含其他内容的菜单条目），也可以包含带有其他菜单项的菜单，因此使用组合模式描述菜单就很恰当，我们的需求是针对一个菜单，打印出其包含的所有菜单以及菜单项的名称。
+
+<img src="img4/image-20200208182322313.png" style="zoom:80%;" />
+
+要实现该案例，我们先画出类图：
+
+<img src="img4/组合模式.png" style="zoom:80%;" />
+
+**代码实现：**
+
+不管是菜单还是菜单项，都应该继承自统一的接口，这里姑且将这个统一的接口称为菜单组件。
+
+```java
+//菜单组件  不管是菜单还是菜单项，都应该继承该类
+public abstract class MenuComponent {
+    protected String name;
+    protected int level;
+    //添加菜单
+    public void add(MenuComponent menuComponent){
+        throw new UnsupportedOperationException();
+    }
+    //移除菜单
+    public void remove(MenuComponent menuComponent){
+        throw new UnsupportedOperationException();
+    }
+    //获取指定的子菜单
+    public MenuComponent getChild(int i){
+        throw new UnsupportedOperationException();
+    }
+    //获取菜单名称
+    public String getName(){
+        return name;
+    }
+    public void print(){
+        throw new UnsupportedOperationException();
+    }
+}
+```
+
+这里的MenuComponent定义为抽象类，因为有一些共有的属性和行为要在该类中实现，Menu和MenuItem类就可以只覆盖自己感兴趣的方法，而不用搭理不需要或者不感兴趣的方法，举例来说，Menu类可以包含子菜单，因此需要覆盖add()、remove()、getChild()方法，但是MenuItem就不应该有这些方法。这里给出的默认实现是抛出异常，你也可以根据自己的需要改写默认实现。
+
+```java
+public class Menu extends MenuComponent {
+    private List<MenuComponent> menuComponentList;
+    public Menu(String name,int level){
+        this.level = level;
+        this.name = name;
+        menuComponentList = new ArrayList<MenuComponent>();
+    }
+    @Override
+    public void add(MenuComponent menuComponent) {
+        menuComponentList.add(menuComponent);
+    }
+    @Override
+    public void remove(MenuComponent menuComponent) {
+        menuComponentList.remove(menuComponent);
+    }
+    @Override
+    public MenuComponent getChild(int i) {
+        return menuComponentList.get(i);
+    }
+    @Override
+    public void print() {
+        for (int i = 1; i < level; i++) {
+            System.out.print("--");
+        }
+        System.out.println(name);
+        for (MenuComponent menuComponent : menuComponentList) {
+            menuComponent.print();
+        }
+    }
+}
+```
+
+Menu类已经实现了除了getName方法的其他所有方法，因为Menu类具有添加菜单，移除菜单和获取子菜单的功能。
+
+```java
+public class MenuItem extends MenuComponent {
+    public MenuItem(String name,int level) {
+        this.name = name;
+        this.level = level;
+    }
+    @Override
+    public void print() {
+        for (int i = 1; i < level; i++) {
+            System.out.print("--");
+        }
+        System.out.println(name);
+    }
+}
+```
+
+MenuItem是菜单项，不能再有子菜单，所以添加菜单，移除菜单和获取子菜单的功能并不能实现。
+
+测试：
+
+```java
+public static void main(String[] args) {
+    //创建一级菜单
+    MenuComponent component = new Menu("系统管理",1);
+    //创建菜单树
+    MenuComponent menu1 = new Menu("菜单管理",2);
+    menu1.add(new MenuItem("页面访问",3));
+    menu1.add(new MenuItem("展开菜单",3));
+    menu1.add(new MenuItem("编辑菜单",3));
+    menu1.add(new MenuItem("删除菜单",3));
+    menu1.add(new MenuItem("新增菜单",3));
+    MenuComponent menu2 = new Menu("权限管理",2);
+    menu2.add(new MenuItem("页面访问",3));
+    menu2.add(new MenuItem("提交保存",3));
+    MenuComponent menu3 = new Menu("角色管理",2);
+    menu3.add(new MenuItem("页面访问",3));
+    menu3.add(new MenuItem("新增角色",3));
+    menu3.add(new MenuItem("修改角色",3));
+    //将二级菜单添加到一级菜单中
+    component.add(menu1);
+    component.add(menu2);
+    component.add(menu3);
+    //打印菜单名称(如果有子菜单一块打印)
+      component.print();
+    menu1.print();
+}
+```
+
+### 5.6.4 组合模式的分类
+
+在使用组合模式时，根据抽象构件类的定义形式，我们可将组合模式分为`透明组合模式`和`安全组合模式`两种形式。
+
+* 透明组合模式
+
+  透明组合模式中，抽象根节点角色中声明了所有用于管理成员对象的方法，比如在示例中 `MenuComponent` 声明了 `add`、`remove` 、`getChild` 方法，这样做的好处是确保所有的构件类都有相同的接口。透明组合模式也是组合模式的标准形式。
+
+  透明组合模式的缺点是不够安全，因为叶子对象和容器对象在本质上是有区别的，叶子对象不可能有下一个层次的对象，即不可能包含成员对象，因此为其提供 add()、remove() 等方法是没有意义的，这在编译阶段不会出错，但在运行阶段如果调用这些方法可能会出错（如果没有提供相应的错误处理代码）
+
+* 安全组合模式
+
+  在安全组合模式中，在抽象构件角色中没有声明任何用于管理成员对象的方法，而是在树枝节点 `Menu` 类中声明并实现这些方法。安全组合模式的缺点是不够透明，因为叶子构件和容器构件具有不同的方法，且容器构件中那些用于管理成员对象的方法没有在抽象构件类中定义，因此客户端不能完全针对抽象编程，必须有区别地对待叶子构件和容器构件。
+
+  <img src="img4/组合模式-安全性.png" style="zoom:80%;" />
+
+### 5.6.5 优点
+
+* 组合模式可以清楚地定义分层次的复杂对象，表示对象的全部或部分层次，它让客户端忽略了层次的差异，方便对整个层次结构进行控制。
+* 客户端可以一致地使用一个组合结构或其中单个对象，不必关心处理的是单个对象还是整个组合结构，简化了客户端代码。
+* 在组合模式中增加新的树枝节点和叶子节点都很方便，无须对现有类库进行任何修改，符合“开闭原则”。
+* 组合模式为树形结构的面向对象实现提供了一种灵活的解决方案，通过叶子节点和树枝节点的递归组合，可以形成复杂的树形结构，但对树形结构的控制却非常简单。
+
+### 5.6.6 使用场景
+
+组合模式正是应树形结构而生，所以组合模式的使用场景就是出现树形结构的地方。比如：文件目录显示，多级目录呈现等树形结构数据的操作。
+
+## 5.7 享元模式
+
+### 5.7.1 概述
+
+**定义：**
+
+​	运用共享技术来有效地支持大量细粒度对象的复用。它通过共享已经存在的对象来大幅度减少需要创建的对象数量、避免大量相似对象的开销，从而提高系统资源的利用率。
+
+### 5.7.2 结构
+
+享元（Flyweight ）模式中存在以下两种状态：
+
+1. 内部状态，即不会随着环境的改变而改变的可共享部分。
+2. 外部状态，指随环境改变而改变的不可以共享的部分。享元模式的实现要领就是区分应用中的这两种状态，并将外部状态外部化。
+
+享元模式的主要有以下角色：
+
+* 抽象享元角色（Flyweight）：通常是一个接口或抽象类，在抽象享元类中声明了具体享元类公共的方法，这些方法可以向外界提供享元对象的内部数据（内部状态），同时也可以通过这些方法来设置外部数据（外部状态）。
+* 具体享元（Concrete Flyweight）角色 ：它实现了抽象享元类，称为享元对象；在具体享元类中为内部状态提供了存储空间。通常我们可以结合单例模式来设计具体享元类，为每一个具体享元类提供唯一的享元对象。
+* 非享元（Unsharable Flyweight)角色 ：并不是所有的抽象享元类的子类都需要被共享，不能被共享的子类可设计为非共享具体享元类；当需要一个非共享具体享元类的对象时可以直接通过实例化创建。
+* 享元工厂（Flyweight Factory）角色 ：负责创建和管理享元角色。当客户对象请求一个享元对象时，享元工厂检査系统中是否存在符合要求的享元对象，如果存在则提供给客户；如果不存在的话，则创建一个新的享元对象。
+
+### 5.7.3 案例实现
+
+【例】俄罗斯方块
+
+下面的图片是众所周知的俄罗斯方块中的一个个方块，如果在俄罗斯方块这个游戏中，每个不同的方块都是一个实例对象，这些对象就要占用很多的内存空间，下面利用享元模式进行实现。
+
+<img src="img4/俄罗斯方块.jpeg" style="zoom:60%;" />
+
+
+
+**先来看类图：**
+
+<img src="img4/享元模式.png" style="zoom:80%;" />
+
+**代码如下：**
+
+俄罗斯方块有不同的形状，我们可以对这些形状向上抽取出AbstractBox，用来定义共性的属性和行为。
+
+```java
+public abstract class AbstractBox {
+    public abstract String getShape();
+    public void display(String color) {
+        System.out.println("方块形状：" + this.getShape() + " 颜色：" + color);
+    }
+}
+```
+
+接下来就是定义不同的形状了，IBox类、LBox类、OBox类等。
+
+```java
+public class IBox extends AbstractBox {
+    public String getShape() {return "I";}
+}
+public class LBox extends AbstractBox {
+    public String getShape() {return "L";}
+}
+public class OBox extends AbstractBox {
+    public String getShape() {return "O";}
+}
+```
+
+提供了一个工厂类（BoxFactory），用来管理享元对象（也就是AbstractBox子类对象），该工厂类对象只需要一个，所以可以使用单例模式。并给工厂类提供一个获取形状的方法。
+
+```java
+public class BoxFactory {
+    private static HashMap<String, AbstractBox> map;
+    private BoxFactory() {
+        map = new HashMap<String, AbstractBox>();
+				map.put("I",new IBox());
+				map.put("L",new LBox());
+				map.put("O",new OBox());
+    }
+    public static final BoxFactory getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+    private static class SingletonHolder {
+        private static final BoxFactory INSTANCE = new BoxFactory();
+    }
+    public AbstractBox getBox(String key) {
+        return map.get(key);
+    }
+}
+```
+
+### 5.7.5 优缺点和使用场景
+
+**1，优点**
+
+- 极大减少内存中相似或相同对象数量，节约系统资源，提供系统性能
+- 享元模式中的外部状态相对独立，且不影响内部状态
+
+**2，缺点：**
+
+为了使对象可以共享，需要将享元对象的部分状态外部化，分离内部状态和外部状态，使程序逻辑复杂
+
+**3，使用场景：**
+
+- 一个系统有大量相同或者相似的对象，造成内存的大量耗费。
+- 对象的大部分状态都可以外部化，可以将这些外部状态传入对象中。
+- 在使用享元模式时需要维护一个存储享元对象的享元池，而这需要耗费一定的系统资源，因此，应当在需要多次重复使用享元对象时才值得使用享元模式。
+
+### 5.7.6 JDK源码解析
+
+Integer类使用了享元模式。我们先看下面的例子：
+
+```java
+public class Demo {
+    public static void main(String[] args) {
+        Integer i1 = 127;
+        Integer i2 = 127;
+        System.out.println("i1和i2对象是否是同一个对象？" + (i1 == i2));
+        Integer i3 = 128;
+        Integer i4 = 128;
+        System.out.println("i3和i4对象是否是同一个对象？" + (i3 == i4));
+    }
+}
+```
+
+运行上面代码，结果如下：
+
+<img src="img4/image-20200208212930857.png" style="zoom:80%;" />
+
+上面代码可以看到，直接给Integer类型的变量赋值基本数据类型数据的操作底层使用的是 `valueOf()` ，所以只需要看该方法即可
+
+可以看到 `Integer` 默认先创建并缓存 `-128 ~ 127` 之间数的 `Integer` 对象，当调用 `valueOf` 时如果参数在 `-128 ~ 127` 之间则计算下标并从缓存中返回，否则创建一个新的 `Integer` 对象。
+
+# 6 行为型模式
+
+行为型模式用于描述程序在运行时复杂的流程控制，即描述多个类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务，它涉及算法与对象间职责的分配。
+
+行为型模式分为`类行为模式`和`对象行为模式`，前者采用继承机制来在类间分派行为，后者采用组合或聚合在对象间分配行为。由于组合关系或聚合关系比继承关系耦合度低，满足“合成复用原则”，所以对象行为模式比类行为模式具有更大的灵活性。
+
+行为型模式分为：
+
+* 模板方法模式
+* 策略模式
+* 命令模式
+* 职责链模式
+* 状态模式
+* 观察者模式
+* 中介者模式
+* 迭代器模式
+* 访问者模式
+* 备忘录模式
+* 解释器模式
+
+以上 11 种行为型模式，除了模板方法模式和解释器模式是类行为型模式，其他的全部属于对象行为型模式。
+
+## 6.1 模板方法模式
+
+### 6.1.1 概述
+
+在面向对象程序设计过程中，程序员常常会遇到这种情况：设计一个系统时知道了算法所需的关键步骤，而且确定了这些步骤的执行顺序，但某些步骤的具体实现还未知，或者说某些步骤的实现与具体的环境相关。
+
+例如，去银行办理业务一般要经过以下4个流程：取号、排队、办理具体业务、对银行工作人员进行评分等，其中取号、排队和对银行工作人员进行评分的业务对每个客户是一样的，可以在父类中实现，但是办理具体业务却因人而异，它可能是存款、取款或者转账等，可以延迟到子类中实现。
+
+**定义：**
+
+定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。
+
+
+
+###  6.1.2 结构
+
+模板方法（Template Method）模式包含以下主要角色：
+
+* 抽象类（Abstract Class）：负责给出一个算法的轮廓和骨架。它由一个模板方法和若干个基本方法构成。
+
+  * 模板方法：定义了算法的骨架，按某种顺序调用其包含的基本方法。
+
+  * 基本方法：是实现算法各个步骤的方法，是模板方法的组成部分。基本方法又可以分为三种：
+
+    * 抽象方法(Abstract Method) ：一个抽象方法由抽象类声明、由其具体子类实现。
+
+    * 具体方法(Concrete Method) ：一个具体方法由一个抽象类或具体类声明并实现，其子类可以进行覆盖也可以直接继承。
+
+    * 钩子方法(Hook Method) ：在抽象类中已经实现，包括用于判断的逻辑方法和需要子类重写的空方法两种。
+
+      一般钩子方法是用于判断的逻辑方法，这类方法名一般为isXxx，返回值类型为boolean类型。
+
+* 具体子类（Concrete Class）：实现抽象类中所定义的抽象方法和钩子方法，它们是一个顶级逻辑的组成步骤。
+
+
+
+### 6.1.3 案例实现
+
+【例】炒菜
+
+炒菜的步骤是固定的，分为倒油、热油、倒蔬菜、倒调料品、翻炒等步骤。现通过模板方法模式来用代码模拟。类图如下：
+
+<img src="img4/模板方法模式.png" style="zoom:80%;" />
+
+代码如下：
+
+```java
+public abstract class AbstractClass {
+    
+    public final void cookProcess() {
+        //第一步：倒油
+        this.pourOil();
+        //第二步：热油
+        this.heatOil();
+        //第三步：倒蔬菜
+        this.pourVegetable();
+        //第四步：倒调味料
+        this.pourSauce();
+        //第五步：翻炒
+        this.fry();
+    }
+
+    public void pourOil() {
+        System.out.println("倒油");
+    }
+
+    //第二步：热油是一样的，所以直接实现
+    public void heatOil() {
+        System.out.println("热油");
+    }
+
+    //第三步：倒蔬菜是不一样的（一个下包菜，一个是下菜心）
+    public abstract void pourVegetable();
+
+    //第四步：倒调味料是不一样
+    public abstract void pourSauce();
+
+
+    //第五步：翻炒是一样的，所以直接实现
+    public void fry(){
+        System.out.println("炒啊炒啊炒到熟啊");
+    }
+}
+
+public class ConcreteClass_BaoCai extends AbstractClass {
+
+    @Override
+    public void pourVegetable() {
+        System.out.println("下锅的蔬菜是包菜");
+    }
+
+    @Override
+    public void pourSauce() {
+        System.out.println("下锅的酱料是辣椒");
+    }
+}
+
+public class ConcreteClass_CaiXin extends AbstractClass {
+    @Override
+    public void pourVegetable() {
+        System.out.println("下锅的蔬菜是菜心");
+    }
+
+    @Override
+    public void pourSauce() {
+        System.out.println("下锅的酱料是蒜蓉");
+    }
+}
+
+public class Client {
+    public static void main(String[] args) {
+        //炒手撕包菜
+        ConcreteClass_BaoCai baoCai = new ConcreteClass_BaoCai();
+        baoCai.cookProcess();
+
+        //炒蒜蓉菜心
+        ConcreteClass_CaiXin caiXin = new ConcreteClass_CaiXin();
+        caiXin.cookProcess();
+    }
+}
+```
+
+> 注意：为防止恶意操作，一般模板方法都加上 final 关键词。
+
+
+
+### 6.1.3 优缺点
+
+**优点：**
+
+* 提高代码复用性
+
+  将相同部分的代码放在抽象的父类中，而将不同的代码放入不同的子类中。
+
+* 实现了反向控制
+
+  通过一个父类调用其子类的操作，通过对子类的具体实现扩展不同的行为，实现了反向控制 ，并符合“开闭原则”。
+
+**缺点：**
+
+* 对每个不同的实现都需要定义一个子类，这会导致类的个数增加，系统更加庞大，设计也更加抽象。
+* 父类中的抽象方法由子类实现，子类执行的结果会影响父类的结果，这导致一种反向的控制结构，它提高了代码阅读的难度。
+
+
+
+### 6.1.4 适用场景
+
+* 算法的整体步骤很固定，但其中个别部分易变时，这时候可以使用模板方法模式，将容易变的部分抽象出来，供子类实现。
+* 需要通过子类来决定父类算法中某个步骤是否执行，实现子类对父类的反向控制。
+
+
+
+### 6.1.5 JDK源码解析
+
+InputStream类就使用了模板方法模式。在InputStream类中定义了多个 `read()` 方法，如下：
+
+```java
+public abstract class InputStream implements Closeable {
+    //抽象方法，要求子类必须重写
+    public abstract int read() throws IOException;
+
+    public int read(byte b[]) throws IOException {
+        return read(b, 0, b.length);
+    }
+
+    public int read(byte b[], int off, int len) throws IOException {
+        if (b == null) {
+            throw new NullPointerException();
+        } else if (off < 0 || len < 0 || len > b.length - off) {
+            throw new IndexOutOfBoundsException();
+        } else if (len == 0) {
+            return 0;
+        }
+
+        int c = read(); //调用了无参的read方法，该方法是每次读取一个字节数据
+        if (c == -1) {
+            return -1;
+        }
+        b[off] = (byte)c;
+
+        int i = 1;
+        try {
+            for (; i < len ; i++) {
+                c = read();
+                if (c == -1) {
+                    break;
+                }
+                b[off + i] = (byte)c;
+            }
+        } catch (IOException ee) {
+        }
+        return i;
+    }
+}
+```
+
+从上面代码可以看到，无参的 `read()` 方法是抽象方法，要求子类必须实现。而 `read(byte b[])` 方法调用了 `read(byte b[], int off, int len)` 方法，所以在此处重点看的方法是带三个参数的方法。 
+
+在该方法中第18行、27行，可以看到调用了无参的抽象的 `read()` 方法。
+
+总结如下： 在InputStream父类中已经定义好了读取一个字节数组数据的方法是每次读取一个字节，并将其存储到数组的第一个索引位置，读取len个字节数据。具体如何读取一个字节数据呢？由子类实现。
+
+
+
+## 6.2 策略模式
+
+### 6.2.1 概述
+
+先看下面的图片，我们去旅游选择出行模式有很多种，可以骑自行车、可以坐汽车、可以坐火车、可以坐飞机。
+
+<img src="img4/image-20200210143039168.png" style="zoom:80%;" />
+
+作为一个程序猿，开发需要选择一款开发工具，当然可以进行代码开发的工具有很多，可以选择Idea进行开发，也可以使用eclipse进行开发，也可以使用其他的一些开发工具。
+
+<img src="img4/image-20200210144457478.png" style="zoom:70%;" />
+
+**定义：**
+
+​	该模式定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的变化不会影响使用算法的客户。策略模式属于对象行为模式，它通过对算法进行封装，把使用算法的责任和算法的实现分割开来，并委派给不同的对象对这些算法进行管理。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
