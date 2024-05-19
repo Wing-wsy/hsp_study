@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f2f948ed-d08a-44f0-9a4a-389fc9d0a819" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../chapter02/jdk环境变量.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter17/JUC并发编程1.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter17/JUC并发编程2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter17/JUC并发编程3.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter17/JUC并发编程4.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter17/JUC并发编程5.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter17/NET并发编程.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter20/Maven.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter20/POM文件帮助文档.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter20/maven环境变量.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter21/Java日志框架.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter21/picture/img01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/.idea/dictionaries/brzha12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/log-stack-01.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/complete_exception/CompleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/complete_exception/ExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/custom_exception/OptimizeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/custom_exception/ProfessionalException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/java_process_exception/CatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/java_process_exception/DeclareException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter2/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter3/DoNotAffectTheState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter3/EssentialException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter3/ExceptionChaining.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter3/IgnoreException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter3/OtherPrinciples.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/JCLBinding.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/LogbackHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/SLF4JBinding.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/SubUseLog4j2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/UseLog4j2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/UseLogback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/UseLombokToLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test1/A.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test1/C.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test1/ImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test1/InterfaceA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test1/InterfaceB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test1/Outer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test2/B.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter4/test2/D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter6/CodeDebug.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter6/CodeDebugAttention.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter6/DebugVariable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter6/ExplicitBug.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter6/UseBreakPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter7/AbnormalCpu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter7/DeadLock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter7/GetThreadStack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter7/PrintThreadState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/chapter7/VastWaitingThreads.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/test/Hello.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/java/com/imooc/log/stack/test/JUTTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/complete_exception/CompleteException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/complete_exception/ExceptionHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/custom_exception/OptimizeException$CustomException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/custom_exception/OptimizeException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/custom_exception/ProfessionalException$BizException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/custom_exception/ProfessionalException$ViewGoodsException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/custom_exception/ProfessionalException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/java_process_exception/CatchException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/java_process_exception/DeclareException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter2/package-info.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/DoNotAffectTheState$Imoocer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/DoNotAffectTheState.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/EssentialException$Imooc.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/EssentialException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/ExceptionChaining$BizException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/ExceptionChaining$ImoocMathException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/ExceptionChaining$ImoocNullException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/ExceptionChaining.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/IgnoreException$Imoocer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/IgnoreException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter3/OtherPrinciples.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/SLF4JBinding.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/UseLombokToLog.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/test1/A.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/test1/C.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/test1/Outer$1Inner.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/test1/Outer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/test2/B.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter4/test2/D.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/CodeDebugAttention.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/DebugVariable$Imoocer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/DebugVariable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/ExplicitBug$GeneralObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/ExplicitBug.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/UseBreakPoint$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/UseBreakPoint$CustomException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/UseBreakPoint$FieldWatchPoint.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter6/UseBreakPoint.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter7/AbnormalCpu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter7/DeadLock.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter7/GetThreadStack.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter7/PrintThreadState.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/chapter7/VastWaitingThreads.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/package-info.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/test/Hello.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/com/imooc/log/stack/test/JUTTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/classes/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/log-stack-01-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log-stack-01/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2gdOGr0SSPfqHFdNXQWKMRCJKr4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/wing/architect/hsp_study/java02/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f2f948ed-d08a-44f0-9a4a-389fc9d0a819" name="Changes" comment="" />
+      <created>1716023896531</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716023896531</updated>
+      <workItem from="1716023897719" duration="2040000" />
+      <workItem from="1716049410204" duration="88000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

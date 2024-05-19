@@ -1,7 +1,7 @@
 <h3 style="text-align: center">说明</h3>
 
 #### chapter-01 - git 操作命令         【 √ 】
-#### chapter-02 - java 基础           【 √ 】
+#### chapter-02 - java基础&jdk环境变量  【 √ 】
 #### chapter-03 - 数据结构与算法        【 △ 】
 #### chapter-04 - java8新特性-lambda   【 √ 】
 #### chapter-05 - JVM                 【 △ 】
@@ -20,6 +20,7 @@
 #### chapter-18 - Java设计模式           【 × 】
 #### chapter-19 - java IO 流         【 √ 】
 #### chapter-20 - maven             【 × 】
+#### chapter-21 - Java日志框架        【 × 】
 #### chapter-23 - java 反射          【 √ 】
 
 
