@@ -110,3 +110,13 @@ public static class Facade {
 
 ## 2.2 JCL 绑定日志实现（log4j2）
 
+
+
+
+
+
+
+
+
+
+
