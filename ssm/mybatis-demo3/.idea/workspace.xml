@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="52ede483-d8a5-4d1a-a29b-4970600b300d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../chapter24/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616144597211.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616145569298.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616145876310.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616146056045.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616146926729.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616147002109.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616147015300.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616147095936.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616147180562.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616463209812.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616463282187.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616464771784.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616465607290.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616465639080.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616465667657.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616467216382.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616467314082.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616467336432.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616469113754.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616469142604.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616469154258.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616470534343.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616470612608.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616471056064.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616471133486.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616482928813.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616487875112.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616550990633.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616551159843.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616557509389.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616557527886.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616558061073.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616558696902.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616558739190.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616558872585.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616566686358.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616566709567.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616566868757.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616567949549.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616568410749.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616568443022.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616568763050.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616568799366.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616568809974.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616569488794.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616569897430.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616569932235.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616577612042.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616577631853.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616577675018.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616577705162.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616577785188.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616578573302.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616579097777.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616579157655.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616639207003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616639302357.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616654926110.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616660132980.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/picture/img1/1616663783657.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter24/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter25/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../chapter26/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../design_patterns/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../design_patterns/src/main/java/com/itheima/pattern/proxy/jdk_interface_proxy/Huochezhan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../design_patterns/src/main/java/com/itheima/pattern/proxy/jdk_interface_proxy/ProxyHuochezhan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo1/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo1/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo1/mybatis-demo1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/mybatis-demo2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/dao/ClassDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/dao/CourseDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/dao/DetailDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/dao/StudentDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/dao/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/pojo/Clazz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/pojo/Course.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/pojo/Detail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/pojo/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/pojo/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/java/com/qfedu/utils/MyBatisUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/mappers/ClassMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/mappers/CourseMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/mappers/DetailMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/mappers/StudentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/test/java/com/qfedu/dao/ClassDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/test/java/com/qfedu/dao/CourseDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/test/java/com/qfedu/dao/StudentDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/src/test/java/com/qfedu/dao/UserDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/dao/ClassDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/dao/CourseDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/dao/DetailDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/dao/StudentDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/dao/UserDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/pojo/Clazz.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/pojo/Course.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/pojo/Detail.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/pojo/Student.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/pojo/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/com/qfedu/utils/MyBatisUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/mappers/ClassMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/mappers/CourseMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/mappers/DetailMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/mappers/StudentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/mappers/UserMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/classes/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/test-classes/com/qfedu/dao/ClassDAOTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/test-classes/com/qfedu/dao/CourseDAOTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/test-classes/com/qfedu/dao/StudentDAOTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mybatis-demo2/target/test-classes/com/qfedu/dao/UserDAOTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/dao/ClassDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/dao/MemberDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/dao/StudentDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/pojo/Clazz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/pojo/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/pojo/MemberSearchCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/pojo/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/utils/DruidDataSourceFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/qfedu/utils/MyBatisUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/ClassMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/MemberMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/StudentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/qfedu/dao/ClassDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/qfedu/dao/MemberDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/dao/ClassDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/dao/MemberDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/dao/StudentDAO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/pojo/Clazz.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/pojo/Member.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/pojo/MemberSearchCondition.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/pojo/Student.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/utils/DruidDataSourceFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/qfedu/utils/MyBatisUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/jdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mappers/ClassMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mappers/MemberMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mappers/StudentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/qfedu/dao/ClassDAOTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/qfedu/dao/MemberDAOTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../design_patterns/target/classes/com/itheima/pattern/proxy/jdk_proxy/ProxyFactory1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../design_patterns/target/classes/com/itheima/pattern/proxy/jdk_proxy/ProxyFactory1.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="log4j2" />
+        <option value="Class" />
+        <option value="mapper" />
+        <option value="Interface" />
+        <option value="JUnit4 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/repository" />
+        <option name="mavenHome" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4" />
+        <option name="userSettingsFile" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="1qEEFlArwD64scqPcZSb7Y0G4H5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/wing/architect/hsp_study/ssm/mybatis-demo3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.qfedu.dao" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Java2010\workspace\part3\mybatis-demo3\src\main\java\com\qfedu\pojo" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ClassDAOTest.queryClassByCid">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.qfedu.utils.Test" />
+      <module name="mybatis-demo3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qfedu.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClassDAOTest.queryClassByCid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis-demo3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qfedu.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qfedu.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.qfedu.dao.ClassDAOTest" />
+      <option name="METHOD_NAME" value="queryClassByCid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberDAOTest.searchMemberByCity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis-demo3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qfedu.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qfedu.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.qfedu.dao.MemberDAOTest" />
+      <option name="METHOD_NAME" value="searchMemberByCity" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberDAOTest.testQueryMemberById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis-demo3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qfedu.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qfedu.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.qfedu.dao.MemberDAOTest" />
+      <option name="METHOD_NAME" value="testQueryMemberById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberDAOTest.testSearchMemberByNick" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatis-demo3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qfedu.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qfedu.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.qfedu.dao.MemberDAOTest" />
+      <option name="METHOD_NAME" value="testSearchMemberByNick" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ClassDAOTest.queryClassByCid" />
+        <item itemvalue="JUnit.MemberDAOTest.searchMemberByCity" />
+        <item itemvalue="JUnit.MemberDAOTest.testQueryMemberById" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="JUnit.MemberDAOTest.testSearchMemberByNick" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52ede483-d8a5-4d1a-a29b-4970600b300d" name="Default Changelist" comment="" />
+      <created>1616636247679</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616636247679</updated>
+      <workItem from="1616636250231" duration="20274000" />
+      <workItem from="1616722971742" duration="2116000" />
+      <workItem from="1616730324126" duration="127000" />
+      <workItem from="1716476308233" duration="2269000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
