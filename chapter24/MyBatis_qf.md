@@ -1529,13 +1529,13 @@ public void testQueryMemberById(){
 >
 > 特性：
 >
-> 1.二级缓存默认没有开启，需要在mybatis-config.xml中的settings标签开启
+> 1.二级缓存默认开启
 >
 > 2.二级缓存只能缓存实现序列化接口的对象
 >
 > 3.
 
-- 在mybatis-config.xml开启使用二级缓存
+- 也可以显示在mybatis-config.xml开启使用二级缓存
 
 ```xml
 <settings>
@@ -1662,3 +1662,4 @@ public void queryClassByCid() {
 ![1616663783657](picture/img1/1616663783657.png)
 
 ***
+
