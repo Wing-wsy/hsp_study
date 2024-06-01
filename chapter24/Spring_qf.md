@@ -1292,7 +1292,7 @@ druid.pool.timeout=30000
     <property name="maxWait" value="${druid.pool.timeout}"/>
 </bean>
 
-<!-- 如果要使用mybatis的数据源，那么打开这样，注释上面
+<!-- 如果要使用mybatis的数据源，那么打开这里，注释上面
 <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
     <property name="driver" value="${driver}"/>
     <property name="url" value="${url}"/>
