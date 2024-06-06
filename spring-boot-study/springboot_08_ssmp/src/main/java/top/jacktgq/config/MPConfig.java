@@ -6,8 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Author CandyWall
- * @Date 2022/1/20--1:07
+ * 分页配置类，分页功能都是通过这个MyBatisPlus提供的拦截器来实现
  * @Description
  */
 @Configuration

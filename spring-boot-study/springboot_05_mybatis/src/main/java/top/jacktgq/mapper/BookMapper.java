@@ -12,6 +12,6 @@ import top.jacktgq.pojo.Book;
  */
 @Mapper
 public interface BookMapper {
-    @Select("select * from tbl_book where id = #{id}")
+    @Select("select * from book where id = #{id}")
     Book getById(Integer id);
 }

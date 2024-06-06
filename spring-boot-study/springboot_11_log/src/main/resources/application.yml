@@ -6,7 +6,7 @@ logging:
     iservice: com.alibaba
   level:
     root: info
-    # 设置某个包的日志级别
+    # 设置某个包的日志级别【不推荐】
     # top.jacktgq.controller: debug
     # 设置分组，对组设置级别
     ebank: warn

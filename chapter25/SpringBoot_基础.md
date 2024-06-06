@@ -1,5 +1,7 @@
 > SpringBoot中文文档：https://www.springcloud.cc/spring-boot.html
 
+> application.properties配置文档：https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties
+
 # SpringBoot
 
 ### 课程内容说明
@@ -53,7 +55,7 @@
 
 我们就着手第一个SpringBoot程序的开发了，看看到底使用SpringBoot技术能简化开发到什么程度。
 
-### JC-1-1.SpringBoot入门程序制作（一）
+### JC-1-1.SpringBoot入门程序制作
 
 ​	下面让我们开始做第一个SpringBoot程序吧，本课程基于Idea2020.3版本制作，使用的Maven版本为3.6.1，JDK版本为1.8。如果你的环境和上述环境不同，可能在操作界面和操作过程中略有不同，只要软件匹配兼容即可（说到这个Idea和Maven，它们两个还真不是什么版本都能搭到一起的，说多了都是泪啊）。
 
@@ -61,7 +63,7 @@
 
 **步骤①**：创建新模块，选择Spring Initializr，并配置模块相关基础信息
 
-![image-20211116125259385](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211116125259385.png)
+![image-20211116125259385](picture/img/image-20211116125259385.png)
 
 ​	<font color="#ff0000"><b>特别关注</b></font>：第3步点击Next时，Idea需要联网状态才可以进入到后面那一页，如果不能正常联网，就无法正确到达右面那个设置页了，会一直<font color="#ff0000"><b>联网</b></font>转转转
 
@@ -69,7 +71,7 @@
 
 **步骤②**：选择当前模块需要使用的技术集
 
-![image-20211116125615728](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211116125615728.png)
+![image-20211116125615728](picture/img/image-20211116125615728.png)
 
 ​	按照要求，左侧选择web，然后在中间选择Spring Web即可，选完右侧就出现了新的内容项，这就表示勾选成功了
 
@@ -96,7 +98,7 @@ public class BookController {
 
 **步骤④**：运行自动生成的Application类
 
-![image-20211116130152452](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211116130152452.png)
+![image-20211116130152452](picture/img/image-20211116130152452.png)
 
 ​	使用带main方法的java程序的运行形式来运行程序，运行完毕后，控制台输出上述信息。
 
@@ -182,179 +184,9 @@ public class BookController {
 
 ​	前面制作的时候说过，这个过程必须联网才可以进行，但是有些时候你会遇到一些莫名其妙的问题，比如基于Idea开发时，你会发现你配置了一些坐标，然后Maven下载对应东西的时候死慢死慢的，甚至还会失败。其实这和Idea这款IDE工具有关，万一Idea不能正常访问网络的话，我们是不是就无法制作SpringBoot程序了呢？咱们下一节再说
 
-
-
-### JC-1-2.SpringBoot入门程序制作（二）
-
-​	如果Idea不能正常联网，这个SpringBoot程序就无法制作了吗？开什么玩笑，世上IDE工具千千万，难道SpringBoot技术还必须基于Idea来做了？这是不可能的。开发SpringBoot程序，可以不基于任意的IDE工具进行，其实在SpringBoot的官网里面就可以直接创建SpringBoot程序
-
-​	SpringBoot官网和Spring的官网是在一起的，都是  spring.io  。你可以通过项目一级一级的找到SpringBoot技术的介绍页，然后在页面中间部位找到如下内容
-
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122150444816.png" alt="image-20211122150444816" style="zoom: 67%;" />
-
-**步骤①**：点击Spring Initializr后进入到创建SpringBoot程序的界面上，下面是输入信息的过程，和前面的一样，只是界面变了而已，根据自己的要求，在左侧选择对应信息和输入对应的信息即可
-
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122150608039.png" alt="image-20211122150608039"  />
-
-**步骤②**：右侧的ADD DEPENDENCIES用于选择使用何种技术，和之前勾选的Spring WEB是在做同一件事，仅仅是界面不同而已，点击后打开网页版的技术选择界面
-
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122161257361.png" alt="image-20211122161257361" style="zoom:50%;" />
-
-**步骤③**：所有信息设置完毕后，点击下面左侧按钮，生成一个文件包
-
-![image-20211122161548022](C:\Users\itcast\AppData\Roaming\Typora\typora-user-images\image-20211122161548022.png)
-
-**步骤④**：保存后得到一个压缩文件，这个文件打开后就是创建的SpringBoot工程文件夹了		
-
-![image-20211122161709478](C:\Users\itcast\AppData\Roaming\Typora\typora-user-images\image-20211122161709478.png)
-
-**步骤⑤**：解压缩此文件后，得到工程目录，在Idea中导入即可使用，和之前创建的东西完全一样。下面就可以自己创建一个Controller测试一下是否能用了。
-
-<font color="#f0f"><b>温馨提示</b></font>
-
-​	做到这里其实可以透漏一个小秘密，Idea工具中创建SpringBoot工程其实连接的就是SpringBoot的官网，走的就是这个过程，只不过Idea把界面给整合了一下，读取到了Spring官网给的信息，然后展示到了Idea的界面中而已，不信你可以看看下面这个步骤
-
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122162443035.png" alt="image-20211122162443035" style="zoom: 67%;" />
-
-​	上面描述了连接的网址，再看看SpringBoot官网创建工程的URL地址，是不是一样？
-
-<img src="C:\Users\itcast\AppData\Roaming\Typora\typora-user-images\image-20211122162820719.png" alt="image-20211122162820719"  />
-
-**总结**
-
-1. 打开SpringBoot官网，选择Quickstart Your Project
-
-   <img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122150444816.png" alt="image-20211122150444816" style="zoom: 67%;" />
-
-2. 创建工程
-
-   <img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122150608039.png" alt="image-20211122150608039"  />
-
-   并保存项目
-
-   ![image-20211122161548022](C:\Users\itcast\AppData\Roaming\Typora\typora-user-images\image-20211122161548022.png)
-
-3. 解压项目，通过IDE导入项目
-
-**思考**
-
-​	现在创建工程靠的是访问国外的Spring主站，但是互联网访问是可以控制的，如果一天这个网站你在国内都无法访问了，那前面这两种方式都无法创建SpringBoot工程了，这时候又该怎么解决这个问题呢？咱们下一节再说
-
-
-
-### JC-1-3.SpringBoot入门程序制作（三）
-
-​	前面提到网站如果被限制访问了，该怎么办？开动脑筋想一想，不管是方式一还是方式二其实都是走的同一个地方，也就是SpringBoot的官网创建的SpringBoot工程，那如果我们国内有这么一个网站能提供这样的功能，是不是就解决了呢？必然的嘛，新的问题又来了，这个国内的网站有吗？还真有，阿里提供了一个，下面问题就简单了，网址告诉我们就OK了，没错，就是这样
-
-​	创建工程时，切换选择starter服务路径，然后手工收入阿里云提供给我们的使用地址即可。地址：http://start.aliyun.com或https://start.aliyun.com
-
-![image-20211122163605950](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122163605950.png)
-
-​	阿里为了便于自己开发使用，因此在依赖坐标中添加了一些阿里相关的技术，也是为了推广自己的技术吧，所以在依赖选择列表中，你有了更多的选择。不过有一点需要说清楚，阿里云地址默认创建的SpringBoot工程版本是<font color="#ff0000"><b>2.4.1</b></font>，所以如果你想更换其他的版本，创建项目后手工修改即可，别忘了刷新一下，加载新版本信息
-
-![image-20211122163937408](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122163937408.png)
-
-​	阿里云提供的地址更符合国内开发者的使用习惯，里面有一些SpringBoot官网上没有给出的坐标，大家可以好好看一看。
-
-​	<font color="#ff0000"><b>注意</b></font>：阿里云提供的工程创建地址初始化完毕后和实用SpringBoot官网创建出来的工程略有区别。主要是在配置文件的形式上有区别。这个信息在后面讲解Boot程序的执行流程时给大家揭晓
-
-**总结**
-
-1. 选择start来源为自定义URL
-2. 输入阿里云start地址
-3. 创建项目
-
-**思考**
-
-​	做到这里我们已经有了三种方式创建SpringBoot工程，但是每种方式都要求你必须能上网才能创建工程。假如有一天，你加入了一个保密级别比较高的项目组，整个项目组没有外网，整个事情是不是就不能做了呢？咱们下一节再说
-
-
-
-### JC-1-4.SpringBoot入门程序制作（四）
-
-​	不能上网，还想创建SpringBoot工程，能不能做呢？能做，但是你要先问问自己联网和不联网到底差别是什么？这个信息找到以后，你就发现，你把联网要干的事情都提前准备好，就无需联网了。
-
-​	联网做什么呢？首先SpringBoot工程也是基于Maven构建的，而Maven工程当使用了一些自己需要使用又不存在的东西时，就要去下载。其实SpringBoot工程创建的时候就是去下载一些必要的组件的。你把这些东西给提前准备好就可以了吗？是的，就是这样。
-
-​	下面咱们就一起手工创建一个SpringBoot工程
-
-**步骤①**：创建工程时，选择手工创建Maven工程
-
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122165341684.png" alt="image-20211122165341684" style="zoom:50%;" />
-
-**步骤②**：参照标准SpringBoot工程的pom文件，书写自己的pom文件即可
-
-```XML
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
-    </parent>
-
-    <groupId>com.itheima</groupId>
-    <artifactId>springboot_01_04_quickstart</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-
-</project>
-```
-
-​	用什么写什么，不用的都可以不写。当然，现在小伙伴们可能还不知道用什么和不用什么，最简单的就是复制粘贴了，随着后面的学习，你就知道哪些可以省略了。此处我删减了一些目前不是必须的东西，一样能用
-
-**步骤③**：之前运行SpringBoot工程需要一个类，这个缺不了，自己手写一个就行了，建议按照之前的目录结构来创建，先别玩花样，先学走后学跑。类名可以自定义，关联的名称一切修改即可
-
-```JAVA
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(<Application.class);
-    }
-}
-```
-
-​	<font color="#ff0000"><b>关注</b></font>：类上面的注解@SpringBootApplication千万别丢了，这个是核心，后面再介绍
-
-​	<font color="#ff0000"><b>关注</b></font>：类名可以自定义，只要保障下面代码中使用的类名和你自己定义的名称一样即可，也就是run方法中的那个class对应的名称
-
-**步骤④**：下面就可以自己创建一个Controller测试一下是否能用了，和之前没有差别了
-
-​	看到这里其实应该能够想明白了，通过向导或者网站创建的SpringBoot工程其实就是帮你写了一些代码，而现在是自己手写，写的内容都一样，仅此而已。
-
-<font color="#f0f"><b>温馨提示</b></font>
-
-​	如果你的计算机上从来没有创建成功过SpringBoot工程，自然也就没有下载过SpringBoot对应的坐标，那用手写创建的方式在不联网的情况下肯定该是不能用的。所谓手写，其实就是自己写别人帮你生成的东西，但是引用的坐标对应的资源必须保障maven仓库里面有才行，如果没有，还是要去下载的
-
-**总结**
-
-1. 创建普通Maven工程
-2. 继承spring-boot-starter-parent
-3. 添加依赖spring-boot-starter-web
-4. 制作引导类Application
-
-到这里其实学习了4种创建SpringBoot工程的方式，其实本质是一样的，就是根据SpringBoot工程的文件格式要求，通过不同时方式生成或者手写得到对应的文件，效果完全一样。
-
-
-
 #### 教你一招：在Idea中隐藏指定文件/文件夹
 
-​	创建SpringBoot工程时，使用SpringBoot向导也好，阿里云也罢，其实都是为了一个目的，得到一个标准的SpringBoot工程文件结构。这个时候就有新的问题出现了，标准的工程结构中包含了一些未知的文件夹，在开发的时候看起来特别别扭，这一节就来说说这些文件怎么处理。
+​	创建SpringBoot工程时，标准的工程结构中包含了一些未知的文件夹，在开发的时候看起来特别别扭，这一节就来说说这些文件怎么处理。
 
 ​	处理方案无外乎两种，如果你对每一个文件/目录足够了解，没有用的完全可以删除掉，或者不删除，但是看着别扭，就设置文件为看不到就行了。删除不说了，直接Delete掉就好了，这一节说说如何隐藏指定的文件或文件夹信息。
 
@@ -362,11 +194,11 @@ public class Application {
 
 **步骤①**：打开设置，【Files】→【Settings】
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122173835517.png" alt="image-20211122173835517" style="zoom:80%;" />
+<img src="picture/img/image-20211122173835517.png" alt="image-20211122173835517" style="zoom:80%;" />
 
 **步骤②**：打开文件类型设置界面，【Editor】→【File Types】→【Ignored Files and Folders】，忽略文件或文件夹显示
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211122174020028.png" alt="image-20211122174020028" style="zoom: 67%;" />
+<img src="picture/img/image-20211122174020028.png" alt="image-20211122174020028" style="zoom: 67%;" />
 
 **步骤③**：添加你要隐藏的文件名称或文件夹名称，可以使用*号通配符，表示任意，设置完毕即可
 
@@ -380,11 +212,9 @@ public class Application {
    3. 输入要隐藏的名称，支持*号通配符
    4. 回车确认添加
 
+***
 
-
-### JC-1-5.SpringBoot简介
-
-​	入门案例做完了，这个时候回忆一下咱们之前说的SpringBoot的功能是什么还记得吗？加速Spring程序的开发，现在是否深有体会？再来看SpringBoot技术的设计初衷就很容易理解了。
+### JC-1-2.SpringBoot简介
 
 ​	SpringBoot是由Pivotal团队提供的全新框架，其设计目的是用来<font color="#ff0000"><b>简化Spring应用的初始搭建以及开发过程</b></font>。
 
@@ -392,7 +222,7 @@ public class Application {
 
 - Spring程序缺点
   - 依赖设置繁琐
-    - 以前写Spring程序，使用的技术都要自己一个一个的写，现在不需要了，如果做过原始SpringMVC程序的小伙伴应该知道，写SpringMVC程序，最基础的spring-web和spring-webmvc这两个坐标时必须的，就这还不包含你用json啊等等这些坐标，现在呢？一个坐标搞定面
+    - 以前写Spring程序，使用的技术都要自己一个一个的写，现在不需要了，如果做过原始SpringMVC程序的小伙伴应该知道，写SpringMVC程序，最基础的spring-web和spring-webmvc这两个坐标是必须的，就这还不包含你用json啊等等这些坐标，现在呢？一个坐标搞定
   - 配置繁琐
     - 以前写配置类或者配置文件，然后用什么东西就要自己写加载bean这些东西，现在呢？什么都没写，照样能用
 
@@ -418,8 +248,6 @@ public class Application {
 - starter
 - 引导类
 - 内嵌tomcat
-
-
 
 #### parent
 
@@ -702,7 +530,7 @@ public class Application {
 
 ​	配置说完了，我们发现SpringBoot确实帮助我们减少了很多配置工作，下面说一下程序是如何运行的。目前程序运行的入口就是SpringBoot工程创建时自带的那个类了，带有main方法的那个类，运行这个类就可以启动SpringBoot工程的运行
 
-```
+```java
 @SpringBootApplication
 public class Springboot0101QuickstartApplication {
     public static void main(String[] args) {
@@ -953,7 +781,7 @@ public class Springboot0101QuickstartApplication {
 
 ​	SpringBoot通过配置文件application.properties就可以修改默认的配置，那咱们就先找个简单的配置下手，当前访问tomcat的默认端口是8080，好熟悉的味道，但是不便于书写，我们先改成80，通过这个操作来熟悉一下SpringBoot的配置格式是什么样的
 
-![image-20211123165428245](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211123165428245.png)
+![image-20211123165428245](picture/img/image-20211123165428245.png)
 
 ​	那该如何写呢？properties格式的文件书写规范是key=value
 
@@ -963,7 +791,7 @@ name=itheima
 
 ​	这个格式肯定是不能颠覆的，那就尝试性的写就行了，改端口，写port。当你输入port后，神奇的事情就发生了，这玩意儿带提示，太好了
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211123165719091.png" alt="image-20211123165719091" style="zoom:80%;" />
+<img src="picture/img/image-20211123165719091.png" alt="image-20211123165719091" style="zoom:80%;" />
 
 ​	根据提示敲回车，输入80端口，搞定
 
@@ -1157,23 +985,23 @@ server:
 
 **步骤①**：打开设置，【Files】→【Project Structure...】
 
-![image-20211126160548690](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126160548690.png)
+![image-20211126160548690](picture/img/image-20211126160548690.png)
 
 **步骤②**：在弹出窗口中左侧选择【Facets】，右侧选中Spring路径下对应的模块名称，也就是你自动提示功能消失的那个模块
 
-![image-20211126160726589](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126160726589.png)![image-20211126160844372](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126160844372.png)
+![image-20211126160726589](picture/img/image-20211126160726589.png)![image-20211126160844372](picture/img/image-20211126160844372.png)
 
 **步骤③**：点击Customize Spring Boot按钮，此时可以看到当前模块对应的配置文件是哪些了。如果没有你想要称为配置文件的文件格式，就有可能无法弹出提示
 
-![image-20211126160946448](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126160946448.png)![image-20211126160954338](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126160954338.png)
+![image-20211126160946448](picture/img/image-20211126160946448.png)![image-20211126160954338](picture/img/image-20211126160954338.png)
 
 **步骤④**：选择添加配置文件，然后选中要作为配置文件的具体文件就OK了
 
-![image-20211126161145082](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126161145082.png)<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126161156324.png" alt="image-20211126161156324" style="zoom:80%;" />
+![image-20211126161145082](picture/img/image-20211126161145082.png)<img src="picture/img/image-20211126161156324.png" alt="image-20211126161156324" style="zoom:80%;" />
 
 ​	到这里就做完了，其实就是Idea的一个小功能
 
-![image-20211126161301699](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126161301699.png)
+![image-20211126161301699](picture/img/image-20211126161301699.png)
 
 
 
@@ -1276,7 +1104,7 @@ users2: [ { name:Tom , age:4 } , { name:Jerry , age:5 } ]	#对象数组缩略格
 
 ​	yaml中保存的单个数据，可以使用Spring中的注解直接读取，使用@Value可以读取单个数据，属性名引用方式：<font color="#ff0000"><b>${一级属性名.二级属性名……}</b></font>
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126180433356.png" alt="image-20211126180433356" style="zoom:80%;" />
+<img src="picture/img/image-20211126180433356.png" alt="image-20211126180433356" style="zoom:80%;" />
 
 ​	记得使用@Value注解时，要将该注入写在某一个指定的Spring管控的bean的属性名上方。现在就可以读取到对应的单一数据行了
 
@@ -1291,7 +1119,7 @@ users2: [ { name:Tom , age:4 } , { name:Jerry , age:5 } ]	#对象数组缩略格
 
 ​	读取单一数据可以解决读取数据的问题，但是如果定义的数据量过大，这么一个一个书写肯定会累死人的，SpringBoot提供了一个对象，能够把所有的数据都封装到这一个对象中，这个对象叫做Environment，使用自动装配注解可以将所有的yaml数据封装到这个对象中
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126180738569.png" alt="image-20211126180738569" style="zoom:80%;" />
+<img src="picture/img/image-20211126180738569.png" alt="image-20211126180738569" style="zoom:80%;" />
 
 ​	数据封装到了Environment对象中，获取属性时，通过Environment的接口操作进行，具体方法时getProperties（String），参数填写属性名即可
 
@@ -1308,11 +1136,11 @@ users2: [ { name:Tom , age:4 } , { name:Jerry , age:5 } ]	#对象数组缩略格
 
 ​	首先定义一个对象，并将该对象纳入Spring管控的范围，也就是定义成一个bean，然后使用注解@ConfigurationProperties指定该对象加载哪一组yaml中配置的信息。
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126181126382.png" alt="image-20211126181126382" style="zoom:80%;" />
+<img src="picture/img/image-20211126181126382.png" alt="image-20211126181126382" style="zoom:80%;" />
 
 ​	这个@ConfigurationProperties必须告诉他加载的数据前缀是什么，这样当前前缀下的所有属性就封装到这个对象中。记得数据属性名要与对象的变量名一一对应啊，不然没法封装。其实以后如果你要定义一组数据自己使用，就可以先写一个对象，然后定义好属性，下面到配置中根据这个格式书写即可。
 
-​	<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211126181423432.png" alt="image-20211126181423432" style="zoom:80%;" />
+<img src="picture/img/image-20211126181423432.png" alt="image-20211126181126382" style="zoom:80%;" />
 
 ​	<font color="#f0f"><b>温馨提示</b></font>
 
@@ -1373,8 +1201,6 @@ lesson: "Spring\tboot\nlesson"
 
 ​	到这里有关yaml文件的基础使用就先告一段落，在实用篇中再继续研究更深入的内容。
 
-
-
 ## JC-3.基于SpringBoot实现SSMP整合
 
 ​	重头戏来了，SpringBoot之所以好用，就是它能方便快捷的整合其他技术，这一部分咱们就来聊聊一些技术的整合方式，通过这一章的学习，大家能够感受到SpringBoot到底有多酷炫。这一章咱们学习如下技术的整合方式
@@ -1412,7 +1238,6 @@ public class AccountServiceTestCase {
         System.out.println(accountService.findById(2));
     }
 }
-
 ```
 
 ​	其中核心代码是前两个注解，第一个注解@RunWith是设置Spring专用于测试的类运行器，简单说就是Spring程序执行程序有自己的一套独立的运行程序的方式，不能使用JUnit提供的类运行方式了，必须指定一下，但是格式是固定的，琢磨一下，<font color="#ff0000"><b>每次都指定一样的东西，这个东西写起来没有技术含量啊</b></font>，第二个注解@ContextConfiguration是用来设置Spring核心配置文件或配置类的，简单说就是加载Spring的环境你要告诉Spring具体的环境配置是在哪里写的，虽然每次加载的文件都有可能不同，但是仔细想想，如果文件名是固定的，这个貌似也是一个固定格式。似然<font color="#ff0000"><b>有可能是固定格式，那就有可能每次都写一样的东西，也是一个没有技术含量的内容书写</b></font>
@@ -1600,9 +1425,9 @@ class Springboot04JunitApplicationTests {
 
 **步骤①**：创建模块时勾选要使用的技术，MyBatis，由于要操作数据库，还要勾选对应数据库
 
-![image-20211129092156020](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129092156020.png)
+![image-20211129092156020](picture/img/image-20211129092156020.png)
 
-![image-20211129092210993](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129092210993.png)
+![image-20211129092210993](picture/img/image-20211129092210993.png)
 
 ​	或者手工导入对应技术的starter，和对应数据库的坐标
 
@@ -1640,6 +1465,8 @@ spring:
 **实体类**
 
 ```JAVA
+@Component
+@Data
 public class Book {
     private Integer id;
     private String type;
@@ -1786,7 +1613,7 @@ public interface BookDao extends BaseMapper<Book> {
 
 ​	核心在于Dao接口继承了一个BaseMapper的接口，这个接口中帮助开发者预定了若干个常用的API接口，简化了通用API接口的开发工作。
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129100313919.png" alt="image-20211129100313919" style="zoom:80%;" />
+<img src="picture/img/image-20211129100313919.png" alt="image-20211129100313919" style="zoom:80%;" />
 
 ​	下面就可以写一个测试类进行测试了，此处省略。
 
@@ -1894,7 +1721,7 @@ spring:
 
 ​	注意观察，配置项中，在datasource下面并不是直接配置url这些属性的，而是先配置了一个druid节点，然后再配置的url这些东西。言外之意，url这个属性时druid下面的属性，那你能想到吗？除了这4个常规配置外，还有druid专用的其他配置。通过提示功能可以打开druid相关的配置查阅
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129112610729.png" alt="image-20211129112610729" style="zoom:80%;" />
+<img src="picture/img/image-20211129112610729.png" alt="image-20211129112610729" style="zoom:80%;" />
 
 ​	与druid相关的配置超过200条以上，这就告诉你，如果想做druid相关的配置，使用这种格式就可以了，这里就不展开描述了，太多了。
 
@@ -1918,27 +1745,17 @@ spring:
 
 **主页面**
 
-![image-20211129113447844](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129113447844.png)
+![image-20211129113447844](picture/img/image-20211129113447844.png)
 
 **添加**
 
-![image-20211129113522459](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129113522459.png)
+![image-20211129113522459](picture/img/image-20211129113522459.png)
 
 **删除**
 
-![image-20211129113550829](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129113550829.png)
+![image-20211129113550829](picture/img/image-20211129113550829.png)
 
-**修改**
-
-![image-20211129113610966](C:\Users\itcast\AppData\Roaming\Typora\typora-user-images\image-20211129113610966.png)
-
-**分页**
-
-![image-20211129113628969](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129113628969.png)
-
-**条件查询**
-
-![image-20211129113650369](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129113650369.png)
+等。
 
 ​	整体案例中需要采用的技术如下，先了解一下，做到哪一个说哪一个
 
@@ -1963,11 +1780,11 @@ spring:
 
 ​	对于这个案例如果按照企业开发的形式进行应该制作后台微服务，前后端分离的开发。
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129114306062.png" alt="image-20211129114306062" style="zoom:80%;" />
+<img src="picture/img/image-20211129114306062.png" alt="image-20211129114306062" style="zoom:80%;" />
 
 我知道这个对初学的小伙伴要求太高了，咱们简化一下。后台做单体服务器，前端不使用前后端分离的制作了。
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129114328967.png" alt="image-20211129114328967" style="zoom:80%;" />
+<img src="picture/img/image-20211129114328967.png" alt="image-20211129114328967" style="zoom:80%;" />
 
 一个服务器即充当后台服务调用，又负责前端页面展示，降低学习的门槛。
 
@@ -1998,37 +1815,7 @@ server:
 
 #### 1.实体类开发
 
-​	本案例对应的模块表结构如下：
-
-```tex
--- ----------------------------
--- Table structure for tbl_book
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_book`;
-CREATE TABLE `tbl_book`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tbl_book
--- ----------------------------
-INSERT INTO `tbl_book` VALUES (1, '计算机理论', 'Spring实战 第5版', 'Spring入门经典教程，深入理解Spring原理技术内幕');
-INSERT INTO `tbl_book` VALUES (2, '计算机理论', 'Spring 5核心原理与30个类手写实战', '十年沉淀之作，手写Spring精华思想');
-INSERT INTO `tbl_book` VALUES (3, '计算机理论', 'Spring 5 设计模式', '深入Spring源码剖析Spring源码中蕴含的10大设计模式');
-INSERT INTO `tbl_book` VALUES (4, '计算机理论', 'Spring MVC+MyBatis开发从入门到项目实战', '全方位解析面向Web应用的轻量级框架，带你成为Spring MVC开发高手');
-INSERT INTO `tbl_book` VALUES (5, '计算机理论', '轻量级Java Web企业应用实战', '源码级剖析Spring框架，适合已掌握Java基础的读者');
-INSERT INTO `tbl_book` VALUES (6, '计算机理论', 'Java核心技术 卷I 基础知识（原书第11版）', 'Core Java 第11版，Jolt大奖获奖作品，针对Java SE9、10、11全面更新');
-INSERT INTO `tbl_book` VALUES (7, '计算机理论', '深入理解Java虚拟机', '5个维度全面剖析JVM，大厂面试知识点全覆盖');
-INSERT INTO `tbl_book` VALUES (8, '计算机理论', 'Java编程思想（第4版）', 'Java学习必读经典,殿堂级著作！赢得了全球程序员的广泛赞誉');
-INSERT INTO `tbl_book` VALUES (9, '计算机理论', '零基础学Java（全彩版）', '零基础自学编程的入门图书，由浅入深，详解Java语言的编程思想和核心技术');
-INSERT INTO `tbl_book` VALUES (10, '市场营销', '直播就该这么做：主播高效沟通实战指南', '李子柒、李佳琦、薇娅成长为网红的秘密都在书中');
-INSERT INTO `tbl_book` VALUES (11, '市场营销', '直播销讲实战一本通', '和秋叶一起学系列网络营销书籍');
-INSERT INTO `tbl_book` VALUES (12, '市场营销', '直播带货：淘宝、天猫直播从新手到高手', '一本教你如何玩转直播的书，10堂课轻松实现带货月入3W+');
-```
+​	表SQL语句看对应的项目
 
 ​	根据上述表结构，制作对应的实体类
 
@@ -2225,38 +2012,13 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-​	再来看运行结果，此时就显示了运行期执行SQL的情况。
-
-```tex
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c9a6717] was not registered for synchronization because synchronization is not active
-JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@6ca30b8a] will not be managed by Spring
-==>  Preparing: SELECT id,type,name,description FROM tbl_book
-==> Parameters: 
-<==    Columns: id, type, name, description
-<==        Row: 1, 计算机理论, Spring实战 第5版, Spring入门经典教程，深入理解Spring原理技术内幕
-<==        Row: 2, 计算机理论, Spring 5核心原理与30个类手写实战, 十年沉淀之作，手写Spring精华思想
-<==        Row: 3, 计算机理论, Spring 5 设计模式, 深入Spring源码剖析Spring源码中蕴含的10大设计模式
-<==        Row: 4, 计算机理论, Spring MVC+MyBatis开发从入门到项目实战, 全方位解析面向Web应用的轻量级框架，带你成为Spring MVC开发高手
-<==        Row: 5, 计算机理论, 轻量级Java Web企业应用实战, 源码级剖析Spring框架，适合已掌握Java基础的读者
-<==        Row: 6, 计算机理论, Java核心技术 卷I 基础知识（原书第11版）, Core Java 第11版，Jolt大奖获奖作品，针对Java SE9、10、11全面更新
-<==        Row: 7, 计算机理论, 深入理解Java虚拟机, 5个维度全面剖析JVM，大厂面试知识点全覆盖
-<==        Row: 8, 计算机理论, Java编程思想（第4版）, Java学习必读经典,殿堂级著作！赢得了全球程序员的广泛赞誉
-<==        Row: 9, 计算机理论, 零基础学Java（全彩版）, 零基础自学编程的入门图书，由浅入深，详解Java语言的编程思想和核心技术
-<==        Row: 10, 市场营销, 直播就该这么做：主播高效沟通实战指南, 李子柒、李佳琦、薇娅成长为网红的秘密都在书中
-<==        Row: 11, 市场营销, 直播销讲实战一本通, 和秋叶一起学系列网络营销书籍
-<==        Row: 12, 市场营销, 直播带货：淘宝、天猫直播从新手到高手, 一本教你如何玩转直播的书，10堂课轻松实现带货月入3W+
-<==        Row: 13, 测试类型, 测试数据, 测试描述数据
-<==        Row: 14, 测试数据update, 测试数据update, 测试数据update
-<==        Row: 15, -----------------, 测试数据123, 测试数据123
-<==      Total: 15
-```
+​	此时就显示了运行期执行SQL的情况。
 
 ​	其中清晰的标注了当前执行的SQL语句是什么，携带了什么参数，对应的执行结果是什么，所有信息应有尽有。
 
 ​	此处设置的是日志的显示形式，当前配置的是控制台输出，当然还可以由更多的选择，根据需求切换即可
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129143207295.png" alt="image-20211129143207295" style="zoom:80%;" />
+<img src="picture/img/image-20211129143207295.png" alt="image-20211129143207295" style="zoom:80%;" />
 
 
 
@@ -2645,15 +2407,15 @@ public class BookController2 {
 
 **普通GET请求**
 
-![image-20211129152237371](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129152237371.png)
+![image-20211129152237371](picture/img/image-20211129152237371.png)
 
 **PUT请求传递json数据，后台实用@RequestBody接收数据**
 
-![image-20211129152300177](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129152300177.png)
+![image-20211129152300177](picture/img/image-20211129152300177.png)
 
 **GET请求传递路径变量，后台实用@PathVariable接收数据**
 
-![image-20211129152320073](C:\Users\itcast\AppData\Roaming\Typora\typora-user-images\image-20211129152320073.png)
+![image-20211129152320073](picture/img/image-20211129152320073.png)
 
 **总结**
 
@@ -2734,11 +2496,11 @@ public class R {
 
 ​	表现层开发格式也需要转换一下
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129153301262.png" alt="image-20211129153301262" style="zoom:80%;" />
+<img src="picture/img/image-20211129153301262.png" alt="image-20211129153301262" style="zoom:80%;" />
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129153319052.png" alt="image-20211129153319052" style="zoom:80%;" />
+<img src="picture/img/image-20211129153319052.png" alt="image-20211129153319052" style="zoom:80%;" />
 
-<img src="../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129153332499.png" alt="image-20211129153332499" style="zoom:80%;" />
+<img src="picture/img/image-20211129153332499.png" alt="image-20211129153332499" style="zoom:80%;" />
 
 ​	结果这么一折腾，全格式统一，现在后端发送给前端的数据格式就统一了，免去了不少前端解析数据的麻烦。
 
@@ -2757,8 +2519,6 @@ public class R {
 ​	后端的表现层接口开发完毕，就可以进行前端的开发了。
 
 ​	将前端人员开发的页面保存到lresources目录下的static目录中，建议执行maven的clean生命周期，避免缓存的问题出现。
-
-​	![image-20211129153831990](../../SpringBoot资料/SpringBoot—资料/SpringBoot—资料/配套资源/img/image-20211129153831990.png)
 
 ​	在进行具体的功能开发之前，先做联通性的测试，通过页面发送异步提交（axios），这一步调试通过后再进行进一步的功能开发
 
@@ -2783,246 +2543,7 @@ getAll() {
 
 #### 9.页面基础功能开发
 
-##### 	F-1.列表功能（非分页版）
-
-​		列表功能主要操作就是加载完数据，将数据展示到页面上，此处要利用VUE的数据模型绑定，发送请求得到数据，然后页面上读取指定数据即可
-
-​		**页面数据模型定义**
-
-```vue
-data:{
-	dataList: [],//当前页要展示的列表数据
-	...
-},
-```
-
-​		异步请求获取数据
-
-```JS
-//列表
-getAll() {
-    axios.get("/books").then((res)=>{
-        this.dataList = res.data.data;
-    });
-},
-```
-
-​		这样在页面加载时就可以获取到数据，并且由VUE将数据展示到页面上了
-
-总结：
-
-1. 将查询数据返回到页面，利用前端数据绑定进行数据展示
-
-
-
-##### 	F-2.添加功能
-
-​		添加功能用于收集数据的表单是通过一个弹窗展示的，因此在添加操作前首先要进行弹窗的展示，添加后隐藏弹窗即可。因为这个弹窗一直存在，因此当页面加载时首先设置这个弹窗为不可显示状态，需要展示，切换状态即可
-
-​		**默认状态**
-
-```vue
-data:{
-	dialogFormVisible: false,//添加表单是否可见
-	...
-},
-```
-
-​		**切换为显示状态**
-
-```JS
-//弹出添加窗口
-handleCreate() {
-	this.dialogFormVisible = true;
-},
-```
-
-​		由于每次添加数据都是使用同一个弹窗录入数据，所以每次操作的痕迹将在下一次操作时展示出来，需要在每次操作之前清理掉上次操作的痕迹
-
-​		**定义清理数据操作**
-
-```js
-//重置表单
-resetForm() {
-    this.formData = {};
-},
-```
-
-​		**切换弹窗状态时清理数据**
-
-```js
-//弹出添加窗口
-handleCreate() {
-    this.dialogFormVisible = true;
-    this.resetForm();
-},
-```
-
-​		至此准备工作完成，下面就要调用后台完成添加操作了
-
-​		**添加操作**
-
-```js
-//添加
-handleAdd () {
-    //发送异步请求
-    axios.post("/books",this.formData).then((res)=>{
-        //如果操作成功，关闭弹层，显示数据
-        if(res.data.flag){
-            this.dialogFormVisible = false;
-            this.$message.success("添加成功");
-        }else {
-            this.$message.error("添加失败");
-        }
-    }).finally(()=>{
-        this.getAll();
-    });
-},
-```
-
-1. 将要保存的数据传递到后台，通过post请求的第二个参数传递json数据到后台
-2. 根据返回的操作结果决定下一步操作
-   - 如何是true就关闭添加窗口，显示添加成功的消息
-   - 如果是false保留添加窗口，显示添加失败的消息
-3. 无论添加是否成功，页面均进行刷新，动态加载数据（对getAll操作发起调用）
-
-​		**取消添加操作**
-
-```JS
-//取消
-cancel(){
-    this.dialogFormVisible = false;
-    this.$message.info("操作取消");
-},
-```
-
-**总结**
-
-1. 请求方式使用POST调用后台对应操作
-2. 添加操作结束后动态刷新页面加载数据
-3. 根据操作结果不同，显示对应的提示信息
-4. 弹出添加Div时清除表单数据
-
-
-
-##### 	F-3.删除功能
-
-​		模仿添加操作制作删除功能，差别之处在于删除操作仅传递一个待删除的数据id到后台即可
-
-​		**删除操作**
-
-```JS
-// 删除
-handleDelete(row) {
-    axios.delete("/books/"+row.id).then((res)=>{
-        if(res.data.flag){
-            this.$message.success("删除成功");
-        }else{
-            this.$message.error("删除失败");
-        }
-    }).finally(()=>{
-        this.getAll();
-    });
-},
-```
-
-​		**删除操作提示信息**
-
-```JS
-// 删除
-handleDelete(row) {
-    //1.弹出提示框
-    this.$confirm("此操作永久删除当前数据，是否继续？","提示",{
-        type:'info'
-    }).then(()=>{
-        //2.做删除业务
-        axios.delete("/books/"+row.id).then((res)=>{
-       		if(res.data.flag){
-            	this.$message.success("删除成功");
-        	}else{
-            	this.$message.error("删除失败");
-        	}
-        }).finally(()=>{
-            this.getAll();
-        });
-    }).catch(()=>{
-        //3.取消删除
-        this.$message.info("取消删除操作");
-    });
-}，	
-```
-
-**总结**
-
-1. 请求方式使用Delete调用后台对应操作
-2. 删除操作需要传递当前行数据对应的id值到后台
-3. 删除操作结束后动态刷新页面加载数据
-4. 根据操作结果不同，显示对应的提示信息
-5. 删除操作前弹出提示框避免误操作
-
-
-
-##### 	F-4.修改功能
-
-​		修改功能可以说是列表功能、删除功能与添加功能的合体。几个相似点如下：
-
-1. 页面也需要有一个弹窗用来加载修改的数据，这一点与添加相同，都是要弹窗
-
-2. 弹出窗口中要加载待修改的数据，而数据需要通过查询得到，这一点与查询全部相同，都是要查数据
-
-3. 查询操作需要将要修改的数据id发送到后台，这一点与删除相同，都是传递id到后台
-
-4. 查询得到数据后需要展示到弹窗中，这一点与查询全部相同，都是要通过数据模型绑定展示数据
-
-5. 修改数据时需要将被修改的数据传递到后台，这一点与添加相同，都是要传递数据
-
-   所以整体上来看，修改功能就是前面几个功能的大合体
-
-   **查询并展示数据**
-
-```JS
-//弹出编辑窗口
-handleUpdate(row) {
-    axios.get("/books/"+row.id).then((res)=>{
-        if(res.data.flag){
-            //展示弹层，加载数据
-            this.formData = res.data.data;
-            this.dialogFormVisible4Edit = true;
-        }else{
-            this.$message.error("数据同步失败，自动刷新");
-        }
-    });
-},
-```
-
-​		**修改操作**
-
-```JS
-//修改
-handleEdit() {
-    axios.put("/books",this.formData).then((res)=>{
-        //如果操作成功，关闭弹层并刷新页面
-        if(res.data.flag){
-            this.dialogFormVisible4Edit = false;
-            this.$message.success("修改成功");
-        }else {
-            this.$message.error("修改失败，请重试");
-        }
-    }).finally(()=>{
-        this.getAll();
-    });
-},
-```
-
-**总结**
-
-1. 加载要修改数据通过传递当前行数据对应的id值到后台查询数据（同删除与查询全部）
-2. 利用前端双向数据绑定将查询到的数据进行回显（同查询全部）
-3. 请求方式使用PUT调用后台对应操作（同新增传递数据）
-4. 修改操作结束后动态刷新页面加载数据（同新增）
-5. 根据操作结果不同，显示对应的提示信息（同新增）
-
-​	
+前端处理，这里略。
 
 #### 10.业务消息一致性处理
 
@@ -3090,75 +2611,13 @@ public class ProjectExceptionAdvice {
 }
 ```
 
-​	页面上得到数据后，先判定是否有后台传递过来的消息，标志就是当前操作是否成功，如果返回操作结果false，就读取后台传递的消息
-
-```JS
-//添加
-handleAdd () {
-	//发送ajax请求
-    axios.post("/books",this.formData).then((res)=>{
-        //如果操作成功，关闭弹层，显示数据
-        if(res.data.flag){
-            this.dialogFormVisible = false;
-            this.$message.success("添加成功");
-        }else {
-            this.$message.error(res.data.msg);			//消息来自于后台传递过来，而非固定内容
-        }
-    }).finally(()=>{
-        this.getAll();
-    });
-},
-```
-
 **总结**
 
 1. 使用注解@RestControllerAdvice定义SpringMVC异常处理器用来处理异常的
 2. 异常处理器必须被扫描加载，否则无法生效
 3. 表现层返回结果的模型类中添加消息属性用来传递消息到页面
 
-​	
-
 #### 11.页面功能开发
-
-##### 	F-5.分页功能
-
-​		分页功能的制作用于替换前面的查询全部，其中要使用到elementUI提供的分页组件
-
-```js
-<!--分页组件-->
-<div class="pagination-container">
-    <el-pagination
-		class="pagiantion"
-		@current-change="handleCurrentChange"
-		:current-page="pagination.currentPage"
-		:page-size="pagination.pageSize"
-		layout="total, prev, pager, next, jumper"
-		:total="pagination.total">
-    </el-pagination>
-</div>
-```
-
-​		为了配合分页组件，封装分页对应的数据模型
-
-```vue
-data:{
-	pagination: {	
-		//分页相关模型数据
-		currentPage: 1,	//当前页码
-		pageSize:10,	//每页显示的记录数
-		total:0,		//总记录数
-	}
-},
-```
-
-​		修改查询全部功能为分页查询，通过路径变量传递页码信息参数
-
-```JS
-getAll() {
-    axios.get("/books/"+this.pagination.currentPage+"/"+this.pagination.pageSize).then((res) => {
-    });
-},
-```
 
 ​		后台提供对应的分页功能
 
@@ -3169,38 +2628,6 @@ public R getAll(@PathVariable Integer currentPage,@PathVariable Integer pageSize
     return new R(null != pageBook ,pageBook);
 }
 ```
-
-​		页面根据分页操作结果读取对应数据，并进行数据模型绑定
-
-```JS
-getAll() {
-    axios.get("/books/"+this.pagination.currentPage+"/"+this.pagination.pageSize).then((res) => {
-        this.pagination.total = res.data.data.total;
-        this.pagination.currentPage = res.data.data.current;
-        this.pagination.pagesize = res.data.data.size;
-        this.dataList = res.data.data.records;
-    });
-},
-```
-
-​		对切换页码操作设置调用当前分页操作
-
-```JS
-//切换页码
-handleCurrentChange(currentPage) {
-    this.pagination.currentPage = currentPage;
-    this.getAll();
-},
-```
-
-**总结**
-
-1. 使用el分页组件
-2. 定义分页组件绑定的数据模型
-3. 异步调用获取分页数据
-4. 分页数据页面回显
-
-
 
 ##### 	F-6.删除功能维护
 
@@ -3218,113 +2645,22 @@ public R getPage(@PathVariable int currentPage,@PathVariable int pageSize){
 }
 ```
 
+```JAVA
+@GetMapping("{currentPage}/{pageSize}")
+public R getAll(@PathVariable int currentPage,@PathVariable int pageSize,Book book) {
+    System.out.println("参数=====>"+book);
+    IPage<Book> pageBook = bookService.getPage(currentPage,pageSize);
+    return new R(null != pageBook ,pageBook);
+}
+```
 
+对应业务层接口与实现类进行修正
 
-##### 	F-7.条件查询功能
-
-​		最后一个功能来做条件查询，其实条件查询可以理解为分页查询的时候除了携带分页数据再多带几个数据的查询。这些多带的数据就是查询条件。比较一下不带条件的分页查询与带条件的分页查询差别之处，这个功能就好做了
-
-- 页面封装的数据：带不带条件影响的仅仅是一次性传递到后台的数据总量，由传递2个分页相关的数据转换成2个分页数据加若干个条件
-
-- 后台查询功能：查询时由不带条件，转换成带条件，反正不带条件的时候查询条件对象使用的是null，现在换成具体条件，差别不大
-
-- 查询结果：不管带不带条件，出来的数据只是有数量上的差别，其他都差别，这个可以忽略
-
-  经过上述分析，看来需要在页面发送请求的格式方面做一定的修改，后台的调用数据层操作时发送修改，其他没有区别
-
-  页面发送请求时，两个分页数据仍然使用路径变量，其他条件采用动态拼装url参数的形式传递
-
-  **页面封装查询条件字段**
-
-  ```vue
-  pagination: {		
-  //分页相关模型数据
-  	currentPage: 1,		//当前页码
-  	pageSize:10,		//每页显示的记录数
-  	total:0,			//总记录数
-  	name: "",
-  	type: "",
-  	description: ""
-  },
-  ```
-
-  页面添加查询条件字段对应的数据模型绑定名称
-
-  ```HTML
-  <div class="filter-container">
-      <el-input placeholder="图书类别" v-model="pagination.type" class="filter-item"/>
-      <el-input placeholder="图书名称" v-model="pagination.name" class="filter-item"/>
-      <el-input placeholder="图书描述" v-model="pagination.description" class="filter-item"/>
-      <el-button @click="getAll()" class="dalfBut">查询</el-button>
-      <el-button type="primary" class="butT" @click="handleCreate()">新建</el-button>
-  </div>
-  ```
-
-  将查询条件组织成url参数，添加到请求url地址中，这里可以借助其他类库快速开发，当前使用手工形式拼接，降低学习要求
-
-  ```JS
-  getAll() {
-      //1.获取查询条件,拼接查询条件
-      param = "?name="+this.pagination.name;
-      param += "&type="+this.pagination.type;
-      param += "&description="+this.pagination.description;
-      console.log("-----------------"+ param);
-      axios.get("/books/"+this.pagination.currentPage+"/"+this.pagination.pageSize+param).then((res) => {
-          this.dataList = res.data.data.records;
-      });
-  },
-  ```
-
-  后台代码中定义实体类封查询条件
-
-  ```JAVA
-  @GetMapping("{currentPage}/{pageSize}")
-  public R getAll(@PathVariable int currentPage,@PathVariable int pageSize,Book book) {
-      System.out.println("参数=====>"+book);
-      IPage<Book> pageBook = bookService.getPage(currentPage,pageSize);
-      return new R(null != pageBook ,pageBook);
-  }
-  ```
-
-  对应业务层接口与实现类进行修正
-
-  ```JAVA
-  public interface IBookService extends IService<Book> {
-      IPage<Book> getPage(Integer currentPage,Integer pageSize,Book queryBook);
-  }
-  ```
-
-  ```JAVA
-  @Service
-  public class BookServiceImpl2 extends ServiceImpl<BookDao,Book> implements IBookService {
-      public IPage<Book> getPage(Integer currentPage,Integer pageSize,Book queryBook){
-          IPage page = new Page(currentPage,pageSize);
-          LambdaQueryWrapper<Book> lqw = new LambdaQueryWrapper<Book>();
-          lqw.like(Strings.isNotEmpty(queryBook.getName()),Book::getName,queryBook.getName());
-          lqw.like(Strings.isNotEmpty(queryBook.getType()),Book::getType,queryBook.getType());
-          lqw.like(Strings.isNotEmpty(queryBook.getDescription()),Book::getDescription,queryBook.getDescription());
-          return bookDao.selectPage(page,lqw);
-      }
-  }
-  ```
-
-  页面回显数据
-
-  ```js
-  getAll() {
-      //1.获取查询条件,拼接查询条件
-      param = "?name="+this.pagination.name;
-      param += "&type="+this.pagination.type;
-      param += "&description="+this.pagination.description;
-      console.log("-----------------"+ param);
-      axios.get("/books/"+this.pagination.currentPage+"/"+this.pagination.pageSize+param).then((res) => {
-          this.pagination.total = res.data.data.total;
-          this.pagination.currentPage = res.data.data.current;
-          this.pagination.pagesize = res.data.data.size;
-          this.dataList = res.data.data.records;
-      });
-  },
-  ```
+```JAVA
+public interface IBookService extends IService<Book> {
+    IPage<Book> getPage(Integer currentPage,Integer pageSize,Book queryBook);
+}
+```
 
 **总结**
 
@@ -3335,7 +2671,7 @@ public R getPage(@PathVariable int currentPage,@PathVariable int pageSize){
 
 ## 基础篇完结
 
-​	基础篇到这里就全部结束了，在基础篇中带着大家学习了如果创建一个SpringBoot工程，然后学习了SpringBoot的基础配置语法格式，接下来对常见的市面上的实用技术做了整合，最后通过一个小的案例对前面学习的内容做了一个综合应用。整体来说就是一个最基本的入门，关于SpringBoot的实际开发其实接触的还是很少的，我们到实用篇和原理篇中继续吧，各位小伙伴，加油学习，再见。
+​	基础篇到这里就全部结束了，在基础篇中带着大家学习了如果创建一个SpringBoot工程，然后学习了SpringBoot的基础配置语法格式，接下来对常见的市面上的实用技术做了整合，最后通过一个小的案例对前面学习的内容做了一个综合应用。整体来说就是一个最基本的入门，关于SpringBoot的实际开发其实接触的还是很少的，我们到实用篇和原理篇中继续吧。
 
 
 

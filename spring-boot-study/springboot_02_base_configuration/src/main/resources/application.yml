@@ -1,2 +1,18 @@
+# 服务器端口配置
 server:
-  port: 81
+  port: 8081
+
+# banner配置
+spring:
+  main:
+    banner-mode: off               # off: 关闭；CONSOLE:打印在控制台;LOG:打印在日志文件 (不区分大小写)
+  banner:
+    image:
+      location: universe.png       # 可以使用图片作为banner，图片保存在resources下，但是前提要将 banner.txt删除
+
+# 日志
+logging:
+  level:
+    root: info                    # 默认 info 级别
+    top:
+      jacktgq: warn               # 还可以设置具体某个包使用什么日志级别

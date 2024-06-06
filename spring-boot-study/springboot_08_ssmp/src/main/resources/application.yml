@@ -1,22 +1,28 @@
-# 配置端口
+
+# 如果有多个配置文件，按照下面的优先级，相同属性使用的是优先级更高的
+# 1. file ：config/application.yml 【最高】
+# 2. file ：application.yml
+# 3. classpath：config/application.yml
+# 4. classpath：application.yml  【最低】
+
+# 配置端口  config/application.yml文件也配置了端口8081，优先级更高，覆盖了这个 8081生效
 server:
-  port: 80
+  port: 8082
 
 # 配置数据库和连接池
 spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/springboot_db?serverTimezone=UTC
+      url: jdbc:mysql://47.76.68.216:3306/mybatis_plus?rewriteBatchedStatements=true
       username: root
-      password: TGQ@candywall123
-      # password: 123
+      password: P@ssw0rd123!
 
 # 配置MP
 mybatis-plus:
   global-config:
     db-config:
-      table-prefix: tbl_
-      id-type: auto
+      table-prefix: tbl_                                      # 设置表名通用前缀
+      id-type: auto                                           # 设置主键id字段的生成策略为参照数据库设定的策略，当前数据库设置id生成策略为自增
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl     # 打印执行SQL到控制台

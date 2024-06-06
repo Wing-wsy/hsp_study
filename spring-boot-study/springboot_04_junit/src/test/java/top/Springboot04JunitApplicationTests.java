@@ -16,6 +16,7 @@ class Springboot04JunitApplicationTests {
     void contextLoads() {
         // 2、执行要测试的对象对应的方法
         bookDao.save();
+        System.out.println("1111");
     }
 
 }

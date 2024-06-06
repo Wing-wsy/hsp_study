@@ -1,8 +1,10 @@
+# 旧
 #spring:
 #  profiles:
 #    active: dev
 #    include: devDB, devMVC
 
+# 新
 spring:
   profiles:
     active: @profile.active@

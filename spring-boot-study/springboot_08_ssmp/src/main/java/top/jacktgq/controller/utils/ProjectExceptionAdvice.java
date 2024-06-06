@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * @Author CandyWall
  * @Date 2022/1/20--15:38
- * @Description 作为springmvc的异常处理器
+ * @Description 作为springmvc的全局异常处理器，下面还可以根据不同的异常执行不同的处理，这里就不区分直接Exception全捕获统一处理
  */
 //@ControllerAdvice
 @RestControllerAdvice

@@ -2,12 +2,12 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springboot_db?serverTimezone=UTC
+    url: jdbc:mysql://47.76.68.216:3306/mybatis_plus?rewriteBatchedStatements=true
     username: root
-    password: TGQ@candywall123
+    password: P@ssw0rd123!
 
 # 设置MP相关的配置
 mybatis-plus:
   global-config:
     db-config:
-      table-prefix: tbl_
+      table-prefix: tbl_   # 如果表都是 tbl_开头，比如 tbl_book,实体类是 Book，那么可以配置这个 table-prefix

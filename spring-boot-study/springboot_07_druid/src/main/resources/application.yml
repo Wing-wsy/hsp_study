@@ -13,6 +13,6 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/springboot_db?serverTimezone=UTC
+      url: jdbc:mysql://47.76.68.216:3306/mybatis_plus?rewriteBatchedStatements=true
       username: root
-      password: TGQ@candywall123
+      password: P@ssw0rd123!
