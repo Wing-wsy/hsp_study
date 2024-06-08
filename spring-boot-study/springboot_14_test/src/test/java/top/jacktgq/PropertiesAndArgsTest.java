@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import top.jacktgq.pojo.BookCase;
+//import top.jacktgq.pojo.BookCase;
 
 // properties属性可以为当前测试用例添加临时的属性配置
 //@SpringBootTest(properties = {"test.prop=testValue1"})
@@ -15,11 +15,11 @@ import top.jacktgq.pojo.BookCase;
 class PropertiesAndArgsTest {
     @Value("${test.prop}")
     private String prop;
-    @Autowired
-    private BookCase bookCase;
+//    @Autowired
+//    private BookCase bookCase;
     @Test
     public void testProperties() {
         System.out.println("prop = " + prop);
-        System.out.println("bookCase = " + bookCase);
+//        System.out.println("bookCase = " + bookCase);
     }
 }

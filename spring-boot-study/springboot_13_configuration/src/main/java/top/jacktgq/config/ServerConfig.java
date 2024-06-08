@@ -16,9 +16,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
 /**
- * @Author CandyWall
- * @Date 2022/1/23--15:33
- * @Description
+ * 自定义的一个读取配置类
  */
 //@Component
 @ConfigurationProperties(prefix = "server-config")

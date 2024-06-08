@@ -11,10 +11,14 @@ import java.util.regex.Pattern;
 public class RegExp01 {
 
     public static void main(String[] args) {
-        String content = "hello*adsf-jksd122shmi+北京";
-        String[] split = content.split("\\*|-|\\+|\\d+");
-        for (String s : split) {
-            System.out.println(s);
+        String content = "51915625345";
+        boolean matches = content.matches("^[0-9+\\-() ]{1,16}$");
+//        boolean matches = content.matches("^[0-9+-(]{4,6}$");
+//        boolean matches = content.matches("[0-9,+,-,]{6}");
+        if (matches) {
+            System.out.println("验证成功");
+        }else {
+            System.out.println("验证失败");
         }
 
     }

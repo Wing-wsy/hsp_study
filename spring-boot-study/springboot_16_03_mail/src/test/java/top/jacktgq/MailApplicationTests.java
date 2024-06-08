@@ -14,8 +14,8 @@ class MailApplicationTests {
 
 	@Test
 	void contextLoads() throws MessagingException {
-		// mailService.sendMail();
-		mailService.sendMailWithLinkAttachment();
+		 mailService.sendMail();
+//		mailService.sendMailWithLinkAttachment();
 	}
 
 }

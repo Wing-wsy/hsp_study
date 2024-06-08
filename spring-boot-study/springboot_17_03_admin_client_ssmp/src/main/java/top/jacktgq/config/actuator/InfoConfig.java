@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author CandyWall
- * @Date 2022/3/1--18:24
- * @Description
+ * 在服务监控平台展示自定义服务描述信息
  */
 @Component
 public class InfoConfig implements InfoContributor {
@@ -19,6 +17,7 @@ public class InfoConfig implements InfoContributor {
         builder.withDetail("runTime", System.currentTimeMillis());
         Map infoMap = new HashMap();
         infoMap.put("buildTime", "2006");
+        infoMap.put("systemInfo", "这是xxx服务");
         builder.withDetails(infoMap);
     }
 }

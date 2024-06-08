@@ -4,9 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * @Author CandyWall
- * @Date 2022/2/14--23:52
- * @Description
+ * 入门体验
  */
 public class TimerTaskApp {
     public static void main(String[] args) {
@@ -17,6 +15,7 @@ public class TimerTaskApp {
                 System.out.println("Timer task run...");
             }
         };
+        // 每隔两秒执行run方法
         timer.schedule(task, 0, 2000);
     }
 }

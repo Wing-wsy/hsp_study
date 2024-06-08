@@ -23,8 +23,9 @@
 #### chapter-21 - Java日志框架（学了ssm再回头学）        【 × 】
 #### chapter-22 - servlet             【 √  】
 #### chapter-23 - java 反射          【 √ 】
-#### chapter-24 - ssm             【 △ 】
-#### chapter-25 - SpringBoot       【 × 】
+#### chapter-24 - ssm             【 √ 】
+#### chapter-25 - SpringBoot       【 △ 】
+#### chapter-26 - Elasticsearch      【 × 】
 #### 更多技术待解锁...
 
 

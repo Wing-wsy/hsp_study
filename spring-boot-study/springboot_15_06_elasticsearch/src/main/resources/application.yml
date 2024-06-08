@@ -14,7 +14,7 @@ spring:
       #是否可用
       # enabled: false
 
-  # 配置es
+  # 配置es（低级别的elasticsearch客户端的配置方式，高级别的不在这里配置，在代码中直接写）
 #  elasticsearch:
 #    uris: http://localhost:9200
 

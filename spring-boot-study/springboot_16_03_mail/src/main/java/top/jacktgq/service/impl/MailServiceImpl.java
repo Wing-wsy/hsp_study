@@ -22,22 +22,22 @@ public class MailServiceImpl implements MailService {
     private JavaMailSender javaMailSender;
 
     // 发送人
-    private String from = "xxxxxxxx@qq.com";
+    private String from = "895682269@qq.com";
 
     // 接收人
-    private String to = "xxxxxxxxx@163.com";
+    private String to = "wangshaoyou24@163.com";
 
 
 
     @Override
     public void sendMail() {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom(from + "(章北海)");
+        msg.setFrom(from + "(Wing1)");
         msg.setTo(to);
         // 主题
         String subject = "测试发邮件";
         // 正文
-        String context = "测试邮件的正文内容";
+        String context = "测试邮件的正文内容：生日快乐";
         msg.setSubject(subject);
         msg.setText(context);
         javaMailSender.send(msg);

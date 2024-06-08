@@ -14,6 +14,7 @@ import top.jacktgq.config.ServerConfig;
 // 在这个注解里面指定了对应类，就不用在具体配置类上面加@Component注解了，会导致冲突
 @EnableConfigurationProperties(ServerConfig.class)
 public class ConfigurationApplication {
+
     @Bean
     @ConfigurationProperties(prefix = "datasource")
     public DruidDataSource dataSource() {

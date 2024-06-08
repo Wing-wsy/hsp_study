@@ -12,7 +12,6 @@ import top.jacktgq.config.MsgConfig;
  * @Description
  */
 @SpringBootTest
-@Import(MsgConfig.class)
 public class ConfigurationTest {
     @Autowired
     private String msg;

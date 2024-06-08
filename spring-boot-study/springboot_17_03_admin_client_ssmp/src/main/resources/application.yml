@@ -7,15 +7,15 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/springboot_db?serverTimezone=UTC
+      url: jdbc:mysql://47.76.68.216:3306/mybatis_plus?rewriteBatchedStatements=true
       username: root
-      password: TGQ@candywall123
+      password: P@ssw0rd123!
       # password: 123
   boot:
     admin:
       client:
         # SpringbootAdminServer Web服务url地址
-        url: http://localhost:8080
+        url: http://localhost:8081
 
 # 配置开放给服务器端监控信息
 management:
