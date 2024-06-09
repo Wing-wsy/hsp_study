@@ -1,0 +1,24 @@
+#cartoon:
+#  cat:
+#    name: "图多盖洛"
+#    age: 5
+#  mouse:
+#    name: "泰菲"
+#    age: 1
+
+servers:
+  ip-address: 192.168.0.1
+  port: 2345
+  timeout: -1
+  student:
+    name: "张三"
+    hobby: "游泳"
+
+
+#spring:
+#  redis:
+#    port: 6379
+#
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
