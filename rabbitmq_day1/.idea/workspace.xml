@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="03f37cad-7794-48b8-aafc-a07117d9ba33" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../chapter16/rabbitmq基础.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/rabbitmq高级.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/592892-20190520220249900-1679743651.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211112660.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211156645.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211247287.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211304085.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211341601.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-4860248.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925215603036-9419777.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925220115235.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925220343521.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221112077-3835963.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221112077.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221232056.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221436278.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222019811.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222230260-3836271.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222230260.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222329200-3836312.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222329200.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222551533.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222743776-3836511.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222743776.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194738708-3836601.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194738708.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194954822-3836665.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194954822.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126162026720.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126162617280.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126163023153.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126163506795.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126163631889.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126165434784.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126165459282.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126165840602.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126213115873.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126220145375.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191127121900255.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200311182438041.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200312140114784.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314221002008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314223242058.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314223302207.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314230412178.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314230423280.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200315180653207.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200315180708489.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200315180728035.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102613933.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102627912.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102925740.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102947326.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316113935785.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316114000459.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200318195546662.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320094147471.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095613586.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095743935.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095827688.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095843370.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320100000347.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320100010968.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320113423235.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbitmq_day1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/rabbitmq_springboot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/java/com/baizhi/RabbitmqSpringbootApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/java/com/baizhi/fanout/FanoutCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/java/com/baizhi/hello/HelloCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/java/com/baizhi/route/RouteCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/java/com/baizhi/topic/TopicCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/java/com/baizhi/work/WorkCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/src/test/java/com/baizhi/test/TestRabbitMQ.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/com/baizhi/RabbitmqSpringbootApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/com/baizhi/fanout/FanoutCustomer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/com/baizhi/hello/HelloCustomer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/com/baizhi/route/RouteCustomer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/com/baizhi/topic/TopicCustomer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/classes/com/baizhi/work/WorkCustomer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rabbitmq_springboot/target/test-classes/com/baizhi/test/TestRabbitMQ.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter08/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter08/Linux.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/repository" />
+        <option name="mavenHome" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4" />
+        <option name="userSettingsFile" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2hdeEZcEU9JTkYyGNRIHjAgBvfc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/wing/architect/hsp_study/rabbitmq_day1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Provider">
+    <configuration name="Customer2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="direct.Customer2" />
+      <module name="rabbitmq_day1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="direct.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Provider" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="topic.Provider" />
+      <module name="rabbitmq_day1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="topic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="direct.Provider" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="direct.Provider" />
+      <module name="rabbitmq_day1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="direct.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="topic.Customer1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="topic.Customer1" />
+      <module name="rabbitmq_day1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="topic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="topic.Customer2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="topic.Customer2" />
+      <module name="rabbitmq_day1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="topic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Provider" />
+        <item itemvalue="Application.topic.Customer2" />
+        <item itemvalue="Application.topic.Customer1" />
+        <item itemvalue="Application.direct.Provider" />
+        <item itemvalue="Application.Customer2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="03f37cad-7794-48b8-aafc-a07117d9ba33" name="Changes" comment="" />
+      <created>1717928270837</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717928270837</updated>
+      <workItem from="1717928272160" duration="10306000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

@@ -2536,8 +2536,6 @@ total 20
 
 # 11 云平台技术
 
-
-
 # mysql5.7 linux安装
 
 ###### 2.4.1 官网压缩包（推荐）
@@ -2656,3 +2654,88 @@ systemctl start mysqld
 systemctl status mysqld
 
 systemctl stop mysqld
+
+# rabbitmq安装
+
+第1步：上传三个文件到linux系统
+
+```sh
+cd /usr/local/rabbitmq
+使用工具上传
+ll
+erlang-22.0.7-1.el7.x86_64.rpm
+rabbitmq-server-3.7.18-1.el7.noarch.rpm
+socat-1.7.3.2-2.el7.x86_64.rpm
+```
+
+第2步：
+
+```sh
+rpm -ivh erlang-22.0.7-1.el7.x86_64.rpm
+```
+
+第3步：
+
+```sh
+rpm -ivh socat-1.7.3.2-2.el7.x86_64.rpm
+```
+
+第4步：
+
+```sh
+rpm -ivh rabbitmq-server-3.7.18-1.el7.noarch.rpm
+```
+
+第5步：复制配置文件并重命名为 rabbitmq.config
+
+```sh
+cp /usr/share/doc/rabbitmq-server-3.7.18/rabbitmq.config.example /etc/rabbitmq/rabbitmq.config
+```
+
+第6步：修改 rabbitmq.config
+
+```sh
+cd /etc/rabbitmq
+vim rabbitmq.config
+```
+
+将这个注释打开，并删掉后面的逗号
+
+```markdown
+%% Uncomment the following line if you want to allow access to the
+%% guest user from anywhere on the network.
+{loopback_users, []}   # 这一行把注释打开
+```
+
+第7步：启动rabbitmq的插件管理
+
+```sh
+cd ~
+rabbitmq-plugins enable rabbitmq_management
+```
+
+第8步：启动RabbitMQ的服务
+
+```sh
+systemctl start rabbitmq-server
+systemctl restart rabbitmq-server
+systemctl stop rabbitmq-server
+systemctl status rabbitmq-server
+```
+
+第9步：访问
+
+```sh
+http://47.76.68.216:15672
+```
+
+
+
+
+
+
+
+
+
+
+
