@@ -5,103 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="514a96af-c34c-43a1-bccb-7cd102af01ce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../chapter16/rabbitmq基础.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/rabbitmq高级.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/592892-20190520220249900-1679743651.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211112660.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211156645.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211247287.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211304085.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-20191127211341601.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/SouthEast-4860248.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925215603036-9419777.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925220115235.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925220343521.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221112077-3835963.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221112077.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221232056.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925221436278.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222019811.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222230260-3836271.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222230260.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222329200-3836312.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222329200.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222551533.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222743776-3836511.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190925222743776.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194738708-3836601.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194738708.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194954822-3836665.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20190926194954822.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126162026720.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126162617280.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126163023153.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126163506795.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126163631889.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126165434784.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126165459282.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126165840602.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126213115873.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191126220145375.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20191127121900255.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200311182438041.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200312140114784.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314221002008.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314223242058.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314223302207.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314230412178.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200314230423280.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200315180653207.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200315180708489.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200315180728035.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102613933.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102627912.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102925740.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316102947326.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316113935785.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200316114000459.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200318195546662.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320094147471.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095613586.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095743935.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095827688.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320095843370.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320100000347.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320100010968.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.assets/image-20200320113423235.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../rabbitmq_day1/rabbitmq_day1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rabbitmq_springboot.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/baizhi/RabbitmqSpringbootApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/baizhi/fanout/FanoutCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/baizhi/hello/HelloCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/baizhi/route/RouteCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/baizhi/topic/TopicCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/baizhi/work/WorkCustomer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/baizhi/test/TestRabbitMQ.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/baizhi/RabbitmqSpringbootApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/baizhi/fanout/FanoutCustomer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/baizhi/hello/HelloCustomer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/baizhi/route/RouteCustomer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/baizhi/topic/TopicCustomer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/baizhi/work/WorkCustomer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/baizhi/test/TestRabbitMQ.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter08/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter08/Linux.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/src/main/java/com/itheima/consumer/ConsumerApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/src/main/java/com/itheima/consumer/config/DirectConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/src/main/java/com/itheima/consumer/config/ErrorConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/src/main/java/com/itheima/consumer/config/FanoutConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/src/main/java/com/itheima/consumer/listeners/MqListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/target/classes/com/itheima/consumer/ConsumerApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/target/classes/com/itheima/consumer/config/DirectConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/target/classes/com/itheima/consumer/config/FanoutConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/consumer/target/classes/com/itheima/consumer/listeners/MqListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/src/main/java/com/itheima/publisher/PublisherApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/src/main/java/com/itheima/publisher/config/MqConfirmConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/src/test/java/com/itheima/publisher/SpringAmqpTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/classes/com/itheima/publisher/PublisherApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/classes/com/itheima/publisher/config/MqConfirmConfig$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/classes/com/itheima/publisher/config/MqConfirmConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/test-classes/com/itheima/publisher/SpringAmqpTest$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/test-classes/com/itheima/publisher/SpringAmqpTest$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/test-classes/com/itheima/publisher/SpringAmqpTest$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mq-demo/publisher/target/test-classes/com/itheima/publisher/SpringAmqpTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter16/rabbitmq基础.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter16/rabbitmq基础.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter16/rabbitmq高级.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter16/rabbitmq高级.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq_day1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rabbitmq_day1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +197,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1717948830696</updated>
-      <workItem from="1717948831979" duration="2485000" />
+      <workItem from="1717948831979" duration="4293000" />
     </task>
     <servers />
   </component>

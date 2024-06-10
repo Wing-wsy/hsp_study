@@ -1,0 +1,19 @@
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+
+spring:
+  application:
+    name: rabbitmq-springboot
+  rabbitmq:
+    host: 47.76.68.216
+    port: 5672
+    username: ems
+    password: 123
+    virtual-host: /ems
+    listener:
+      simple:
+        prefetch: 1  # 能者多劳，每次只获取一条，消费完再去获取
+        acknowledge-mode: none # 消费者收到消息之后，是否需要确认，确认机制
+        retry:
+          enabled: true # 开启重试机制

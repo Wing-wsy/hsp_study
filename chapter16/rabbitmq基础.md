@@ -135,18 +135,17 @@ RabbitMQ是基于Erlang语言开发的开源消息通信中间件，官网地址
 
 ## 2.1.安装
 
-
-
-
 RabbitMQ对应的架构如图：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687136827222-52374724-79c9-4738-b53f-653cc0805d22.png#averageHue=%23e8d7b3&clientId=u6a529863-cf4b-4&from=paste&height=495&id=ub8dd8df6&originHeight=614&originWidth=1458&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=104273&status=done&style=none&taskId=uc0c132a5-73a3-4024-819f-61241da2511&title=&width=1176.2016429676203)
+
 其中包含几个概念：
 
-- `**publisher**`：生产者，也就是发送消息的一方
-- `**consumer**`：消费者，也就是消费消息的一方
-- `**queue**`：队列，存储消息。生产者投递的消息会暂存在消息队列中，等待消费者处理
-- `**exchange**`：交换机，负责消息路由。生产者发送的消息由交换机决定投递到哪个队列。
-- `**virtual host**`：虚拟主机，起到数据隔离的作用。每个虚拟主机相互独立，有各自的exchange、queue
+- `publisher`：生产者，也就是发送消息的一方
+- `consumer`：消费者，也就是消费消息的一方
+- `queue`：队列，存储消息。生产者投递的消息会暂存在消息队列中，等待消费者处理
+- `exchange`：交换机，负责消息路由。生产者发送的消息由交换机决定投递到哪个队列。
+- `virtual host`：虚拟主机，起到数据隔离的作用。每个虚拟主机相互独立，有各自的exchange、queue
 
 上述这些东西都可以在RabbitMQ的管理控制台来管理，下一节我们就一起来学习控制台的使用。
 
@@ -155,20 +154,31 @@ RabbitMQ对应的架构如图：
 ### 2.2.1.交换机
 
 我们打开Exchanges选项卡，可以看到已经存在很多交换机：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687137953880-08aa9694-6a1e-4337-8bde-5757ec3c33f8.png#averageHue=%23f7f6f6&clientId=u6a529863-cf4b-4&from=paste&height=605&id=u413741e2&originHeight=750&originWidth=1264&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=60217&status=done&style=none&taskId=u8611b86c-aa50-46d9-855f-8307a318079&title=&width=1019.6974463038903)
+
 我们点击任意交换机，即可进入交换机详情页面。仍然会利用控制台中的publish message 发送一条消息：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687138031622-ccce4612-954f-42c0-9291-73cf19915e39.png#averageHue=%23f9f8f7&clientId=u6a529863-cf4b-4&from=paste&height=487&id=u9d211d96&originHeight=604&originWidth=947&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=38263&status=done&style=none&taskId=ue134ec0e-ad83-465f-a1b2-97cb7667d75&title=&width=763.9663620647026)
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687138163403-839087fe-66f7-4710-a866-210aa0282be8.png#averageHue=%23f9f6f6&clientId=u6a529863-cf4b-4&from=paste&height=616&id=ubca84480&originHeight=763&originWidth=1092&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=46085&status=done&style=none&taskId=u5f176fff-eda8-457c-94cd-bb7d6bbd997&title=&width=880.9411482308925)
+
+<img src="https://cdn.nlark.com/yuque/0/2023/png/27967491/1687138163403-839087fe-66f7-4710-a866-210aa0282be8.png#averageHue=%23f9f6f6&clientId=u6a529863-cf4b-4&from=paste&height=616&id=ubca84480&originHeight=763&originWidth=1092&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=46085&status=done&style=none&taskId=u5f176fff-eda8-457c-94cd-bb7d6bbd997&title=&width=880.9411482308925" alt="image.png" style="zoom:150%;" />
+
 这里是由控制台模拟了生产者发送的消息。由于没有消费者存在，最终消息丢失了，这样说明交换机没有存储消息的能力。
 
 ### 2.2.2.队列
 
 我们打开`Queues`选项卡，新建一个队列：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687138308409-be6e1649-af03-4ee7-bee3-8518fd0dca03.png#averageHue=%23f9f8f7&clientId=u6a529863-cf4b-4&from=paste&height=417&id=u398bfe43&originHeight=517&originWidth=1157&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=35084&status=done&style=none&taskId=u3b2b568c-e113-4abf-971c-2aea7bfaa4b&title=&width=933.3781213398743)
+
 命名为`hello.queue1`：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255044231-4b0e0339-c1ab-468a-8a72-9ae1b184594c.png#averageHue=%23f9f6f6&clientId=u1711eaf3-9387-4&from=paste&height=548&id=uf3cb4af4&originHeight=679&originWidth=1163&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=51428&status=done&style=none&taskId=u71f9590b-0cc5-4727-bd4c-65b353c4df7&title=&width=938.2184573191648)
+
 再以相同的方式，创建一个队列，密码为`hello.queue2`，最终队列列表如下：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255204405-523f8053-e414-45f3-99c3-b66de152f79e.png#averageHue=%23f6f5f4&clientId=u1711eaf3-9387-4&from=paste&height=359&id=u956d1947&originHeight=445&originWidth=1074&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=39049&status=done&style=none&taskId=u1eb8bf9f-f74b-4238-a33e-796c4280e78&title=&width=866.4201402930207)
+
 此时，我们再次向`amq.fanout`交换机发送一条消息。会发现消息依然没有到达队列！！
 怎么回事呢？
 发送到交换机的消息，只会路由到与其绑定的队列，因此仅仅创建队列是不够的，我们还需要将其与交换机绑定。
@@ -176,21 +186,32 @@ RabbitMQ对应的架构如图：
 ### 2.2.3.绑定关系
 
 点击`Exchanges`选项卡，点击`amq.fanout`交换机，进入交换机详情页，然后点击`Bindings`菜单，在表单中填写要绑定的队列名称：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255547460-d87943cd-4309-4778-8e9e-374167a97e45.png#averageHue=%23f9f7f7&clientId=u1711eaf3-9387-4&from=paste&height=481&id=u04a61731&originHeight=596&originWidth=1022&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=34676&status=done&style=none&taskId=u0ce69958-400b-4c37-89ea-adf0b369080&title=&width=824.4705618058354)
+
 相同的方式，将hello.queue2也绑定到改交换机。
 最终，绑定结果如下：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255624712-7bd850b1-95fd-4d98-8243-57d1779de935.png#averageHue=%23f7f4f4&clientId=u1711eaf3-9387-4&from=paste&height=385&id=u82198db4&originHeight=477&originWidth=978&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=28098&status=done&style=none&taskId=u1394f18f-c109-4688-9eb1-effec6a43fb&title=&width=788.9747646243708)
 
 ### 2.2.4.发送消息
 
 再次回到exchange页面，找到刚刚绑定的`amq.fanout`，点击进入详情页，再次发送一条消息：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687138163403-839087fe-66f7-4710-a866-210aa0282be8.png#averageHue=%23f9f6f6&clientId=u6a529863-cf4b-4&from=paste&height=616&id=GyhjT&originHeight=763&originWidth=1092&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=46085&status=done&style=none&taskId=u5f176fff-eda8-457c-94cd-bb7d6bbd997&title=&width=880.9411482308925)
+
 回到`Queues`页面，可以发现`hello.queue`中已经有一条消息了：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255725782-fd5e2550-3572-48c0-9ec0-60786e33a3b1.png#averageHue=%23f5f4f3&clientId=u1711eaf3-9387-4&from=paste&height=319&id=u97a4707c&originHeight=395&originWidth=1051&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=38484&status=done&style=none&taskId=u4d68c013-3032-4d2b-83a0-571c3335780&title=&width=847.8655190390733)
+
 点击队列名称，进入详情页，查看队列详情，这次我们点击get message：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255765034-69e67460-1535-48b3-8537-da383c498141.png#averageHue=%23f8f7f7&clientId=u1711eaf3-9387-4&from=paste&height=473&id=ua850c29b&originHeight=586&originWidth=974&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=35281&status=done&style=none&taskId=u668d2c9f-54a9-4427-adc4-e121a960025&title=&width=785.7478739715103)
+
 可以看到消息到达队列了：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687255798153-dda9b729-a3a0-415c-9167-48c525c75800.png#averageHue=%23f9f7f7&clientId=u1711eaf3-9387-4&from=paste&height=466&id=u66fa5450&originHeight=578&originWidth=762&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=33500&status=done&style=none&taskId=u665361c6-23b2-4fc4-b1a9-fdf6c880545&title=&width=614.7226693699085)
+
 这个时候如果有消费者监听了MQ的`hello.queue1`或`hello.queue2`队列，自然就能接收到消息了。
 
 ## 2.3.数据隔离
@@ -198,7 +219,9 @@ RabbitMQ对应的架构如图：
 ### 2.3.1.用户管理
 
 点击`Admin`选项卡，首先会看到RabbitMQ控制台的用户管理界面：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687151143347-f7e2aaff-0a14-4022-8d50-582ee75e2998.png#averageHue=%23f7f5f5&clientId=uc5430584-57f9-4&from=paste&height=450&id=u2a51a990&originHeight=558&originWidth=1580&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=55212&status=done&style=none&taskId=u18a12c4e-be8d-4ccb-a14a-415a21db44a&title=&width=1274.621807879863)
+
 这里的用户都是RabbitMQ的管理或运维人员。目前只有安装RabbitMQ时添加的`itheima`这个用户。仔细观察用户表格中的字段，如下：
 
 - `Name`：`itheima`，也就是用户名
@@ -211,9 +234,13 @@ RabbitMQ对应的架构如图：
 - 给每个项目创建不同的`virtual host`，将每个项目的数据隔离。
 
 比如，我们给黑马商城创建一个新的用户，命名为`hmall`：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687151725993-05fe9bd1-8f8b-468d-8456-eac36278bea2.png#averageHue=%23f7f5f5&clientId=uc5430584-57f9-4&from=paste&height=609&id=ua32ca0ae&originHeight=755&originWidth=1569&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=70298&status=done&style=none&taskId=u4f4ed00c-b8dd-4ffd-8a83-75d03c11fb5&title=&width=1265.7478585844967)
+
 你会发现此时hmall用户没有任何`virtual host`的访问权限：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687151853554-e671a696-e9c0-4ff5-9caf-31b39e1a17f5.png#averageHue=%23f7f5f4&clientId=uc5430584-57f9-4&from=paste&height=353&id=ueeaf90c6&originHeight=437&originWidth=927&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=31497&status=done&style=none&taskId=u74d79385-5602-447d-8beb-ed20ec36022&title=&width=747.8319088004005)
+
 别急，接下来我们就来授权。
 
 
@@ -233,8 +260,11 @@ RabbitMQ对应的架构如图：
 
 此时，点击页面右上角的`virtual host`下拉菜单，切换`virtual host`为 `/hmall`：
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687153236457-ca138f25-b351-4095-8855-aa0df42fae65.png#averageHue=%23f7f5f4&clientId=ud5bd9b1f-141b-4&from=paste&height=223&id=u0989d284&originHeight=277&originWidth=1448&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=35060&status=done&style=none&taskId=u6ab4f38a-ad0d-48bd-ace7-7f0281755d1&title=&width=1168.1344163354693)
-然后再次查看queues选项卡，会发现之前的队列已经看不到了：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687153307085-0157ac47-2d89-4f32-ab9a-d513b0e19f25.png#averageHue=%23f9f6f6&clientId=ud5bd9b1f-141b-4&from=paste&height=431&id=u151b88b9&originHeight=534&originWidth=1443&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=48526&status=done&style=none&taskId=u7ef6af14-7e3c-4988-8721-80965a310f6&title=&width=1164.1008030193937)
+
+然后再次查看queues选项卡，会发现之前的队列已经看不到了：
+
 这就是基于`virtual host `的隔离效果。
 
 # 3.SpringAMQP
@@ -255,9 +285,13 @@ SpringAMQP提供了三个功能：
 ## 3.1.导入Demo工程
 
 在课前资料给大家提供了一个Demo工程，方便我们学习SpringAMQP的使用：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689939402093-e0e0a3d4-84ed-40b5-bedc-0884fcb4ae64.png#averageHue=%23f9f9f8&clientId=uf6195e90-5366-4&from=paste&height=169&id=u1dad7a09&originHeight=188&originWidth=752&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=15464&status=done&style=none&taskId=u1668b30b-b977-4fc3-89ba-6c2e029e374&title=&width=674.0616102445883)
+
 将其复制到你的工作空间，然后用Idea打开，项目结构如图：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687156248415-3fe7ae5b-302b-4a35-a520-b2419e616862.png#averageHue=%23f9fbf8&clientId=ud5bd9b1f-141b-4&from=paste&height=253&id=u53ed8a5e&originHeight=314&originWidth=664&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=30988&status=done&style=none&taskId=u5ab16e5b-840d-4511-b27b-07f42a60f4c&title=&width=535.6638483748284)
+
 包括三部分：
 
 - mq-demo：父工程，管理项目依赖
@@ -319,7 +353,9 @@ SpringAMQP提供了三个功能：
 
 在之前的案例中，我们都是经过交换机发送消息到队列，不过有时候为了测试方便，我们也可以直接向队列发送消息，跳过交换机。
 在入门案例中，我们就演示这样的简单模型，如图：
+
 ![](https://cdn.nlark.com/yuque/0/2023/jpeg/27967491/1687261777988-23fff732-dcfa-499a-a8a1-a66328fe05e7.jpeg)
+
 也就是：
 
 - publisher直接发送消息到队列
@@ -332,9 +368,13 @@ SpringAMQP提供了三个功能：
 
 
 为了方便测试，我们现在控制台新建一个队列：simple.queue
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687171932026-33eace5d-c0f2-4070-8742-fe8b34c6c749.png#averageHue=%23f9f8f8&clientId=u0fe93ba5-a0ba-4&from=paste&height=602&id=uec08e673&originHeight=746&originWidth=1219&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=53932&status=done&style=none&taskId=ubdce29f2-6d3c-45cc-8b7f-64627bcf68c&title=&width=983.3949264592106)
+
 添加成功：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687172012283-e19d8da6-8944-4f51-a40b-a15f0814b015.png#averageHue=%23f7f6f6&clientId=u0fe93ba5-a0ba-4&from=paste&height=405&id=u61761e6f&originHeight=502&originWidth=1187&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=40787&status=done&style=none&taskId=uaf3c44d8-727d-4f46-8ae6-46245932d99&title=&width=957.5798012363273)
+
 接下来，我们就可以利用Java代码收发消息了。
 
 ### 3.1.1.消息发送
@@ -380,7 +420,9 @@ public class SpringAmqpTest {
 ```
 
 打开控制台，可以看到消息已经发送到队列中：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687173164620-51a78ccb-b2a1-474b-8147-076f4b8cee12.png#averageHue=%23f8f7f6&clientId=u0fe93ba5-a0ba-4&from=paste&height=431&id=u34a6c895&originHeight=534&originWidth=1267&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=43690&status=done&style=none&taskId=u6fd3cf33-b6c0-42a6-91f3-e263e176174&title=&width=1022.1176142935356)
+
 接下来，我们再来实现消息接收。
 
 ### 3.1.2.消息接收
@@ -420,18 +462,21 @@ public class SpringRabbitListener {
 ### 3.1.3.测试
 
 启动consumer服务，然后在publisher服务中运行测试代码，发送MQ消息。最终consumer收到消息：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687173574481-792b9a3c-bcab-4f96-9d09-206cccdd1456.png#averageHue=%23f7f9f5&clientId=u0fe93ba5-a0ba-4&from=paste&height=405&id=ua133b5cf&originHeight=502&originWidth=1805&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=226083&status=done&style=none&taskId=u72073b8f-ef3f-4ec4-af3e-4187138ca2a&title=&width=1456.134407103261)
 
 ## 3.3.WorkQueues模型
 
 Work queues，任务模型。简单来说就是**让多个消费者绑定到一个队列，共同消费队列中的消息**。
+
 ![](https://cdn.nlark.com/yuque/0/2023/jpeg/27967491/1687261956699-4b3c9999-ee86-4dda-a795-1ea5f4f9eef3.jpeg)
 
 当消息处理比较耗时的时候，可能生产消息的速度会远远大于消息的消费速度。长此以往，消息就会堆积越来越多，无法及时处理。
 此时就可以使用work 模型，**多个消费者共同处理消息处理，消息处理的速度就能大大提高**了。
 
 接下来，我们就来模拟这样的场景。
-首先，我们在控制台创建一个新的队列，命名为`work.queue`：
+首先，我们在控制台创建一个新的队列，命名为`work.queue`
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687179664222-3e226588-63e3-4275-a9e2-cce5c8e93d4c.png#averageHue=%23f5f2f1&clientId=u0fe93ba5-a0ba-4&from=paste&height=321&id=u96998af1&originHeight=398&originWidth=1180&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=41883&status=done&style=none&taskId=ubcca08d6-3211-435a-ae7c-10fcf4daafe&title=&width=951.9327425938216)
 
 ### 3.3.1.消息发送
@@ -486,60 +531,6 @@ public void listenWorkQueue2(String msg) throws InterruptedException {
 启动ConsumerApplication后，在执行publisher服务中刚刚编写的发送测试方法testWorkQueue。
 最终结果如下：
 
-```java
-消费者1接收到消息：【hello, message_0】21:06:00.869555300
-消费者2........接收到消息：【hello, message_1】21:06:00.884518
-消费者1接收到消息：【hello, message_2】21:06:00.907454400
-消费者1接收到消息：【hello, message_4】21:06:00.953332100
-消费者1接收到消息：【hello, message_6】21:06:00.997867300
-消费者1接收到消息：【hello, message_8】21:06:01.042178700
-消费者2........接收到消息：【hello, message_3】21:06:01.086478800
-消费者1接收到消息：【hello, message_10】21:06:01.087476600
-消费者1接收到消息：【hello, message_12】21:06:01.132578300
-消费者1接收到消息：【hello, message_14】21:06:01.175851200
-消费者1接收到消息：【hello, message_16】21:06:01.218533400
-消费者1接收到消息：【hello, message_18】21:06:01.261322900
-消费者2........接收到消息：【hello, message_5】21:06:01.287003700
-消费者1接收到消息：【hello, message_20】21:06:01.304412400
-消费者1接收到消息：【hello, message_22】21:06:01.349950100
-消费者1接收到消息：【hello, message_24】21:06:01.394533900
-消费者1接收到消息：【hello, message_26】21:06:01.439876500
-消费者1接收到消息：【hello, message_28】21:06:01.482937800
-消费者2........接收到消息：【hello, message_7】21:06:01.488977100
-消费者1接收到消息：【hello, message_30】21:06:01.526409300
-消费者1接收到消息：【hello, message_32】21:06:01.572148
-消费者1接收到消息：【hello, message_34】21:06:01.618264800
-消费者1接收到消息：【hello, message_36】21:06:01.660780600
-消费者2........接收到消息：【hello, message_9】21:06:01.689189300
-消费者1接收到消息：【hello, message_38】21:06:01.705261
-消费者1接收到消息：【hello, message_40】21:06:01.746927300
-消费者1接收到消息：【hello, message_42】21:06:01.789835
-消费者1接收到消息：【hello, message_44】21:06:01.834393100
-消费者1接收到消息：【hello, message_46】21:06:01.875312100
-消费者2........接收到消息：【hello, message_11】21:06:01.889969500
-消费者1接收到消息：【hello, message_48】21:06:01.920702500
-消费者2........接收到消息：【hello, message_13】21:06:02.090725900
-消费者2........接收到消息：【hello, message_15】21:06:02.293060600
-消费者2........接收到消息：【hello, message_17】21:06:02.493748
-消费者2........接收到消息：【hello, message_19】21:06:02.696635100
-消费者2........接收到消息：【hello, message_21】21:06:02.896809700
-消费者2........接收到消息：【hello, message_23】21:06:03.099533400
-消费者2........接收到消息：【hello, message_25】21:06:03.301446400
-消费者2........接收到消息：【hello, message_27】21:06:03.504999100
-消费者2........接收到消息：【hello, message_29】21:06:03.705702500
-消费者2........接收到消息：【hello, message_31】21:06:03.906601200
-消费者2........接收到消息：【hello, message_33】21:06:04.108118500
-消费者2........接收到消息：【hello, message_35】21:06:04.308945400
-消费者2........接收到消息：【hello, message_37】21:06:04.511547700
-消费者2........接收到消息：【hello, message_39】21:06:04.714038400
-消费者2........接收到消息：【hello, message_41】21:06:04.916192700
-消费者2........接收到消息：【hello, message_43】21:06:05.116286400
-消费者2........接收到消息：【hello, message_45】21:06:05.318055100
-消费者2........接收到消息：【hello, message_47】21:06:05.520656400
-消费者2........接收到消息：【hello, message_49】21:06:05.723106700
-
-```
-
 可以看到消费者1和消费者2竟然每人消费了25条消息：
 
 - 消费者1很快完成了自己的25条消息
@@ -561,60 +552,6 @@ spring:
 
 再次测试，发现结果如下：
 
-```java
-消费者1接收到消息：【hello, message_0】21:12:51.659664200
-消费者2........接收到消息：【hello, message_1】21:12:51.680610
-消费者1接收到消息：【hello, message_2】21:12:51.703625
-消费者1接收到消息：【hello, message_3】21:12:51.724330100
-消费者1接收到消息：【hello, message_4】21:12:51.746651100
-消费者1接收到消息：【hello, message_5】21:12:51.768401400
-消费者1接收到消息：【hello, message_6】21:12:51.790511400
-消费者1接收到消息：【hello, message_7】21:12:51.812559800
-消费者1接收到消息：【hello, message_8】21:12:51.834500600
-消费者1接收到消息：【hello, message_9】21:12:51.857438800
-消费者1接收到消息：【hello, message_10】21:12:51.880379600
-消费者2........接收到消息：【hello, message_11】21:12:51.899327100
-消费者1接收到消息：【hello, message_12】21:12:51.922828400
-消费者1接收到消息：【hello, message_13】21:12:51.945617400
-消费者1接收到消息：【hello, message_14】21:12:51.968942500
-消费者1接收到消息：【hello, message_15】21:12:51.992215400
-消费者1接收到消息：【hello, message_16】21:12:52.013325600
-消费者1接收到消息：【hello, message_17】21:12:52.035687100
-消费者1接收到消息：【hello, message_18】21:12:52.058188
-消费者1接收到消息：【hello, message_19】21:12:52.081208400
-消费者2........接收到消息：【hello, message_20】21:12:52.103406200
-消费者1接收到消息：【hello, message_21】21:12:52.123827300
-消费者1接收到消息：【hello, message_22】21:12:52.146165100
-消费者1接收到消息：【hello, message_23】21:12:52.168828300
-消费者1接收到消息：【hello, message_24】21:12:52.191769500
-消费者1接收到消息：【hello, message_25】21:12:52.214839100
-消费者1接收到消息：【hello, message_26】21:12:52.238998700
-消费者1接收到消息：【hello, message_27】21:12:52.259772600
-消费者1接收到消息：【hello, message_28】21:12:52.284131800
-消费者2........接收到消息：【hello, message_29】21:12:52.306190600
-消费者1接收到消息：【hello, message_30】21:12:52.325315800
-消费者1接收到消息：【hello, message_31】21:12:52.347012500
-消费者1接收到消息：【hello, message_32】21:12:52.368508600
-消费者1接收到消息：【hello, message_33】21:12:52.391785100
-消费者1接收到消息：【hello, message_34】21:12:52.416383800
-消费者1接收到消息：【hello, message_35】21:12:52.439019
-消费者1接收到消息：【hello, message_36】21:12:52.461733900
-消费者1接收到消息：【hello, message_37】21:12:52.485990
-消费者1接收到消息：【hello, message_38】21:12:52.509219900
-消费者2........接收到消息：【hello, message_39】21:12:52.523683400
-消费者1接收到消息：【hello, message_40】21:12:52.547412100
-消费者1接收到消息：【hello, message_41】21:12:52.571191800
-消费者1接收到消息：【hello, message_42】21:12:52.593024600
-消费者1接收到消息：【hello, message_43】21:12:52.616731800
-消费者1接收到消息：【hello, message_44】21:12:52.640317
-消费者1接收到消息：【hello, message_45】21:12:52.663111100
-消费者1接收到消息：【hello, message_46】21:12:52.686727
-消费者1接收到消息：【hello, message_47】21:12:52.709266500
-消费者2........接收到消息：【hello, message_48】21:12:52.725884900
-消费者1接收到消息：【hello, message_49】21:12:52.746299900
-
-```
-
 可以发现，由于消费者1处理速度较快，所以处理了更多的消息；消费者2处理速度较慢，只处理了6条消息。而最终总的执行耗时也在1秒左右，大大提升。
 正所谓能者多劳，这样充分利用了每一个消费者的处理能力，可以有效避免消息积压问题。
 
@@ -628,7 +565,9 @@ Work模型的使用：
 ## 3.4.交换机类型
 
 在之前的两个测试案例中，都没有交换机，生产者直接发送消息到队列。而一旦引入交换机，消息发送的模式会有很大变化：
+
 ![](https://cdn.nlark.com/yuque/0/2023/jpeg/27967491/1687264784359-de7cbc4a-ec60-461d-a6a4-3474ba52e0d0.jpeg)
+
 可以看到，在订阅模型中，多了一个exchange角色，而且过程略有变化：
 
 - **Publisher**：生产者，不再发送消息到队列中，而是发给交换机
@@ -651,6 +590,7 @@ Work模型的使用：
 
 Fanout，英文翻译是扇出，我觉得在MQ中叫广播更合适。
 在广播模式下，消息发送流程是这样的：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687181415478-ea4bb17b-48bf-4303-9242-27703efb39d8.png#averageHue=%23fbf6f6&clientId=u0fe93ba5-a0ba-4&from=paste&height=389&id=u41b3ec34&originHeight=482&originWidth=1598&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=84491&status=done&style=none&taskId=u0db849d5-c734-41f3-87c2-d1fe9ec7575&title=&width=1289.1428158177346)
 
 - 1）  可以有多个队列
@@ -660,6 +600,7 @@ Fanout，英文翻译是扇出，我觉得在MQ中叫广播更合适。
 - 5）  订阅队列的消费者都能拿到消息
 
 我们的计划是这样的：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687182474076-2b479229-56a6-4163-93c4-a6a7187f3dbe.png#averageHue=%23f9f4f4&clientId=u0fe93ba5-a0ba-4&from=paste&height=248&id=ue59e0d8c&originHeight=308&originWidth=1314&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=48827&status=done&style=none&taskId=u7d52896e-f59b-494d-bb25-b376c96414e&title=&width=1060.0335794646453)
 
 - 创建一个名为` hmall.fanout`的交换机，类型是`Fanout`
@@ -668,13 +609,21 @@ Fanout，英文翻译是扇出，我觉得在MQ中叫广播更合适。
 ### 3.5.1.声明队列和交换机
 
 在控制台创建队列`fanout.queue1`:
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689946886137-0bcb8641-faf1-4bea-b553-4b3bb96d224c.png#averageHue=%23f8f7f7&clientId=uf6195e90-5366-4&from=paste&height=380&id=ub435a220&originHeight=424&originWidth=1117&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=31069&status=done&style=none&taskId=uf02d05dd-b916-4d37-b2f4-dba06eff8a9&title=&width=1001.2324716000069)
+
 在创建一个队列`fanout.queue2`：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689946949922-c4e442c3-568b-4164-a327-74e30aa9b9d0.png#averageHue=%23f8f6f5&clientId=uf6195e90-5366-4&from=paste&height=380&id=u452ddf31&originHeight=424&originWidth=916&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=29357&status=done&style=none&taskId=u657c70e9-017c-4339-98e0-2d408950262&title=&width=821.0644082234613)
+
 然后再创建一个交换机：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689948003779-ea99bac6-6b84-48f3-9760-a719ba5f0c2e.png#averageHue=%23f8f6f6&clientId=uf6195e90-5366-4&from=paste&height=359&id=ud456637e&originHeight=401&originWidth=886&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=22862&status=done&style=none&taskId=uba3f2a17-5520-43f0-abd4-2eec22a7c3a&title=&width=794.1736524956187)
+
 然后绑定两个队列到交换机：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689947064113-23e123ec-a601-4af4-a44f-70f7b4ef4063.png#averageHue=%23f8f7f7&clientId=uf6195e90-5366-4&from=paste&height=527&id=u2d63999d&originHeight=588&originWidth=978&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=34267&status=done&style=none&taskId=uc512438d-9693-44f1-9c35-33917ddbced&title=&width=876.6386367276695)
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689947695506-5346b816-61c7-4bfe-a28d-db261b3598c5.png#averageHue=%23f8f7f7&clientId=uf6195e90-5366-4&from=paste&height=537&id=u17bcbe41&originHeight=599&originWidth=985&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=34532&status=done&style=none&taskId=u17b49cc4-004f-4e31-bd46-bdef7fe19a1&title=&width=882.9131463974993)
 
 
@@ -722,7 +671,9 @@ public void listenFanoutQueue2(String msg) {
 ## 3.6.Direct交换机
 
 在Fanout模式中，一条消息，会被所有订阅的队列都消费。但是，在某些场景下，我们希望不同的消息被不同的队列消费。这时就要用到Direct类型的Exchange。
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687182404437-027a5191-b037-4033-baab-6bafd998161d.png#averageHue=%23fbf5f5&clientId=u0fe93ba5-a0ba-4&from=paste&height=430&id=uf5b6a678&originHeight=533&originWidth=1686&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=93278&status=done&style=none&taskId=ud6ffb209-4207-40a6-a7ab-4977cab3b5d&title=&width=1360.1344101806637)
+
 在Direct模型下：
 
 - 队列与交换机的绑定，不能是任意绑定了，而是要指定一个`RoutingKey`（路由key）
@@ -730,6 +681,7 @@ public void listenFanoutQueue2(String msg) {
 - Exchange不再把消息交给每一个绑定的队列，而是根据消息的`Routing Key`进行判断，只有队列的`Routingkey`与消息的 `Routing key`完全一致，才会接收到消息
 
 **案例需求如图**：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687182519270-885589ec-7f4a-492a-ab78-cddf109121cc.png#averageHue=%23fbf6f6&clientId=u0fe93ba5-a0ba-4&from=paste&height=430&id=u4dde4f59&originHeight=533&originWidth=1362&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=64401&status=done&style=none&taskId=u62c673b4-a71b-40bf-af49-a8c1a4df0de&title=&width=1098.7562672989704)
 
 1.  声明一个名为`hmall.direct`的交换机
@@ -742,14 +694,21 @@ public void listenFanoutQueue2(String msg) {
 ### 3.6.1.声明队列和交换机
 
 首先在控制台声明两个队列`direct.queue1`和`direct.queue2`，这里不再展示过程：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689947864231-5ace5d74-fdac-4a2a-9f92-180df06fe4ad.png#averageHue=%23f2f0ef&clientId=uf6195e90-5366-4&from=paste&height=403&id=u292b8851&originHeight=450&originWidth=1157&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=56948&status=done&style=none&taskId=uf110e543-1005-4b1a-b23e-d8529df3c0c&title=&width=1037.0868125704637)
+
 然后声明一个direct类型的交换机，命名为`hmall.direct`:
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689948033525-e6ea1134-c2ef-4b80-86b2-b364c1301335.png#averageHue=%23f8f6f6&clientId=uf6195e90-5366-4&from=paste&height=367&id=u0964090b&originHeight=409&originWidth=871&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=22938&status=done&style=none&taskId=u127085fa-3898-488f-afef-52a7cbf9e2d&title=&width=780.7282746316974)
+
 然后使用`red`和`blue`作为key，绑定`direct.queue1`到`hmall.direct`：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689948151280-bed1019d-7d60-455b-95b8-754e266edf50.png#averageHue=%23f8f6f6&clientId=uf6195e90-5366-4&from=paste&height=523&id=uf5aa7079&originHeight=583&originWidth=942&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=35339&status=done&style=none&taskId=u31d3c033-0a9a-446f-9ebc-a90405ba47d&title=&width=844.3697298542583)
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689948181033-6b1e6556-0110-4ed8-a2cb-8bc2dd388903.png#averageHue=%23f8f6f6&clientId=uf6195e90-5366-4&from=paste&height=522&id=u4e6a2147&originHeight=582&originWidth=874&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=34608&status=done&style=none&taskId=u274e41ea-73f2-4da5-bc23-fed091d234d&title=&width=783.4173502044816)
 
 同理，使用`red`和`yellow`作为key，绑定`direct.queue2`到`hmall.direct`，步骤略，最终结果：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689948243879-c97a0e6f-807a-4bc3-ad53-032c378008f3.png#averageHue=%23f4f4f3&clientId=uf6195e90-5366-4&from=paste&height=515&id=ufb0f0d5d&originHeight=575&originWidth=834&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=37957&status=done&style=none&taskId=uaae894e6-bc07-4e01-bf1f-53561ffd05a&title=&width=747.5630092340249)
 
 ### 3.6.2.消息接收
@@ -786,7 +745,9 @@ public void testSendDirectExchange() {
 ```
 
 由于使用的red这个key，所以两个消费者都收到了消息：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687182883516-906024ce-6ade-4dcd-8b4e-2b0cfc1bd03a.png#averageHue=%23f7f9f3&clientId=u0fe93ba5-a0ba-4&from=paste&height=136&id=uc0e2efee&originHeight=168&originWidth=1410&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=85796&status=done&style=none&taskId=u4ab862c3-bb61-4a97-87d8-ac463218ab2&title=&width=1137.4789551332954)
+
 我们再切换为blue这个key：
 
 ```java
@@ -802,6 +763,7 @@ public void testSendDirectExchange() {
 ```
 
 你会发现，只有消费者1收到了消息：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687182898732-afba28a8-c57e-4ccb-a330-9e3315879b31.png#averageHue=%23f7f9f4&clientId=u0fe93ba5-a0ba-4&from=paste&height=175&id=udcac360f&originHeight=217&originWidth=1237&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=99781&status=done&style=none&taskId=ua85a2eca-9806-4a15-997d-ee3c73528b6&title=&width=997.9159343970824)
 
 ### 3.6.4.总结
@@ -833,7 +795,9 @@ public void testSendDirectExchange() {
 - `item.*`：只能匹配`item.spu`
 
 图示：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687183148068-ad50ba76-0024-460b-9b24-3cf7a0fe172e.png#averageHue=%23f9f4f3&clientId=u0fe93ba5-a0ba-4&from=paste&height=305&id=u74a65bd0&originHeight=378&originWidth=1337&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=57084&status=done&style=none&taskId=u90f6bfb4-4f10-4ebe-8edb-70856565f27&title=&width=1078.5882007185928)
+
 假如此时publisher发送的消息使用的`RoutingKey`共有四种：
 
 - `china.news `代表有中国的新闻消息；
@@ -852,6 +816,7 @@ public void testSendDirectExchange() {
 
 接下来，我们就按照上图所示，来演示一下Topic交换机的用法。
 首先，在控制台按照图示例子创建队列、交换机，并利用通配符绑定队列和交换机。此处步骤略。最终结果如下：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689948475987-05bab459-43b6-47ad-bbfc-faf9f50d776e.png#averageHue=%23f5f5f4&clientId=uf6195e90-5366-4&from=paste&height=419&id=u3d545ee6&originHeight=468&originWidth=879&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=32637&status=done&style=none&taskId=u1bf5deb0-6b33-48e6-9d9d-d273a1be805&title=&width=787.8991428257888)
 
 ### 3.7.2.消息发送
@@ -906,14 +871,19 @@ public void listenTopicQueue2(String msg){
 ### 3.8.1.基本API
 
 SpringAMQP提供了一个Queue类，用来创建队列：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689945200636-5f4a823f-6f36-4088-9b67-7b9b3ae48079.png#averageHue=%23f9fcf7&clientId=uf6195e90-5366-4&from=paste&height=241&id=u2a7bba30&originHeight=269&originWidth=930&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=42392&status=done&style=none&taskId=uf1b5d62e-4e09-4ba8-a011-f8345dac005&title=&width=833.6134275631213)
 
-
 SpringAMQP还提供了一个Exchange接口，来表示所有不同类型的交换机：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687181804385-c500bc13-9f81-4071-ad8a-598fa5f57d97.png#averageHue=%23f8f8f7&clientId=u0fe93ba5-a0ba-4&from=paste&height=379&id=Qewqz&originHeight=470&originWidth=1469&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=23466&status=done&style=none&taskId=u357861af-c5aa-43c4-aafd-97dadaf8714&title=&width=1185.0755922629864)
-![](../../rabbitmq资料/01、MQ基础/assets/image-20210717165552676.png)我们可以自己创建队列和交换机，不过SpringAMQP还提供了ExchangeBuilder来简化这个过程：
+
+我们可以自己创建队列和交换机，不过SpringAMQP还提供了ExchangeBuilder来简化这个过程：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689945421476-fe44bf9a-d6eb-4f51-af02-374359c8e70b.png#averageHue=%23f8f7f5&clientId=uf6195e90-5366-4&from=paste&height=278&id=uae4334fe&originHeight=310&originWidth=781&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=34426&status=done&style=none&taskId=uc1b7bc5b-68b9-4ce9-afe5-9eb733e8f4b&title=&width=700.0560074481696)
+
 而在绑定队列和交换机时，则需要使用BindingBuilder来创建Binding对象：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1689945503733-13d2179c-f586-4de5-b18c-d3b5749f1f96.png#averageHue=%23dcab6a&clientId=uf6195e90-5366-4&from=paste&height=145&id=u91096ccd&originHeight=162&originWidth=659&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=16128&status=done&style=none&taskId=u1da153f0-6e86-45b2-900b-8f83e489358&title=&width=590.7002674882763)
 
 ### 3.8.2.fanout示例
@@ -1100,7 +1070,9 @@ public void listenTopicQueue2(String msg){
 ## 3.9.消息转换器
 
 Spring的消息发送代码接收的消息体是一个Object：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687183652317-82b0319b-03aa-46ed-afbc-373e7a6fa0f1.png#averageHue=%23f6f9f5&clientId=u0fe93ba5-a0ba-4&from=paste&height=394&id=u2c63fbb1&originHeight=488&originWidth=1448&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=122291&status=done&style=none&taskId=u0da81780-720e-4c27-9c2f-c24d7dc0123&title=&width=1168.1344163354693)
+
 而在数据传输时，它会把你发送的消息序列化为字节发送给MQ，接收消息的时候，还会把字节反序列化为Java对象。
 只不过，默认情况下Spring采用的序列化方式是JDK序列化。众所周知，JDK序列化存在下列问题：
 
@@ -1114,8 +1086,10 @@ Spring的消息发送代码接收的消息体是一个Object：
 
 1）创建测试队列
 首先，我们在consumer服务中声明一个新的配置类：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687183868403-242aa812-a07f-4748-8863-dc5d1e161dc1.png#averageHue=%23f9fbf8&clientId=u0fe93ba5-a0ba-4&from=paste&height=351&id=u77b665f4&originHeight=435&originWidth=1053&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=48481&status=done&style=none&taskId=uf6d36991-ec76-497c-93d3-3e96d9d6590&title=&width=849.4789643655035)
-利用@Bean的方式创建一个队列，![](../../rabbitmq资料/01、MQ基础/assets/image-20211104102144275.png)具体代码：
+
+利用@Bean的方式创建一个队列，具体代码：
 
 ```java
 package com.itheima.consumer.config;
@@ -1137,8 +1111,8 @@ public class MessageConfig {
 注意，这里我们先不要给这个队列添加消费者，我们要查看消息体的格式。
 
 重启consumer服务以后，该队列就会被自动创建出来了：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687184033157-c4c8e59e-a2b3-4b2b-9c20-ca3c597e556c.png#averageHue=%23f3f0ef&clientId=u0fe93ba5-a0ba-4&from=paste&height=456&id=u7c3fdb16&originHeight=565&originWidth=1196&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=72445&status=done&style=none&taskId=u03cddb0f-41a3-483d-83c7-d53a5ecb269&title=&width=964.8403052052632)
-![](../../rabbitmq资料/01、MQ基础/assets/image-20211104102409347.png)
 
 2）发送消息
 我们在publisher模块的SpringAmqpTest中新增一个消息发送的代码，发送一个Map对象：
@@ -1156,7 +1130,9 @@ public void testSendMap() throws InterruptedException {
 ```
 
 发送消息后查看控制台：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687184206574-69117533-5b4e-4172-b254-23130023f711.png#averageHue=%23f9f7f7&clientId=u0fe93ba5-a0ba-4&from=paste&height=528&id=u038b25c3&originHeight=654&originWidth=1244&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=46749&status=done&style=none&taskId=u8bea522c-fa98-48f1-bd84-1acfb50fff8&title=&width=1003.5629930395882)
+
 可以看到消息格式非常不友好。
 
 ### 3.9.2.配置JSON转换器
@@ -1176,7 +1152,7 @@ public void testSendMap() throws InterruptedException {
 注意，如果项目中引入了`spring-boot-starter-web`依赖，则无需再次引入`Jackson`依赖。
 
 
-配置消息转换器，在`publisher`和`consumer`两个服务的启动类中添加一个Bean即可：
+配置消息转换器，在`publisher`和`consumer`两个服务的启动类中都添加一个Bean即可：
 
 ```java
 @Bean
@@ -1191,10 +1167,9 @@ public MessageConverter messageConverter(){
 
 消息转换器中添加的messageId可以便于我们将来做幂等性判断。
 
-
 此时，我们到MQ控制台**删除**`object.queue`中的旧的消息。然后再次执行刚才的消息发送的代码，到MQ的控制台查看消息结构：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1687245684217-8b401cc5-29e6-4d08-9a9b-4fbe0dffd486.png#averageHue=%23f9f7f7&clientId=ucdd993b6-34bc-4&from=paste&height=432&id=ue5acc96b&originHeight=535&originWidth=990&originalType=binary&ratio=1.2395833730697632&rotation=0&showTitle=false&size=41352&status=done&style=none&taskId=u158a691b-c3b3-4103-993a-3064dc7139b&title=&width=798.655436582952)
-![](../../rabbitmq资料/01、MQ基础/assets/image-20211104102831385.png)
 
 ### 3.9.3.消费者接收Object
 
@@ -1207,13 +1182,13 @@ public void listenSimpleQueueMessage(Map<String, Object> msg) throws Interrupted
 }
 ```
 
-![](../../rabbitmq资料/01、MQ基础/assets/image-20211104103017170.png)
-
 # 4.业务改造
 
 案例需求：改造余额支付功能，将支付成功后基于OpenFeign的交易服务的更新订单状态接口的同步调用，改为基于RabbitMQ的异步通知。
 如图：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1690336853591-c874697b-688c-464e-8797-8162a02701e8.png#averageHue=%23faf3f3&clientId=u2c434c61-ffda-4&from=paste&height=396&id=ud83a0c53&originHeight=442&originWidth=1282&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=66835&status=done&style=none&taskId=uac12f07b-6953-4628-933f-82655332fb7&title=&width=1149.1316281031413)
+
 说明，我们只关注交易服务，步骤如下：
 
 - 定义topic类型交换机，命名为`pay.topic`
@@ -1250,7 +1225,9 @@ spring:
 ## 4.1.接收消息
 
 在trade-service服务中定义一个消息监听类：
+
 ![image.png](https://cdn.nlark.com/yuque/0/2023/png/27967491/1690339169409-cf6a9ad7-c364-4a26-992d-dd678f53e910.png#averageHue=%23f9fbf8&clientId=u2c434c61-ffda-4&from=paste&height=362&id=uc197e23b&originHeight=404&originWidth=899&originalType=binary&ratio=1.115625023841858&rotation=0&showTitle=false&size=38311&status=done&style=none&taskId=u11e78c89-237d-4689-a03a-1caed96b8fe&title=&width=805.8263133110172)
+
 其代码如下：
 
 ```java
