@@ -10,9 +10,10 @@ import java.util.Collections;
  * @author wing
  * @create 2024/5/13
  */
+
 public class FastAutoGeneratorTest {
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://47.76.68.216:3306/mybatis_plus?useSSL=false&serverTimezone=UTC", "root", "P@ssw0rd123!")
+        FastAutoGenerator.create("jdbc:mysql://192.168.0.245:3306/y_peru_system?useSSL=false&serverTimezone=America/Mexico_City", "shaoyou", "Ycs11g8ap_BkQp#35fc&Xin7f")
                         .globalConfig(builder -> {
                             builder.author("wing") // 设置作者
                             // .enableSwagger() // 开启 swagger 模式
@@ -25,8 +26,9 @@ public class FastAutoGeneratorTest {
                                     .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "/Users/wing/architect/MybatisPlusAutoCode")); // 设置mapperXml生成路径
                         })
                         .strategyConfig(builder -> {
-                            builder.addInclude("user") // 设置需要生成的表名
-                                    .addTablePrefix("t_", "c_"); // 设置过滤表前缀
+                            builder.addInclude("t_app_error_burial_point") // 设置需要生成的表名
+//                                    .addTablePrefix("t_", "c_") // 设置过滤表前缀
+                            ;
                              })
                         .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker 引擎模板，默认的是Velocity引擎模板
                         .execute();

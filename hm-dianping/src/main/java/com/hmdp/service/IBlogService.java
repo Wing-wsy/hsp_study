@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.Blog;
 
+import java.util.concurrent.Future;
+
 /**
  * <p>
  *  服务类
@@ -25,5 +27,10 @@ public interface IBlogService extends IService<Blog> {
     Result saveBlog(Blog blog);
 
     Result queryBlogOfFollow(Long max, Integer offset);
+
+    void testTask1();
+    void testTask2();
+    void testTask3();
+    Future<String> testTask4();
 
 }

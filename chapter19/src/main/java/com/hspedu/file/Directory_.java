@@ -13,8 +13,27 @@ import java.io.IOException;
 public class Directory_ {
 
     public static void main(String[] args) {
-
+        Thread t1 = new Thread("t1"){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        System.out.println(t1.getState());
+        t1.start();
+        System.out.println(t1.getState());
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(t1.getState());
     }
+
 
     // 判断news1.txt是否存在，存在则删除
     @Test

@@ -1842,6 +1842,8 @@ Yum 是一个shell 前端软件包管理器。基于RPM包管理，能够从指�
 
 ## 8.1 安装JDK
 
+> mac查看JDK安装路径命令：/usr/libexec/java_home -V
+
 <img src="picture/img108.png" style="zoom:50%;" />
 
 <img src="picture/img109.png" style="zoom:50%;" />

@@ -14,27 +14,31 @@
 
 线程的作用：使多道程序更好的并发执行，提高资源利用率和系统吞吐量，增强操作系统的并发性能
 
+***
+
 并发并行：
 
 * 并行：在同一时刻，有多个指令在多个 CPU 上同时执行
 * 并发：在同一时刻，有多个指令在单个 CPU 上交替执行
+
+单核 cpu 下，线程实际还是 串行执行 的。操作系统中有一个组件叫做任务调度器，将 cpu 的时间片(windows 下时间片最小约为 15 毫秒)分给不同的程序使用，只是由于 cpu 在线程间(时间片很短)的切换非常快，人类感 觉是 同时运行的 。总结为一句话就是: `微观串行，宏观并行` ，
+
+一般会将这种 线程轮流使用 CPU 的做法称为并发， concurrent
+
+<img src="img/img01.png" style="zoom:50%;" />
+
+多核 cpu下，每个 核(core) 都可以调度运行线程，这时候线程可以是并行的。
+
+<img src="img/img02.png" style="zoom:50%;" />
+
+***
 
 同步异步：
 
 * 需要等待结果返回，才能继续运行就是同步
 * 不需要等待结果返回，就能继续运行就是异步
 
-
-
-参考视频：https://www.bilibili.com/video/BV16J411h7Rd
-
-笔记的整体结构依据视频编写，并随着学习的深入补充了很多知识
-
-
-
 ***
-
-
 
 ### 对比
 
@@ -67,15 +71,41 @@
 
 * 线程更轻量，线程上下文切换成本一般上要比进程上下文切换低
 
-
-
-
-
 ***
 
+## 应用案例1
 
+充分利用多核 cpu 的优势，提高运行效率。想象下面的场景，执行3个计算，最后将计算结果汇总
 
+> 计算 1 花费 10 ms
+>
+> 计算 2 花费 11 ms
+>
+> 计算 3 花费 9 ms
+>
+> 汇总需要 1ms
 
+- ﻿如果是串行执行，那么总共花费的时间是 10+11+9+1=31ms
+
+- ﻿但如果是四核 cpu，各个核心分别使用线程1执行计算 1，线程2执行计算2，线程3执行计算了，那么3个线程是并行的，花费时间只取决于最长的那个线程运行的时间，即11ms 最后加上汇总时间只会花费
+   12ms
+
+  **注意**
+
+​		需要在多核 cpu 才能提高效率，单核仍然是轮流执行
+
+> 结论：
+>
+> 1.单核cpu 下，多线程不能实际提高程序运行效率，只是为了能够在不同的任务之间切换，不同线程轮流使用cpu，不至于一个线程总占用cpu，别的线程没法干活
+>
+> 2.多核cpu 可以并行跑多个线程，但能否提高程序运行效率还是要分情况的
+>
+> - ﻿有些任务，经过精心设计，将任务拆分，并行执行，当然可以提高程序的运行效率。但不是所有计算任务都能拆分（参考后文的【阿姆达尔定律】）
+> - ﻿也不是所有任务都需要拆分，任务的目的如果不同，谈拆分和效率没啥意义
+>
+> 3.IO操作不占用cpu，只是我们一般拷贝文件使用的是【阻塞 IO】，这时相当于线程虽然不用cpu，但需要一直等待IO 结束，没能充分利用线程。所以才有后面的【非阻塞 IO】和【异步 IO】优化
+
+***
 
 ## 线程
 
@@ -120,13 +150,11 @@ class MyThread extends Thread {
 * 优点：编码简单
 *  缺点：线程类已经继承了 Thread 类无法继承其他类了，功能不能通过继承拓展（单继承的局限性）
 
-
-
 ***
 
-
-
 #### Runnable
+
+把【线程】和【任务】（要执行的代码）分开
 
 Runnable 创建线程方式：创建线程类，匿名内部类方式
 
@@ -186,11 +214,7 @@ Runnable 方式的优缺点：
 
   5. 线程池可以放入实现 Runnable 或 Callable 线程任务对象
 
-​     
-
 ****
-
-
 
 #### Callable
 
@@ -241,13 +265,7 @@ public class MyCallable implements Callable<String> {
 }
 ```
 
-
-
-
-
 ***
-
-
 
 ### 线程方法
 
@@ -274,13 +292,9 @@ Thread 类 API：
 | public final native boolean isAlive()       | 线程是否存活（还没有运行完毕）                               |
 | public final void setDaemon(boolean on)     | 将此线程标记为守护线程或用户线程                             |
 
-
-
 ***
 
-
-
-#### run start
+#### run 和 start
 
 run：称为线程体，包含了要执行的这个线程的内容，方法运行结束，此线程随即终止。直接调用 run 是在主线程中执行了 run，没有启动新的线程，需要顺序执行
 
@@ -293,13 +307,9 @@ run() 方法中的异常不能抛出，只能 try/catch
 * 因为父类中没有抛出任何异常，子类不能比父类抛出更多的异常
 * **异常不能跨线程传播回 main() 中**，因此必须在本地进行处理
 
-
-
 ***
 
-
-
-#### sleep yield
+#### sleep 和 yield
 
 sleep：
 
@@ -311,15 +321,11 @@ sleep：
 
 yield：
 
-* 调用 yield 会让提示线程调度器让出当前线程对 CPU 的使用
+* 调用 yield 会提示线程调度器让出当前线程对 CPU 的使用
 * 具体的实现依赖于操作系统的任务调度器
 * **会放弃 CPU 资源，锁资源不会释放**
 
-
-
 ***
-
-
 
 #### join
 
@@ -371,11 +377,7 @@ public class Test {
 }
 ```
 
-
-
 ***
-
-
 
 #### interrupt
 
@@ -427,11 +429,7 @@ public class Test {
   }
   ```
 
-
-
 ***
-
-
 
 ##### 打断 park
 
@@ -463,10 +461,6 @@ System.out.println("unpark...");//和上一个unpark同时执行
 可以修改获取打断状态方法，使用 `Thread.interrupted()`，清除打断标记
 
 LockSupport 类在 同步 → park-un 详解
-
-
-
-***
 
 
 
@@ -529,11 +523,7 @@ class TwoPhaseTermination {
 }
 ```
 
-
-
 ***
-
-
 
 #### daemon
 
@@ -564,13 +554,7 @@ t.start();
 * 垃圾回收器线程就是一种守护线程
 * Tomcat 中的 Acceptor 和 Poller 线程都是守护线程，所以 Tomcat 接收到 shutdown 命令后，不会等待它们处理完当前请求
 
-
-
-
-
 ***
-
-
 
 #### 不推荐
 
@@ -586,11 +570,7 @@ t.start();
 
 * `public final void resume()`：恢复线程运行
 
-
-
 ***
-
-
 
 ### 线程原理
 
@@ -619,11 +599,9 @@ JVM 规范并没有限定线程模型，以 HotSopot 为例：
 
 Java 中 main 方法启动的是一个进程也是一个主线程，main 方法里面的其他线程均为子线程，main 线程是这些线程的父线程
 
-
+> 频繁上下文切换会影响性能，线程超过了CPU核心，也会导致切换
 
 ***
-
-
 
 #### 线程调度
 
@@ -643,11 +621,7 @@ Java 提供了线程优先级的机制，优先级会提示（hint）调度器�
 
 说明：并不能通过优先级来判断线程执行的先后顺序
 
-
-
 ***
-
-
 
 #### 未来优化
 
@@ -661,11 +635,7 @@ Java 提供了线程优先级的机制，优先级会提示（hint）调度器�
 * 执行过程：用于维护执行现场，保护、恢复上下文状态
 * 调度器：负责编排所有要执行的代码顺序
 
-
-
 ****
-
-
 
 ### 线程状态
 
@@ -731,15 +701,7 @@ Java：
 * jstack <PID> 查看某个 Java 进程（PID）的所有线程状态
 * jconsole 来查看某个 Java 进程中线程的运行情况（图形界面）
 
-
-
-
-
 ***
-
-
-
-
 
 ## 同步
 
@@ -772,11 +734,7 @@ Java：
 * 线程安全，性能差
 * 线程不安全性能好，假如开发中不会存在多线程安全问题，建议使用线程不安全的设计类
 
-
-
 ***
-
-
 
 ### syn-ed
 
@@ -833,11 +791,37 @@ public class demo {
 }
 ```
 
+```java
+class Test{
+  public synchronized void test() {
+  }
+}
 
+等价于
+class Test{
+  public void test() {
+    synchronized(this) {
+    }
+  }
+}
+```
+
+```java
+class Test{
+  public synchronized static void test() {
+  }
+}
+
+等价于
+class Test{
+  public static void test() {
+    synchronized(Test.class) {
+    }
+  }
+}
+```
 
 ***
-
-
 
 ##### 同步方法
 
@@ -883,11 +867,7 @@ synchronized 修饰的方法的不具备继承性，所以子类是线程不安�
   }
   ```
 
-
-
 ***
-
-
 
 ##### 线程八锁
 
@@ -938,13 +918,7 @@ public static void main(String[] args) {
 }
 ```
 
-
-
-
-
 ***
-
-
 
 #### 锁原理
 
@@ -966,7 +940,9 @@ Monitor 被翻译为监视器或管程
 
 * 开始时 Monitor 中 Owner 为 null
 * 当 Thread-2 执行 synchronized(obj) 就会将 Monitor 的所有者 Owner 置为 Thread-2，Monitor 中只能有一个 Owner，**obj 对象的 Mark Word 指向 Monitor**，把**对象原有的 MarkWord 存入线程栈中的锁记录**中（轻量级锁部分详解）
-  <img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-Monitor工作原理1.png" style="zoom:67%;" />
+
+<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-Monitor工作原理1.png" style="zoom:67%;" />
+
 * 在 Thread-2 上锁的过程，Thread-3、Thread-4、Thread-5 也执行 synchronized(obj)，就会进入 EntryList BLOCKED（双向链表）
 * Thread-2 执行完同步代码块的内容，根据 obj 对象头中 Monitor 地址寻找，设置 Owner 为空，把线程栈的锁记录中的对象头的值设置回 MarkWord
 * 唤醒 EntryList 中等待的线程来竞争锁，竞争是**非公平的**，如果这时有新的线程想要获取锁，可能直接就抢占到了，阻塞队列的线程就会继续阻塞
@@ -979,11 +955,7 @@ Monitor 被翻译为监视器或管程
 * synchronized 必须是进入同一个对象的 Monitor 才有上述的效果
 * 不加 synchronized 的对象不会关联监视器，不遵从以上规则
 
-
-
 ****
-
-
 
 ##### 字节码
 
@@ -1035,11 +1007,7 @@ LocalVariableTable:
 * 通过异常 **try-catch 机制**，确保一定会被解锁
 * 方法级别的 synchronized 不会在字节码指令中有所体现
 
-
-
 ***
-
-
 
 #### 锁升级
 
@@ -1053,11 +1021,7 @@ LocalVariableTable:
 
 ![](https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-锁升级过程.png)
 
-
-
 ***
-
-
 
 ##### 偏向锁
 
@@ -1147,8 +1111,6 @@ public static void method2() {
 
 ***
 
-
-
 ##### 锁膨胀
 
 在尝试加轻量级锁的过程中，CAS 操作无法成功，可能是其它线程为此对象加上了轻量级锁（有竞争），这时需要进行锁膨胀，将轻量级锁变为**重量级锁**
@@ -1163,13 +1125,7 @@ public static void method2() {
 
 * 当 Thread-0 退出同步块解锁时，使用 CAS 将 Mark Word 的值恢复给对象头失败，这时进入重量级解锁流程，即按照 Monitor 地址找到 Monitor 对象，设置 Owner 为 null，唤醒 EntryList 中 BLOCKED 线程
 
-
-
-
-
 ***
-
-
 
 #### 锁优化
 
@@ -1189,16 +1145,18 @@ public static void method2() {
 自旋锁情况：
 
 * 自旋成功的情况：
-      <img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-自旋成功.png" style="zoom: 80%;" />
+
+<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-自旋成功.png" style="zoom: 80%;" />
 
 * 自旋失败的情况：
 
-  <img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-自旋失败.png" style="zoom:80%;" />
+<img src="https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-自旋失败.png" style="zoom:80%;" />
 
 自旋锁说明：
 
 * 在 Java 6 之后自旋锁是自适应的，比如对象刚刚的一次自旋操作成功过，那么认为这次自旋成功的可能性会高，就多自旋几次；反之，就少自旋甚至不自旋，比较智能
 * Java 7 之后不能控制是否开启自旋功能，由 JVM 控制
+* 自旋会占用CPU时间，单核CPU自旋就是浪费，多核CPU自旋才能发挥优势
 
 ```java
 //手写自旋锁
@@ -1248,13 +1206,7 @@ public class SpinLock {
 }
 ```
 
-
-
-
-
 ***
-
-
 
 ##### 锁消除
 
@@ -1262,11 +1214,7 @@ public class SpinLock {
 
 锁消除主要是通过**逃逸分析**来支持，如果堆上的共享数据不可能逃逸出去被其它线程访问到，那么就可以把它们当成私有数据对待，也就可以将它们的锁进行消除（同步消除：JVM 逃逸分析）
 
-
-
 ***
-
-
 
 ##### 锁粗化
 
@@ -1296,11 +1244,7 @@ public class SpinLock {
 
 扩展到第一个 append() 操作之前直至最后一个 append() 操作之后，只需要加锁一次就可以
 
-
-
 ****
-
-
 
 #### 多把锁
 
@@ -1445,8 +1389,6 @@ public class Dead {
 
 ***
 
-
-
 ##### 活锁
 
 活锁：指的是任务或者执行者没有被阻塞，由于某些条件没有满足，导致一直重复尝试—失败—尝试—失败的过程
@@ -1478,21 +1420,13 @@ class TestLiveLock {
 }
 ```
 
-
-
 ***
-
-
 
 ##### 饥饿
 
 饥饿：一个线程由于优先级太低，始终得不到 CPU 调度执行，也不能够结束
 
-
-
 ***
-
-
 
 ### wait-ify
 
@@ -1526,11 +1460,7 @@ public final native void wait(long timeout):有时限的等待, 到n毫秒后结
 
 ![](https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-Monitor工作原理2.png)
 
-
-
 ***
-
-
 
 #### 代码优化
 
@@ -1606,13 +1536,7 @@ public class demo {
 }
 ```
 
-
-
-
-
 ****
-
-
 
 ### park-un
 
@@ -1672,8 +1596,6 @@ LockSupport 出现就是为了增强 wait & notify 的功能：
 
 ***
 
-
-
 ### 安全分析
 
 成员变量和静态变量：
@@ -1720,11 +1642,7 @@ LockSupport 出现就是为了增强 wait & notify 的功能：
 
 抽象方法如果有参数，被重写后行为不确定可能造成线程不安全，被称之为外星方法：`public abstract foo(Student s);`
 
-
-
 ***
-
-
 
 ### 同步模式
 
@@ -1803,8 +1721,6 @@ class GuardedObject {
 }
 ```
 
-
-
 ##### 多任务版
 
 多任务版保护性暂停：
@@ -1875,11 +1791,7 @@ class GuardedObject {
 }
 ```
 
-
-
 ****
-
-
 
 #### 顺序输出
 
@@ -1908,11 +1820,7 @@ public static void main(String[] args) throws InterruptedException {
 }
 ```
 
-
-
 ***
-
-
 
 #### 交替输出
 
@@ -1969,11 +1877,7 @@ class AwaitSignal extends ReentrantLock {
 }
 ```
 
-
-
 ***
-
-
 
 ### 异步模式
 
@@ -2049,8 +1953,6 @@ public class TraditionalProducerConsumer {
     }
 }
 ```
-
-
 
 #### 改进版
 
@@ -2142,11 +2044,7 @@ final class Message {
 }
 ```
 
-
-
 ***
-
-
 
 #### 阻塞队列
 
@@ -2181,7 +2079,6 @@ public static void main(String[] args) {
 
 
 ****
-
 
 
 

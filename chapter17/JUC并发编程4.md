@@ -243,7 +243,7 @@ class MyLock implements Lock {
 
 
 
-### Re-Lock
+### ReentrantLock
 
 #### 锁对比
 
@@ -297,12 +297,6 @@ try {
 	reentrantLock.unlock();
 }
 ```
-
-
-
-***
-
-
 
 #### 公平锁
 
@@ -1171,11 +1165,7 @@ public static void main(String[] args) throws InterruptedException {
 }
 ```
 
-
-
 ****
-
-
 
 ##### 实现原理
 
@@ -2969,7 +2959,6 @@ class ThreadB extends Thread{
 
 
 ***
-
 
 
 

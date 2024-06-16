@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="231c2be9-0e39-47dd-9795-5167b3673ecd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../chapter16/img1/img01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter16/rabbitmq基础组件封装.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.apt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.settings/org.springframework.ide.eclipse.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/.factorypath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/.settings/org.eclipse.jdt.apt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/.settings/org.eclipse.m2e.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/.settings/org.springframework.ide.eclipse.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/MessageBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/MessageListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/MessageProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/MessageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/SendCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/exception/MessageException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/src/main/java/com/bfxy/rabbit/api/exception/MessageRunTimeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-api/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-api/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/Message.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/MessageBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/MessageListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/MessageProducer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/MessageType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/SendCallback.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/exception/MessageException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-api/target/classes/com/bfxy/rabbit/api/exception/MessageRunTimeException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.classpath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.factorypath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.settings/org.eclipse.jdt.apt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.settings/org.eclipse.m2e.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/.settings/org.springframework.ide.eclipse.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/convert/GenericMessageConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/convert/RabbitMessageConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/mybatis/handler/MessageJsonTypeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/serializer/Serializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/serializer/SerializerFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/serializer/impl/JacksonSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/serializer/impl/JacksonSerializerFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/src/main/java/com/bfxy/rabbit/common/util/FastJsonConvertUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-common/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/convert/GenericMessageConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/convert/RabbitMessageConverter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/mybatis/handler/MessageJsonTypeHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/serializer/Serializer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/serializer/SerializerFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/serializer/impl/JacksonSerializer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/serializer/impl/JacksonSerializerFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-common/target/classes/com/bfxy/rabbit/common/util/FastJsonConvertUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.classpath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.factorypath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.project" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.settings/org.eclipse.jdt.apt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.settings/org.eclipse.m2e.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/.settings/org.springframework.ide.eclipse.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/autoconfigure/RabbitProducerAutoConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/AsyncBaseQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/MessageHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/MessageHolderAyncQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/ProducerClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/RabbitBroker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/RabbitBrokerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/broker/RabbitTemplateContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/config/database/BrokerMessageConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/config/database/RabbitProducerDataSourceConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/config/database/RabbitProducerMyBatisConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/config/database/RabbitProducerMybatisMapperScanerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/constant/BrokerMessageConst.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/constant/BrokerMessageStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/entity/BrokerMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/mapper/BrokerMessageMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/mapping/BrokerMessageMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/service/MessageStoreService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/java/com/bfxy/rabbit/producer/task/RetryMessageDataflowJob.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/resources/rabbit-producer-message-schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/src/main/resources/rabbit-producer-message.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-core-producer/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-core-producer/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/autoconfigure/RabbitProducerAutoConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/AsyncBaseQueue$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/AsyncBaseQueue$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/AsyncBaseQueue.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/MessageHolder$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/MessageHolder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/MessageHolderAyncQueue$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/MessageHolderAyncQueue$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/MessageHolderAyncQueue.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/ProducerClient.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/RabbitBroker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/RabbitBrokerImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/broker/RabbitTemplateContainer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/config/database/BrokerMessageConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/config/database/RabbitProducerDataSourceConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/config/database/RabbitProducerMyBatisConfiguration.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/config/database/RabbitProducerMybatisMapperScanerConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/constant/BrokerMessageConst.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/constant/BrokerMessageStatus.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/entity/BrokerMessage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/mapper/BrokerMessageMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/mapping/BrokerMessageMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/service/MessageStoreService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/com/bfxy/rabbit/producer/task/RetryMessageDataflowJob.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/rabbit-producer-message-schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-core-producer/target/classes/rabbit-producer-message.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/.factorypath" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/.settings/org.eclipse.jdt.apt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/.settings/org.eclipse.m2e.core.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/.settings/org.springframework.ide.eclipse.prefs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/java/com/bfxy/rabbit/task/annotation/ElasticJobConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/java/com/bfxy/rabbit/task/annotation/EnableElasticJob.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/java/com/bfxy/rabbit/task/autoconfigure/JobParserAutoConfigurartion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/java/com/bfxy/rabbit/task/autoconfigure/JobZookeeperProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/java/com/bfxy/rabbit/task/enums/ElasticJobTypeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/java/com/bfxy/rabbit/task/parser/ElasticJobConfParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-task/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-task/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/META-INF/spring-configuration-metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/META-INF/spring.factories" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/com/bfxy/rabbit/task/annotation/ElasticJobConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/com/bfxy/rabbit/task/annotation/EnableElasticJob.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/com/bfxy/rabbit/task/autoconfigure/JobParserAutoConfigurartion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/com/bfxy/rabbit/task/autoconfigure/JobZookeeperProperties.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/com/bfxy/rabbit/task/enums/ElasticJobTypeEnum.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rabbit-task/target/classes/com/bfxy/rabbit/task/parser/ElasticJobConfParser.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-parent/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/maven/com.bfxy.base.rabbit/rabbit-parent/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter17/JUC并发编程1.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter17/JUC并发编程1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mq-demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mq-demo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rabbitmq_springboot/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/repository" />
+        <option name="mavenHome" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4" />
+        <option name="userSettingsFile" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2hiKPdYAFesVaUYKFgtohBZNvQj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/wing/architect/hsp_study/rabbit-parent&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="231c2be9-0e39-47dd-9795-5167b3673ecd" name="Changes" comment="" />
+      <created>1718071436331</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718071436331</updated>
+      <workItem from="1718071438428" duration="27357000" />
+      <workItem from="1718114883789" duration="599000" />
+      <workItem from="1718156239427" duration="707000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

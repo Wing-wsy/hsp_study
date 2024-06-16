@@ -1000,7 +1000,7 @@ Executors 提供了四种线程池的创建：newCachedThreadPool、newFixedThre
 
   * 核心线程数 == 最大线程数（没有救急线程被创建），因此也无需超时时间
   * LinkedBlockingQueue 是一个单向链表实现的阻塞队列，默认大小为 `Integer.MAX_VALUE`，也就是无界队列，可以放任意数量的任务，在任务比较多的时候会导致 OOM（内存溢出）
-  * 适用于任务量已知，相对耗时的长期任务
+  * **适用于任务量已知，相对耗时的长期任务**
 
 * newCachedThreadPool：创建一个可扩容的线程池
 
@@ -1014,7 +1014,7 @@ Executors 提供了四种线程池的创建：newCachedThreadPool、newFixedThre
   * 核心线程数是 0， 最大线程数是 29 个 1，全部都是救急线程（60s 后可以回收），可能会创建大量线程，从而导致 **OOM**
   * SynchronousQueue 作为阻塞队列，没有容量，对于每一个 take 的线程会阻塞直到有一个 put 的线程放入元素为止（类似一手交钱、一手交货）
 
-  * 适合任务数比较密集，但每个任务执行时间较短的情况
+  * **适合任务数比较密集，但每个任务执行时间较短的情况**
 
 * newSingleThreadExecutor：创建一个只有 1 个线程的单线程池
 
@@ -1026,7 +1026,7 @@ Executors 提供了四种线程池的创建：newCachedThreadPool、newFixedThre
   }
   ```
 
-  * 保证所有任务按照**指定顺序执行**，线程数固定为 1，任务数多于 1 时会放入无界队列排队，任务执行完毕，这唯一的线程也不会被释放
+  * **保证所有任务按照指定顺序执行，线程数固定为 1，任务数多于 1 时会放入无界队列排队，任务执行完毕，这唯一的线程也不会被释放**
 
 
 对比：
@@ -3305,7 +3305,6 @@ class MockConnection implements Connection {
 
 
 ****
-
 
 
 

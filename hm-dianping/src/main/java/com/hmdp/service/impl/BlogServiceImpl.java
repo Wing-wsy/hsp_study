@@ -16,8 +16,11 @@ import com.hmdp.service.IFollowService;
 import com.hmdp.service.IUserService;
 import com.hmdp.utils.SystemConstants;
 import com.hmdp.utils.UserHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import static com.hmdp.utils.RedisConstants.BLOG_LIKED_KEY;
@@ -38,6 +42,7 @@ import static com.hmdp.utils.RedisConstants.FEED_KEY;
  * @author 虎哥
  * @since 2021-12-22
  */
+@Slf4j
 @Service
 public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
 
@@ -225,4 +230,59 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
 
         return Result.ok(r);
     }
+
+    @Async
+    @Override
+    public void testTask1() {
+        log.debug("testTaskService1，{}", "start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.debug("testTaskService1，{}", "end");
+        System.out.println("当前线程:"+Thread.currentThread().getName());
+    }
+
+    @Async  // 不指定名称代表使用默认线程池（如果有实现自定义线程池替换默认线程池的则使用自定义的）
+    @Override
+    public void testTask2() {
+        log.debug("testTaskService2，{}", "start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.debug("testTaskService2，{}", "end");
+        System.out.println("当前线程:"+Thread.currentThread().getName());
+    }
+
+    @Async("heihei") // 指定使用的线程池
+    @Override
+    public void testTask3() {
+        log.debug("testTaskService3，{}", "start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.debug("testTaskService3，{}", "end");
+        System.out.println("当前线程:"+Thread.currentThread().getName());
+    }
+
+    @Async
+//    @Async("heihei")
+    @Override
+    public Future<String> testTask4() {
+        log.debug("testTaskService4，{}", "start");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.debug("testTaskService4，{}", "end");
+        log.debug("heihei:{}", Thread.currentThread().getName());
+        return new AsyncResult("处理好了");
+    }
+
 }
