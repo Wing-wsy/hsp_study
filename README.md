@@ -25,7 +25,8 @@
 #### chapter-23 - java 反射          【 √ 】
 #### chapter-24 - ssm             【 √ 】
 #### chapter-25 - SpringBoot       【 △ 】
-#### chapter-26 - Elasticsearch      【 × 】
+#### chapter-26 - JWT     【 × 】
+#### chapter-27 - Elasticsearch        【 × 】
 #### 更多技术待解锁...
 
 

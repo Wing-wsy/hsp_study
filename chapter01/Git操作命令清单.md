@@ -17,7 +17,7 @@ $ git init [project-name]
 # 查看初始化目录的隐藏.git文件
 $ ls -a
 # 克隆下载一个项目和它的整个代码历史
-$ git clone [url]    # eg:git clone https://github.com/Wing-wsy/bamboo-project.git
+$ git clone [url]    # eg:git clone https://github.com/Wing-wsy/bamboo.git
 ```
 
 #### 二、代码提交/回退操作
@@ -181,7 +181,7 @@ git remote set-url origin  https://<your_token>@github.com/<USERNAME>/<REPO>.git
 
  wing@WangShaoYoudeMacBook-Pro git-demo % git remote set-url origin  https://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@github.com/Wing-wsy/git-demo.git
  # 最后一步，执行推送【到这里完成了将本地文件推送到了github】
- wing@WangShaoYoudeMacBook-Pro git-demo % git push origin main 
+ wing@WangShaoYoudeMacBook-Pro git-demo % 【git push origin main 】
  
  # 直接在github上打开文件直接修改下，这样的话本地仓库需要拉取远程仓库的最新代码
  wing@WangShaoYoudeMacBook-Pro wang-demo % git pull origin hos-fix

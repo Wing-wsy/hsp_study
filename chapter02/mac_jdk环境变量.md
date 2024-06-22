@@ -32,14 +32,16 @@
 终端输入回车之后，自动打开，初始可能有一些东西在里面
 
 ```sh
-open -e .zshrc
+[根目录]open -e .zshrc
 # 如果一开始没有这个文件，那么就创建
-touch .zshrc
+[根目录]touch .zshrc
 ```
 
 ### 2.2 写配置文件
 
 将下面代码直接复制到打开的配置文件中然后保存（JAVA_HOME只要改成自己的，其它不变）
+
+open /Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home
 
 ```xml
 JAVA_HOME=我的jdk路径
@@ -55,8 +57,8 @@ export CLASSPATH
 ### 2.3 使配置生效
 
 ```sh
-source ~/.zshrc
-source .bash_profile
+[根目录]source ~/.zshrc
+[根目录]source .bash_profile
 ```
 
 **然后就配置成功了**

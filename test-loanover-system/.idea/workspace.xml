@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b110aaef-c8f1-4ceb-8491-a058aa3977c9" name="Changes" comment="删除 admin_system.asta，兼容maven打包报错问题">
+      <change afterPath="$PROJECT_DIR$/../chapter24/src/main/java/org/example/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter24/src/main/java/org/example/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chapter24/src/main/java/org/example/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter24/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter24/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log-stack-01/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../log-stack-01/src/main/resources/logback.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/repository" />
+        <option name="mavenHome" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4" />
+        <option name="userSettingsFile" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2h96NPdJnxbsEBb4YfnJZgXQ43v" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/wing/architect/hsp_study/test-loanover-system",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/loanover-business/business-admin/src/main/resources" />
+      <recent name="$PROJECT_DIR$/bamboo-technology/bamboo-core/src/main/java/org/panda/tech/core/jwt" />
+      <recent name="$PROJECT_DIR$/bamboo-technology/bamboo-common/src/main/java/org/panda/bamboo/common/constant" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/loanover-business/business-admin/src/main/resources" />
+      <recent name="$PROJECT_DIR$/loanover-business/business-admin/src/main/resources/config" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.panda.business.admin.common.controller.son" />
+      <recent name="org.panda.business.admin" />
+      <recent name="org.panda.business.admin.common.config" />
+      <recent name="org.panda.tech.core.jwt.concurrent" />
+      <recent name="org.panda.bamboo.common.util.lang" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AdminApplication">
+    <configuration name="AdminApplicationTest.test01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="business-admin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.panda.business.admin.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.panda.business.admin.test" />
+      <option name="MAIN_CLASS_NAME" value="org.panda.business.admin.test.AdminApplicationTest" />
+      <option name="METHOD_NAME" value="test01" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MybatisCodeGenTest.codeGen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="support-data" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yc.support.data.test.codegen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.yc.support.data.test.codegen" />
+      <option name="MAIN_CLASS_NAME" value="com.yc.support.data.test.codegen.MybatisCodeGenTest" />
+      <option name="METHOD_NAME" value="codeGen" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="bamboo-core" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="bamboo-core" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="business-admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.panda.business.admin.AdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="business-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yc.business.app.AppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.AdminApplicationTest.test01" />
+        <item itemvalue="JUnit.MybatisCodeGenTest.codeGen" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b110aaef-c8f1-4ceb-8491-a058aa3977c9" name="Changes" comment="" />
+      <created>1716993909124</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716993909124</updated>
+      <workItem from="1716993910632" duration="3388000" />
+      <workItem from="1717035287273" duration="2377000" />
+      <workItem from="1717037707921" duration="18377000" />
+      <workItem from="1717209467196" duration="598000" />
+      <workItem from="1717342234415" duration="599000" />
+      <workItem from="1717382031597" duration="4266000" />
+      <workItem from="1718264720228" duration="5180000" />
+      <workItem from="1718541680322" duration="763000" />
+      <workItem from="1718542661888" duration="1249000" />
+      <workItem from="1718596420111" duration="14939000" />
+      <workItem from="1718634030388" duration="9658000" />
+      <workItem from="1718678121409" duration="952000" />
+      <workItem from="1718679301409" duration="16348000" />
+      <workItem from="1718702780990" duration="368000" />
+    </task>
+    <task id="LOCAL-00001" summary="删除 admin_system.asta，兼容maven打包报错问题">
+      <option name="closed" value="true" />
+      <created>1717038395908</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717038395908</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1fceb31d-24fc-4fc9-86a5-f8fa4b2aa39b" value="TOOL_WINDOW" />
+        <entry key="60f6b811-c0c1-4430-ae22-c79d5ff26689" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1fceb31d-24fc-4fc9-86a5-f8fa4b2aa39b">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="60f6b811-c0c1-4430-ae22-c79d5ff26689">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="删除 admin_system.asta，兼容maven打包报错问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除 admin_system.asta，兼容maven打包报错问题" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bamboo-technology/bamboo-core/src/main/java/org/panda/tech/core/web/mvc/servlet/ServletContextInitializedBean.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/loanover-business/business-admin/src/main/java/org/panda/business/admin/Test1.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
