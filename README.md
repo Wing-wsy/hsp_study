@@ -15,7 +15,7 @@
 #### chapter-13 - nginx              【 × 】
 #### chapter-14 - java 集合           【 √ 】
 #### chapter-15 - mybatis-plus        【 √ 】
-#### chapter-16 - rabbitmq           【 × 】
+#### chapter-16 - rabbitmq           【 √ 】
 #### chapter-17 - JUC并发编程           【 × 】
 #### chapter-18 - Java设计模式           【 △ 】
 #### chapter-19 - java IO 流         【 √ 】
@@ -25,8 +25,10 @@
 #### chapter-23 - java 反射          【 √ 】
 #### chapter-24 - ssm             【 √ 】
 #### chapter-25 - SpringBoot       【 △ 】
-#### chapter-26 - JWT     【 × 】
-#### chapter-27 - Elasticsearch        【 × 】
+#### chapter-26 - JWT     【 √ 】
+#### chapter-27 - SpringSecurity        【  △ 】
+#### chapter-28 - Elasticsearch        【 × 】
+
 #### 更多技术待解锁...
 
 
