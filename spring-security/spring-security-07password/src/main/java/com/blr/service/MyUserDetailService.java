@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * 实现  UserDetailsPasswordService接口 为了可以实现密码自动升级
+ */
 @Service
-public class MyUserDetailService implements UserDetailsService, UserDetailsPasswordService {
+public class MyUserDetailService implements UserDetailsService , UserDetailsPasswordService {
 
     private final UserDao userDao;
 
@@ -26,6 +29,7 @@ public class MyUserDetailService implements UserDetailsService, UserDetailsPassw
         return user;
     }
 
+    /** 密码自动升级 */
     @Override //默认使用DelegatingPasswordEncoder 默认使用相当最安全密码加密 Bcrypt ----> Cxxx
     public UserDetails updatePassword(UserDetails user, String newPassword) {
         Integer result = userDao.updatePassword(user.getUsername(), newPassword);

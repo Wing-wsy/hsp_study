@@ -97,20 +97,19 @@ AuthenticationManager 主要实现类为 `ProviderManager`，在 ProviderManager
 
 ```java
 public interface Authentication extends Principal, Serializable {
+  // 获取用户权限信息
 	Collection<? extends GrantedAuthority> getAuthorities();
-	Object getCredentials();
+  // 获取用户凭证信息，一般指密码
+	Object getCredentials(); 
+  // 获取用户详细信息
 	Object getDetails();
+  // 获取用户身份信息，用户名、用户对象等
 	Object getPrincipal();
+  // 用户是否认证成功
 	boolean isAuthenticated();
 	void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException;
 }
 ```
-
-- getAuthorities 	 获取用户权限信息
-- getCredentials 	获取用户凭证信息，一般指密码
-- getDetails 			 获取用户详细信息
-- getPrincipal 		 获取用户身份信息，用户名、用户对象等
-- isAuthenticated   用户是否认证成功
 
 #### SecurityContextHolder
 
@@ -321,9 +320,12 @@ class DefaultWebSecurityCondition extends AllNestedConditions {
 	DefaultWebSecurityCondition() {
 		super(ConfigurationPhase.REGISTER_BEAN);
 	}
+  // 按照类路径判断是否存在这两个类，明显只要引入了包就肯定有
 	@ConditionalOnClass({ SecurityFilterChain.class, HttpSecurity.class })
 	static class Classes {
 	}
+  
+  // 找看环境中是否存在这两个Bean,注意跟上面区别，不是存在类，而是存在Bean
 	@ConditionalOnMissingBean({ WebSecurityConfigurerAdapter.class, SecurityFilterChain.class })
 	static class Beans {
 	}
@@ -333,7 +335,9 @@ class DefaultWebSecurityCondition extends AllNestedConditions {
 - 条件一 classpath中存在 SecurityFilterChain.class, HttpSecurity.class
 - 条件二 没有自定义 WebSecurityConfigurerAdapter.class, SecurityFilterChain.class
 
-默认情况下，条件都是满足的。WebSecurityConfigurerAdapter 这个类极其重要，Spring Security 核心配置都在这个类中:
+> 如果需要覆盖默认配置，推荐定义一个类继承 WebSecurityConfigurerAdapter 并作为bean在容器中，这样就不会加载默认配置
+
+默认情况下，条件都是满足的。`WebSecurityConfigurerAdapter` **这个类极其重要，Spring Security 核心配置都在这个类中**:
 
 ![image-20220112095638356](SpringSecurity.assets/image-20220112095638356.png)
 
@@ -344,20 +348,30 @@ class DefaultWebSecurityCondition extends AllNestedConditions {
 ![image-20220111100643506](SpringSecurity.assets/image-20220111100643506.png)
 
 1. 请求 /hello 接口，在引入 spring security 之后会先经过一些列过滤器
-2. 在请求到达 FilterSecurityInterceptor时，发现请求并未认证。请求拦截下来，并抛出 AccessDeniedException 异常。
-3. 抛出 AccessDeniedException 的异常会被 ExceptionTranslationFilter 捕获，这个 Filter 中会调用 LoginUrlAuthenticationEntryPoint#commence 方法给客户端返回 302，要求客户端进行重定向到 /login 页面。
+2. 在请求到达 `FilterSecurityInterceptor`时，发现请求并未认证。请求拦截下来，并抛出 AccessDeniedException 异常。
+3. 抛出 AccessDeniedException 的异常会被 `ExceptionTranslationFilter` 捕获，这个 Filter 中会调用 LoginUrlAuthenticationEntryPoint#commence 方法给客户端返回 302，要求客户端进行重定向到 /login 页面。
 4. 客户端发送 /login 请求。
-5. /login 请求会再次被拦截器中 DefaultLoginPageGeneratingFilter 拦截到，并在拦截器中返回生成登录页面。
+5. /login 请求会再次被拦截器中 `DefaultLoginPageGeneratingFilter` 拦截到，并在拦截器中返回生成登录页面。
 
 **就是通过这种方式，Spring Security 默认过滤器中生成了登录页面，并返回！**
 
 ### 默认用户生成
 
-1. 查看 SpringBootWebSecurityConfiguration#defaultSecurityFilterChain 方法表单登录
+1. 查看 SpringBootWebSecurityConfiguration#defaultSecurityFilterChain 方法表单登录【org.springframework.boot.autoconfigure.security.servlet】
 
 ![image-20220112141503914](SpringSecurity.assets/image-20220112141503914.png)
 
-2. 处理登录为 FormLoginConfigurer 类中 调用 UsernamePasswordAuthenticationFilter这个类实例
+进入 @ConditionalOnDefaultWebSecurity 
+
+```java
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(DefaultWebSecurityCondition.class)
+public @interface ConditionalOnDefaultWebSecurity {}
+```
+
+2. 处理登录为 FormLoginConfigurer 类中调用 UsernamePasswordAuthenticationFilter这个类实例
 
 ![image-20220111104043636](SpringSecurity.assets/image-20220111104043636.png)
 
@@ -1111,7 +1125,7 @@ https://spring.io/guides/topicals/spring-security-architecture
 
   **总结**
 
-  1. 默认自动配置创建全局AuthenticationManager 默认找当前项目中是否存在自定义 UserDetailService 实例 自动将当前项目 UserDetailService 实例设置为数据源
+  1. 默认自动配置创建全局AuthenticationManager **默认找当前项目中是否存在自定义 UserDetailService 实例 自动将当前项目 UserDetailService 实例设置为数据源**
   2. 默认自动配置创建全局AuthenticationManager 在工厂中使用时直接在代码中注入即可
 
 - 自定义全局 AuthenticationManager
@@ -1130,7 +1144,7 @@ https://spring.io/guides/topicals/spring-security-architecture
 
   **总结**
 
-  1. 一旦通过 configure 方法自定义 AuthenticationManager实现 就回将工厂中自动配置AuthenticationManager 进行覆盖
+  1. 一旦通过 configure 方法自定义 AuthenticationManager实现 就会将工厂中自动配置AuthenticationManager 进行覆盖
   2. 一旦通过 configure 方法自定义 AuthenticationManager实现 需要在实现中指定认证数据源对象 UserDetaiService 实例
   3. 一旦通过 configure 方法自定义 AuthenticationManager实现 这种方式创建AuthenticationManager对象工厂内部本地一个 AuthenticationManager 对象 不允许在其他自定义组件中进行注入
 
@@ -1154,7 +1168,6 @@ https://spring.io/guides/topicals/spring-security-architecture
           return super.authenticationManagerBean();
       }
   }
-  
   ```
 
 #### 自定义内存数据源
@@ -1814,8 +1827,7 @@ public class KaptchaConfig {
 
 ### 加密意义
 
-​	2011 年12月21 日，有人在网络上公开了一个包含600万个 CSDN 用户资料的数据库，数据全部为明文储存，包含用户名、密码以及注册邮箱。事件发生后 CSDN 在微博、官方网站等渠道发出了声明，解释说此数据库系2009 年备份所用，因不明原因泄漏，已经向警方报
-案，后又在官网发出了公开道歉信。在接下来的十多天里，金山、网易、京东、当当、新浪等多家公司被卷入到这次事件中。整个事件中最触目惊心的莫过于 CSDN 把用户密码明文存储，由于很多用户是多个网站共用一个密码，因此一个网站密码泄漏就会造成很大的安全隐患。由于有了这么多前车之鉴，我们现在做系统时，密码都要加密处理。
+​	2011 年12月21 日，有人在网络上公开了一个包含600万个 CSDN 用户资料的数据库，数据全部为明文储存，包含用户名、密码以及注册邮箱。事件发生后 CSDN 在微博、官方网站等渠道发出了声明，解释说此数据库系2009 年备份所用，因不明原因泄漏，已经向警方报案，后又在官网发出了公开道歉信。在接下来的十多天里，金山、网易、京东、当当、新浪等多家公司被卷入到这次事件中。整个事件中最触目惊心的莫过于 CSDN 把用户密码明文存储，由于很多用户是多个网站共用一个密码，因此一个网站密码泄漏就会造成很大的安全隐患。由于有了这么多前车之鉴，我们现在做系统时，密码都要加密处理。
 
 在前面的案例中，凡是涉及密码的地方，我们都采用明文存储，在实际项目中这肯定是不可取的，因为这会带来极高的安全风险。在企业级应用中，密码不仅需要加密，还需要加`盐`，最大程度地保证密码安全。
 

@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+    // 认证成功后会回调onAuthenticationSuccess方法，响应前端json数据
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         Map<String, Object> result = new HashMap<>();

@@ -1,7 +1,5 @@
 package com.baizhi.config;
 
-//import com.baizhi.service.MyUserDetailService;
-
 import com.baizhi.service.MyUserDetailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,16 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.myUserDetailService = myUserDetailService;
     }
 
-    /*@Bean 使用自定义数据库来验证，这里需要注释
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
-        inMemoryUserDetailsManager.createUser(User.withUsername("root").password("{noop}123").roles("admin").build());
-        return inMemoryUserDetailsManager;
-    }*/
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService());
         // 使用自定义数据库来验证
         auth.userDetailsService(myUserDetailService);
     }
@@ -60,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         loginFilter.setFilterProcessesUrl("/doLogin");//指定认证 url
         loginFilter.setUsernameParameter("uname");//指定接收json 用户名 key
         loginFilter.setPasswordParameter("passwd");//指定接收 json 密码 key
+        // LoginFilter过滤器中使用到 AuthenticationManager ，这里需要注入
         loginFilter.setAuthenticationManager(authenticationManagerBean());
         //认证成功处理
         loginFilter.setAuthenticationSuccessHandler((req, resp, authentication) -> {
@@ -91,7 +81,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 // 没有通过认证后端不响应登录界面，而是返回json提示
                 .and()
+                // 默认没有认证去访问资源时，后端会返回登录页面，而前后端分离，没有认证后端应该返回json提示未认证，所以可以使用下面认证异常处理实现
+                // 获取异常处理实例
                 .exceptionHandling()
+                // 认证异常处理
                 .authenticationEntryPoint((req, resp, ex) -> {
                     resp.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
                     resp.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -100,6 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new OrRequestMatcher(
+                        // 也支持下面两种注销方式
                         new AntPathRequestMatcher("/logout", HttpMethod.DELETE.name()),
                         new AntPathRequestMatcher("/logout", HttpMethod.GET.name())
                 ))
@@ -115,11 +109,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
         ;
-
-
-        // at: 用来某个 filter 替换过滤器链中哪个 filter
-        // before: 放在过滤器链中哪个 filter 之前
-        // after: 放在过滤器链中那个 filter 之后
+        /*
+           at: 用来某个 filter 替换过滤器链中哪个 filter
+           before: 放在过滤器链中哪个 filter 之前
+           after: 放在过滤器链中那个 filter 之后
+         */
+        // 这里用的是 at
         http.addFilterAt(loginFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }

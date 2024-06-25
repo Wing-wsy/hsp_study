@@ -35,12 +35,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 System.out.println("用户名: " + username + " 密码: " + password);
                 UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
                 setDetails(request, authRequest);
+                // 这里需要用到AuthenticationManager，需要在 SecurityConfig中 loginFilter() 注入
                 return this.getAuthenticationManager().authenticate(authRequest);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        // 上面都不满足
+        // 上面都不满足则使用默认
         return super.attemptAuthentication(request, response);
     }
 }
