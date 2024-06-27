@@ -4331,9 +4331,11 @@ OAuth 是一个开放的非常重要的认证标准/协议，该标准允许用�
 - **Authorization Server** ：授权服务器。
 - **Resource Server**： 资源服务器。
 
+> 授权服务器 和 资源服务器 可以是同一台，只是大公司一般都是分开
+
 ## 四种授权模式
 
-### 授权码模式
+### 授权码模式(重点)
 
 **授权码模式（`Authorization Code`）** 是功能最完整、流程最严密、最安全并且使用最广泛的一种OAuth2授权模式。同时也是最复杂的一种授权模式，它的特点就是通过客户端的后台服务器，与`服务提供商`的认证服务器进行互动。其具体的授权流程如图所示（图片来自 RFC6749文档 https://tools.ietf.org/html/rfc6749)
 
@@ -4344,6 +4346,8 @@ OAuth 是一个开放的非常重要的认证标准/协议，该标准允许用�
 - Resource Server：资源服务器，即服务端存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。
 
 ![image-20220625090018332](SpringSecurity.assets/image-20220625090018332.png)
+
+![](SpringSecurity.assets/img01.png)
 
 具体流程如下:
 
@@ -4372,11 +4376,13 @@ https://wx.com/oauth/authorize?response_type=code&client_id=CLIENT_ID&redirect_u
 | scope         | 必须 令牌可以访问资源权限 read 只读   all 读写 |
 | state         | 可选 存在原样返回客户端 用来防止 CSRF跨站攻击  |
 
-### 简化模式
+### 简化模式(了解)
 
 **简化模式（`implicit` grant type）**不通过第三方应用程序的服务器，直接在浏览器中向认证服务器申请令牌，跳过了"授权码"这个步骤，因此得名。所有步骤在浏览器中完成，令牌对访问者是可见的，且客户端不需要认证。其具体的授权流程如图所示（图片来自 RFC6749文档 https://tools.ietf.org/html/rfc6749)
 
 ![image-20220625090540320](SpringSecurity.assets/image-20220625090540320.png)
+
+![](SpringSecurity.assets/img02.png)
 
 具体步骤如下:
 
@@ -4402,11 +4408,13 @@ https://wx.com/oauth/authorize?response_type=token&client_id=CLIENT_ID&redirect_
 | scope         | 必须 令牌可以访问资源权限                     |
 | state         | 可选 存在原样返回客户端 用来防止 CSRF跨站攻击 |
 
-### 密码模式
+### 密码模式(了解)
 
 **密码模式（Resource Owner `Password` Credentials Grant）**中，用户向客户端提供自己的用户名和密码。客户端使用这些信息，向"服务商提供商"索要授权。在这种模式中，用户必须把自己的密码给客户端，但是客户端不得储存密码。这通常用在用户对客户端高度信任的情况下，比如客户端是操作系统的一部分，或者由一个相同公司出品。而认证服务器只有在其他授权模式无法执行的情况下，才能考虑使用这种模式。其具体的授权流程如图所示（图片来自 RFC6749文档 https://tools.ietf.org/html/rfc6749)
 
 ![image-20220625090710221](SpringSecurity.assets/image-20220625090710221.png)
+
+![](SpringSecurity.assets/img03.png)
 
 具体步骤如下:
 
@@ -4428,6 +4436,8 @@ https://wx.com/token?grant_type=password&username=USERNAME&password=PASSWORD&cli
 **客户端模式（`Client Credentials` Grant）**指客户端以自己的名义，而不是以用户的名义，向"服务提供商"进行认证。严格地说，客户端模式并不属于OAuth框架所要解决的问题。在这种模式中，用户直接向客户端注册，客户端以自己的名义要求"服务提供商"提供服务，其实不存在授权问题。
 
 ![image-20220625090900509](SpringSecurity.assets/image-20220625090900509.png)
+
+![](SpringSecurity.assets/img04.png)
 
 具体步骤如下:
 
