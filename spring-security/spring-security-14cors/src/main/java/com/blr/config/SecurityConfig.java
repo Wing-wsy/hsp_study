@@ -1,3 +1,4 @@
+
 package com.blr.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +11,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 /**
- * 自定义 security 配置
+ * 自定义 security 配置【处理跨域方式六-SpringSecurity方式】
  */
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -9,8 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -45,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .and()
                 .rememberMe() //开启记住我功能
-                .tokenRepository(persistentTokenRepository())
+//                .tokenRepository(persistentTokenRepository())
                 //.rememberMeServices(rememberMeServices()) //指定 rememberService 实现
                 //.rememberMeParameter("remember-me") 用来接收请求中哪个参数作为开启记住我的参数
                 //.alwaysRemember(true) //总是记住我
@@ -55,13 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     //指定数据库持久化
-    @Bean
+   /* @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         jdbcTokenRepository.setDataSource(dataSource);
         jdbcTokenRepository.setCreateTableOnStartup(false);//启动创建表结构
         return jdbcTokenRepository;
-    }
+    }*/
 
     //指定记住我的实现
 //    @Bean

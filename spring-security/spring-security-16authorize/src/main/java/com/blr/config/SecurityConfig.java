@@ -15,6 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  * 自定义 spring security 配置类
  */
 @Configuration
+// 开启注解支持
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
@@ -37,13 +38,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                // 授权
                 .mvcMatchers(HttpMethod.GET,"/admin").hasRole("ADMIN")  //具有 admin 角色   强大 通用: /admin /admin/  /admin.html
                 .mvcMatchers("/user").hasRole("USER")    //具有 user 角色
                 .mvcMatchers("/getInfo").hasAuthority("READ_INFO") //READ_INFO 权限
-                .antMatchers(HttpMethod.GET,"/admin").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.GET,"/admin").hasRole("ADMIN")
                 //.regexMatchers().hasRole()  //注意: 好处 支持正则表达
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .and().csrf().disable();
+                .and().csrf().disable();  //实际开发不建议关闭，这里只是测试
     }
 }

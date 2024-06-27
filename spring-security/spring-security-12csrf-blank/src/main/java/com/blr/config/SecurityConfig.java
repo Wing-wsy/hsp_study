@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().authenticated()
                 .and().formLogin()
                 .and()
-                //.csrf().disable();  //关闭 CSRF 跨站请求保护
-                .csrf(); //开始 CSRF 防御
+//                .csrf().disable();  //关闭 CSRF 跨站请求保护
+                .csrf(); //开启 CSRF 防御
     }
 }

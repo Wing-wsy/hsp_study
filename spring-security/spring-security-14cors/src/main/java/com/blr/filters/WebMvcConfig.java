@@ -1,7 +1,7 @@
 package com.blr.filters;
 
-/*
-@Configuration
+// 【处理跨域方式五】
+/*@Configuration
 public class WebMvcConfig {
     @Bean
     FilterRegistrationBean<CorsFilter> corsFilter() {

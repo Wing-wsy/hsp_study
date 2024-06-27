@@ -2446,13 +2446,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ![image-20220317195930708](SpringSecurity.assets/image-20220317195930708.png)
 
-- (1）请求到达过滤器之后，首先判断 SecurityContextHolder 中是否有值，没值的话表示用户尚未登录，此时调用 autoLogin 方法进行自动登录。
-
-  
+- (1）请求到达过滤器之后，首先判断 SecurityContextHolder 中是否有值，没值的话表示用户尚未登录，此时**调用 autoLogin 方法进行自动登录**。
 
 - (2）当自动登录成功后返回的rememberMeAuth 不为null 时，表示自动登录成功，此时调用 authenticate 方法对 key 进行校验，并且将登录成功的用户信息保存到 SecurityContextHolder 对象中，然后调用登录成功回调，并发布登录成功事件。需要注意的是，登录成功的回调并不包含 RememberMeServices 中的 1oginSuccess 方法。
-
-  
 
 - (3）如果自动登录失败，则调用 remenberMeServices.loginFail方法处理登录失败回调。onUnsuccessfulAuthentication 和 onSuccessfulAuthentication 都是该过滤器中定义的空方法，并没有任何实现这就是 RememberMeAuthenticationFilter 过滤器所做的事情，成功将 RememberMeServices的服务集成进来。
 
@@ -2857,7 +2853,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ## 简介
 
-当浏览器调用登录接口登录成功后，服务端会和浏览器之间建立一个会话 (Session) 浏览器在每次发送请求时都会携带一个 Sessionld，服务端则根据这个 Sessionld 来判断用户身份。当浏览器关闭后，服务端的 Session 并不会自动销毁，需要开发者手动在服务端调用 Session销毁方法，或者等 Session 过期时间到了自动销毁。在Spring Security 中，与HttpSession相关的功能由 SessionManagementFiter 和SessionAutheaticationStrateey 接口来处理，SessionManagomentFilter 过滤器将 Session 相关操作委托给 SessionAuthenticationStrateey 接口去完成。
+当浏览器调用登录接口登录成功后，服务端会和浏览器之间建立一个会话 (Session) 浏览器在每次发送请求时都会携带一个 Sessionld，服务端则根据这个 Sessionld 来判断用户身份。当浏览器关闭后，服务端的 Session 并不会自动销毁，需要开发者**手动在服务端调用 Session销毁方法，或者等 Session 过期时间到了自动销毁**。在Spring Security 中，与HttpSession相关的功能由 SessionManagementFiter 和SessionAutheaticationStrateey 接口来处理，SessionManagomentFilter 过滤器将 Session 相关操作委托给 SessionAuthenticationStrateey 接口去完成。
 
 ## 会话并发管理
 
@@ -2972,7 +2968,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ## 会话共享
 
-前面所讲的会话管理都是单机上的会话管理，如果当前是集群环境，前面所讲的会话管
+前面所讲的会话管理都是**单机**上的会话管理，如果当前是集群环境，前面所讲的会话管
 理方案就会失效。此时可以利用 spring-session 结合 redis 实现 session 共享。
 
 ### 实战
@@ -3002,29 +2998,10 @@ spring.redis.port=6379
 ```java
 package com.blr.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.session.FindByIndexNameSessionRepository;
-import org.springframework.session.security.SpringSessionBackedSessionRegistry;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
-
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private final FindByIndexNameSessionRepository sessionRepository;
-
 
     @Autowired
     public SecurityConfig(FindByIndexNameSessionRepository sessionRepository) {
@@ -3071,7 +3048,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SpringSessionBackedSessionRegistry sessionRegistry() {
         return new SpringSessionBackedSessionRegistry(sessionRepository);
     }
-
 }
 ```
 
@@ -3362,9 +3338,7 @@ Access-Control-Allow-Metbods 字段表示允许的跨域方法：Access-Control-
 
 ### @CrossOrigin
 
-Spring 中第一种处理跨域的方式是通过@CrossOrigin 注解来标记支持跨域，该注解可以添加在方法上，也可以添加在 Controller 上。当添加在 Controller 上时，表示 Controller 中的所
-
-有接口都支持跨域，具体配置如下：
+Spring 中第一种处理跨域的方式是通过@CrossOrigin 注解来标记支持跨域，该注解可以添加在方法上，也可以添加在 Controller 上。当添加在 Controller 上时，表示 Controller 中的所有接口都支持跨域，具体配置如下：
 
 ```java
 @RestController
@@ -3392,6 +3366,22 @@ public Class HelloController{
 
 - origins：允许的域，`*`表示允许所有域。
 
+也可以使用这样方式：
+
+```java
+@RestController
+@CrossOrigin //代表类中所有方法允许跨域  springmvc 注解解决方案
+public class DemoController {
+    @GetMapping("/demo")
+    public String demo() {
+        System.out.println("demo ok!");
+        return "demo ok!";
+    }
+}
+```
+
+
+
 ### addCrosMapping
 
 @CrossOrigin 注解需要添加在不同的 Controller 上。所以还有一种全局配置方法，就是通过重写 WebMvcConfigurerComposite#addCorsMappings方法来实现，具体配置如下：
@@ -3403,10 +3393,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
   public void addCorsMappings (CorsRegistry registry){
     registry.addMapping("/**") //处理的请求地址
     .allowedMethods ("*")
-    •allowedorigins("*")
+    .allowedorigins("*")
     .allowedHeaders ("*")
     .allowCredentials (false)
-    •exposedHeaders ("")
+    .exposedHeaders ("")
     .maxAge (3600) ;
   }
 }
@@ -3557,7 +3547,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ### 授权核心概念
 
-在前面学习认证过程中，我们得知认证成功之后会将当前登录用户信息保存到 Authentication 对象中，Authentication 对象中有一个 getAuthorities() 方法，用来返回当前登录用户具备的权限信息，也就是当前用户具有权限信息。该方法的返回值为 Collection<? extends GrantedAuthority>，当需要进行权限判断时，就回根据集合返回权限信息调用相应方法进行判断。
+在前面学习认证过程中，我们得知认证成功之后会将当前登录用户信息保存到 Authentication 对象中，Authentication 对象中有一个 `getAuthorities()` 方法，用来返回当前登录用户具备的权限信息，也就是当前用户具有权限信息。该方法的返回值为 Collection<? extends GrantedAuthority>，当需要进行权限判断时，就回根据集合返回权限信息调用相应方法进行判断。
 
 ![image-20220523110143445](SpringSecurity.assets/image-20220523110143445.png)
 
@@ -3577,31 +3567,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 Spring Security 中提供的权限管理策略主要有两种类型:
 
-- 基于过滤器(URL)的权限管理 (FilterSecurityInterceptor)
+- 基于过滤器(URL)的权限管理 (`FilterSecurityInterceptor`)
   - 基于过滤器的权限管理主要是用来拦截 HTTP 请求，拦截下来之后，根据 HTTP 请求地址进行权限校验。
 
-- 基于 AOP (方法)的权限管理   (MethodSecurityInterceptor)
+- 基于 AOP (方法)的权限管理   (`MethodSecurityInterceptor`)
   - 基于 AOP 权限管理主要是用来处理方法级别的权限问题。当需要调用某一个方法时，通过 AOP 将操作拦截下来，然后判断用户是否具备相关的权限。
 
 
-### 基于 URL 权限管理
+### 基于过滤器（URL） 权限管理
 
 - 开发 controller
 
 ```java
 @RestController
 public class DemoController {
-
     @GetMapping("/admin")
     public String admin() {
         return "admin ok";
     }
-
     @GetMapping("/user")
     public String user() {
         return "user ok";
     }
-
     @GetMapping("/getInfo")
     public String getInfo() {
         return "info ok";
@@ -3614,17 +3601,8 @@ public class DemoController {
 ```java
 package com.blr.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     //创建内存数据源
     public UserDetailsService userDetailsService() {
@@ -3694,7 +3672,7 @@ public class SecurityConfig extends WebsecurityConfigurerAdapter{}
 
 ```markdown
 # 以上注解含义如下:
-- @PostAuthorize： 在目前标方法执行之后进行权限校验。
+- @PostAuthorize： 在目标方法执行之后进行权限校验。
 - @PostFiter： 在目标方法执行之后对方法的返回结果进行过滤。
 - @PreAuthorize：在目标方法执行之前进行权限校验。
 - @PreFiter：在目前标方法执行之前对方法参数进行过滤。
@@ -3728,25 +3706,21 @@ public class AuthorizeMethodController {
     public String hello() {
         return "hello";
     }
-
     @PreAuthorize("authentication.name==#name")
     @GetMapping("/name")
     public String hello(String name) {
         return "hello:" + name;
     }
-
     @PreFilter(value = "filterObject.id%2!=0",filterTarget = "users")
     @PostMapping("/users")  //filterTarget 必须是 数组  集合
     public void addUsers(@RequestBody List<User> users) {
         System.out.println("users = " + users);
     }
-
     @PostAuthorize("returnObject.id==1")
     @GetMapping("/userId")
     public User getUserById(Integer id) {
         return new User(id, "blr");
     }
-
     @PostFilter("filterObject.id%2==0")
     @GetMapping("/lists")
     public List<User> getAll() {
@@ -3756,31 +3730,26 @@ public class AuthorizeMethodController {
         }
         return users;
     }
-
     @Secured({"ROLE_USER"}) //只能判断角色
     @GetMapping("/secured")
     public User getUserByUsername() {
         return new User(99, "secured");
     }
-
     @Secured({"ROLE_ADMIN","ROLE_USER"}) //具有其中一个即可
     @GetMapping("/username")
     public User getUserByUsername2(String username) {
         return new User(99, username);
     }
-
     @PermitAll
     @GetMapping("/permitAll")
     public String permitAll() {
         return "PermitAll";
     }
-
     @DenyAll
     @GetMapping("/denyAll")
     public String denyAll() {
         return "DenyAll";
     }
-
     @RolesAllowed({"ROLE_ADMIN","ROLE_USER"}) //具有其中一个角色即可
     @GetMapping("/rolesAllowed")
     public String rolesAllowed() {

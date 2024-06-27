@@ -1,0 +1,8 @@
+1. 【GET】http://localhost:8082/test 【测试资源】
+2. 【POST】http://localhost:8082/doLogin【登录】
+  {
+      "uname":"root",
+      "passwd":"123",
+      "remember-me":"false"  【记住我改成true】
+  }
+3. 【GET】http://localhost:8082/logout 【注销】

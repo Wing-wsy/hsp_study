@@ -48,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     response.flushBuffer();
                 })
                 .sessionRegistry(sessionRegistry()) //将 session 交给谁管理
-                .maxSessionsPreventsLogin(true); //一旦登录 禁止再次登录
+                .maxSessionsPreventsLogin(true) //一旦登录 true禁止再次登录
+        ;
     }
 
 
@@ -58,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SpringSessionBackedSessionRegistry(findByIndexNameSessionRepository);
     }
 
+    // 建议加上这个【如果使用session就不用这个了】
     /*@Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
