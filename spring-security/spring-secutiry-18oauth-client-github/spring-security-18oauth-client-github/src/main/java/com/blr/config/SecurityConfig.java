@@ -12,7 +12,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .anyRequest().authenticated()
-                .and().formLogin()
+                //.and().formLogin()
                 .and()
                 .oauth2Login(); //使用 oauth2 认证  配置文件中配置认证服务
 

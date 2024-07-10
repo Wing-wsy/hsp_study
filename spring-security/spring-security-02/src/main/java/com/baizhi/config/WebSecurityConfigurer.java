@@ -32,18 +32,31 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         return userDetailsService;
     }*/
 
-    //springboot 对 security 默认配置中  在工厂中默认创建 AuthenticationManager
+    //springboot 对 security 默认配置中  在工厂中默认创建 AuthenticationManager 【方式一】
     /*@Autowired
     public void initialize(AuthenticationManagerBuilder builder) throws Exception {
         System.out.println("springboot 默认配置: " + builder);
     }*/
 
-    //自定义AuthenticationManager  推荐  并没有在工厂中暴露出来
+    //自定义全局AuthenticationManager  推荐  并没有在工厂中暴露出来 【方式二】
+    //自定义就没有默认配置干扰，看起来比较清楚了
     @Override
     public void configure(AuthenticationManagerBuilder builder) throws Exception {
         System.out.println("自定义AuthenticationManager: " + builder);
 //        builder.userDetailsService(userDetailsService());
         builder.userDetailsService(myUserDetailService);
+        // 这里还可以自定义 Provider
+//        builder.authenticationProvider(new AuthenticationProvider() {
+//            @Override
+//            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//                return null;
+//            }
+//
+//            @Override
+//            public boolean supports(Class<?> authentication) {
+//                return false;
+//            }
+//        });
     }
 
     //作用: 用来将自定义AuthenticationManager在工厂中进行暴露,可以在任何位置注入（比如在HelloController中注入使用）

@@ -124,21 +124,20 @@ $ git config --global user.email test@runoob.com
 #### 五、从本地初始化仓库到推送远程仓库操作
 
 ```bash
+================================ 开始 ================================
 # 查看本地路径
 wing@WangShaoYoudeMacBook-Pro architect % pwd
 /Users/wing/architect
 # 创建目录
-wing@WangShaoYoudeMacBook-Pro architect % mkdir testGit  
+wing@WangShaoYoudeMacBook-Pro architect % 【mkdir testGit】
 wing@WangShaoYoudeMacBook-Pro architect % cd testGit 
 # 初始化仓库，指定目录的方式，目录为 git-demo
-wing@WangShaoYoudeMacBook-Pro testGit % git init git-demo
+wing@WangShaoYoudeMacBook-Pro testGit % 【git init git-demo】
 Initialized empty Git repository in /Users/wing/architect/testGit/git-demo/.git/ # 初始化完成
 # 进入仓库目录
-wing@WangShaoYoudeMacBook-Pro testGit % cd git-demo 
+wing@WangShaoYoudeMacBook-Pro 【testGit % cd git-demo】
 
-# 在电脑上拷贝东西到仓库目录下，让仓库不为空
-# background/Create100Threads.java
-# background/JavaAndThreads.java
+# 【在电脑上拷贝东西到仓库目录下，让仓库不为空】
 # 查询状态，现在提示有文件了
 wing@WangShaoYoudeMacBook-Pro git-demo % git status
 On branch main
@@ -152,9 +151,9 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 # 将全部数据添加到暂存区
-wing@WangShaoYoudeMacBook-Pro git-demo % git add .
+wing@WangShaoYoudeMacBook-Pro git-demo % 【git add .】
 # 继续提交到本地仓库
-wing@WangShaoYoudeMacBook-Pro git-demo % git commit -m "wangsy commit"
+wing@WangShaoYoudeMacBook-Pro git-demo % 【git commit -m "wangsy commit"】
 
 # 查询提交记录，已经有记录了【到这里本地仓库已经ok了】
 wing@WangShaoYoudeMacBook-Pro git-demo % git reflog
@@ -171,7 +170,7 @@ wing@WangShaoYoudeMacBook-Pro git-demo %
 # Settings -- Developer Settings -- Personal access tokens【切记要选择令牌的权限，下面有截图，否则最后push的时候会报错，提示没有权限访】得到token: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（需要保存起来）
 
 # 开始操作（这条命令GitHub 仓库上复制）
- wing@WangShaoYoudeMacBook-Pro git-demo %git remote add origin https://github.com/Wing-wsy/git-demo.git
+ wing@WangShaoYoudeMacBook-Pro git-demo %【git remote add origin https://github.com/Wing-wsy/git-demo.git】
 # 使用token方式
 
 // <your_token>：包括<>在内的全部字符替换成你的token
@@ -179,10 +178,11 @@ wing@WangShaoYoudeMacBook-Pro git-demo %
 // <REPO>：包括<>在内的全部字符替换成你要访问的仓库名称
 git remote set-url origin  https://<your_token>@github.com/<USERNAME>/<REPO>.git
 
- wing@WangShaoYoudeMacBook-Pro git-demo % git remote set-url origin  https://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@github.com/Wing-wsy/git-demo.git
+ wing@WangShaoYoudeMacBook-Pro git-demo % 【git remote set-url origin  https://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@github.com/Wing-wsy/git-demo.git】
  # 最后一步，执行推送【到这里完成了将本地文件推送到了github】
  wing@WangShaoYoudeMacBook-Pro git-demo % 【git push origin main 】
  
+ ================================ 结束了 ================================
  # 直接在github上打开文件直接修改下，这样的话本地仓库需要拉取远程仓库的最新代码
  wing@WangShaoYoudeMacBook-Pro wang-demo % git pull origin hos-fix
 

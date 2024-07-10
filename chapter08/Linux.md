@@ -2,6 +2,8 @@
 
 IP：47.76.68.216
 
+端口：9988
+
 默认用户名：`root`
 
 登录密码：`P2AN~gKm#{4`
@@ -2731,11 +2733,56 @@ systemctl status rabbitmq-server
 http://47.76.68.216:15672
 ```
 
+# linux jdk安装
 
+https://blog.csdn.net/qq_36858491/article/details/135678566
 
+1. 官网下载
 
+https://www.oracle.com/cn/java/technologies/downloads/?spm=a2c4g.11186623.2.18.3555630fp9XpCI#java17
 
+![](picture/img1001.png)
 
+2.使用工具上传到linux
+
+```sh
+/usr/local/java
+```
+
+3.解压上传过来的安装包
+
+```sh
+# 解压
+tar -zxf jdk-17_linux-x64_bin.tar.gz
+```
+
+4. 配置环境变量，注意jdk17版本，不要直接拷贝，改成你的版本和你的jdk17安装路径
+
+```sh
+vim /etc/profile
+// 在末尾处添加 
+export JAVA_HOME=/usr/local/jdk-17.0.10   #你安装jdk的路径，你的jdk版本（不一定是17.0.10版本）
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$CLASSPATH
+export JAVA_PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin
+export PATH=$PATH:${JAVA_PATH}
+
+// 注意：JAVA_HOME、CLASSPATH、PATH必配置，最好5个变量都配置上。
+// JAVA_HOME一定注意是你安装的jdk路径，是你安装的jdk17最新版本
+
+```
+
+5.刷新配置
+
+```sh
+source /etc/profile
+```
+
+6.验证
+
+```sh
+java -version
+```
 
 
 

@@ -29,6 +29,7 @@ Redis诞生于2009年，全称是Remote Dictionary Server远程词典服务器�
 
 ## 1.3 Redis安装和启动
 
+
 官网：https://redis.io/
 
 Redis是基于C语言编写的，因此首先需要安装Redis所需要的gcc依赖

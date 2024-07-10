@@ -1,0 +1,20 @@
+2024-07-10 11:44:31.466 [main] INFO  [com.xxl.job.admin.XxlJobAdminApplication] - Starting XxlJobAdminApplication using Java 1.8.0_381 on WangShaoYoudeMacBook-Pro.local with PID 30296 (/Users/wing/architect/hsp_study/xxl-job-master/xxl-job-admin/target/classes started by wing in /Users/wing/architect/hsp_study/xxl-job-master)
+2024-07-10 11:44:31.467 [main] INFO  [com.xxl.job.admin.XxlJobAdminApplication] - No active profile set, falling back to 1 default profile: "default"
+2024-07-10 11:44:32.158 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat initialized with port(s): 8080 (http)
+2024-07-10 11:44:32.162 [main] INFO  [org.apache.coyote.http11.Http11NioProtocol] - Initializing ProtocolHandler ["http-nio-8080"]
+2024-07-10 11:44:32.162 [main] INFO  [org.apache.catalina.core.StandardService] - Starting service [Tomcat]
+2024-07-10 11:44:32.162 [main] INFO  [org.apache.catalina.core.StandardEngine] - Starting Servlet engine: [Apache Tomcat/9.0.62]
+2024-07-10 11:44:32.256 [main] INFO  [o.a.c.c.C.[Tomcat].[localhost].[/xxl-job-admin]] - Initializing Spring embedded WebApplicationContext
+2024-07-10 11:44:32.256 [main] INFO  [o.s.b.w.s.c.ServletWebServerApplicationContext] - Root WebApplicationContext: initialization completed in 663 ms
+2024-07-10 11:44:32.500 [main] INFO  [com.xxl.job.admin.core.scheduler.XxlJobScheduler] - >>>>>>>>> init xxl-job admin success.
+2024-07-10 11:44:32.506 [xxl-job, admin JobRegistryMonitorHelper-registryMonitorThread] INFO  [com.zaxxer.hikari.HikariDataSource] - HikariCP - Starting...
+2024-07-10 11:44:32.597 [main] INFO  [o.s.b.a.web.servlet.WelcomePageHandlerMapping] - Adding welcome page template: index
+2024-07-10 11:44:32.778 [main] INFO  [o.s.b.actuate.endpoint.web.EndpointLinksResolver] - Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-07-10 11:44:32.794 [main] INFO  [org.apache.coyote.http11.Http11NioProtocol] - Starting ProtocolHandler ["http-nio-8080"]
+2024-07-10 11:44:32.805 [main] INFO  [o.a.c.c.C.[Tomcat].[localhost].[/xxl-job-admin]] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-10 11:44:32.805 [main] INFO  [org.springframework.web.servlet.DispatcherServlet] - Initializing Servlet 'dispatcherServlet'
+2024-07-10 11:44:32.806 [main] INFO  [org.springframework.web.servlet.DispatcherServlet] - Completed initialization in 1 ms
+2024-07-10 11:44:32.806 [main] INFO  [o.s.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat started on port(s): 8080 (http) with context path '/xxl-job-admin'
+2024-07-10 11:44:32.814 [main] INFO  [com.xxl.job.admin.XxlJobAdminApplication] - Started XxlJobAdminApplication in 1.518 seconds (JVM running for 1.925)
+2024-07-10 11:44:33.468 [xxl-job, admin JobRegistryMonitorHelper-registryMonitorThread] INFO  [com.zaxxer.hikari.HikariDataSource] - HikariCP - Start completed.
+2024-07-10 11:44:37.004 [xxl-job, admin JobScheduleHelper#scheduleThread] INFO  [com.xxl.job.admin.core.thread.JobScheduleHelper] - >>>>>>>>> init xxl-job admin scheduler success.

@@ -1,6 +1,10 @@
 # SpringSecurity 实战
 
 > 博客：https://blog.csdn.net/unique_perfect/article/details/109219826
+>
+> 中文文档：
+
+
 
 # 第一章 权限管理
 
@@ -440,8 +444,8 @@ public class UserDetailsServiceAutoConfiguration {
 **结论**
 
 1. 从自动配置源码中得知当 classpath 下存在 AuthenticationManager 类
-2. 当前项目中，系统没有提供 AuthenticationManager.class、 AuthenticationProvider.class、UserDetailsService.class、
-   				AuthenticationManagerResolver.class、实例
+2. 当前项目中，系统没有提供 `AuthenticationManager.class`、 `AuthenticationProvider.class`、`UserDetailsService.class`、
+   				`AuthenticationManagerResolver.class`、实例
 
 **默认情况下都会满足，此时Spring Security会提供一个 InMemoryUserDetailManager 实例**
 
@@ -544,14 +548,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
   ```java
   @Controller
   public class LoginController {
-  
       @RequestMapping("/login.html")
       public String login() {
           return "login";
       }
   }
   ```
-
+  
 - 在 templates 中定义登录界面
 
   ```html
@@ -1442,27 +1445,22 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
   ```java
   @Configuration
   public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
-    
       private final UserDetailsService userDetailsService;
-  
       @Autowired
       public WebSecurityConfigurer(UserDetailsService userDetailsService) {
           this.userDetailsService = userDetailsService;
       }
-  
       @Override
       protected void configure(AuthenticationManagerBuilder builder) throws Exception {
           builder.userDetailsService(userDetailsService);
       }
-    
-    	
     	@Override
       protected void configure(HttpSecurity http) throws Exception {
         //web security..
       }
   }
   ```
-
+  
 -  启动测试即可
 
 -----
@@ -1527,33 +1525,27 @@ public class KaptchaConfig {
 
   ```java
   public class KaptchaNotMatchException extends AuthenticationException {
-  
       public KaptchaNotMatchException(String msg) {
           super(msg);
       }
-  
       public KaptchaNotMatchException(String msg, Throwable cause) {
           super(msg, cause);
       }
   }
   ```
-
+  
 - 自定义filter验证验证码
 
   ```java
   public class KaptchaFilter extends UsernamePasswordAuthenticationFilter {
-  
       public static final String KAPTCHA_KEY = "kaptcha";//默认值
       private String kaptcha = KAPTCHA_KEY;
-  
       public String getKaptcha() {
           return kaptcha;
       }
-  
       public void setKaptcha(String kaptcha) {
           this.kaptcha = kaptcha;
       }
-  
       @Override
       public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
           //1.判断是否是 post 方式
@@ -1571,31 +1563,26 @@ public class KaptchaConfig {
       }
   }
   ```
-
+  
 - 放行以及配置验证码 filter
 
   ```java
   @Configuration
   public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
-  
       private final UserDetailsService userDetailsService;
-  
       @Autowired
       public WebSecurityConfigurer(UserDetailsService userDetailsService) {
           this.userDetailsService = userDetailsService;
       }
-  
       @Override
       protected void configure(AuthenticationManagerBuilder builder) throws Exception {
           builder.userDetailsService(userDetailsService);
       }
-  
       @Override
       @Bean
       public AuthenticationManager authenticationManagerBean() throws Exception {
           return super.authenticationManagerBean();
       }
-  
       @Bean
       public KaptchaFilter kaptchaFilter() throws Exception {
           KaptchaFilter kaptchaFilter = new KaptchaFilter();
@@ -1612,7 +1599,6 @@ public class KaptchaConfig {
           kaptchaFilter.setPasswordParameter("passwd");
           return kaptchaFilter;
       }
-  
       @Override
       protected void configure(HttpSecurity http) throws Exception {
           http.authorizeHttpRequests()
@@ -1627,7 +1613,7 @@ public class KaptchaConfig {
       }
   }
   ```
-
+  
 - 登录页面添加验证码
 
   ```html
@@ -1647,12 +1633,10 @@ public class KaptchaConfig {
   @RestController
   public class KaptchaController {
       private final Producer producer;
-  
       @Autowired
       public KaptchaController(Producer producer) {
           this.producer = producer;
       }
-  
       @GetMapping("/vc.png")
       public String getVerifyCode(HttpSession session) throws IOException {
           //1.生成验证码
@@ -1667,41 +1651,33 @@ public class KaptchaConfig {
       }
   }
   ```
-
+  
 - 定义验证码异常类
 
   ```java
   public class KaptchaNotMatchException extends AuthenticationException {
-  
       public KaptchaNotMatchException(String msg) {
           super(msg);
       }
-  
       public KaptchaNotMatchException(String msg, Throwable cause) {
           super(msg, cause);
       }
   }
   ```
-
+  
 - 在自定义LoginKaptchaFilter中加入验证码验证
 
   ```java
-  
   //自定义 filter
   public class LoginKaptchaFilter extends UsernamePasswordAuthenticationFilter {
-  
       public static final String FORM_KAPTCHA_KEY = "kaptcha";
-  
       private String kaptchaParameter = FORM_KAPTCHA_KEY;
-  
       public String getKaptchaParameter() {
           return kaptchaParameter;
       }
-  
       public void setKaptchaParameter(String kaptchaParameter) {
           this.kaptchaParameter = kaptchaParameter;
       }
-  
       @Override
       public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
           if (!request.getMethod().equals("POST")) {
@@ -1729,14 +1705,12 @@ public class KaptchaConfig {
       }
   }
   ```
-
+  
 - 配置
 
   ```java
-  
   @Configuration
   public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  
       //自定义内存数据源
       @Bean
       public UserDetailsService userDetailsService() {
@@ -1744,18 +1718,15 @@ public class KaptchaConfig {
           inMemoryUserDetailsManager.createUser(User.withUsername("root").password("{noop}123").roles("admin").build());
           return inMemoryUserDetailsManager;
       }
-  
       @Override
       protected void configure(AuthenticationManagerBuilder auth) throws Exception {
           auth.userDetailsService(userDetailsService());
       }
-  
       @Override
       @Bean
       public AuthenticationManager authenticationManagerBean() throws Exception {
           return super.authenticationManagerBean();
       }
-  
       //配置
       @Bean
       public LoginKaptchaFilter loginKaptchaFilter() throws Exception {
@@ -1789,7 +1760,6 @@ public class KaptchaConfig {
           });
           return loginKaptchaFilter;
       }
-  
       @Override
       protected void configure(HttpSecurity http) throws Exception {
           http.authorizeRequests()
@@ -1813,7 +1783,7 @@ public class KaptchaConfig {
       }
   
   ```
-
+  
 - 测试验证
 
 # 第五章 密码加密
@@ -2128,13 +2098,11 @@ COMMIT;
     <artifactId>mysql-connector-java</artifactId>
     <version>5.1.38</version>
 </dependency>
-
 <dependency>
   <groupId>org.mybatis.spring.boot</groupId>
   <artifactId>mybatis-spring-boot-starter</artifactId>
   <version>2.2.0</version>
 </dependency>
-
 <dependency>
   <groupId>com.alibaba</groupId>
   <artifactId>druid</artifactId>
@@ -2173,72 +2141,6 @@ public class User implements UserDetails {
         }
         return authorities;
     }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(Boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(Boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
 ```
 
@@ -2247,30 +2149,6 @@ public class Role {
     private Integer id;
     private String name;
     private String nameZh;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNameZh() {
-        return nameZh;
-    }
-
-    public void setNameZh(String nameZh) {
-        this.nameZh = nameZh;
-    }
 }
 ```
 
@@ -2292,8 +2170,6 @@ public interface UserDao {
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.baizhi.dao.UserDao">
-
-
     <select id="loadUserByUsername" resultType="User">
         select id,
                username,
@@ -2305,8 +2181,6 @@ public interface UserDao {
         from `user`
         where username = #{username}
     </select>
-
-
     <select id="getRolesByUid" resultType="Role">
         select r.id,
                r.name,
@@ -2316,12 +2190,10 @@ public interface UserDao {
         where r.id = ur.rid
           and ur.uid = #{uid}
     </select>
-  
   	<update id="updatePassword">
       update `user` set password=#{password}
       where username=#{username}
   	</update>
-
 </mapper>
 ```
 
@@ -2331,12 +2203,10 @@ public interface UserDao {
 @Service
 public class MyUserDetailService implements UserDetailsService,UserDetailsPasswordService {
     private final UserDao userDao;
-
     @Autowired
     public MyUserDetailService(UserDao userDao) {
         this.userDao = userDao;
     }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.loadUserByUsername(username);
@@ -2346,7 +2216,6 @@ public class MyUserDetailService implements UserDetailsService,UserDetailsPasswo
         user.setRoles(userDao.getRolesByUid(user.getId()));
         return user;
     }
-  
   	 @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
         Integer result = userDao.updatePassword(user.getUsername(), newPassword);
@@ -2356,7 +2225,6 @@ public class MyUserDetailService implements UserDetailsService,UserDetailsPasswo
         return user;
     }
 }
-
 ```
 
 - 配置securityconfig
@@ -2364,10 +2232,7 @@ public class MyUserDetailService implements UserDetailsService,UserDetailsPasswo
 ```java
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-
     private final MyUserDetailService myUserDetailService;
-
     @Autowired
     public SecurityConfig(MyUserDetailService myUserDetailService) {
         this.myUserDetailService = myUserDetailService;
@@ -2377,7 +2242,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //查询数据库
         auth.userDetailsService(myUserDetailService);
     }
-
 }
 ```
 
@@ -2548,13 +2412,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   <artifactId>druid</artifactId>
   <version>1.2.8</version>
 </dependency>
-
 <dependency>
   <groupId>mysql</groupId>
   <artifactId>mysql-connector-java</artifactId>
   <version>5.1.38</version>
 </dependency>
-
 <dependency>
   <groupId>org.mybatis.spring.boot</groupId>
   <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -2593,7 +2455,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   	//..
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.authorizeRequests()
                 .mvcMatchers("/login.html").permitAll()
                 .anyRequest().authenticated()
@@ -2682,7 +2543,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  * 自定义前后端分离认证 Filter
  */
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         System.out.println("========================================");
@@ -2755,13 +2615,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
     }
-
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
     //自定义 filter 交给工厂管理
     @Bean
     public LoginFilter loginFilter() throws Exception {
@@ -2840,7 +2698,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new MyPersistentTokenBasedRememberMeServices(UUID.randomUUID().toString(), userDetailsService(), new InMemoryTokenRepositoryImpl());
     }
 }
-
 ```
 
 ---
@@ -2895,7 +2752,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ### 测试会话管理
 
 配置完成后，启动项目。这次测试我们需要两个浏览器，如果使用了 Chrome 浏览器，可以使用 Chrome 浏览器中的多用户方式（相当于两个浏览器）先在第一个浏览器中输入 http://localhost:8080，此时会自动跳转到登录页面，完成登录操作，就可以访问到数据了；接下来在第二个浏览器中也输入 http://localhost:8080，也需要登录，
-完成登录操作；当第二个浏览器登录成功后，再回到第一个浏览器，刷新页面。结果出现下图：![image-20220308195448860](SpringSecurity.assets/image-20220308195448860.png)
+完成登录操作；当第二个浏览器登录成功后，再回到第一个浏览器，刷新页面。结果出现下图：
+
+![image-20220308195448860](SpringSecurity.assets/image-20220308195448860.png)
 
 ## 会话失效处理
 
@@ -2996,28 +2855,21 @@ spring.redis.port=6379
 ###### 配置Security
 
 ```java
-package com.blr.config;
-
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final FindByIndexNameSessionRepository sessionRepository;
-
     @Autowired
     public SecurityConfig(FindByIndexNameSessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
     }
-
     @Bean
     public UserDetailsService userDetailsService() {
         ....
     }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -3043,7 +2895,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }).sessionRegistry(sessionRegistry());//前后端分离开发处理
         //.maxSessionsPreventsLogin(true);//登录之后禁止再次登录*/
     }
-
     @Bean
     public SpringSessionBackedSessionRegistry sessionRegistry() {
         return new SpringSessionBackedSessionRegistry(sessionRepository);
@@ -3100,19 +2951,16 @@ CSRF (Cross-Site Request Forgery 跨站请求伪造)，也可称为一键式攻�
   ```java
   @Configuration
   public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  
       @Bean
       public UserDetailsService userDetailsService() {
           InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
           inMemoryUserDetailsManager.createUser(User.withUsername("root").password("{noop}123").roles("admin").build());
           return inMemoryUserDetailsManager;
       }
-  
       @Override
       protected void configure(AuthenticationManagerBuilder auth) throws Exception {
           auth.userDetailsService(userDetailsService());
       }
-  
       @Override
       protected void configure(HttpSecurity http) throws Exception {
           http.authorizeRequests().anyRequest().authenticated()
@@ -3120,13 +2968,12 @@ CSRF (Cross-Site Request Forgery 跨站请求伪造)，也可称为一键式攻�
       }
   }
   ```
-
+  
 - 创建 controller 并启动启动
 
   ```java
   @RestController
   public class HelloController {
-  
       @PostMapping("/withdraw")
       public String withdraw() {
           System.out.println("执行一次转账操作");
@@ -3206,7 +3053,6 @@ public class HelloController {
         System.out.println("hello success");
         return "hello success";
     }
-
     @GetMapping("/index.html")
     public String index() {
         return "index";
@@ -3379,8 +3225,6 @@ public class DemoController {
     }
 }
 ```
-
-
 
 ### addCrosMapping
 
@@ -3905,7 +3749,6 @@ SET FOREIGN_KEY_CHECKS = 1;
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
   </dependency>
-  
   <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
@@ -3922,7 +3765,7 @@ SET FOREIGN_KEY_CHECKS = 1;
     <version>2.2.2</version>
   </dependency>
   ```
-
+  
 - 配置配置文件
 
   ```properties
@@ -3946,140 +3789,29 @@ SET FOREIGN_KEY_CHECKS = 1;
       private boolean enabled;
       private boolean locked;
       private List<Role> roles;
-  
       @Override
       public Collection<? extends GrantedAuthority> getAuthorities() {
           return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
       }
-  
-      @Override
-      public String getPassword() {
-          return password;
-      }
-  
-      @Override
-      public String getUsername() {
-          return username;
-      }
-  
-      @Override
-      public boolean isAccountNonExpired() {
-          return true;
-      }
-  
-      @Override
-      public boolean isAccountNonLocked() {
-          return !locked;
-      }
-  
-      @Override
-      public boolean isCredentialsNonExpired() {
-          return true;
-      }
-  
-      @Override
-      public boolean isEnabled() {
-          return enabled;
-      }
-  
-      public void setId(Integer id) {
-          this.id = id;
-      }
-  
-      public void setPassword(String password) {
-          this.password = password;
-      }
-  
-      public void setUsername(String username) {
-          this.username = username;
-      }
-  
-      public void setEnabled(boolean enabled) {
-          this.enabled = enabled;
-      }
-  
-      public void setLocked(boolean locked) {
-          this.locked = locked;
-      }
-  
-      public void setRoles(List<Role> roles) {
-          this.roles = roles;
-      }
-  
-      public Integer getId() {
-          return id;
-      }
-  
-      public List<Role> getRoles() {
-          return roles;
-      }
   }
   ```
-
+  
   ```java
   public class Role {
       private Integer id;
       private String name;
       private String nameZh;
-  
-      public Integer getId() {
-          return id;
-      }
-  
-      public void setId(Integer id) {
-          this.id = id;
-      }
-  
-      public String getName() {
-          return name;
-      }
-  
-      public void setName(String name) {
-          this.name = name;
-      }
-  
-      public String getNameZh() {
-          return nameZh;
-      }
-  
-      public void setNameZh(String nameZh) {
-          this.nameZh = nameZh;
-      }
   }
   ```
-
+  
   ```java
   public class Menu {
       private Integer id;
       private String pattern;
       private List<Role> roles;
-  
-      public List<Role> getRoles() {
-          return roles;
-      }
-  
-      public void setRoles(List<Role> roles) {
-          this.roles = roles;
-      }
-  
-      public Integer getId() {
-          return id;
-      }
-  
-      public void setId(Integer id) {
-          this.id = id;
-      }
-  
-      public String getPattern() {
-          return pattern;
-      }
-  
-      public void setPattern(String pattern) {
-          this.pattern = pattern;
-      }
   }
   ```
-
+  
 - 创建 mapper 接口
 
   ```java
@@ -4100,11 +3832,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 - 创建 mapper 文件
 
   ```xml
-  <!DOCTYPE mapper
-          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.blr.mapper.UserMapper">
-  
       <select id="loadUserByUsername" resultType="com.blr.entity.User">
           select *
           from user
@@ -4120,7 +3848,7 @@ SET FOREIGN_KEY_CHECKS = 1;
       </select>
   </mapper>
   ```
-
+  
   ```xml
   <mapper namespace="com.blr.mapper.MenuMapper">
       <resultMap id="MenuResultMap" type="com.blr.entity.Menu">
@@ -4141,14 +3869,13 @@ SET FOREIGN_KEY_CHECKS = 1;
       </select>
   </mapper>
   ```
-
+  
 - 创建 service 接口
 
   ```java
   @Service
   public class UserService implements UserDetailsService {
       private final UserMapper userMapper;
-  
       @Autowired
       public UserService(UserMapper userMapper) {
           this.userMapper = userMapper;
@@ -4165,23 +3892,21 @@ SET FOREIGN_KEY_CHECKS = 1;
       }
   }
   ```
-
+  
   ```java
   @Service
   public class MenuService {
       private final MenuMapper menuMapper;
-  
       @Autowired
       public MenuService(MenuMapper menuMapper) {
           this.menuMapper = menuMapper;
       }
-  
       public List<Menu> getAllMenu() {
           return menuMapper.getAllMenu();
       }
   }
   ```
-
+  
 - 创建测试 controller
 
   ```java
@@ -4191,24 +3916,21 @@ SET FOREIGN_KEY_CHECKS = 1;
       public String admin() {
           return "hello admin";
       }
-  
       @GetMapping("/user/hello")
       public String user() {
           return "hello user";
       }
-  
       @GetMapping("/guest/hello")
       public String guest() {
           return "hello guest";
       }
-  
       @GetMapping("/hello")
       public String hello() {
           return "hello";
       }
   }
   ```
-
+  
 - 创建 CustomSecurityMetadataSource
 
   ```java
@@ -5163,3 +4885,70 @@ curl -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2N
 ```
 
 ![image-20220812160042315](SpringSecurity.assets/image-20220812160042315.png)
+
+--
+
+
+
+
+
+SecurityBuilder
+
+```java
+public interface SecurityBuilder<O> {
+	O build() throws Exception;
+}
+```
+
+
+
+SecurityConfigurer
+
+```java
+public interface SecurityConfigurer<O, B extends SecurityBuilder<O>> {
+	void init(B builder) throws Exception;
+	void configure(B builder) throws Exception;
+}
+```
+
+
+
+SecurityConfigurerAdapter
+
+```java
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

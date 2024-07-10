@@ -1,5 +1,9 @@
 # Mac配置JDK环境变量
 
+> 官网下载 jdk17
+>
+> https://www.oracle.com/java/technologies/downloads/#jdk17-mac
+
 较高版本的JDK一般在安装的时候就自动配置好了环境变量
 
 ## 1 验证

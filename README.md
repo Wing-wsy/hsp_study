@@ -27,7 +27,7 @@
 #### chapter-25 - SpringBoot       【 △ 】
 #### chapter-26 - JWT     【 √ 】
 #### chapter-27 - SpringSecurity        【  △ 】
-#### chapter-28 - Elasticsearch        【 × 】
+#### chapter-28 - XXL_JOB        【 × 】
 
 #### 更多技术待解锁...
 
