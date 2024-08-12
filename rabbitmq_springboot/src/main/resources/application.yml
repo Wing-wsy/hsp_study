@@ -7,4 +7,9 @@ spring:
     username: ems
     password: 123
     virtual-host: /ems
-
+    # 手动提交消息
+    listener:
+      simple:
+        acknowledge-mode: manual
+      direct:
+        acknowledge-mode: manual

@@ -24,10 +24,14 @@
 #### chapter-22 - servlet             【 √  】
 #### chapter-23 - java 反射          【 √ 】
 #### chapter-24 - ssm             【 √ 】
-#### chapter-25 - SpringBoot       【 △ 】
+#### chapter-25 - SpringBoot       【 √  】
 #### chapter-26 - JWT     【 √ 】
-#### chapter-27 - SpringSecurity        【  △ 】
-#### chapter-28 - XXL_JOB        【 × 】
+#### chapter-27 - SpringSecurity        【  √  】
+#### chapter-28 - XXL_JOB        【 √  】
+#### chapter-29 - Kafka       【 △ 】
+#### chapter-30 - ElasticSearch       【 × 】
+#### chapter-31 - WebSocket       【 × 】
+
 
 #### 更多技术待解锁...
 

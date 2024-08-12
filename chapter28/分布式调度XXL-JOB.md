@@ -569,3 +569,22 @@ public void sendMsgShardingHandler() throws Exception{
 
 ##  4. 项目集成XXL-JOB
 
+
+
+```sql
+select
+    DATE(a.create_date) as '日期', d.system_code as '系统',a.app_package as '包名',a.item_code '系统编码',
+    count(DISTINCT case when b.is_new = 1  then a.app_user_id else NULL END) as '申请人数',
+    count(DISTINCT case when b.loan_type = 0 and b.is_new = 1  then a.app_user_id else NULL END) as'手动申请人数',
+    count(DISTINCT case when b.loan_type = 1 and b.is_new = 1  then a.app_user_id else NULL END) as'自动申请人数',
+    count(DISTINCT case when c.status = 3  then a.app_user_id else NULL END) as'手动取消申请人数'
+from t_app_user as a left join t_loan_order as b on a.app_user_id = b.app_user_id
+left join  t_loan_order_time_request as c on a.app_user_id = c.app_user_id
+left join t_app_item as d on a.item_code = d.item_code
+where   a.create_date >= '2024-07-01 00:00:00' and a.create_date <= '2024-07-16 23:59:59'
+and (a.decive_brand is null or a.decive_brand != 'Apple')
+group by DATE(a.create_date),app_package
+
+
+```
+

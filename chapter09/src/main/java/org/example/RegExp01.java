@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 public class RegExp01 {
 
     public static void main(String[] args) {
-        String content = "51915625345";
-        boolean matches = content.matches("^[0-9+\\-() ]{1,16}$");
+        String content = "519156253345";
+        boolean matches = content.matches("[0-9]{12}");
 //        boolean matches = content.matches("^[0-9+-(]{4,6}$");
 //        boolean matches = content.matches("[0-9,+,-,]{6}");
         if (matches) {

@@ -1,5 +1,7 @@
 # 1 基础篇
 
+hm_dianping 项目
+
 >redis-cli -h 47.76.68.216 -p 6379 -a 123456abc
 
 ## 1.1 SQL & NoSQL

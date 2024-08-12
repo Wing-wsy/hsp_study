@@ -13,7 +13,7 @@ import java.util.Collections;
 
 public class FastAutoGeneratorTest {
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://192.168.0.245:3306/y_peru_system?useSSL=false&serverTimezone=America/Mexico_City", "shaoyou", "Ycs11g8ap_BkQp#35fc&Xin7f")
+        FastAutoGenerator.create("jdbc:mysql://8.218.31.154:3306/mexico_loanover?useSSL=false&serverTimezone=GMT%2B7", "用户名", "密码")
                         .globalConfig(builder -> {
                             builder.author("wing") // 设置作者
                             // .enableSwagger() // 开启 swagger 模式
@@ -21,12 +21,12 @@ public class FastAutoGeneratorTest {
                             .outputDir("/Users/wing/architect/MybatisPlusAutoCode"); // 指定输出目录
                         })
                         .packageConfig(builder -> {
-                            builder.parent("com.atguigu") // 设置父包名
+                            builder.parent("com.test") // 设置父包名
                                     .moduleName("mybatisplus") // 设置父包模块名
                                     .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "/Users/wing/architect/MybatisPlusAutoCode")); // 设置mapperXml生成路径
                         })
                         .strategyConfig(builder -> {
-                            builder.addInclude("t_app_error_burial_point") // 设置需要生成的表名
+                            builder.addInclude("t_app_cardid_occupation") // 设置需要生成的表名
 //                                    .addTablePrefix("t_", "c_") // 设置过滤表前缀
                             ;
                              })

@@ -1,10 +1,10 @@
 # SpringSecurity 实战
 
-> 博客：https://blog.csdn.net/unique_perfect/article/details/109219826
+学习到微信小程序开发，再来学习 oauth2 认证
+
+>博客：https://blog.csdn.net/chisuisi5702/article/details/131519731
 >
-> 中文文档：
-
-
+>github代码：https://github.com/LucasZhanye/SpringSecurity-OAuth2-Study-Demo/tree/master
 
 # 第一章 权限管理
 
@@ -4270,7 +4270,7 @@ spring.security.oauth2.client.registration.github.redirect-uri=http://localhost:
 
 ![image-20220601102620149](SpringSecurity.assets/image-20220601102620149.png)
 
-- 点击 github 登录,点击授权 访问 hello 接口
+- 点击 github 登录,点击授权 访问 hello 接口 http://localhost:8088/hello
 
 ![image-20220601102749454](SpringSecurity.assets/image-20220601102749454.png)
 

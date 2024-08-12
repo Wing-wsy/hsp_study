@@ -613,7 +613,7 @@ channel.basicConsume(queue,true,new DefaultConsumer(channel){
 ##### 1.开发生产者
 
 ```java
-//生命交换机和交换机类型 topic 使用动态路由(通配符方式)
+//声明交换机和交换机类型 topic 使用动态路由(通配符方式)
 channel.exchangeDeclare("topics","topic");
 String routekey = "user.save";//动态路由key
 //发布消息
