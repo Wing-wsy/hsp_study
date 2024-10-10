@@ -222,15 +222,6 @@ public class DefaultSkin extends AbstractSkin {
 ```
 
 ```java
-/*黑马程序员皮肤*/
-public class HeimaSkin extends AbstractSkin {
-    public void display() {
-        System.out.println("黑马皮肤");
-    }
-}
-```
-
-```java
 /*搜狗输入法*/
 public class SougouInput {
     private AbstractSkin skin;

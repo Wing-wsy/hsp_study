@@ -60,7 +60,9 @@
 
 #### 2.2.1 下载
 
-`官网下载地址`: https://www.rabbitmq.com/download.html![image-20190925220115235](RibbitMQ 实战教程.assets/image-20190925220115235.png)
+`官网下载地址`: https://www.rabbitmq.com/download.html
+
+![image-20190925220115235](RibbitMQ 实战教程.assets/image-20190925220115235.png)
 
 > `最新版本`: 3.7.18
 
@@ -231,7 +233,7 @@
 	为了让各个用户可以互不干扰的工作，RabbitMQ添加了虚拟主机（Virtual Hosts）的概念。其实就是一个独立的访问路径，不同用户使用不同路径，各自有自己的队列、交换机，互相不会影响。
 ```
 
- ![image-20191126163023153](RibbitMQ 实战教程.assets/image-20191126163023153.png)
+![image-20191126163023153](RibbitMQ 实战教程.assets/image-20191126163023153.png)
 
 ##### 3. 绑定虚拟主机和用户
 
@@ -239,7 +241,7 @@
 
 点击添加好的虚拟主机：
 
- ![image-20191126163506795](RibbitMQ 实战教程.assets/image-20191126163506795.png)
+![image-20191126163506795](RibbitMQ 实战教程.assets/image-20191126163506795.png)
 
 进入虚拟机设置界面:
 
@@ -425,7 +427,7 @@ channel.basicConsume("hello",false,new DefaultConsumer(channel){
 
 `fanout 扇出 也称为广播`
 
- ![image-20191126213115873](RibbitMQ 实战教程.assets/image-20191126213115873.png)
+![image-20191126213115873](RibbitMQ 实战教程.assets/image-20191126213115873.png)
 
 在广播模式下，消息发送流程是这样的：
 
@@ -664,9 +666,11 @@ channel.basicConsume(queue,true,new DefaultConsumer(channel){
 
 ##### 4.测试结果
 
- ![image-20200316113935785](RibbitMQ 实战教程.assets/image-20200316113935785.png)
+![image-20200316113935785](RibbitMQ 实战教程.assets/image-20200316113935785.png)
 
  ![image-20200316114000459](RibbitMQ 实战教程.assets/image-20200316114000459.png)
+
+
 
 ## 5. SpringBoot中使用RabbitMQ
 
@@ -688,7 +692,7 @@ spring:
   application:
     name: springboot_rabbitmq
   rabbitmq:
-    host: 10.15.0.9
+    host: 127.0.0.1
     port: 5672
     username: ems
     password: 123

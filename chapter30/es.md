@@ -129,7 +129,7 @@ Elasticsearch 的搜索原理简单过程是，索引系统通过扫描文章中
 
 假如没有集群只有一个shard对外提供服务，一个shard保存了全部的数据。为了提高并发访问量，shard做成集群。这样全部数据分散保存到三个shard中（三个shard数据加起来就是完整数据）。假如其中一个shard宕机了，那么完整数据就少了三分之一了，这样就不能对外提供完整服务了，就出现了replica，一个replica就是一个shard备份，假如其中一个shard宕机了，它的replica副本就会晋升为主分片继续对外提供服务。这样整体又能对外提供完整服务了。（下图就是6台服务器节点）
 
-![](image/img02.png)
+![](../chapter31/image/img02.png)
 
 ![](image/img01.png)
 

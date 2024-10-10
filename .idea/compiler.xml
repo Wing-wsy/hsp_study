@@ -33,6 +33,7 @@
         <module name="chapter13" />
         <module name="chapter10" />
         <module name="chapter11" />
+        <module name="chapter31" />
       </profile>
     </annotationProcessing>
   </component>
