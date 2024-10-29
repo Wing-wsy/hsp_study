@@ -33,6 +33,7 @@ public class Server {
             ssChannel.configureBlocking(false);
             // e.把通道注册到选择器上去，并且开始指定接收连接事件
             ssChannel.register(selector, SelectionKey.OP_ACCEPT);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
