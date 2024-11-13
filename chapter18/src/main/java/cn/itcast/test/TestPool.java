@@ -1,10 +1,12 @@
 package cn.itcast.test;
 
+import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -48,6 +50,7 @@ public class TestPool {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService pool = Executors.newFixedThreadPool(2);
+        Executors.newSingleThreadExecutor();
 //        Future<String> future = pool.submit(new Callable<String>() {
 //            @Override
 //            public String call() throws Exception {
@@ -58,19 +61,37 @@ public class TestPool {
 //        });
 //        System.out.println(future.get());
 
-        Future<String> future = pool.submit(new Runnable() {
+//        Future<String> future = pool.submit(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    System.out.println("run。。。");
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }, "okk" );
+//        System.out.println(future.get());
+//        System.out.println("main...");
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
+        System.out.println("111" + new Date());
+        scheduledExecutorService.schedule(new Runnable() {
             @Override
             public void run() {
-                try {
-                    System.out.println("run。。。");
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                System.out.println("hello..." + new Date());
             }
-        }, "okk" );
-        System.out.println(future.get());
-        System.out.println("main...");
+        },3,TimeUnit.SECONDS);
+
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("nihao..." + new Date());
+            }
+        },5,3,TimeUnit.SECONDS);
+
+
 
     }
 }

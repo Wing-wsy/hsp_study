@@ -1041,6 +1041,38 @@ Executors 提供了四种线程池的创建：newCachedThreadPool、newFixedThre
 
 ![](https://seazean.oss-cn-beijing.aliyuncs.com/img/Java/JUC-newSingleThreadExecutor.png)
 
+- newScheduledThreadPool：延迟任务
+
+```java
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(3);
+        System.out.println("111" + new Date());
+        // 延迟3秒执行，只执行一次
+        scheduledExecutorService.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("hello..." + new Date());
+            }
+        },3,TimeUnit.SECONDS);
+
+       // 延迟5秒后每隔两3秒执行一次
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("nihao..." + new Date());
+            }
+        },5,3,TimeUnit.SECONDS);
+    }
+
+111Thu Nov 07 17:30:41 CST 2024
+hello...Thu Nov 07 17:30:44 CST 2024
+nihao...Thu Nov 07 17:30:46 CST 2024
+nihao...Thu Nov 07 17:30:49 CST 2024
+nihao...Thu Nov 07 17:30:52 CST 2024
+nihao...Thu Nov 07 17:30:55 CST 2024
+nihao...Thu Nov 07 17:30:58 CST 2024
+```
+
 
 
 ***
@@ -3106,6 +3138,145 @@ DelayedWorkQueue 是支持延时获取元素的阻塞队列，内部采用优先
       tryTerminate();
   }
   ```
+
+### CompletableFuture
+
+两个辅助方法
+
+```java
+private static void println(String content) {
+    String threadName = "【" + Thread.currentThread().getName() + "】";
+    String result = content + threadName;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String date = "【" + dateFormat.format(new Date()) + "】";
+    System.out.println(date + result);
+}
+
+private static void thread(int time){
+    try {
+        Thread.sleep(time);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+}
+```
+
+- **情况一：小白和厨师分开执行**
+  - 小白一个线程
+  - 厨师一个线程：厨师两个工作，先炒菜，再接着打饭
+
+```java
+public static void main(String[] args) {
+    println("小白进入餐厅");
+    println("小白点了番茄炒蛋 + 一碗米饭");
+    CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(() -> {
+        println("厨师炒菜");
+        thread(2000);
+        println("厨师打饭");
+        thread(1000);
+        return "番茄炒蛋 + 米饭 做好了";
+    });
+    println("小白在打王者");
+    println(cf1.join() + "小白开吃");
+}
+
+【2024-11-07 19:42:31】小白进入餐厅【main】
+【2024-11-07 19:42:31】小白点了番茄炒蛋 + 一碗米饭【main】
+【2024-11-07 19:42:31】小白在打王者【main】
+【2024-11-07 19:42:31】厨师炒菜【ForkJoinPool.commonPool-worker-9】
+【2024-11-07 19:42:33】厨师打饭【ForkJoinPool.commonPool-worker-9】
+【2024-11-07 19:42:34】番茄炒蛋 + 米饭 做好了小白开吃【main】
+```
+
+- **情况二：小白和厨师、服务员分开执行**
+  - 小白一个线程
+  - 厨师一个线程：厨师一个工作：炒菜
+  - 服务员一个线程：服务员一个工作：打饭【服务员要等厨师炒完菜，才能开始打饭】
+
+```java
+public static void main(String[] args) {
+    /** 2）小白和厨师、服务员分开执行 */
+    println("小白进入餐厅");
+    println("小白点了番茄炒蛋 + 一碗米饭");
+    CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(() -> {
+        println("厨师炒菜");
+        thread(2000);
+        return "番茄炒蛋";
+    }).thenCompose(dish -> CompletableFuture.supplyAsync(() -> {
+        println("服务员打饭");
+        thread(1000);
+        return dish + " + 米饭";
+    }));
+    println("小白在打王者");
+    println(cf1.join() + "小白开吃");
+}
+
+注意下面厨师和服务员不是同一个线程
+【2024-11-07 19:56:59】小白进入餐厅【main】
+【2024-11-07 19:56:59】小白点了番茄炒蛋 + 一碗米饭【main】
+【2024-11-07 19:56:59】厨师炒菜【ForkJoinPool.commonPool-worker-9】
+【2024-11-07 19:56:59】小白在打王者【main】
+【2024-11-07 19:57:01】服务员打饭【ForkJoinPool.commonPool-worker-2】
+【2024-11-07 19:57:02】番茄炒蛋 + 米饭小白开吃【main】
+
+```
+
+- **情况三：小白和厨师、服务员分开执行**
+  - 小白一个线程
+  - 厨师一个线程：厨师一个工作：炒菜
+  - 服务员一个线程：服务员两个工作：蒸饭和打饭（蒸饭可以和炒菜同时进行，但是打饭得等炒菜和蒸饭都好了才能进行）
+
+```java
+public static void main(String[] args) {
+    /** 3）小白和厨师、服务员分开执行（有所区别的是，厨师和服务员同时执行，但服务员还得等厨师执行完继续执行） */
+    println("小白进入餐厅");
+    println("小白点了番茄炒蛋 + 一碗米饭");
+    CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(() -> {
+        println("厨师炒菜");
+        thread(2000);  // 这里改成 thread(5000);
+        return "番茄炒蛋";
+    }).thenCombine(CompletableFuture.supplyAsync(() -> {
+        println("服务员蒸饭");
+        thread(3000);
+        return "米饭";
+    }),(dish,rice) -> {
+        println("服务员打饭");
+        thread(1000);
+        return dish + rice + " + 好了";
+    });
+    println("小白在打王者");
+    println(cf1.join() + "小白开吃");
+}
+
+// 当前厨师炒菜需要 2000 毫秒（比服务员做米饭需要 3000 毫秒少）执行的结果【服务员蒸饭和服务员打饭是同一个线程】
+【2024-11-07 20:16:40】小白进入餐厅【main】
+【2024-11-07 20:16:40】小白点了番茄炒蛋 + 一碗米饭【main】
+【2024-11-07 20:16:40】厨师炒菜【ForkJoinPool.commonPool-worker-9】
+【2024-11-07 20:16:40】服务员蒸饭【ForkJoinPool.commonPool-worker-2】
+【2024-11-07 20:16:40】小白在打王者【main】
+【2024-11-07 20:16:43】服务员打饭【ForkJoinPool.commonPool-worker-2】
+【2024-11-07 20:16:44】番茄炒蛋米饭 + 好了小白开吃【main】
+  
+
+// 当前厨师炒菜需要 5000 毫秒（比服务员做米饭需要 3000 毫秒多）执行的结果【服务员蒸饭和服务员打饭不是同一个线程】
+【2024-11-07 20:19:24】小白进入餐厅【main】
+【2024-11-07 20:19:24】小白点了番茄炒蛋 + 一碗米饭【main】
+【2024-11-07 20:19:24】厨师炒菜【ForkJoinPool.commonPool-worker-9】
+【2024-11-07 20:19:24】服务员蒸饭【ForkJoinPool.commonPool-worker-2】
+【2024-11-07 20:19:24】小白在打王者【main】
+【2024-11-07 20:19:29】服务员打饭【ForkJoinPool.commonPool-worker-9】
+【2024-11-07 20:19:30】番茄炒蛋米饭 + 好了小白开吃【main】
+  
+// 结论：执行时间最长的线程，会最后执行打饭。
+```
+
+下面的图示分别对应上面的三种情况：
+
+![](img/img03.png)
+
+将来可能存在下面复杂的情况，都是上面三种情况组合而成：
+
+![](img/img04.png)
 
 
 

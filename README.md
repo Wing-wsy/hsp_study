@@ -30,7 +30,9 @@
 #### chapter-28 - XXL_JOB        【 √  】
 #### chapter-29 - Kafka       【 △ 】
 #### chapter-30 - ElasticSearch       【 × 】
-#### chapter-31 - NIO、WebSocket、Netty       【 × 】
+#### chapter-31 - NIO、WebSocket、Netty       【 √ 】
+#### chapter-32 - dubbo       【 × 】
+#### chapter-33 - zookeeper       【 × 】
 
 
 #### 更多技术待解锁...

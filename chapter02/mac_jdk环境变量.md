@@ -1,5 +1,31 @@
 # Mac配置JDK环境变量
 
+
+
+切换本地JDK
+
+```
+// 第一步，打开配置文件,使用哪个jdk，放开那个配置即可
+wing@WangShaoYoudeMacBook-Pro ~ % vim .zshrc  
+
+#使用jdk8
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home
+#使用jdk11
+#JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home
+#使用jdk17
+#JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+
+
+// 第二步，刷新配置使其生效
+wing@WangShaoYoudeMacBook-Pro ~ % source .zshrc
+// 第三步，查看是否生效
+wing@WangShaoYoudeMacBook-Pro ~ % java -version
+```
+
+
+
+
+
 > 官网下载 jdk17
 >
 > https://www.oracle.com/java/technologies/downloads/#jdk17-mac
@@ -78,3 +104,8 @@ export CLASSPATH
 ![](https://img-blog.csdnimg.cn/direct/319d76e7eab149e7b0f82edcb0a16c6e.png)
 
 结束！
+
+
+
+
+
