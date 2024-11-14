@@ -36,14 +36,14 @@ public class IPLimitFilter extends BaseInfoProperties implements GlobalFilter, O
      * 等待30秒静默后，才能够继续恢复访问
      */
 
-    @Value("${blackIp.continueCounts:3}") // 3表示没有配置时的默认值
-    private Integer continueCounts=3;  // 3次
+    @Value("${blackIp.continueCounts}")
+    private Integer continueCounts;
 
-    @Value("${blackIp.timeInterval:20}")
-    private Integer timeInterval = 20; // 20秒
+    @Value("${blackIp.timeInterval}")
+    private Integer timeInterval;
 
-    @Value("${blackIp.limitTimes:30}")
-    private Integer limitTimes = 30; // 30秒
+    @Value("${blackIp.limitTimes}")
+    private Integer limitTimes;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
