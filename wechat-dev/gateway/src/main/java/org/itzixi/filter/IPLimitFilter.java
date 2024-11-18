@@ -36,13 +36,13 @@ public class IPLimitFilter extends BaseInfoProperties implements GlobalFilter, O
      * 等待30秒静默后，才能够继续恢复访问
      */
 
-    @Value("${blackIp.continueCounts}")
+    @Value("${blackIp.continueCounts:1}") // 没有配置则使用默认值1
     private Integer continueCounts;
 
-    @Value("${blackIp.timeInterval}")
+    @Value("${blackIp.timeInterval:2}")
     private Integer timeInterval;
 
-    @Value("${blackIp.limitTimes}")
+    @Value("${blackIp.limitTimes:3}")
     private Integer limitTimes;
 
     @Override
@@ -50,9 +50,9 @@ public class IPLimitFilter extends BaseInfoProperties implements GlobalFilter, O
 
         log.info("IPLimitFilter 当前的执行顺序order为1");
 
-        log.info("continueCounts: {}", continueCounts);
-        log.info("timeInterval: {}", timeInterval);
-        log.info("limitTimes: {}", limitTimes);
+//        log.info("continueCounts: {}", continueCounts);
+//        log.info("timeInterval: {}", timeInterval);
+//        log.info("limitTimes: {}", limitTimes);
 //
         return doLimit(exchange, chain);
 

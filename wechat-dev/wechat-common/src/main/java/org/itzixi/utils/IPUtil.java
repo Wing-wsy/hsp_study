@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import java.util.Optional;
 
 /**
- * 用户获得用户ip的工具类
+ * ip工具类
  */
 public class IPUtil {
 

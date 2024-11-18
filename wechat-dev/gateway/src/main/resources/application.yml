@@ -14,7 +14,7 @@ logging:
   level:
     root: info
 
-# 自定义的配置(不设置有默认值)
+# 自定义的配置
 #blackIp:
 #  continueCounts: 5   # ip连续请求的次数
 #  timeInterval: 15    # ip判断的时间间隔，单位：秒
