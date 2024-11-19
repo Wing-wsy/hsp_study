@@ -17,6 +17,7 @@ redis-server /etc/redis/redis.conf
 
 3-1）docker 下载 nacos 命令
 docker pull nacos/nacos-server:v2.3.1-slim
+
 3-2）docker 安装 nacos 命令【需要提前下载好镜像】
 docker run --name nacos-imooc \
 -e MODE=standalone \
@@ -28,3 +29,15 @@ docker run --name nacos-imooc \
 
 3-3）访问nacos
 http://127.0.0.1:8848/nacos
+
+4-1）拉取minio镜像
+docker pull minio/minio
+
+4-2）启动minio
+docker run -p 8000:8000 -p 8001:8001 \
+--name minio-imooc \
+-d --restart=always \
+-e "MINIO_ROOT_USER=imooc" \
+-e "MINIO_ROOT_PASSWORD=imooc123456" \
+-v /Users/wing/architect/docker/minio/wechat/data:/data \
+minio/minio server /data --console-address ":8001" -address ":8000"

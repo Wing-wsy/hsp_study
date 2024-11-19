@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 //import org.itzixi.api.feign.FileMicroServiceFeign;
+import org.itzixi.api.feign.FileMicroServiceFeign;
 import org.itzixi.base.BaseInfoProperties;
 import org.itzixi.enums.Sex;
 import org.itzixi.mapper.UsersMapper;
@@ -58,8 +59,7 @@ public class UsersServiceImpl extends BaseInfoProperties implements UsersService
         String wechatNum = "wx" + uuidStr[0] + uuidStr[1];
         user.setWechatNum(wechatNum);
 
-//        String wechatNumUrl = getQrCodeUrl(wechatNum, TEMP_STRING);
-        String wechatNumUrl = "aaa";
+        String wechatNumUrl = getQrCodeUrl(wechatNum, TEMP_STRING);
         user.setWechatNumImg(wechatNumUrl);
 
         // 用户138****1234
@@ -91,15 +91,15 @@ public class UsersServiceImpl extends BaseInfoProperties implements UsersService
         return user;
     }
 
-//    @Resource
-//    private FileMicroServiceFeign fileMicroServiceFeign;
-//
-//    private String getQrCodeUrl(String wechatNumber, String userId) {
-//        try {
-//            return fileMicroServiceFeign.generatorQrCode(wechatNumber, userId);
-//        } catch (Exception e) {
-//            // throw new RuntimeException(e);
-//            return null;
-//        }
-//    }
+    @Resource
+    private FileMicroServiceFeign fileMicroServiceFeign;
+
+    private String getQrCodeUrl(String wechatNumber, String userId) {
+        try {
+            return fileMicroServiceFeign.generatorQrCode(wechatNumber, userId);
+        } catch (Exception e) {
+            // throw new RuntimeException(e);
+            return null;
+        }
+    }
 }

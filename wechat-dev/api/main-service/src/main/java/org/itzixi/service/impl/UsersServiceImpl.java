@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 //import org.itzixi.api.feign.FileMicroServiceFeign;
+import org.itzixi.api.feign.FileMicroServiceFeign;
 import org.itzixi.base.BaseInfoProperties;
 import org.itzixi.enums.Sex;
 import org.itzixi.exceptions.GraceException;
@@ -53,8 +54,7 @@ public class UsersServiceImpl extends BaseInfoProperties implements UsersService
                 GraceException.display(ResponseStatusEnum.WECHAT_NUM_ALREADY_MODIFIED_ERROR);
             } else {
                 // 修改微信二维码
-//                String wechatNumUrl = getQrCodeUrl(wechatNum, userId);
-                String wechatNumUrl = "bbb";
+                String wechatNumUrl = getQrCodeUrl(wechatNum, userId);
                 pendingUser.setWechatNumImg(wechatNumUrl);
             }
         }
@@ -79,17 +79,17 @@ public class UsersServiceImpl extends BaseInfoProperties implements UsersService
         return usersMapper.selectById(userId);
     }
 
-//    @Resource
-//    private FileMicroServiceFeign fileMicroServiceFeign;
-//
-//    private String getQrCodeUrl(String wechatNumber, String userId) {
-//        try {
-//            return fileMicroServiceFeign.generatorQrCode(wechatNumber, userId);
-//        } catch (Exception e) {
-//            // throw new RuntimeException(e);
-//            return null;
-//        }
-//    }
+    @Resource
+    private FileMicroServiceFeign fileMicroServiceFeign;
+
+    private String getQrCodeUrl(String wechatNumber, String userId) {
+        try {
+            return fileMicroServiceFeign.generatorQrCode(wechatNumber, userId);
+        } catch (Exception e) {
+            // throw new RuntimeException(e);
+            return null;
+        }
+    }
 
     @Override
     public Users getByWechatNumOrMobile(String queryString) {
