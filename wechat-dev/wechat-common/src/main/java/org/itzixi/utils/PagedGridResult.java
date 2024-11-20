@@ -12,6 +12,7 @@ import java.util.List;
 public class PagedGridResult {
 	
 	private long page;			// 当前页数
+	private long size;			// 每页记录数
 	private long total;			// 总页数
 	private long records;		// 总记录数
 	private List<?> rows;		// 每行显示的内容
@@ -29,6 +30,13 @@ public class PagedGridResult {
 
 	public void setTotal(long total) {
 		this.total = total;
+	}
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
 	}
 
 	public void setTotal(int total) {

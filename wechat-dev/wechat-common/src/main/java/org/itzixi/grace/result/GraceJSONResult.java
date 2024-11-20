@@ -15,8 +15,8 @@ import java.util.Map;
  * 				前端接受此类数据（json object)后，可自行根据业务去实现相关功能
  *
  * @Copyright: Copyright (c) 2020
- * @Company: www.imooc.com
- * @author 慕课网 - 风间影月
+ * @Company:
+ * @author
  * @version V2.0
  */
 public class GraceJSONResult {

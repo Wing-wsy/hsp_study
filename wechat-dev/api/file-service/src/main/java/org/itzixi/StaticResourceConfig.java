@@ -6,7 +6,7 @@
 //import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //
 ///**
-// * @Auther 风间影月 这是本地保存图片才这样使用，用minio分布式文件服务就不用这个
+// * @Auther  这是本地保存图片才这样使用，用minio分布式文件服务就不用这个
 // */
 //@Configuration
 //public class StaticResourceConfig extends WebMvcConfigurationSupport {

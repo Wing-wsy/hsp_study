@@ -8,7 +8,7 @@ import org.itzixi.pojo.FriendCircleLiked;
  * 点赞朋友圈的朋友 Mapper 接口
  * </p>
  *
- * @author 风间影月
+ * @author
  * @since 2024-03-27
  */
 public interface FriendCircleLikedMapper extends BaseMapper<FriendCircleLiked> {

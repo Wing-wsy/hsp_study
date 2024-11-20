@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @Auther 风间影月
+ * @Auther
  */
 @Slf4j
 public class SMSInterceptor extends BaseInfoProperties implements HandlerInterceptor {

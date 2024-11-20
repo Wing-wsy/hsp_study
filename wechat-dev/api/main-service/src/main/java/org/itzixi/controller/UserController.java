@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 /**
- * @Auther 风间影月
+ * @Auther
  */
 @RestController
 @RequestMapping("userinfo")
@@ -117,25 +117,25 @@ public class UserController extends BaseInfoProperties {
         return usersVO;
     }
 
-//    @PostMapping("queryFriend")
-//    public GraceJSONResult queryFriend(String queryString, HttpServletRequest request) {
-//
-//        if (StringUtils.isBlank(queryString)) {
-//            return GraceJSONResult.error();
-//        }
-//
-//        Users friend = userService.getByWechatNumOrMobile(queryString);
-//        if (friend == null) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FRIEND_NOT_EXIST_ERROR);
-//        }
-//
-//        // 判断，不能添加自己为好友
-//        String myId = request.getHeader(HEADER_USER_ID);
-//        if (myId.equals(friend.getId())) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.CAN_NOT_ADD_SELF_FRIEND_ERROR);
-//        }
-//
-//        return GraceJSONResult.ok(friend);
-//    }
+    @PostMapping("queryFriend")
+    public GraceJSONResult queryFriend(String queryString, HttpServletRequest request) {
+
+        if (StringUtils.isBlank(queryString)) {
+            return GraceJSONResult.error();
+        }
+
+        Users friend = userService.getByWechatNumOrMobile(queryString);
+        if (friend == null) {
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.FRIEND_NOT_EXIST_ERROR);
+        }
+
+        // 判断，不能添加自己为好友
+        String myId = request.getHeader(HEADER_USER_ID);
+        if (myId.equals(friend.getId())) {
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.CAN_NOT_ADD_SELF_FRIEND_ERROR);
+        }
+
+        return GraceJSONResult.ok(friend);
+    }
 
 }

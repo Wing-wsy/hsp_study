@@ -1,16 +1,16 @@
 package org.itzixi.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.itzixi.pojo.Users;
+import org.itzixi.pojo.Friendship;
 
 /**
  * <p>
- * 用户表 Mapper 接口
+ * 朋友关系表 Mapper 接口
  * </p>
  *
  * @author
  * @since 2024-03-27
  */
-public interface UsersMapper extends BaseMapper<Users> {
+public interface FriendshipMapper extends BaseMapper<Friendship> {
 
 }

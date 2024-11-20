@@ -4,55 +4,76 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="redis分布式应用结束">
-      <change afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/feign/FileMicroServiceFeign.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/feign/UserInfoMicroServiceFeign.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/MinIOConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/MinIOUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/StaticResourceConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/file-service/src/test/java/org/itzixi/test/MinIOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendCircleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/CommentMapperCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleLikedMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleMapperCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/CommentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/FriendCircleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/CommentServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/FriendCircleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/CommentMapperCustom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/FriendCircleLikedMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/FriendCircleMapperCustom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendCircle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendCircleLiked.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/vo/CommentVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/vo/FriendCircleVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/vo/NewFriendsVO.java" afterDir="false" />
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="分布式文件服务器">
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendRequestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendshipController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendRequestMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendRequestMapperCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendshipMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendshipMapperCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/FriendRequestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/FriendshipService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/FriendRequestServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/FriendshipServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/FriendRequestMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/FriendRequestMapperCustom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/FriendshipMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/mappers/FriendshipMapperCustom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/config/MybatisPlusConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/Friendship.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/bo/NewFriendRequestBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/vo/ContactsVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/InterceptorConifg.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/InterceptorConifg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/mapper/UsersMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/mapper/UsersMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/service/UsersService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/service/impl/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/service/impl/UsersServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/aspect/ServiceLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/aspect/ServiceLogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/feign/FileMicroServiceFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/feign/FileMicroServiceFeign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/feign/UserInfoMicroServiceFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/feign/UserInfoMicroServiceFeign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/controller/interceptor/SMSInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/controller/interceptor/SMSInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/tasks/SMSTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/tasks/SMSTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/StaticResourceConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/StaticResourceConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/src/test/java/org/itzixi/test/MinIOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/test/java/org/itzixi/test/MinIOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendCircleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendCircleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleLikedMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleLikedMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleMapperCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleMapperCustom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/UsersMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/UsersMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/UsersService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/UsersServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/ExcludeUrlProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/ExcludeUrlProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/RenderErrorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/RenderErrorUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/SecurityFilterToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/SecurityFilterToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/TestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/TestFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/grace/result/GraceJSONResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/grace/result/GraceJSONResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/grace/result/IMOOCJSONResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/grace/result/IMOOCJSONResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/OkHttpUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/OkHttpUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/PagedGridResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/PagedGridResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/QrCodeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/QrCodeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/RedisOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/RedisOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/SMSUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/SMSUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendCircle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendCircleLiked.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/FriendCircleLiked.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/bo/RegistLoginBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/bo/RegistLoginBO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -96,10 +117,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/api/main-service/src/main/resources/mappers" />
-      <recent name="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/vo" />
-      <recent name="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo" />
       <recent name="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper" />
+      <recent name="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/vo" />
       <recent name="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl" />
+      <recent name="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -193,7 +214,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
-      <workItem from="1731913171384" duration="34751000" />
+      <workItem from="1731913171384" duration="50440000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -203,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731916626724</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="分布式文件服务器">
+      <option name="closed" value="true" />
+      <created>1732021999770</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732021999770</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +240,28 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="redis分布式应用结束" />
-    <option name="LAST_COMMIT_MESSAGE" value="redis分布式应用结束" />
+    <MESSAGE value="分布式文件服务器" />
+    <option name="LAST_COMMIT_MESSAGE" value="分布式文件服务器" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendRequestController.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/FriendRequestServiceImpl.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java</url>
+          <line>179</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
