@@ -194,31 +194,31 @@ public class FileController {
         return GraceJSONResult.ok(usersVO);
     }
 
-//    @PostMapping("uploadFriendCircleImage")
-//    public GraceJSONResult uploadFriendCircleImage(@RequestParam("file") MultipartFile file,
-//                                        String userId) throws Exception {
-//
-//        if (StringUtils.isBlank(userId)) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        String filename = file.getOriginalFilename();   // 获得文件原始名称
-//        if (StringUtils.isBlank(filename)) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        filename = "friendCircleImage"
-//                + File.separator + userId
-//                + File.separator + dealWithoutFilename(filename);
-//
-//        String imageUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
-//                filename,
-//                file.getInputStream(),
-//                true);
-//
-//        return GraceJSONResult.ok(imageUrl);
-//    }
-//
+    @PostMapping("uploadFriendCircleImage")
+    public GraceJSONResult uploadFriendCircleImage(@RequestParam("file") MultipartFile file,
+                                        String userId) throws Exception {
+
+        if (StringUtils.isBlank(userId)) {
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        String filename = file.getOriginalFilename();   // 获得文件原始名称
+        if (StringUtils.isBlank(filename)) {
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        filename = "friendCircleImage"
+                + File.separator + userId
+                + File.separator + dealWithoutFilename(filename);
+
+        String imageUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
+                filename,
+                file.getInputStream(),
+                true);
+
+        return GraceJSONResult.ok(imageUrl);
+    }
+
 //    @PostMapping("uploadChatPhoto")
 //    public GraceJSONResult uploadChatPhoto(@RequestParam("file") MultipartFile file,
 //                                           String userId) throws Exception {
