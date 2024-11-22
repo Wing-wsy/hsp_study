@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="chat-server" />
         <module name="wechat-common" />
         <module name="auth-service" />
         <module name="base-service" />
@@ -21,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="auth-service" options="-parameters" />
       <module name="base-service" options="-parameters" />
+      <module name="chat-server" options="-parameters" />
       <module name="file-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="main-service" options="-parameters" />

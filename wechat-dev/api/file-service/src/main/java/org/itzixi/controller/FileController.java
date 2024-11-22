@@ -6,14 +6,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.itzixi.MinIOConfig;
 import org.itzixi.MinIOUtils;
 import org.itzixi.api.feign.UserInfoMicroServiceFeign;
+import org.itzixi.base.BaseInfoProperties;
+import org.itzixi.exceptions.GraceException;
 import org.itzixi.grace.result.GraceJSONResult;
 import org.itzixi.grace.result.ResponseStatusEnum;
 import org.itzixi.pojo.vo.UsersVO;
+import org.itzixi.pojo.vo.VideoMsgVO;
+import org.itzixi.utils.JcodecVideoUtil;
 import org.itzixi.utils.JsonUtils;
 import org.itzixi.utils.QrCodeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -23,7 +28,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("file")
-public class FileController {
+public class FileController{
 
 //    /**
 //     * 基于本地保存实现的方式（看看就好，生产不会保存到本地）
@@ -79,7 +84,7 @@ public class FileController {
             return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
         }
 
-        filename = "face" + File.separator + userId + File.separator + filename;
+        filename = MinIOUtils.FilePathEnum.FACE.path + File.separator + userId + File.separator + filename;
         MinIOUtils.uploadFile(minIOConfig.getBucketName(),
                                 filename,
                                 file.getInputStream());
@@ -122,7 +127,8 @@ public class FileController {
         // 把二维码上传到minio中
         if (StringUtils.isNotBlank(qrCodePath)) {
             String uuid = UUID.randomUUID().toString();
-            String objectName = "wechatNumber" + File.separator + userId + File.separator + uuid + ".png";
+            String objectName = MinIOUtils.FilePathEnum.WECHAT_NUMBER.path + File.separator + userId + File.separator + uuid + ".png";
+//            String objectName = "wechatNumber" + File.separator + userId + File.separator + uuid + ".png";
             String imageQrCodeUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(), objectName, qrCodePath, true);
             return imageQrCodeUrl;
         }
@@ -143,7 +149,7 @@ public class FileController {
             return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
         }
 
-        filename = "friendCircleBg"
+        filename = MinIOUtils.FilePathEnum.FRIEND_CIRCLE_BG.path
                 + File.separator + userId
                 + File.separator + dealWithoutFilename(filename);
 
@@ -175,7 +181,7 @@ public class FileController {
             return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
         }
 
-        filename = "chatBg"
+        filename = MinIOUtils.FilePathEnum.CHAT_BG.path
                 + File.separator + userId
                 + File.separator + dealWithoutFilename(filename);
 
@@ -207,7 +213,7 @@ public class FileController {
             return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
         }
 
-        filename = "friendCircleImage"
+        filename = MinIOUtils.FilePathEnum.FRIEND_CIRCLE_BG.path
                 + File.separator + userId
                 + File.separator + dealWithoutFilename(filename);
 
@@ -219,115 +225,99 @@ public class FileController {
         return GraceJSONResult.ok(imageUrl);
     }
 
-//    @PostMapping("uploadChatPhoto")
-//    public GraceJSONResult uploadChatPhoto(@RequestParam("file") MultipartFile file,
-//                                           String userId) throws Exception {
-//
-//        if (StringUtils.isBlank(userId)) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        String filename = file.getOriginalFilename();   // 获得文件原始名称
-//        if (StringUtils.isBlank(filename)) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        filename = "chat"
-//                + File.separator + userId
-//                + File.separator + "photo"
-//                + File.separator + dealWithoutFilename(filename);
-//
-//        String imageUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
-//                filename,
-//                file.getInputStream(),
-//                true);
-//
-//        return GraceJSONResult.ok(imageUrl);
-//    }
-//
-//    @PostMapping("uploadChatVideo")
-//    public GraceJSONResult uploadChatVideo(@RequestParam("file") MultipartFile file,
-//                                           String userId) throws Exception {
-//
-//        if (StringUtils.isBlank(userId)) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        String filename = file.getOriginalFilename();   // 获得文件原始名称
-//        if (StringUtils.isBlank(filename)) {
-//            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        filename = "chat"
-//                + File.separator + userId
-//                + File.separator + "video"
-//                + File.separator + dealWithoutFilename(filename);
-//
-//        String videoUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
-//                filename,
-//                file.getInputStream(),
-//                true);
-//
-//        // 帧，封面获取 = 视频截帧 截取第一帧
-//        String coverName = UUID.randomUUID().toString() + ".jpg";   // 视频封面的名称
-//        String coverPath = JcodecVideoUtil.videoFramesPath
-//                + File.separator + "videos"
-//                + File.separator + coverName;
-//
-//        File coverFile = new File(coverPath);
-//        if (!coverFile.getParentFile().exists()) {
-//            coverFile.getParentFile().mkdirs();
-//        }
-//
-//        JcodecVideoUtil.fetchFrame(file, coverFile);
-//
-//        // 上传封面到minio
-//        String coverUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
-//                coverName,
-//                new FileInputStream(coverFile),
-//                true);
-//
-//        VideoMsgVO videoMsgVO = new VideoMsgVO();
-//        videoMsgVO.setVideoPath(videoUrl);
-//        videoMsgVO.setCover(coverUrl);
-//
-//        return GraceJSONResult.ok(videoMsgVO);
-//    }
-//
-//    @PostMapping("uploadChatVoice")
-//    public GraceJSONResult uploadChatVoice(@RequestParam("file") MultipartFile file,
-//                                           String userId) throws Exception {
-//        String voiceUrl = uploadForChatFiles(file, userId, "voice");
-//        return GraceJSONResult.ok(voiceUrl);
-//    }
-//
-//    private String uploadForChatFiles(MultipartFile file,
-//                                      String userId,
-//                                      String fileType) throws Exception {
-//
-//        if (StringUtils.isBlank(userId)) {
-//            GraceException.display(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        String filename = file.getOriginalFilename();   // 获得文件原始名称
-//        if (StringUtils.isBlank(filename)) {
-//            GraceException.display(ResponseStatusEnum.FILE_UPLOAD_FAILD);
-//        }
-//
-//        filename = "chat"
-//                + File.separator + userId
-//                + File.separator + fileType
-//                + File.separator + dealWithoutFilename(filename);
-//
-//        String fileUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
-//                filename,
-//                file.getInputStream(),
-//                true);
-//
-//        return fileUrl;
-//    }
-//
-//
+    @PostMapping("uploadChatPhoto")
+    public GraceJSONResult uploadChatPhoto(@RequestParam("file") MultipartFile file,
+                                           String userId) throws Exception {
+
+        if (StringUtils.isBlank(userId)) {
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        String filename = file.getOriginalFilename();   // 获得文件原始名称
+        if (StringUtils.isBlank(filename)) {
+            return GraceJSONResult.errorCustom(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        filename = MinIOUtils.FilePathEnum.CHAT.path
+                + File.separator + userId
+                + File.separator + MinIOUtils.FilePathEnum.PHOTO.path
+                + File.separator + dealWithoutFilename(filename);
+
+        String imageUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
+                filename,
+                file.getInputStream(),
+                true);
+
+        return GraceJSONResult.ok(imageUrl);
+    }
+
+    @PostMapping("uploadChatVideo")
+    public GraceJSONResult uploadChatVideo(@RequestParam("file") MultipartFile file,
+                                           String userId) throws Exception {
+
+        String videoUrl = uploadForChatFiles(file, userId, MinIOUtils.FilePathEnum.VIDEO.path);
+
+        // 帧，封面获取 = 视频截帧 截取第一帧
+        String coverName = UUID.randomUUID().toString() + MinIOUtils.FilePathEnum.JPG.path;   // 视频封面的名称
+        // 临时保存
+        String coverPath = JcodecVideoUtil.videoFramesPath
+                + File.separator + "videos"
+                + File.separator + coverName;
+
+        File coverFile = new File(coverPath);
+        if (!coverFile.getParentFile().exists()) {
+            coverFile.getParentFile().mkdirs();
+        }
+
+        JcodecVideoUtil.fetchFrame(file, coverFile);
+
+        // 上传封面到minio
+        String coverUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
+                coverName,
+                new FileInputStream(coverFile),
+                true);
+
+        VideoMsgVO videoMsgVO = new VideoMsgVO();
+        videoMsgVO.setVideoPath(videoUrl);
+        videoMsgVO.setCover(coverUrl);
+
+        return GraceJSONResult.ok(videoMsgVO);
+    }
+
+    @PostMapping("uploadChatVoice")
+    public GraceJSONResult uploadChatVoice(@RequestParam("file") MultipartFile file,
+                                           String userId) throws Exception {
+        String voiceUrl = uploadForChatFiles(file, userId, MinIOUtils.FilePathEnum.VOICE.path);
+        return GraceJSONResult.ok(voiceUrl);
+    }
+
+    private String uploadForChatFiles(MultipartFile file,
+                                      String userId,
+                                      String fileType) throws Exception {
+
+        if (StringUtils.isBlank(userId)) {
+            GraceException.display(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        String filename = file.getOriginalFilename();   // 获得文件原始名称
+        if (StringUtils.isBlank(filename)) {
+            GraceException.display(ResponseStatusEnum.FILE_UPLOAD_FAILD);
+        }
+
+        filename = MinIOUtils.FilePathEnum.CHAT.path
+                + File.separator + userId
+                + File.separator + fileType
+                + File.separator + dealWithoutFilename(filename);
+
+        String fileUrl = MinIOUtils.uploadFile(minIOConfig.getBucketName(),
+                filename,
+                file.getInputStream(),
+                true);
+
+        return fileUrl;
+    }
+
+
     private String dealWithFilename(String filename) {
         String suffixName = filename.substring(filename.lastIndexOf("."));
         String fName = filename.substring(0, filename.lastIndexOf("."));

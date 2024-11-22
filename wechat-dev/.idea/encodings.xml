@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/api/auth-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/base-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/base-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api/chat-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api/chat-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/file-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/main-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/src/main/java" charset="UTF-8" />

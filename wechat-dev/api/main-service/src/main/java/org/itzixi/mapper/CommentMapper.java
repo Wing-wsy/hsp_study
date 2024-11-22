@@ -8,7 +8,7 @@ import org.itzixi.pojo.Comment;
  * 文章评论表 Mapper 接口
  * </p>
  *
- * @author 风间影月
+ * @author
  * @since 2024-03-27
  */
 public interface CommentMapper extends BaseMapper<Comment> {

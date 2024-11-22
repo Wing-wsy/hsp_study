@@ -48,7 +48,6 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <!-- 引入nacos配置中心 -->
-        <!-- 请务必按需引入依赖，前期本依赖不需要使用，引入会有报错问题，请在后续用到分布式配置中心的时候在引入 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>

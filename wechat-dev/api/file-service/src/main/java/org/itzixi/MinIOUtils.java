@@ -453,4 +453,33 @@ public class MinIOUtils {
     /******************************  Operate Files End  ******************************/
 
 
+   public static enum FilePathEnum {
+        // 文件目录
+        FACE("face", "头像"),
+        WECHAT_NUMBER("wechatNumber", "微信二维码"),
+        CHAT_BG("chatBg", "聊天背景"),
+        CHAT("chat", "聊天图片"),
+        FRIEND_CIRCLE_BG("friendCircleBg", "朋友圈背景图"),
+
+        // 聊天发送文件格式
+        PHOTO("photo", "图片类型"),
+        VIDEO("video", "视频类型"),
+        VOICE("voice", "音频类型"),
+
+        // 图片格式
+        JPG(".jpg", "jpg类型");
+
+
+
+
+
+
+        public final String path;
+        public final String value;
+
+        FilePathEnum(String path, String value) {
+            this.path = path;
+            this.value = value;
+        }
+    }
 }
