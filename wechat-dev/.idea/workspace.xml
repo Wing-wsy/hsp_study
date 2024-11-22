@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="朋友圈功能">
-      <change beforePath="$PROJECT_DIR$/../uni-weixin/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="续">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller/PassportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller/PassportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/MinIOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/MinIOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendshipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendshipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/CommentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendCircleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendshipMapperCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/mapper/FriendshipMapperCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/SecurityFilterToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/org/itzixi/filter/SecurityFilterToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/BaiduSpeechController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/BaiduSpeechController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/OkHttpUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/OkHttpUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +56,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -177,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="1133000" />
+      <workItem from="1732275494761" duration="2892000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -211,7 +198,23 @@
       <option name="project" value="LOCAL" />
       <updated>1732155267536</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="聊天功能 + 百度语音">
+      <option name="closed" value="true" />
+      <created>1732276848677</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732276848677</updated>
+    </task>
+    <task id="LOCAL-00006" summary="续">
+      <option name="closed" value="true" />
+      <created>1732276920607</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732276920607</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +225,9 @@
     <MESSAGE value="分布式文件服务器" />
     <MESSAGE value="数据库多表关系" />
     <MESSAGE value="朋友圈功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="朋友圈功能" />
+    <MESSAGE value="聊天功能 + 百度语音" />
+    <MESSAGE value="续" />
+    <option name="LAST_COMMIT_MESSAGE" value="续" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -241,16 +246,6 @@
           <url>file://$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java</url>
           <line>179</line>
           <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
-          <line>89</line>
-          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java</url>
