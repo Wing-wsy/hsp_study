@@ -9,6 +9,12 @@ spring:
 #        username: nacos
 #        password: nacos
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5682
+    username: imooc
+    password: imooc
+    virtual-host: wechat-dev
 
 # 自定义minio配置
 minio:

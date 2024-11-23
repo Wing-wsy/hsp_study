@@ -3,6 +3,9 @@ package org.itzixi.netty.websocket;
 //import com.a3test.component.idworker.IdWorkerConfigBean;
 //import com.a3test.component.idworker.Snowflake;
 //import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.a3test.component.idworker.IdWorkerConfigBean;
+import com.a3test.component.idworker.Snowflake;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -12,6 +15,7 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.itzixi.enums.MsgTypeEnum;
 import org.itzixi.grace.result.GraceJSONResult;
+import org.itzixi.netty.mq.MessagePublisher;
 import org.itzixi.pojo.netty.ChatMsg;
 import org.itzixi.pojo.netty.DataContent;
 import org.itzixi.utils.JsonUtils;
@@ -93,6 +97,20 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
                 || msgType == MsgTypeEnum.VIDEO.type
                 || msgType == MsgTypeEnum.VOICE.type
         ) {
+
+            // 方式一：
+            // 此处为mq异步解耦，保存信息到数据库，数据库无法获得信息的主键id，
+            // 所以此处可以用snowflake直接生成唯一的主键id
+            Snowflake snowflake = new Snowflake(new IdWorkerConfigBean());
+            String sid = snowflake.nextId();
+            System.out.println("sid = " + sid);
+
+            // 方式二：
+//            String iid = IdWorker.getIdStr();
+//            System.out.println("iid = " + iid);
+
+            chatMsg.setMsgId(sid);
+
             // 发送消息
             // TODO 测试需要，给自己发信息(测试完成后，这行删除，下面一行放开注释)
             List<Channel> receiverChannels = UserChannelSession.getMultiChannels(senderId);
@@ -125,19 +143,29 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
                     }
 
                 }
+
+            }
+            // 把聊天信息作为mq的消息发送给消费者进行消费处理(最终保存到数据库)
+            MessagePublisher.sendMsgToSave(chatMsg);
+        }
+
+        List<Channel> myOtherChannels = UserChannelSession
+                        .getMyOtherChannels(senderId, currentChannelId);
+        for (Channel c : myOtherChannels) {
+            Channel findChannel = clients.find(c.id());
+            if (findChannel != null) {
+                dataContent.setChatMsg(chatMsg);
+                String chatTimeFormat = LocalDateUtils
+                        .format(chatMsg.getChatTime(),
+                                LocalDateUtils.DATETIME_PATTERN_2);
+                dataContent.setChatTime(chatTimeFormat);
+                // 同步消息给在线的其他设备端
+                findChannel.writeAndFlush(
+                        new TextWebSocketFrame(
+                                JsonUtils.objectToJson(dataContent)));
             }
         }
-//
-//            // 此处为mq异步解耦，保存信息到数据库，数据库无法获得信息的主键id，
-//            // 所以此处可以用snowflake直接生成唯一的主键id
-//            Snowflake snowflake = new Snowflake(new IdWorkerConfigBean());
-//            String sid = snowflake.nextId();
-//            System.out.println("sid = " + sid);
-//
-//            String iid = IdWorker.getIdStr();
-//            System.out.println("iid = " + iid);
-//
-//            chatMsg.setMsgId(sid);
+
 //
 //
 //            // 发送消息

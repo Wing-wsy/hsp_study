@@ -41,3 +41,20 @@ docker run -p 8000:8000 -p 8001:8001 \
 -e "MINIO_ROOT_PASSWORD=imooc123456" \
 -v /Users/wing/architect/docker/minio/wechat/data:/data \
 minio/minio server /data --console-address ":8001" -address ":8000"
+
+5-1）拉取rabbitmq镜像
+docker pull rabbitmq:3.13.2-management
+
+5-2）启动rabbitmq
+docker run --name rabbitmq-imooc \
+-p 5681:5671 \
+-p 5682:5672 \
+-p 4379:4369 \
+-p 15681:15671 \
+-p 15682:15672 \
+-p 25682:25672 \
+--restart always \
+-d rabbitmq:3.13.2-management
+
+运行成功访问管理界面：
+http://127.0.0.1:15682/
