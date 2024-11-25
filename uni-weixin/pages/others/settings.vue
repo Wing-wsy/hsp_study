@@ -109,8 +109,8 @@
 						var status = result.data.status;
 						if (status == 200) {
 							app.clearUserToken();
-							// 退出则关闭ws连接 TODO
-							// app.closeWSConnect();
+							// 退出则关闭ws连接 TODO【netty集群使用】
+							app.closeWSConnect();
 							uni.reLaunch({
 								url: "../loginRegist/loginBefore"
 							})

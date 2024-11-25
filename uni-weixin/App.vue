@@ -33,14 +33,18 @@
 		onLaunch: function() {
 			console.log('App Launch')
 			
-			// this.getWSServerLink();
+			this.getWSServerLink();
 			
 			// this.clearUserInfo();
 			
-			// 程序启动的时候，连接聊天服务器
-			// setTimeout(()=>{
+			//程序启动的时候，连接聊天服务器
+			// 单机
+			// this.doConnect(false);
+			
+			// 集群
+			setTimeout(()=>{
 				this.doConnect(false);
-			// }, 1000)
+			}, 1000)
 				
 			// 仅竖屏
 			// #ifdef APP-PLUS
@@ -119,7 +123,8 @@
 						} 
 						var dataContent = { 
 							chatMsg: chatMsg, 
-							// serverNode: me.globalData.minNode
+							// netty集群，这里需要打开
+							serverNode: me.globalData.minNode
 						}
 						var msgPending = JSON.stringify(dataContent);
 						
