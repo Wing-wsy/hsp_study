@@ -8,7 +8,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @Auther 风间影月
+ * @Auther
  */
 //@Component 测试使用才打开
 @Slf4j

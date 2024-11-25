@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * ChatServer: Netty 服务的启动类(服务器)
  * @Auther
  */
-public class ChatServer extends BaseInfoProperties {
+public class ChatServer2 extends BaseInfoProperties {
 
     public static final Integer nettyDefaultPort = 875;
     public static final String initOnlineCounts = "0";

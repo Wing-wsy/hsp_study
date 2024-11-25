@@ -15,5 +15,8 @@ public class DataContent {
 	private ChatMsg chatMsg;		// 用户的聊天内容entity
 	private String chatTime;		// 格式化后的聊天时间
 	private String extend;			// 扩展字段
+
+	// netty集群，前端需要传递该参数
+	private NettyServerNode serverNode;
 	
 }

@@ -73,5 +73,11 @@ public class MessagePublisher {
                             ROUTING_KEY_WECHAT_MSG_SEND);
     }
 
+    public static void sendMsgToOtherNettyServer(String msg) throws Exception {
+        RabbitMQConnectUtils connectUtils = new RabbitMQConnectUtils();
+        String fanout_exchange = "fanout_exchange";
+        connectUtils.sendMsg(msg, fanout_exchange, "");
+    }
+
 
 }

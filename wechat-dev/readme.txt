@@ -58,3 +58,22 @@ docker run --name rabbitmq-imooc \
 
 运行成功访问管理界面：
 http://127.0.0.1:15682/
+
+6-1）拉取 zookeeper 镜像
+docker pull zookeeper:3.9.2
+
+6-2）启动 zookeeper
+docker run --name zookeeper-imooc  \
+-p 3191:2181 \
+--restart always \
+-v /Users/wing/architect/docker/zookeeper3.9.2/data:/data \
+-v /Users/wing/architect/docker/zookeeper3.9.2/conf:/conf \
+-v /Users/wing/architect/docker/zookeeper3.9.2/logs:/datalog \
+-d zookeeper:3.9.2
+
+-- 增删监听
+stat -w /abc/imooc
+-- 修改监听
+get -w /abc
+-- 子节点监听
+ls -w /abc

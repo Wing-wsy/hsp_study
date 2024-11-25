@@ -124,6 +124,15 @@ public class BaseInfoProperties {
     public static final String REDIS_USER_LIKE_VLOG = "redis_user_like_vlog";
 
 
+    // zk
+    public static final String SERVER_LIST = "server-list";
+
+    // rabbitmq
+    public static final String NETTY_QUEUE_ = "netty_queue_";
+
+
+
+
     // 支付中心地址 - 创建商户订单
 //    public static final String PAYMENT_URL_CREATE_MERCHANT_ORDER = "http://192.168.1.6:9060/payment/createMerchantOrder";		// dev
     public static final String PAYMENT_URL_CREATE_MERCHANT_ORDER = "http://hirecompany.t.mukewang.com:9060/payment/createMerchantOrder";		// prod
