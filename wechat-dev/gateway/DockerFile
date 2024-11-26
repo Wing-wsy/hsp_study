@@ -1,0 +1,7 @@
+FROM openjdk:17
+EXPOSE 1000
+MAINTAINER yc
+
+VOLUME /mydata
+COPY /gateway.jar /gateway.jar
+ENTRYPOINT ["java","-jar","-Xms128m","-Xmx256m","/gateway.jar"]

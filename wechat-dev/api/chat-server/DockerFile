@@ -1,0 +1,10 @@
+FROM openjdk:17
+
+ENV NETTY_PORT 875
+
+EXPOSE $NETTY_PORT
+MAINTAINER yc
+
+VOLUME /mydata
+COPY /chat-server.jar /chat-server.jar
+ENTRYPOINT ["sh","-c","java -jar -Xms128m -Xmx256m /chat-server.jar ${NETTY_PORT}"]

@@ -1,0 +1,7 @@
+FROM openjdk:17
+EXPOSE 88
+MAINTAINER yc
+
+VOLUME /mydata
+COPY /auth-service.jar /auth-service.jar
+ENTRYPOINT ["java","-jar","-Xms128m","-Xmx256m","/auth-service.jar"]

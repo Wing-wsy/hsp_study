@@ -1,0 +1,7 @@
+FROM openjdk:17
+EXPOSE 55
+MAINTAINER yc
+
+VOLUME /mydata
+COPY /file-service.jar /file-service.jar
+ENTRYPOINT ["java","-jar","-Xms128m","-Xmx256m","/file-service.jar"]
