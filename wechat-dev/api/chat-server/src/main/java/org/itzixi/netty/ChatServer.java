@@ -69,6 +69,13 @@ public class ChatServer extends BaseInfoProperties {
 
 
     public static void main(String[] args) throws Exception {
+        Integer port = nettyDefaultPort;
+        if (args != null && args.length > 0) {
+            port = Integer.valueOf(args[0]);
+            System.out.println("+++++++++++++++++++++++");
+            System.out.println("port=" + port);
+            System.out.println("+++++++++++++++++++++++");
+        }
 
         /*
            定义主从线程组
@@ -83,7 +90,8 @@ public class ChatServer extends BaseInfoProperties {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         // Netty服务启动的时候，从redis中查找有没有端口，如果没有则用875，如果有则把端口累加1(或10)再启动
-        Integer nettyPort = selectPort(nettyDefaultPort);
+//        Integer nettyPort = selectPort(nettyDefaultPort);
+        Integer nettyPort = selectPort(port);
 
         // 注册当前netty服务到zookeeper中
         ZookeeperRegister.registerNettyServer(SERVER_LIST,

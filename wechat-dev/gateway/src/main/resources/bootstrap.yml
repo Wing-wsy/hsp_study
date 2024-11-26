@@ -1,8 +1,9 @@
+# nacos 不推荐使用这个文件，容易出BUG
 spring:
   application:
     name: gateway
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: 172.31.0.2:18848
         file-extension: yaml

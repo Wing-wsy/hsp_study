@@ -23,18 +23,9 @@ import org.itzixi.pojo.netty.DataContent;
 import org.itzixi.pojo.netty.NettyServerNode;
 import org.itzixi.utils.JsonUtils;
 import org.itzixi.utils.LocalDateUtils;
-//import org.itzixi.enums.MsgTypeEnum;
-//import org.itzixi.grace.result.GraceJSONResult;
-//import org.itzixi.netty.mq.MessagePublisher;
-//import org.itzixi.pojo.netty.ChatMsg;
-//import org.itzixi.pojo.netty.DataContent;
-//import org.itzixi.utils.JsonUtils;
-//import org.itzixi.utils.LocalDateUtils;
 import org.itzixi.utils.OkHttpUtil;
 import redis.clients.jedis.Jedis;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 创建自定义助手类
@@ -63,11 +54,13 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         String receiverId = chatMsg.getReceiverId();
         String senderId = chatMsg.getSenderId();
 
+        // TODO 这个域名需要修改
         // 判断是否黑名单 start
         // 如果双方只要有一方是黑名单，则终止发送
-        GraceJSONResult result = OkHttpUtil.get("http://127.0.0.1:1000/friendship/isBlack?friendId1st=" + receiverId
-                                                                + "&friendId2nd=" + senderId);
-        boolean isBlack = (Boolean)result.getData();
+//        GraceJSONResult result = OkHttpUtil.get("http://127.0.0.1:1000/friendship/isBlack?friendId1st=" + receiverId
+//                                                                + "&friendId2nd=" + senderId);
+//        boolean isBlack = (Boolean)result.getData();
+        boolean isBlack = false;  // 测试写死非黑名单
         System.out.println("当前的黑名单关系为: " + isBlack);
         if (isBlack) {
             return;

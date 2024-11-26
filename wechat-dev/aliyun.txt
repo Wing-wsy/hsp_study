@@ -1,0 +1,242 @@
+1) 移除新服务器的 docker
+sudo yum remove docker \
+docker-client \
+docker-client-latest \
+docker-common \
+docker-latest \
+docker-latest-logrotate \
+docker-logrotate \
+docker-engine
+
+2）安装 docker
+2-1: sudo yum install -y yum-utils
+2-2: sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+2-3: sudo yum install docker-ce docker-ce-cli containerd.io
+
+3)启动 docker
+3-1: systemctl start docker  //启动
+3-2: docker -v   //查看版本
+3-3: systemctl enable docker   //设置开机自启动
+
+4)拉取 mysql8 镜像
+4-1: docker pull mysql:8.3.0
+4-2: cd /home/
+4-3: mkdir docker
+4-4: cd docker
+4-5: mkdir mysql8.3.0
+4-6: cd mysql8.3.0/
+4-7: mkdir log
+4-8: mkdir data
+4-9: mkdir conf
+4-10: mkdir mysql-files
+
+4-11:启动 mysql
+docker run -p 4406:3306 --name mysql8-test \
+-v /home/docker/mysql8.3.0/log:/var/log/mysql \
+-v /home/docker/mysql8.3.0/data:/var/lib/mysql \
+-v /home/docker/mysql8.3.0/conf:/etc/mysql/conf.d \
+-v /home/docker/mysql8.3.0/mysql-files:/var/lib/mysql-files \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:8.3.0 \
+--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+5) redis
+5-1: cd /home/docker/
+5-2: mkdir redis7
+5-3: cd redis7/
+5-4: mkdir data
+5-5: mkdir conf
+5-6: cd conf
+5-7: touch redis.conf
+5-8: vim redis.conf【里面的内容看服务器】
+5-9: docker pull redis:7.2.4 【拉取镜像】
+5-10: 运行(第一次)
+docker run -p 5379:6379 --name redis-test \
+-v /home/docker/redis7/data:/data \
+-v /home/docker/redis7/conf/redis.conf:/etc/redis/redis.conf \
+-d redis:7.2.4
+redis-server /etc/redis/redis.conf
+
+【停止后，后续再运行可以运行对应的容器名称即可】
+docker start redis-test
+
+6) rabbitmq
+6-1: docker pull rabbitmq:3.13-management
+
+6-2:
+docker run --name rabbitmq-test \
+-p 5681:5671 \
+-p 5682:5672 \
+-p 4379:4369 \
+-p 15681:15671 \
+-p 15682:15672 \
+-p 25682:25672 \
+--restart always \
+-d rabbitmq:3.13-management
+
+7-1）拉取 zookeeper
+cd /home/docker/
+mkdir zookeeper3.9.2
+cd zookeeper3.9.2
+mkdir data
+mkdir logs
+mkdir conf
+
+7-2: docker pull zookeeper:3.9.2
+
+7-3: 注意将zoo.cfg、logback.xml 放到 conf目录
+
+7-4: docker run --name zookeeper-test  \
+-p 3191:2181 \
+--restart always \
+-v /home/docker/zookeeper3.9.2/data:/data \
+-v /home/docker/zookeeper3.9.2/conf:/conf \
+-v /home/docker/zookeeper3.9.2/logs:/datalog \
+-d zookeeper:3.9.2
+
+8-1）拉取minio镜像
+cd /home/docker
+mkdir minio
+cd minio
+mkdir data
+
+docker pull minio/minio
+
+8-2）启动minio
+docker run -p 8100:8100 -p 8101:8101 \
+--name minio-test-2 \
+-d --restart=always \
+-e "MINIO_ROOT_USER=imooc" \
+-e "MINIO_ROOT_PASSWORD=imooc123456" \
+-v /home/docker/minio/data:/data \
+minio/minio server /data --console-address ":8101" -address ":8100"
+
+
+9-1）docker 下载 nacos 命令
+docker pull nacos/nacos-server:v2.3.1-slim
+
+9-2）docker 安装 nacos 命令【需要提前下载好镜像】
+docker run --name nacos-test \
+-e MODE=standalone \
+-p 18848:8848 \
+-p 19848:9848 \
+-p 19849:9849 \
+-p 17848:7848 \
+-d nacos/nacos-server:v2.3.1-slim
+
+========= 下面的服务统一上传到 /home/jars 这个路径下 =========
+============ 发布 gateway ============
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/gateway:v1.0 .
+
+-- 注意要创建这个文件夹
+/home/wechat-dev/gateway/mydata
+
+-- 运行
+docker run \
+--name gateway \
+-p 1000:1000 \
+-v /home/wechat-dev/gateway/mydata:/mydata \
+-d yc/gateway:v1.0
+
+-- 看启动日志
+ docker logs gateway
+
+ ============ 发布 auth ============
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/auth-service:v1.0 .
+
+-- 注意要创建这个文件夹
+/home/wechat-dev/auth-service/mydata
+
+-- 运行
+docker run \
+--name auth-service \
+-p 88:88 \
+-v /home/wechat-dev/auth-service/mydata:/mydata \
+-d yc/auth-service:v1.0
+
+-- 看启动日志
+docker logs auth-service
+
+ ============ 发布 file ============
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/file-service:v1.0 .
+
+-- 注意要创建这个文件夹
+/home/wechat-dev/file-service/mydata
+
+-- 运行
+docker run \
+--name file-service \
+-p 55:55 \
+-v /home/wechat-dev/file-service/mydata:/mydata \
+-d yc/file-service:v1.0
+
+-- 看启动日志
+docker logs file-service
+
+ ============ 发布 main ============
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/main-service:v1.0 .
+
+-- 注意要创建这个文件夹
+/home/wechat-dev/main-service/mydata
+
+-- 运行
+docker run \
+--name main-service \
+-p 66:66 \
+-v /home/wechat-dev/main-service/mydata:/mydata \
+-d yc/main-service:v1.0
+
+-- 看启动日志
+docker logs main-service
+
+
+ ============ 发布 chat ============
+-- 注意要创建这个文件夹
+/home/wechat-dev/chat-server/mydata
+
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/chat-server:v1.0 .
+
+-- 运行第一台
+docker run \
+--name chat-server-1 \
+-e NETTY_PORT=875 \
+-p 875:875 \
+-v /home/wechat-dev/chat-server/mydata:/mydata \
+-d yc/chat-server:v1.0
+
+-- 看启动日志(加了 -f 实时查看)
+docker logs -f chat-server-1
+
+-- 运行第二台
+docker run \
+--name chat-server-2 \
+-e NETTY_PORT=885 \
+-p 885:885 \
+-v /home/wechat-dev/chat-server/mydata:/mydata \
+-d yc/chat-server:v1.0
+
+-- 看启动日志
+docker logs -f chat-server-2
+
+===============================
+-- 先找出容器
+docker ps -a
+-- 然后删除
+docker rm 容器ID
+-- 接着找出容器
+docker images
+-- 然后继续删除
+docker rmi 容器ID
+
+【Linux docker根据容器ID启动】
+docker ps -a
+docker start 容器ID
+
+【安全组开放端口：4406】
+
+

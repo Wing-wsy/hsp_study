@@ -53,7 +53,8 @@ public class PassportController extends BaseInfoProperties {
         // 限制该用户的手机号/ip在60秒内只能获得一次验证码
         redis.setnx60s(MOBILE_SMSCODE + ":" + userIp, mobile);
 
-        String code = String.valueOf((int)((Math.random() * 9 + 1) * 100000));
+//        String code = String.valueOf((int)((Math.random() * 9 + 1) * 100000));
+        String code = "123456"; // 测试固定验证码
         smsTask.sendSMSInTask(MyInfo.getMobile(), code);
 
         // 把验证码存入到redis中，用于后续的注册/登录的校验，有效期十分钟

@@ -1,10 +1,25 @@
-#server:
-#  port: 8809
-#
-#spring:
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 127.0.0.1:8848
-##        username: nacos
-##        password: nacos
+server:
+  port: 55
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.31.0.2:18848
+  #        username: nacos
+  #        password: nacos
+
+  rabbitmq:
+    host: 172.31.0.2
+    port: 5682
+    username: yc
+    password: yc
+    virtual-host: wechat-dev
+
+# 自定义minio配置
+minio:
+  endpoint: http://172.31.0.2:8100     # MinIO服务地址    yc服务器内网地址
+  fileHost: http://8.217.253.19:8100     # 文件地址host   yc服务器公网地址
+  bucketName: wechat                  # 存储桶bucket名称
+  accessKey: imooc                    # 用户名
+  secretKey: imooc123456              # 密码

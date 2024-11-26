@@ -23,9 +23,14 @@ public class JedisPoolUtils {
         poolConfig.setMinIdle(5);
         //最长等待时间,ms
         poolConfig.setMaxWaitMillis(1500);
-        //创建连接池对象
+        //创建连接池对象 dev
+//        jedisPool = new JedisPool(poolConfig,
+//                "127.0.0.1",
+//                5379,
+//                1000);
+        //创建连接池对象 prod
         jedisPool = new JedisPool(poolConfig,
-                "127.0.0.1",
+                "172.31.0.2",
                 5379,
                 1000);
     }

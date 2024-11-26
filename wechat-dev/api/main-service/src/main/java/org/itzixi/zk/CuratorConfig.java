@@ -111,6 +111,7 @@ public class CuratorConfig extends BaseInfoProperties {
 
                     System.out.println("old path:" + oldData.getPath() + ", old value:" + oldNode);
 
+                    // 移除残留端口
                     String oldPort = oldNode.getPort() + "";
                     String portKey = "netty_port";
                     redis.hdel(portKey, oldPort);

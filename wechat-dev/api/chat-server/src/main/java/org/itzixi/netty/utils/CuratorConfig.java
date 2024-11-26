@@ -7,7 +7,9 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 
 public class CuratorConfig {
 
-    private static String host = "127.0.0.1:3191";                 // 单机/集群的ip:port地址
+//    private static String host = "127.0.0.1:3191";                 // 单机/集群的ip:port地址
+    // TODO 地址
+    private static String host = "172.31.0.2:3191";                 // 单机/集群的ip:port地址
     private static Integer connectionTimeoutMs = 30 * 1000;        // 连接超时时间
     private static Integer sessionTimeoutMs = 3 * 1000;            // 会话超时时间
     private static Integer sleepMsBetweenRetry = 2 * 1000;         // 每次重试的间隔时间

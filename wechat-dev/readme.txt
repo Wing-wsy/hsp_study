@@ -12,7 +12,7 @@ docker run -p 4406:3306 --name mysql8-imooc \
 docker run -p 5379:6379 --name redis-imooc \
 -v /Users/wing/architect/docker/redis7/data:/data \
 -v /Users/wing/architect/docker/redis7/conf/redis.conf:/etc/redis/redis.conf \
--d redis:7.2.4
+-d redis:7.2.4 \
 redis-server /etc/redis/redis.conf
 
 3-1）docker 下载 nacos 命令
@@ -70,6 +70,39 @@ docker run --name zookeeper-imooc  \
 -v /Users/wing/architect/docker/zookeeper3.9.2/conf:/conf \
 -v /Users/wing/architect/docker/zookeeper3.9.2/logs:/datalog \
 -d zookeeper:3.9.2
+
+
+============ 发布 gateway ============
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/gateway:v1.0 .
+
+-- 注意要创建这个文件夹
+/home/wechat-dev/gateway/mydata
+
+-- 运行
+docker run \
+--name gateway \
+-p 1000:1000 \
+-v /home/wechat-dev/gateway/mydata:/mydata \
+-d yc/gateway:v1.0
+
+-- 看启动日志
+ docker logs gateway
+
+ ============ 发布 auth ============
+-- 打包（注意后面有个小点）
+docker build -f DockerFile -t yc/auth-service:v1.0 .
+
+-- 注意要创建这个文件夹
+/home/wechat-dev/auth-service/mydata
+
+-- 运行
+docker run \
+--name auth-service \
+-p 88:88 \
+-v /home/wechat-dev/auth-service/mydata:/mydata \
+-d yc/auth-service:v1.0
+
 
 -- 增删监听
 stat -w /abc/imooc

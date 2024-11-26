@@ -1,6 +1,5 @@
 package org.itzixi.netty.utils;
 
-import org.apache.commons.codec.digest.MurmurHash3;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.apache.zookeeper.CreateMode;
@@ -9,9 +8,7 @@ import org.itzixi.base.BaseInfoProperties;
 import org.itzixi.constant.basic.Strings;
 import org.itzixi.pojo.netty.NettyServerNode;
 import org.itzixi.utils.JsonUtils;
-
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,13 +43,17 @@ public class ZookeeperRegister extends BaseInfoProperties {
                 .forPath(path + "/im-", nodeJson.getBytes());
     }
 
-    // 上生产后，这个获取IP可以写死
+    // 上生产后，这个获取IP可以写死 dev
+//    public static String getLocalIp() throws Exception {
+//        InetAddress addr = InetAddress.getLocalHost();
+//        String ip=addr.getHostAddress();
+//        System.out.println("本机IP地址：" + ip);
+//        // ip = xx.xx.xx.xx; 写死
+//        return ip;
+//    }
+    // 上生产后，这个获取IP可以写死 prod
     public static String getLocalIp() throws Exception {
-        InetAddress addr = InetAddress.getLocalHost();
-        String ip=addr.getHostAddress();
-        System.out.println("本机IP地址：" + ip);
-        // ip = xx.xx.xx.xx; 写死
-        return ip;
+        return "8.217.253.19";
     }
 
     /**

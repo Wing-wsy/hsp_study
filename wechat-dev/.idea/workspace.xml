@@ -4,25 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="分布式消息队列">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="IM系统前端调整（netty集群）">
+      <change afterPath="$PROJECT_DIR$/aliyun.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uni-weixin/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../uni-weixin/pages/others/settings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/pages/others/settings.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller/PassportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller/PassportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/MessagePublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/MessagePublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/CuratorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/CuratorConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/JedisPoolUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/JedisPoolUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/UserChannelSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/UserChannelSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/rabbitmq/RabbitMQConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/rabbitmq/RabbitMQConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/test/java/org/itzixi/test/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/test/java/org/itzixi/test/MyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/file-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/file-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/main-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/excludeUrlPath.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/excludeUrlPath.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/zk/CuratorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/zk/CuratorConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/bootstrap.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/netty/DataContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/netty/DataContent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +75,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/wechat-dev/api/main-service/src/main/java/org/itzixi/rabbitmq",
+    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/wechat-dev/api/chat-server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,11 +89,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/rabbitmq" />
-      <recent name="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/constant" />
-      <recent name="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi" />
-      <recent name="$PROJECT_DIR$/api/chat-server/src/main/resources" />
-      <recent name="$PROJECT_DIR$/wechat-pojo/src/main/java/org/itzixi/pojo/netty" />
+      <recent name="$PROJECT_DIR$/api/chat-server" />
+      <recent name="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller" />
+      <recent name="$PROJECT_DIR$/api/main-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/api/file-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.itzixi.netty" />
@@ -155,6 +166,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="file-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main-service-66" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="main-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
@@ -187,7 +219,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="56465000" />
+      <workItem from="1732275494761" duration="97327000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -253,15 +285,61 @@
       <option name="project" value="LOCAL" />
       <updated>1732357565019</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="IM系统完结">
+      <option name="closed" value="true" />
+      <created>1732516768268</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732516768268</updated>
+    </task>
+    <task id="LOCAL-00010" summary="IM系统前端调整（netty集群）">
+      <option name="closed" value="true" />
+      <created>1732516826346</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732516826346</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="30900390-9947-457e-b287-b32b14740b1e" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="30900390-9947-457e-b287-b32b14740b1e">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/wing/architect/github/project/hsp_study/wechat-dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -279,7 +357,9 @@
     <MESSAGE value="续" />
     <MESSAGE value="netty聊天完结" />
     <MESSAGE value="分布式消息队列" />
-    <option name="LAST_COMMIT_MESSAGE" value="分布式消息队列" />
+    <MESSAGE value="IM系统完结" />
+    <MESSAGE value="IM系统前端调整（netty集群）" />
+    <option name="LAST_COMMIT_MESSAGE" value="IM系统前端调整（netty集群）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -326,22 +406,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java</url>
-          <line>95</line>
+          <line>103</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer2.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer2.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
-          <line>55</line>
+          <line>46</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
