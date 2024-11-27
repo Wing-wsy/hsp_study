@@ -9,13 +9,14 @@ import org.itzixi.base.BaseInfoProperties;
 import org.itzixi.constant.basic.Strings;
 import org.itzixi.pojo.netty.NettyServerNode;
 import org.itzixi.utils.JsonUtils;
+import org.itzixi.utils.LocalDateUtils;
+
 import java.net.InetAddress;
 import java.util.List;
 
 /**
  * @Auther
  */
-@Slf4j
 public class ZookeeperRegister extends BaseInfoProperties {
 
     public static void registerNettyServer(String nodeName,
@@ -63,7 +64,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void incrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        log.info("增加在线人数");
+        LocalDateUtils.printByDatetimePattern("增加在线人数");
         dealOnlineCounts(serverNode, 1);
     }
 
@@ -72,7 +73,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void decrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        log.info("减少在线人数");
+        LocalDateUtils.printByDatetimePattern("减少在线人数");
         dealOnlineCounts(serverNode, -1);
     }
 

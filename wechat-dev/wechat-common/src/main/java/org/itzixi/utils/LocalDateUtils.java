@@ -1,5 +1,7 @@
 package org.itzixi.utils;
 
+import org.itzixi.constant.basic.Strings;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -562,6 +564,21 @@ public class LocalDateUtils {
     }
 
     /**
+     * 带日期格式打印
+     * 例如 2015-08-11 09:51:53 > content
+     *
+     * @param content 打印内容
+     * @return
+     */
+    public static void printByDatetimePattern(String content) {
+        System.out.println(LocalDateUtils.getLocalDateTimeStr()
+                + Strings.SPACE
+                + Strings.GREATER_THAN
+                + Strings.SPACE
+                + content);
+    }
+
+    /**
      * 切割日期。按照周期切割成小段日期段。例如： <br>
      *
      * @param startDate 开始日期（yyyy-MM-dd）
@@ -629,6 +646,8 @@ public class LocalDateUtils {
         }
         return result;
     }
+
+
 
     /**
      * 2021-11-11 17:49:57

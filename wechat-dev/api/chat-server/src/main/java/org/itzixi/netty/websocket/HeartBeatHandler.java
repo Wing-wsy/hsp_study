@@ -5,13 +5,12 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-import lombok.extern.slf4j.Slf4j;
+import org.itzixi.utils.LocalDateUtils;
 
 /**
  * 创建心跳助手类
  * @Auther
  */
-@Slf4j
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     @Override
@@ -31,11 +30,11 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
             } else if (event.state() == IdleState.WRITER_IDLE) {
 //                log.info("进入写空闲...");
             } else if (event.state() == IdleState.ALL_IDLE) {
-                log.info("chennel 关闭前，clients的数量为：" + ChatHandler.clients.size());
+                LocalDateUtils.printByDatetimePattern("chennel 关闭前，clients的数量为：" + ChatHandler.clients.size());
                 Channel channel = ctx.channel();
                 // 关闭无用的channel，以防资源浪费
                 channel.close();
-                log.info("chennel 关闭后，clients的数量为：" + ChatHandler.clients.size());
+                LocalDateUtils.printByDatetimePattern("chennel 关闭后，clients的数量为：" + ChatHandler.clients.size());
             }
         }
     }

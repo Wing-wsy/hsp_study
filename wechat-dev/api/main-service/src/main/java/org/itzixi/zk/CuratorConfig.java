@@ -7,22 +7,16 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
-import org.apache.curator.framework.recipes.cache.CuratorCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.itzixi.base.BaseInfoProperties;
 import org.itzixi.constant.basic.Strings;
 import org.itzixi.pojo.netty.NettyServerNode;
 import org.itzixi.utils.JsonUtils;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
 
 @Slf4j
 @Component
@@ -83,18 +77,12 @@ public class CuratorConfig extends BaseInfoProperties {
             // oldData: 节点更新前的数据、状态
             // data: 节点更新后的数据、状态
 
-            System.out.println(type.name());
-
-            if (oldData != null) {
-                System.out.println("oldData path:" + oldData.getPath() + ",oldData value:" + oldData.getData());
-            }
-            if (data != null) {
-                System.out.println("new path:" + data.getPath() + ",new value:" + data.getData());
-            }
-
-//            NODE_CREATED
-//            NODE_CHANGED
-//            NODE_DELETED
+//            if (oldData != null) {
+//                log.info("oldData path:{},oldData value:{}", oldData.getPath(), oldData.getData());
+//            }
+//            if (data != null) {
+//                log.info("new path:{},new value:{}", data.getPath(), data.getData());
+//            }
 
             switch (type.name()) {
                 case "NODE_CREATED":
@@ -109,20 +97,20 @@ public class CuratorConfig extends BaseInfoProperties {
                     NettyServerNode oldNode = JsonUtils.jsonToPojo(new String(oldData.getData()),
                                                                    NettyServerNode.class);
 
-                    System.out.println("old path:" + oldData.getPath() + ", old value:" + oldNode);
-
                     // 移除残留端口
                     String oldPort = oldNode.getPort() + "";
                     String portKey = "netty_port";
+                    log.info("移除残留端口:{}",oldPort);
                     redis.hdel(portKey, oldPort);
 
                     // 移除残留队列
                     String queueName = NETTY_QUEUE_ + oldPort;
+                    log.info("移除残留队列:{}",queueName);
                     rabbitAdmin.deleteQueue(queueName);
 
                     break;
                 default:
-                    log.info("default...");
+                    log.info("default...{}",type.name());
                     break;
             }
 
