@@ -1,5 +1,6 @@
 package org.itzixi.netty.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.apache.zookeeper.CreateMode;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * @Auther
  */
+@Slf4j
 public class ZookeeperRegister extends BaseInfoProperties {
 
     public static void registerNettyServer(String nodeName,
@@ -61,7 +63,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void incrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        System.out.println("增加在线人数");
+        log.info("增加在线人数");
         dealOnlineCounts(serverNode, 1);
     }
 
@@ -70,7 +72,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void decrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        System.out.println("减少在线人数");
+        log.info("减少在线人数");
         dealOnlineCounts(serverNode, -1);
     }
 

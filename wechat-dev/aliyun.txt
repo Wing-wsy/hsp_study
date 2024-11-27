@@ -193,7 +193,7 @@ docker run \
 -d yc/main-service:v1.0
 
 -- 看启动日志
-docker logs main-service
+docker logs -f main-service
 
 
  ============ 发布 chat ============

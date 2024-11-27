@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="后端部署云服务">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="续">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uni-weixin/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -12,7 +12,6 @@
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/HeartBeatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/HeartBeatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/WSServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/WSServerInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +197,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="104788000" />
+      <workItem from="1732275494761" duration="106770000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -296,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732630371727</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="续">
+      <option name="closed" value="true" />
+      <created>1732709258674</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732709258676</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,13 +356,13 @@
     <MESSAGE value="数据库多表关系" />
     <MESSAGE value="朋友圈功能" />
     <MESSAGE value="聊天功能 + 百度语音" />
-    <MESSAGE value="续" />
     <MESSAGE value="netty聊天完结" />
     <MESSAGE value="分布式消息队列" />
     <MESSAGE value="IM系统完结" />
     <MESSAGE value="IM系统前端调整（netty集群）" />
     <MESSAGE value="后端部署云服务" />
-    <option name="LAST_COMMIT_MESSAGE" value="后端部署云服务" />
+    <MESSAGE value="续" />
+    <option name="LAST_COMMIT_MESSAGE" value="续" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -407,7 +414,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
-          <line>40</line>
+          <line>42</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
