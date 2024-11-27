@@ -57,6 +57,8 @@ docker run -p 5379:6379 --name redis-test \
 -d redis:7.2.4
 redis-server /etc/redis/redis.conf
 
+【命令行连接 redis redis-cli -h 8.217.253.19 -p 5379】
+【查询端口：hgetall netty_port】
 【停止后，后续再运行可以运行对应的容器名称即可】
 docker start redis-test
 

@@ -25,15 +25,15 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent)evt;
             if (event.state() == IdleState.READER_IDLE) {
-//                 System.out.println("进入读空闲...");
+                 System.out.println("进入读空闲...");
             } else if (event.state() == IdleState.WRITER_IDLE) {
-//                 System.out.println("进入写空闲...");
+                 System.out.println("进入写空闲...");
             } else if (event.state() == IdleState.ALL_IDLE) {
-//                 System.out.println("chennel 关闭前，clients的数量为：" + ChatHandler.clients.size());
+                System.out.println("chennel 关闭前，clients的数量为：" + ChatHandler.clients.size());
                 Channel channel = ctx.channel();
                 // 关闭无用的channel，以防资源浪费
                 channel.close();
-//                 System.out.println("chennel 关闭后，clients的数量为：" + ChatHandler.clients.size());
+                System.out.println("chennel 关闭后，clients的数量为：" + ChatHandler.clients.size());
             }
         }
     }

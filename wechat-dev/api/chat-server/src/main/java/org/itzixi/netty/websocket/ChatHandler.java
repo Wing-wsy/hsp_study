@@ -1,11 +1,7 @@
 package org.itzixi.netty.websocket;
 
-//import com.a3test.component.idworker.IdWorkerConfigBean;
-//import com.a3test.component.idworker.Snowflake;
-//import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.a3test.component.idworker.IdWorkerConfigBean;
 import com.a3test.component.idworker.Snowflake;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -14,7 +10,6 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.itzixi.enums.MsgTypeEnum;
-import org.itzixi.grace.result.GraceJSONResult;
 import org.itzixi.netty.mq.MessagePublisher;
 import org.itzixi.netty.utils.JedisPoolUtils;
 import org.itzixi.netty.utils.ZookeeperRegister;
@@ -23,7 +18,6 @@ import org.itzixi.pojo.netty.DataContent;
 import org.itzixi.pojo.netty.NettyServerNode;
 import org.itzixi.utils.JsonUtils;
 import org.itzixi.utils.LocalDateUtils;
-import org.itzixi.utils.OkHttpUtil;
 import redis.clients.jedis.Jedis;
 import java.time.LocalDateTime;
 
@@ -69,7 +63,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 
         // 时间校准，以服务器的时间为准
         chatMsg.setChatTime(LocalDateTime.now());
-
         Integer msgType = chatMsg.getMsgType();
 
         // 获取channel
@@ -77,18 +70,18 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         String currentChannelId = currentChannel.id().asLongText();
         String currentChannelIdShort = currentChannel.id().asShortText();
 
-         System.out.println("客户端currentChannelId：" + currentChannelId);
-         System.out.println("客户端currentChannelIdShort：" + currentChannelIdShort);
+        System.out.println("客户端currentChannelId：" + currentChannelId);
+        System.out.println("客户端currentChannelIdShort：" + currentChannelIdShort);
 
         // 2. 判断消息类型，根据不同的类型来处理不同的业务
         if (msgType == MsgTypeEnum.CONNECT_INIT.type) {
-            // 当websocket初次open的时候，初始化channel，把channel和用户userid管来起来
+            System.out.println("消息类型【第一次(或重连)初始化连接】：" + msgType);
+            // 当websocket初次open的时候，初始化channel，把channel和用户userid管理起来
             UserChannelSession.putMultiChannels(senderId, currentChannel);
             UserChannelSession.putUserChannelIdRelation(currentChannelId, senderId);
 
-
             NettyServerNode minNode = dataContent.getServerNode();
-            // System.out.println(minNode);
+             System.out.println("minNode=" + minNode);
             // 初次连接后，该节点下的在线人数累加
             ZookeeperRegister.incrementOnlineCounts(minNode);
 
@@ -101,6 +94,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
                 || msgType == MsgTypeEnum.VIDEO.type
                 || msgType == MsgTypeEnum.VOICE.type
         ) {
+            System.out.println("消息类型【发送类型】：" + msgType);
 
             // 方式一：
             // 此处为mq异步解耦，保存信息到数据库，数据库无法获得信息的主键id，
@@ -109,74 +103,26 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             String sid = snowflake.nextId();
             System.out.println("sid = " + sid);
 
-            // 方式二：
-//            String iid = IdWorker.getIdStr();
-//            System.out.println("iid = " + iid);
-
             chatMsg.setMsgId(sid);
 
-            // 给自己发送消息
-            // TODO 测试需要，给自己发信息(测试完成后，这行删除，下面一行放开注释)
-//            List<Channel> receiverChannels = UserChannelSession.getMultiChannels(senderId);
-            // 给对方发信息
-//            List<Channel> receiverChannels = UserChannelSession.getMultiChannels(receiverId);
-//            if (receiverChannels == null || receiverChannels.size() == 0 || receiverChannels.isEmpty()) {
-//                // receiverChannels为空，表示用户离线/断线状态，消息不需要发送，后续可以存储到数据库
-//                chatMsg.setIsReceiverOnLine(false);
-//            } else {
-//                chatMsg.setIsReceiverOnLine(true);
+            if (msgType == MsgTypeEnum.VOICE.type) {
+                chatMsg.setIsRead(false);
+            }
 
-                // 当receiverChannels为空不为空的时候，同账户多端设备接受消息
-//                for (Channel c : receiverChannels) {
-//                    Channel findChannel = clients.find(c.id());
-//                    if (findChannel != null) {
+            dataContent.setChatMsg(chatMsg);
+            String chatTimeFormat = LocalDateUtils
+                    .format(chatMsg.getChatTime(),
+                            LocalDateUtils.DATETIME_PATTERN_2);
+            dataContent.setChatTime(chatTimeFormat);
+            dataContent.setExtend(currentChannelId);
+            // 将消息广播到队列
+            MessagePublisher.sendMsgToOtherNettyServer(JsonUtils.objectToJson(dataContent));
 
-                        if (msgType == MsgTypeEnum.VOICE.type) {
-                            chatMsg.setIsRead(false);
-                        }
-
-                        dataContent.setChatMsg(chatMsg);
-                        String chatTimeFormat = LocalDateUtils
-                                .format(chatMsg.getChatTime(),
-                                        LocalDateUtils.DATETIME_PATTERN_2);
-                        dataContent.setChatTime(chatTimeFormat);
-                        dataContent.setExtend(currentChannelId);
-                        // 将消息广播到队列
-                        MessagePublisher.sendMsgToOtherNettyServer(JsonUtils.objectToJson(dataContent));
-
-                        // 直接发送消息给在线的用户
-//                        findChannel.writeAndFlush(
-//                                new TextWebSocketFrame(
-//                                        JsonUtils.objectToJson(dataContent)));
-//                    }
-//
-//                }
-
-//            }
             // 把聊天信息作为mq的消息发送给消费者进行消费处理(最终保存到数据库)
             MessagePublisher.sendMsgToSave(chatMsg);
+        } else {
+            System.out.println("特殊类型...");
         }
-
-//        List<Channel> myOtherChannels = UserChannelSession
-//                        .getMyOtherChannels(senderId, currentChannelId);
-//        for (Channel c : myOtherChannels) {
-//            Channel findChannel = clients.find(c.id());
-//            if (findChannel != null) {
-//                dataContent.setChatMsg(chatMsg);
-//                String chatTimeFormat = LocalDateUtils
-//                        .format(chatMsg.getChatTime(),
-//                                LocalDateUtils.DATETIME_PATTERN_2);
-//                dataContent.setChatTime(chatTimeFormat);
-//                // 同步消息给在线的其他设备端
-//                findChannel.writeAndFlush(
-//                        new TextWebSocketFrame(
-//                                JsonUtils.objectToJson(dataContent)));
-//            }
-//        }
-
-        // 直接发给对方的Channel
-        // currentChannel.writeAndFlush(new TextWebSocketFrame(currentChannelId));
-        // clients.writeAndFlush(new TextWebSocketFrame(currentChannelId));  //群发
 
         // 打印
         UserChannelSession.outputMulti();
@@ -229,6 +175,9 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        // 打印异常堆栈
+        cause.printStackTrace();
+
         Channel currentChannel = ctx.channel();
         String currentChannelId = currentChannel.id().asLongText();
         System.out.println("发生异常捕获，channel对应的长id为：" + currentChannelId);
