@@ -52,7 +52,7 @@ public class ServiceLogAspect {
         } else if (takeTimes > 2000) {
             log.warn("执行位置{}，执行时间稍微有点长，耗费了{}毫秒", pointName, takeTimes);
         } else {
-            log.info("执行位置{}，执行时间正常，耗费了{}毫秒", pointName, takeTimes);
+//            log.info("执行位置{}，执行时间正常，耗费了{}毫秒", pointName, takeTimes);
         }
 
         return proceed;

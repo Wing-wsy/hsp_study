@@ -163,11 +163,22 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         clients.remove(currentChannel);
 
         LocalDateUtils.printByDatetimePattern("【handlerRemoved】客户端关闭连接，在线人数累减");
-        // zk中在线人数累减
-        Jedis jedis = JedisPoolUtils.getJedis();
-        NettyServerNode minNode = JsonUtils.jsonToPojo(jedis.get(userId),
-                NettyServerNode.class);
-        ZookeeperRegister.decrementOnlineCounts(minNode);
+        NettyServerNode minNode = null;
+        try {
+            // zk中在线人数累减
+            Jedis jedis = JedisPoolUtils.getJedis();
+            minNode = JsonUtils.jsonToPojo(jedis.get(userId),
+                    NettyServerNode.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LocalDateUtils.printByDatetimePattern("在线人数累减前出错了...");
+        }
+        if (minNode != null) {
+            ZookeeperRegister.decrementOnlineCounts(minNode);
+        } else {
+            LocalDateUtils.printByDatetimePattern("minNode为null...");
+
+        }
     }
 
     /**

@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="日志">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="日志续">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uni-weixin/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/aspect/ServiceLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/aspect/ServiceLogAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/HeartBeatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/HeartBeatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/zk/CuratorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/zk/CuratorConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/constant/basic/Times.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/LocalDateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/LocalDateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +84,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ChatServer2">
+  <component name="RunManager" selected="Application.ChatServer">
     <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer" />
       <module name="chat-server" />
@@ -182,8 +179,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ChatServer2" />
         <item itemvalue="Application.ChatServer" />
+        <item itemvalue="Application.ChatServer2" />
         <item itemvalue="Spring Boot.main-service-66" />
         <item itemvalue="JUnit.MyTest.testCurator" />
         <item itemvalue="JUnit.MyTest.testJedisGetNettyPorts" />
@@ -199,7 +196,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="109571000" />
+      <workItem from="1732275494761" duration="112781000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -313,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732711868563</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="日志续">
+      <option name="closed" value="true" />
+      <created>1732714678999</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732714678999</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,7 +378,8 @@
     <MESSAGE value="后端部署云服务" />
     <MESSAGE value="续" />
     <MESSAGE value="日志" />
-    <option name="LAST_COMMIT_MESSAGE" value="日志" />
+    <MESSAGE value="日志续" />
+    <option name="LAST_COMMIT_MESSAGE" value="日志续" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
