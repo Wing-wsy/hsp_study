@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -23,6 +22,7 @@ import java.util.Optional;
 /**
  * @Auther
  */
+//@Slf4j
 @RestController
 @RequestMapping("chat")
 public class ChatController extends BaseInfoProperties {
@@ -84,7 +84,7 @@ public class ChatController extends BaseInfoProperties {
         List<NettyServerNode> serverNodeList = new ArrayList<>();
         for (String node:list) {
             String nodeValue = new String(zkClient.getData().forPath(path + "/" + node));
-            System.out.println(nodeValue);
+//            System.out.println(nodeValue);
             NettyServerNode serverNode = JsonUtils.jsonToPojo(nodeValue, NettyServerNode.class);
             serverNodeList.add(serverNode);
         }
@@ -95,6 +95,7 @@ public class ChatController extends BaseInfoProperties {
                 .min(Comparator.comparing(nettyServerNode -> nettyServerNode.getOnlineCounts()));
         NettyServerNode minNode = minNodeOptional.get();
 
+//        log.info("getNettyOnlineInfo获取到的数据，{}", minNode);
         return GraceJSONResult.ok(minNode);
     }
 

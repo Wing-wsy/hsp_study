@@ -86,10 +86,10 @@ public class CuratorConfig extends BaseInfoProperties {
 
             switch (type.name()) {
                 case "NODE_CREATED":
-                    log.info("(子)节点创建");
+//                    log.info("(子)节点创建");
                     break;
                 case "NODE_CHANGED":
-                    log.info("(子)节点数据变更");
+//                    log.info("(子)节点数据变更");
                     break;
                 case "NODE_DELETED":
                     log.info("(子)节点删除");

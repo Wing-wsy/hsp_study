@@ -64,7 +64,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void incrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        LocalDateUtils.printByDatetimePattern("增加在线人数");
+        LocalDateUtils.print("增加在线人数");
         dealOnlineCounts(serverNode, 1);
     }
 
@@ -73,7 +73,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void decrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        LocalDateUtils.printByDatetimePattern("减少在线人数");
+        LocalDateUtils.print("减少在线人数");
         dealOnlineCounts(serverNode, -1);
     }
 

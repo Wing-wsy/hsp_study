@@ -22,7 +22,7 @@ public class RabbitMQConsumer {
     @RabbitListener(queues = {RabbitMQTestConfig.TEST_QUEUE})
     public void watchQueue(String payload, Message message) {
         String routingKey = message.getMessageProperties().getReceivedRoutingKey();
-        log.info("routingKey = " + routingKey);
+//        log.info("routingKey = " + routingKey);
 
         if (routingKey.equals(RabbitMQTestConfig.ROUTING_KEY_WECHAT_MSG_SEND)) {
             String msg = payload;

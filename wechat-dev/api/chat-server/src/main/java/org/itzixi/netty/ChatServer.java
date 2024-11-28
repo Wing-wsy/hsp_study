@@ -15,6 +15,7 @@ import redis.clients.jedis.Jedis;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -23,8 +24,37 @@ import java.util.stream.Collectors;
  */
 public class ChatServer extends BaseInfoProperties {
 
+
+
+    public static final String onlineKey = "onlineCounts";
     public static final Integer nettyDefaultPort = 875;
-    public static final String initOnlineCounts = "0";
+    public static Integer currentPort ;
+
+    // 记录在线人数
+    public static AtomicInteger initOnlineCounts = new AtomicInteger(0);
+
+    // 在线人数+1
+    public static void incrementOnlineCounts(){
+        initOnlineCounts.incrementAndGet();
+        updateOnlineCounts();
+    }
+
+    // 在线人数-1
+    public static void decrementOnlineCounts(){
+        initOnlineCounts.decrementAndGet();
+        updateOnlineCounts();
+    }
+
+    // 更新在线人数到 redis
+    public static void updateOnlineCounts () {
+        Jedis jedis = JedisPoolUtils.getJedis();
+        Map<String, String> onlineMap = jedis.hgetAll(onlineKey);
+        for (String key : onlineMap.keySet()) {
+            if (key.equals(String.valueOf(currentPort))) {
+                jedis.hset(onlineKey, key, initOnlineCounts.get()+"");
+            }
+        }
+    }
 
     /*
      * FIXME: 优化方案，改成zookeeper方案，
@@ -36,9 +66,8 @@ public class ChatServer extends BaseInfoProperties {
      */
     public static Integer selectPort(Integer port) {
         String portKey = "netty_port";
-        Jedis jedis = JedisPoolUtils.getJedis();
 
-        jedis.set("jedis-test", "hello world");
+        Jedis jedis = JedisPoolUtils.getJedis();
 
         Map<String, String> portMap = jedis.hgetAll(portKey);
         System.out.println(portMap);
@@ -47,20 +76,24 @@ public class ChatServer extends BaseInfoProperties {
                 .map(entry -> Integer.valueOf(entry.getKey()))
                 .collect(Collectors.toList());
         // step1: 编码到此处先运行测试看一下结果
-        System.out.println(portList);
+//        System.out.println(portList);
 
         Integer nettyPort = null;
         if (portList == null || portList.isEmpty()) {
             // step2: 编码到此处先运行测试看一下结果
-            jedis.hset(portKey, port+"", initOnlineCounts);
+            jedis.hset(portKey, port+"", "0");
+            jedis.hset(onlineKey, port+"", "0");
             nettyPort = port;
+            currentPort = port;
         } else {
             // 循环portList，获得最大值，并且累加10
             Optional<Integer> maxInteger = portList.stream().max(Integer::compareTo);
             Integer maxPort = maxInteger.get().intValue();
-            Integer currentPort = maxPort + 10;
-            jedis.hset(portKey, currentPort+"", initOnlineCounts);
-            nettyPort = currentPort;
+            Integer currentPortTemp = maxPort + 10;
+            jedis.hset(portKey, currentPortTemp+"", "0");
+            jedis.hset(onlineKey, currentPortTemp+"", "0");
+            nettyPort = currentPortTemp;
+            currentPort = currentPortTemp;
         }
         // step3: 编码到此处先运行测试看一下最终结果
         return nettyPort;
@@ -124,5 +157,7 @@ public class ChatServer extends BaseInfoProperties {
             workerGroup.shutdownGracefully();
         }
     }
+
+
 
 }

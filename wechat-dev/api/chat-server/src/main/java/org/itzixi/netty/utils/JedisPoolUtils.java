@@ -28,6 +28,10 @@ public class JedisPoolUtils {
 //                "127.0.0.1",
 //                5379,
 //                1000);
+//        jedisPool = new JedisPool(poolConfig,
+//                "127.0.0.1",
+//                6379,
+//                1000);
         //创建连接池对象 prod
         jedisPool = new JedisPool(poolConfig,
                 "172.31.0.2",

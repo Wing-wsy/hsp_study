@@ -28,6 +28,9 @@ public class UserChannelSession {
     public static void putUserChannelIdRelation(String channelId, String userId) {
         userChannelIdRelation.put(channelId, userId);
     }
+    public static void removeUserChannelIdRelation(String channelId) {
+        userChannelIdRelation.remove(channelId);
+    }
     public static String getUserIdByChannelId(String channelId) {
         return userChannelIdRelation.get(channelId);
     }

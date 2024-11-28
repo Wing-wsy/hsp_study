@@ -13,6 +13,9 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Formatter;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Java8 LocalDate 日期时间 工具类
  */
@@ -563,20 +566,7 @@ public class LocalDateUtils {
         return format(localDateTime.withHour(23).withMinute(59).withSecond(59), pattern);
     }
 
-    /**
-     * 带日期格式打印
-     * 例如 2015-08-11 09:51:53 > content
-     *
-     * @param content 打印内容
-     * @return
-     */
-    public static void printByDatetimePattern(String content) {
-        System.out.println(LocalDateUtils.getLocalDateTimeStr()
-                + Strings.SPACE
-                + Strings.GREATER_THAN
-                + Strings.SPACE
-                + content);
-    }
+
 
     /**
      * 切割日期。按照周期切割成小段日期段。例如： <br>
@@ -739,20 +729,71 @@ public class LocalDateUtils {
      *
      */
 
+    /**
+     * 格式打印，支持动态传参
+     * 例如 2015-08-11 09:51:53 > content
+     * @param content
+     * @param args
+     */
+    public static void print(String content, Object... args) {
+        content = content.replaceAll("\\{}","%s");
+        Formatter formatter = new Formatter();
+        String result = formatter.format(content, args).toString();
+        System.out.println(LocalDateUtils.getLocalDateTimeStr()
+                + Strings.SPACE
+                + Strings.GREATER_THAN
+                + Strings.SPACE
+                + result);
+        formatter.close();
+    }
+
+    /**
+     * 带日期格式打印
+     * 例如 2015-08-11 09:51:53 > content
+     *
+     * @param content 打印内容
+     * @return
+     */
+    public static void printByDatetimePattern(String content) {
+        System.out.println(LocalDateUtils.getLocalDateTimeStr()
+                + Strings.SPACE
+                + Strings.GREATER_THAN
+                + Strings.SPACE
+                + content);
+    }
+
     public static void main(String[] args) {
-        LocalDateTime nowTime = LocalDateTime.now();
 
-        System.out.println(getTomorrow().toString());
-        System.out.println(getYesterday().toString());
-        System.out.println(parseLocalDateTime(getTomorrow() + " 03:00:00", DATETIME_PATTERN));
+//        AtomicInteger atomicInteger = new AtomicInteger(0);
+//        int newValue = atomicInteger.incrementAndGet();
+//        System.out.println("New Value: " + newValue);
+//        System.out.println("当前 Value: " + atomicInteger.get());
+//
+//        newValue = atomicInteger.decrementAndGet();
+//        System.out.println("New Value: " + newValue);
+//        System.out.println("当前 Value: " + atomicInteger.get());
 
-        // 计算凌晨3点到现在的时间
-        LocalDateTime futureTime = LocalDateUtils.parseLocalDateTime(
-                LocalDateUtils.getTomorrow() + " 03:00:00",
-                LocalDateUtils.DATETIME_PATTERN);
-        long publishTimes = LocalDateUtils.getChronoUnitBetween(LocalDateTime.now(), futureTime, ChronoUnit.MILLIS, true);
+//        String s = "你好：{},你叫什么名字：{}".replaceAll(Strings.LEFT_BRACE + Strings.RIGHT_BRACE,"%s");
+//        String s = "你好：{},你叫什么名字：{}".replaceAll("\\{}","%s");
+//        System.out.println(s);
 
-        System.out.println(publishTimes);
+
+//        print("你好：{},你叫什么名字：{}{}=={}","小明","小白","小红",9);
+//        print("你叫什么名字");
+
+//        LocalDateTime nowTime = LocalDateTime.now();
+//
+//        System.out.println(getTomorrow().toString());
+//        System.out.println(getYesterday().toString());
+//        System.out.println(parseLocalDateTime(getTomorrow() + " 03:00:00", DATETIME_PATTERN));
+//
+//        // 计算凌晨3点到现在的时间
+//        LocalDateTime futureTime = LocalDateUtils.parseLocalDateTime(
+//                LocalDateUtils.getTomorrow() + " 03:00:00",
+//                LocalDateUtils.DATETIME_PATTERN);
+//        long publishTimes = LocalDateUtils.getChronoUnitBetween(LocalDateTime.now(), futureTime, ChronoUnit.MILLIS, true);
+//
+//        System.out.println(publishTimes);
 
 //        System.out.println(getChronoUnitBetween(
 //                nowTime,

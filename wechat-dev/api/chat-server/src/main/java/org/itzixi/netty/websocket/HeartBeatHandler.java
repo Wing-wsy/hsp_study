@@ -30,11 +30,11 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
             } else if (event.state() == IdleState.WRITER_IDLE) {
 //                log.info("进入写空闲...");
             } else if (event.state() == IdleState.ALL_IDLE) {
-                LocalDateUtils.printByDatetimePattern("chennel 关闭前，clients的数量为：" + ChatHandler.clients.size());
+                LocalDateUtils.print("chennel 关闭前，clients的数量为：{}", ChatHandler.clients.size());
                 Channel channel = ctx.channel();
                 // 关闭无用的channel，以防资源浪费
                 channel.close();
-                LocalDateUtils.printByDatetimePattern("chennel 关闭后，clients的数量为：" + ChatHandler.clients.size());
+                LocalDateUtils.print("chennel 关闭后，clients的数量为：{}", ChatHandler.clients.size());
             }
         }
     }

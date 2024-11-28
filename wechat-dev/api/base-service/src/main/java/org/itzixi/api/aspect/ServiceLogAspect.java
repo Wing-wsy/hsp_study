@@ -41,7 +41,7 @@ public class ServiceLogAspect {
 //        log.info(stopWatch.prettyPrint());
 //        log.info(stopWatch.shortSummary());
 //        log.info("任务总数：" + stopWatch.getTaskCount());
-        log.info("任务执行总时间：" + stopWatch.getTotalTimeMillis() + "ms");
+//        log.info("任务执行总时间：" + stopWatch.getTotalTimeMillis() + "ms");
 
         // long end = System.currentTimeMillis();
         // long takeTimes = end - begin;
