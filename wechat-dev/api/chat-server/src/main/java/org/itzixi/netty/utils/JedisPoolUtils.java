@@ -15,14 +15,14 @@ public class JedisPoolUtils {
     static {
         //配置连接池
         JedisPoolConfig poolConfig = new JedisPoolConfig();
-        //最大连接数
-        poolConfig.setMaxTotal(10);
-        //最大空闲连接
-        poolConfig.setMaxIdle(10);
-        //最小空闲连接
-        poolConfig.setMinIdle(5);
-        //最长等待时间,ms
-        poolConfig.setMaxWaitMillis(1500);
+        // 连接池中最大的活动连接数
+        poolConfig.setMaxTotal(100);
+        // 连接池中最大的空闲连接数
+        poolConfig.setMaxIdle(50);
+        // 连接池中最小的空闲连接数
+        poolConfig.setMinIdle(10);
+        // 获取连接时的最大等待毫秒数
+        poolConfig.setMaxWaitMillis(20000);
         //创建连接池对象 dev
 //        jedisPool = new JedisPool(poolConfig,
 //                "127.0.0.1",
@@ -36,7 +36,7 @@ public class JedisPoolUtils {
         jedisPool = new JedisPool(poolConfig,
                 "172.31.0.2",
                 5379,
-                1000);
+                5000);
     }
 
     public static Jedis getJedis(){
