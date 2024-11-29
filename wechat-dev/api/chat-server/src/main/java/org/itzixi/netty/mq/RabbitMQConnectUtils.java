@@ -4,6 +4,7 @@ import com.rabbitmq.client.*;
 import org.itzixi.netty.websocket.UserChannelSession;
 import org.itzixi.pojo.netty.DataContent;
 import org.itzixi.utils.JsonUtils;
+import org.itzixi.utils.LocalDateUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -125,30 +126,24 @@ public class RabbitMQConnectUtils {
                                        AMQP.BasicProperties properties,
                                        byte[] body) throws IOException {
 
-                System.out.println("===========MQ消息监听start===========");
+                LocalDateUtils.print("=========== MQ消息监听start ===========");
                 String msg = new String(body);
-                System.out.println("body = " + msg);
-
-                String exchange = envelope.getExchange();
-                System.out.println("exchange = " + exchange);
-
-                System.out.println("===========MQ消息监听end===========");
+                LocalDateUtils.print("body = " + msg);
+                LocalDateUtils.print("=========== MQ消息监听end ===========");
                 // 这里写死，生产可以动态传进来
-                if (exchange.equalsIgnoreCase("fanout_exchange")) {
+                if (envelope.getExchange().equalsIgnoreCase("fanout_exchange")) {
                     DataContent dataContent = JsonUtils.jsonToPojo(msg, DataContent.class);
+                    // 发送人
                     String senderId = dataContent.getChatMsg().getSenderId();
+                    // 接收人（将来也可以是群）
                     String receiverId = dataContent.getChatMsg().getReceiverId();
 
-                    // 广播至集群的其他节点并且发送给用户聊天信息
+                    // 获取接收消息目标的 Channel 集合
                     List<io.netty.channel.Channel> receiverChannels =
                             UserChannelSession.getMultiChannels(receiverId);
-                    UserChannelSession.sendToTarget(receiverChannels, dataContent);
 
-                    // 广播至集群的其他节点并且同步给自己其他设备聊天信息
-                    String currentChannelId = dataContent.getExtend();
-                    List<io.netty.channel.Channel> senderChannels =
-                            UserChannelSession.getMyOtherChannels(senderId, currentChannelId);
-                    UserChannelSession.sendToTarget(senderChannels, dataContent);
+                    // 执行真正发送
+                    UserChannelSession.sendToTarget(receiverChannels, dataContent);
                 }
             }
         };

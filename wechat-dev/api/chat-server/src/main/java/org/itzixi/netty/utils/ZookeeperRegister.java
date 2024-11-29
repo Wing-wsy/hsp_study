@@ -56,6 +56,7 @@ public class ZookeeperRegister extends BaseInfoProperties {
 //    }
     // 上生产后，这个获取IP可以写死 prod
     public static String getLocalIp() throws Exception {
+        // TODO 注意生产多个不同服务器部署集群，这里不能写死，应该动态获取当前服务器的IP返回
         return "8.217.253.19";
     }
 
@@ -64,7 +65,6 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void incrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        LocalDateUtils.print("增加在线人数");
         dealOnlineCounts(serverNode, 1);
     }
 
@@ -73,7 +73,6 @@ public class ZookeeperRegister extends BaseInfoProperties {
      * @param serverNode
      */
     public static void decrementOnlineCounts(NettyServerNode serverNode) throws Exception {
-        LocalDateUtils.print("减少在线人数");
         dealOnlineCounts(serverNode, -1);
     }
 
@@ -84,17 +83,13 @@ public class ZookeeperRegister extends BaseInfoProperties {
      */
     public static void dealOnlineCounts(NettyServerNode serverNode,
                                         Integer counts) throws Exception {
-
         CuratorFramework zkClient = CuratorConfig.getClient();
-
         // 锁对象
         InterProcessReadWriteLock readWriteLock = new InterProcessReadWriteLock(zkClient,
                                                                         "/rw-locks");
         // 获取锁
         readWriteLock.writeLock().acquire();
-
         try {
-
             String path = Strings.SLASH + SERVER_LIST;
             List<String> list = zkClient.getChildren().forPath(path);
             for (String node:list) {
@@ -111,13 +106,10 @@ public class ZookeeperRegister extends BaseInfoProperties {
                     zkClient.setData().forPath(pendingNodePath, nodeJson.getBytes());
                 }
             }
-
         } finally {
             // 释放锁
             readWriteLock.writeLock().release();
         }
-
-
     }
 
 }

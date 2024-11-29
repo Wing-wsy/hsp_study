@@ -159,7 +159,7 @@ docker run \
 -d yc/auth-service:v1.0
 
 -- 看启动日志
-docker logs auth-service
+docker logs -f auth-service
 
  ============ 发布 file ============
 -- 打包（注意后面有个小点）
@@ -225,6 +225,11 @@ docker run \
 -- 看启动日志
 docker logs -f chat-server-2
 
+-- 删除
+del onlineCounts
+-- 查看
+hgetall onlineCounts
+
 ===============================
 -- 先找出容器
 docker ps -a
@@ -240,5 +245,9 @@ docker ps -a
 docker start 容器ID
 
 【安全组开放端口：4406】
+
+
+
+前端部署官方文档：https://uniapp.dcloud.net.cn/quickstart-hx.html
 
 

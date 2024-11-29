@@ -59,7 +59,9 @@ public class UsersServiceImpl extends BaseInfoProperties implements UsersService
         String wechatNum = "wx" + uuidStr[0] + uuidStr[1];
         user.setWechatNum(wechatNum);
 
-        String wechatNumUrl = getQrCodeUrl(wechatNum, TEMP_STRING);
+        // 临时关闭
+//        String wechatNumUrl = getQrCodeUrl(wechatNum, TEMP_STRING);
+        String wechatNumUrl = "test";
         user.setWechatNumImg(wechatNumUrl);
 
         // 用户138****1234

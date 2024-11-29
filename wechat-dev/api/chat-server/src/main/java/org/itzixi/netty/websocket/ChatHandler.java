@@ -9,8 +9,6 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
-import lombok.extern.slf4j.Slf4j;
-import org.itzixi.constant.basic.Strings;
 import org.itzixi.enums.MsgTypeEnum;
 import org.itzixi.netty.ChatServer;
 import org.itzixi.netty.mq.MessagePublisher;
@@ -25,6 +23,7 @@ import redis.clients.jedis.Jedis;
 import java.time.LocalDateTime;
 
 /**
+ * 初版只实现单聊，不支持群聊，也不支持一个用户在多设备同时登录
  * 创建自定义助手类
  * @Auther
  */
@@ -58,7 +57,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 //                                                                + "&friendId2nd=" + senderId);
 //        boolean isBlack = (Boolean)result.getData();
         boolean isBlack = false;  // 测试写死非黑名单
-        LocalDateUtils.print("当前的黑名单关系为: {}", isBlack);
+//        LocalDateUtils.print("当前的黑名单关系为: {}", isBlack);
         if (isBlack) {
             return;
         }
@@ -71,48 +70,46 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         // 获取channel
         Channel currentChannel = ctx.channel();
         String currentChannelId = currentChannel.id().asLongText();
-        String currentChannelIdShort = currentChannel.id().asShortText();
-
         LocalDateUtils.print("客户端currentChannelId：{}", currentChannelId);
-        LocalDateUtils.print("客户端currentChannelIdShort：{}", currentChannelIdShort);
 
         // 2. 判断消息类型，根据不同的类型来处理不同的业务
         if (msgType == MsgTypeEnum.CONNECT_INIT.type) {
-            LocalDateUtils.print("消息类型【第一次(或重连)初始化连接】：{}", msgType);
+            LocalDateUtils.print("第一次(或重连)初始化连接...");
             // 当websocket初次open的时候，初始化channel，把channel和用户userid管理起来
             UserChannelSession.putMultiChannels(senderId, currentChannel);
             UserChannelSession.putUserChannelIdRelation(currentChannelId, senderId);
 
             NettyServerNode minNode = dataContent.getServerNode();
-            LocalDateUtils.print("初次接入minNode={}", minNode);
-            // 初次连接后，该节点下的在线人数累加
+            LocalDateUtils.print("初次接入minNode：{}", minNode);
+            // 初次连接后，该节点下的在线人数累加（zk、redis都更新）
+            LocalDateUtils.print("增加在线人数");
             ZookeeperRegister.incrementOnlineCounts(minNode);
             ChatServer.incrementOnlineCounts();
 
             // 获得ip+端口，在redis中设置关系，以便在前端设备断线后减少在线人数
             Jedis jedis = JedisPoolUtils.getJedis();
             jedis.set(senderId, JsonUtils.objectToJson(minNode));
+
+            // 打印
+            UserChannelSession.outputMulti();
         }
         else if (msgType == MsgTypeEnum.WORDS.type
                 || msgType == MsgTypeEnum.IMAGE.type
                 || msgType == MsgTypeEnum.VIDEO.type
                 || msgType == MsgTypeEnum.VOICE.type
         ) {
-            LocalDateUtils.print("消息类型【发送类型】：{}", msgType);
+            LocalDateUtils.print("消息发送类型：{}", msgType);
 
             // 方式一：
             // 此处为mq异步解耦，保存信息到数据库，数据库无法获得信息的主键id，
             // 所以此处可以用snowflake直接生成唯一的主键id
             Snowflake snowflake = new Snowflake(new IdWorkerConfigBean());
             String sid = snowflake.nextId();
-            LocalDateUtils.print("sid = {}", sid);
-
             chatMsg.setMsgId(sid);
 
             if (msgType == MsgTypeEnum.VOICE.type) {
                 chatMsg.setIsRead(false);
             }
-
             dataContent.setChatMsg(chatMsg);
             String chatTimeFormat = LocalDateUtils
                     .format(chatMsg.getChatTime(),
@@ -127,9 +124,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         } else {
             LocalDateUtils.print("特殊类型...");
         }
-
-        // 打印
-        UserChannelSession.outputMulti();
     }
 
     /**
@@ -142,7 +136,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         Channel currentChannel = ctx.channel();
         String currentChannelId = currentChannel.id().asLongText();
         LocalDateUtils.print("客户端建立连接，channel对应的长id为：{}", currentChannelId);
-
         // 获得客户端的channel，并且存入到ChannelGroup中进行管理(作为一个客户端群组)
         clients.add(currentChannel);
     }
@@ -159,19 +152,21 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         LocalDateUtils.print("客户端关闭连接，channel对应的长id为：{}", currentChannelId);
 
         // 移除多余的会话
-        String userId = UserChannelSession.getUserIdByChannelId(currentChannelId);
-        UserChannelSession.removeUselessChannels(userId, currentChannelId);
+        String senderId = UserChannelSession.getUserIdByChannelId(currentChannelId);
+        UserChannelSession.removeUselessChannels(senderId, currentChannelId);
         UserChannelSession.removeUserChannelIdRelation(currentChannelId);
+
+        LocalDateUtils.print("减少在线人数");
+        // 更新redis在线人数
         ChatServer.decrementOnlineCounts();
 
         clients.remove(currentChannel);
 
-        LocalDateUtils.print("【handlerRemoved】客户端关闭连接，在线人数累减");
         NettyServerNode minNode = null;
         try {
             // zk中在线人数累减
             Jedis jedis = JedisPoolUtils.getJedis();
-            minNode = JsonUtils.jsonToPojo(jedis.get(userId),
+            minNode = JsonUtils.jsonToPojo(jedis.get(senderId),
                     NettyServerNode.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,7 +176,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             ZookeeperRegister.decrementOnlineCounts(minNode);
         } else {
             LocalDateUtils.print("minNode为null...");
-
         }
     }
 
@@ -199,6 +193,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         Channel currentChannel = ctx.channel();
         String currentChannelId = currentChannel.id().asLongText();
         LocalDateUtils.print("发生异常捕获，channel对应的长id为：{}", currentChannelId);
+        LocalDateUtils.print("【exceptionCaught】客户端关闭连接");
 
         // 发生异常之后关闭连接(关闭channel)
         ctx.channel().close();
@@ -206,16 +201,27 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         clients.remove(currentChannel);
 
         // 移除多余的会话
-        String userId = UserChannelSession.getUserIdByChannelId(currentChannelId);
-        UserChannelSession.removeUselessChannels(userId, currentChannelId);
+        String senderId = UserChannelSession.getUserIdByChannelId(currentChannelId);
+        UserChannelSession.removeUselessChannels(senderId, currentChannelId);
         UserChannelSession.removeUserChannelIdRelation(currentChannelId);
+
+        LocalDateUtils.print("减少在线人数");
         ChatServer.decrementOnlineCounts();
 
-        LocalDateUtils.print("【exceptionCaught】客户端关闭连接，在线人数累减");
-        // zk中在线人数累减
-        Jedis jedis = JedisPoolUtils.getJedis();
-        NettyServerNode minNode = JsonUtils.jsonToPojo(jedis.get(userId),
-                NettyServerNode.class);
-        ZookeeperRegister.decrementOnlineCounts(minNode);
+        NettyServerNode minNode = null;
+        try {
+            // zk中在线人数累减
+            Jedis jedis = JedisPoolUtils.getJedis();
+            minNode = JsonUtils.jsonToPojo(jedis.get(senderId),
+                    NettyServerNode.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LocalDateUtils.print("在线人数累减前出错了...");
+        }
+        if (minNode != null) {
+            ZookeeperRegister.decrementOnlineCounts(minNode);
+        } else {
+            LocalDateUtils.print("minNode为null...");
+        }
     }
 }

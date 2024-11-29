@@ -45,7 +45,8 @@ public class WSServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new IdleStateHandler(
                                 8,   // 读 8 秒
                                 10,  // 写 10 秒
-                                60)); // 所有状态 60 秒（测试使用）
+//                                60)); // 所有状态 60 秒（测试使用）
+                                30 * 60)); // 所有状态 30 min（生产使用）
 
         pipeline.addLast(new HeartBeatHandler());
 

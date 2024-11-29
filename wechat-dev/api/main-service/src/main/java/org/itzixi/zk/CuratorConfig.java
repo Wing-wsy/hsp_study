@@ -103,6 +103,10 @@ public class CuratorConfig extends BaseInfoProperties {
                     log.info("移除残留端口:{}",oldPort);
                     redis.hdel(portKey, oldPort);
 
+                    // 移除残留端口
+                    String onlineKey = "onlineCounts";
+                    redis.hdel(onlineKey, oldPort);
+
                     // 移除残留队列
                     String queueName = NETTY_QUEUE_ + oldPort;
                     log.info("移除残留队列:{}",queueName);

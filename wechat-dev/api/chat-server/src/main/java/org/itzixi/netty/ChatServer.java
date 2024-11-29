@@ -57,6 +57,8 @@ public class ChatServer extends BaseInfoProperties {
     }
 
     /*
+     * 【该方法目前实现效果是，不同服务器部署集群，每个节点也不能使用相同的端口号比如 875（实际不同的服务器可以使用相同的端口号）
+     *  正因为每个节点也不能使用相同的端口号，所以 redis 可以使用 onlineCounts 来保存在线人数，否则的话会存在一些问题】
      * FIXME: 优化方案，改成zookeeper方案，
      *        如此可以不需要在中断连接后，监听并且清理在线人数和端口，
      *        因为netty与zk建立的临时节点，中断连接后，会自动删除该临时节点
@@ -70,7 +72,7 @@ public class ChatServer extends BaseInfoProperties {
         Jedis jedis = JedisPoolUtils.getJedis();
 
         Map<String, String> portMap = jedis.hgetAll(portKey);
-        System.out.println(portMap);
+//        System.out.println(portMap);
         // 由于map中的key都应该是整数类型的port，所以先转换成整数后，再比对，否则string类型的比对会有问题
         List<Integer> portList = portMap.entrySet().stream()
                 .map(entry -> Integer.valueOf(entry.getKey()))
@@ -136,7 +138,6 @@ public class ChatServer extends BaseInfoProperties {
         RabbitMQConnectUtils mqConnectUtils = new RabbitMQConnectUtils();
         mqConnectUtils.listen("fanout_exchange", queueName);
 
-
         try {
             // 构建Netty服务器
             ServerBootstrap server = new ServerBootstrap();     // 服务的启动类
@@ -157,7 +158,4 @@ public class ChatServer extends BaseInfoProperties {
             workerGroup.shutdownGracefully();
         }
     }
-
-
-
 }

@@ -34,11 +34,11 @@ public class SMSInterceptor extends BaseInfoProperties implements HandlerInterce
         // 获得用于判断是否存在的boolean
         boolean isExist = redis.keyIsExist(MOBILE_SMSCODE + ":" + userIp);
 
-        if (isExist) {
-            log.error("短信发送频率太高了~~！！！");
-            GraceException.display(ResponseStatusEnum.SMS_NEED_WAIT_ERROR);
-            return false;
-        }
+//        if (isExist) {
+//            log.error("短信发送频率太高了~~！！！");
+//            GraceException.display(ResponseStatusEnum.SMS_NEED_WAIT_ERROR);
+//            return false;
+//        }
 
         /**
          * false: 请求被拦截

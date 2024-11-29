@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="日志续">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="数据库脚本">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uni-weixin/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uni-weixin/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/aspect/ServiceLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/api/aspect/ServiceLogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aliyun.txt" beforeDir="false" afterPath="$PROJECT_DIR$/aliyun.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/service/impl/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/service/impl/UsersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/controller/interceptor/SMSInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/base-service/src/main/java/org/itzixi/controller/interceptor/SMSInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/utils/ZookeeperRegister.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/base/BaseInfoProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandlerSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandlerSingle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/UserChannelSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/UserChannelSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/WSServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/WSServerInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/zk/CuratorConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/zk/CuratorConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +61,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/wechat-dev/api/chat-server",
+    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/wechat-dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,11 +75,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/api/chat-server" />
       <recent name="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller" />
       <recent name="$PROJECT_DIR$/api/main-service/src/main/resources" />
       <recent name="$PROJECT_DIR$/api/file-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/api/auth-service/src/main/java/org/itzixi/controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.itzixi.netty" />
@@ -111,6 +120,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LocalDateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.itzixi.utils.LocalDateUtils" />
+      <module name="wechat-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.itzixi.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MyTest.testCurator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chat-server" />
       <extension name="coverage">
@@ -122,22 +144,6 @@
       <option name="PACKAGE_NAME" value="org.itzixi.test" />
       <option name="MAIN_CLASS_NAME" value="org.itzixi.test.MyTest" />
       <option name="METHOD_NAME" value="testCurator" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MyTest.testJedisGetNettyPorts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chat-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.itzixi.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.itzixi.test" />
-      <option name="MAIN_CLASS_NAME" value="org.itzixi.test.MyTest" />
-      <option name="METHOD_NAME" value="testJedisGetNettyPorts" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -180,10 +186,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ChatServer" />
+        <item itemvalue="Application.LocalDateUtils" />
         <item itemvalue="Application.ChatServer2" />
         <item itemvalue="Spring Boot.main-service-66" />
         <item itemvalue="JUnit.MyTest.testCurator" />
-        <item itemvalue="JUnit.MyTest.testJedisGetNettyPorts" />
       </list>
     </recent_temporary>
   </component>
@@ -196,7 +202,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="112781000" />
+      <workItem from="1732275494761" duration="151465000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -318,45 +324,58 @@
       <option name="project" value="LOCAL" />
       <updated>1732714678999</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="日志续1">
+      <option name="closed" value="true" />
+      <created>1732758988913</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1732758988913</updated>
+    </task>
+    <task id="LOCAL-00017" summary="日志续2">
+      <option name="closed" value="true" />
+      <created>1732783969480</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1732783969480</updated>
+    </task>
+    <task id="LOCAL-00018" summary="调整 jedisPool 配置参数">
+      <option name="closed" value="true" />
+      <created>1732785584654</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1732785584655</updated>
+    </task>
+    <task id="LOCAL-00019" summary="数据库脚本">
+      <option name="closed" value="true" />
+      <created>1732785785140</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1732785785140</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="30900390-9947-457e-b287-b32b14740b1e" value="TOOL_WINDOW" />
-      </map>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
     </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="30900390-9947-457e-b287-b32b14740b1e">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="HEAD" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="structure">
-                    <value>
-                      <list>
-                        <option value="dir:/Users/wing/architect/github/project/hsp_study/wechat-dev" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-            </State>
-          </value>
-        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -379,7 +398,11 @@
     <MESSAGE value="续" />
     <MESSAGE value="日志" />
     <MESSAGE value="日志续" />
-    <option name="LAST_COMMIT_MESSAGE" value="日志续" />
+    <MESSAGE value="日志续1" />
+    <MESSAGE value="日志续2" />
+    <MESSAGE value="调整 jedisPool 配置参数" />
+    <MESSAGE value="数据库脚本" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据库脚本" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -416,17 +439,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java</url>
-          <line>127</line>
+          <line>128</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java</url>
-          <line>99</line>
+          <line>100</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java</url>
-          <line>103</line>
+          <line>138</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -436,8 +459,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/ChatController.java</url>
-          <line>97</line>
+          <line>98</line>
           <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/LocalDateUtils.java</url>
+          <line>738</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
