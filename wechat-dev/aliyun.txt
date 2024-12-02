@@ -18,6 +18,7 @@ docker-engine
 3-2: docker -v   //查看版本
 3-3: systemctl enable docker   //设置开机自启动
 
+=================================================  mysql  =================================================
 4)拉取 mysql8 镜像
 4-1: docker pull mysql:8.3.0
 4-2: cd /home/
@@ -39,6 +40,8 @@ docker run -p 4406:3306 --name mysql8-test \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:8.3.0 \
 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+=================================================  redis  =================================================
 
 5) redis
 5-1: cd /home/docker/
@@ -62,6 +65,8 @@ redis-server /etc/redis/redis.conf
 【停止后，后续再运行可以运行对应的容器名称即可】
 docker start redis-test
 
+=================================================  rabbitmq  =================================================
+
 6) rabbitmq
 6-1: docker pull rabbitmq:3.13-management
 
@@ -75,6 +80,8 @@ docker run --name rabbitmq-test \
 -p 25682:25672 \
 --restart always \
 -d rabbitmq:3.13-management
+
+=================================================  zookeeper  =================================================
 
 7-1）拉取 zookeeper
 cd /home/docker/
@@ -96,6 +103,8 @@ mkdir conf
 -v /home/docker/zookeeper3.9.2/logs:/datalog \
 -d zookeeper:3.9.2
 
+=================================================  minio  =================================================
+
 8-1）拉取minio镜像
 cd /home/docker
 mkdir minio
@@ -113,6 +122,7 @@ docker run -p 8100:8100 -p 8101:8101 \
 -v /home/docker/minio/data:/data \
 minio/minio server /data --console-address ":8101" -address ":8100"
 
+=================================================  nacos  =================================================
 
 9-1）docker 下载 nacos 命令
 docker pull nacos/nacos-server:v2.3.1-slim
@@ -127,7 +137,8 @@ docker run --name nacos-test \
 -d nacos/nacos-server:v2.3.1-slim
 
 ========= 下面的服务统一上传到 /home/jars 这个路径下 =========
-============ 发布 gateway ============
+=================================================  发布 gateway  =================================================
+
 -- 打包（注意后面有个小点）
 docker build -f DockerFile -t yc/gateway:v1.0 .
 
@@ -143,8 +154,8 @@ docker run \
 
 -- 看启动日志
  docker logs gateway
+=================================================  发布 auth  =================================================
 
- ============ 发布 auth ============
 -- 打包（注意后面有个小点）
 docker build -f DockerFile -t yc/auth-service:v1.0 .
 
@@ -161,7 +172,8 @@ docker run \
 -- 看启动日志
 docker logs -f auth-service
 
- ============ 发布 file ============
+=================================================  发布 file  =================================================
+
 -- 打包（注意后面有个小点）
 docker build -f DockerFile -t yc/file-service:v1.0 .
 
@@ -176,9 +188,10 @@ docker run \
 -d yc/file-service:v1.0
 
 -- 看启动日志
-docker logs file-service
+docker logs -f file-service
 
- ============ 发布 main ============
+=================================================  发布 main  =================================================
+
 -- 打包（注意后面有个小点）
 docker build -f DockerFile -t yc/main-service:v1.0 .
 
@@ -195,8 +208,8 @@ docker run \
 -- 看启动日志
 docker logs -f main-service
 
+=================================================  发布 chat  =================================================
 
- ============ 发布 chat ============
 -- 注意要创建这个文件夹
 /home/wechat-dev/chat-server/mydata
 

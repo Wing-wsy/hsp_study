@@ -84,7 +84,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             // 初次连接后，该节点下的在线人数累加（zk、redis都更新）
             LocalDateUtils.print("增加在线人数");
             ZookeeperRegister.incrementOnlineCounts(minNode);
-            ChatServer.incrementOnlineCounts();
 
             // 获得ip+端口，在redis中设置关系，以便在前端设备断线后减少在线人数
             Jedis jedis = JedisPoolUtils.getJedis();
@@ -138,6 +137,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         LocalDateUtils.print("客户端建立连接，channel对应的长id为：{}", currentChannelId);
         // 获得客户端的channel，并且存入到ChannelGroup中进行管理(作为一个客户端群组)
         clients.add(currentChannel);
+        ChatServer.refreshOnlineCounts();
     }
 
     /**
@@ -158,10 +158,8 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         UserChannelSession.removeUserChannelIdRelation(currentChannelId);
 
         LocalDateUtils.print("减少在线人数");
-        // 更新redis在线人数
-        ChatServer.decrementOnlineCounts();
-
         clients.remove(currentChannel);
+        ChatServer.refreshOnlineCounts();
 
         NettyServerNode minNode = null;
         try {
@@ -170,13 +168,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             minNode = JsonUtils.jsonToPojo(jedis.get(senderId),
                     NettyServerNode.class);
         } catch (Exception e) {
-            // 这里会报错，因此zk统计的总在线人数不准确，在线人数以 redis 保存的为准
-//            java.lang.NullPointerException: Cannot invoke "Object.toString()" because "key" is n/*ull
-//            at redis.clients.jedis.CommandArguments.key(CommandArguments.java:81)
-//            at redis.clients.jedis.CommandObjects.get(CommandObjects.java:424)
-//            at redis.clients.jedis.Jedis.get(Jedis.java:4969)
-//            at org.itzixi.netty.websocket.ChatHandler.handlerRemoved(ChatHandler.java:1*/69)
-
 //            e.printStackTrace();
             LocalDateUtils.print("在线人数累减前出错了...");
         }
@@ -207,6 +198,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         ctx.channel().close();
         // 随后从ChannelGroup中移除对应的channel
         clients.remove(currentChannel);
+        ChatServer.refreshOnlineCounts();
 
         // 移除多余的会话
         String senderId = UserChannelSession.getUserIdByChannelId(currentChannelId);
@@ -214,7 +206,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         UserChannelSession.removeUserChannelIdRelation(currentChannelId);
 
         LocalDateUtils.print("减少在线人数");
-        ChatServer.decrementOnlineCounts();
 
         NettyServerNode minNode = null;
         try {

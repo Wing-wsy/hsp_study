@@ -9,6 +9,7 @@ import org.itzixi.base.BaseInfoProperties;
 import org.itzixi.netty.mq.RabbitMQConnectUtils;
 import org.itzixi.netty.utils.JedisPoolUtils;
 import org.itzixi.netty.utils.ZookeeperRegister;
+import org.itzixi.netty.websocket.ChatHandler;
 import org.itzixi.netty.websocket.WSServerInitializer;
 import redis.clients.jedis.Jedis;
 
@@ -30,18 +31,8 @@ public class ChatServer extends BaseInfoProperties {
     public static final Integer nettyDefaultPort = 875;
     public static Integer currentPort ;
 
-    // 记录在线人数
-    public static AtomicInteger initOnlineCounts = new AtomicInteger(0);
-
-    // 在线人数+1
-    public static void incrementOnlineCounts(){
-        initOnlineCounts.incrementAndGet();
-        updateOnlineCounts();
-    }
-
-    // 在线人数-1
-    public static void decrementOnlineCounts(){
-        initOnlineCounts.decrementAndGet();
+    // 刷新在线人数
+    public static void refreshOnlineCounts(){
         updateOnlineCounts();
     }
 
@@ -51,7 +42,7 @@ public class ChatServer extends BaseInfoProperties {
         Map<String, String> onlineMap = jedis.hgetAll(onlineKey);
         for (String key : onlineMap.keySet()) {
             if (key.equals(String.valueOf(currentPort))) {
-                jedis.hset(onlineKey, key, initOnlineCounts.get()+"");
+                jedis.hset(onlineKey, key, ChatHandler.clients.size()+"");
             }
         }
     }
