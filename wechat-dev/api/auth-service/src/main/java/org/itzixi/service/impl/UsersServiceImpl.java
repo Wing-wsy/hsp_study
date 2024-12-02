@@ -68,7 +68,10 @@ public class UsersServiceImpl extends BaseInfoProperties implements UsersService
         // DesensitizationUtil
         if (StringUtils.isBlank(nickname)) {
             user.setNickname("用户" + DesensitizationUtil.commonDisplay(mobile));
+        } else {
+            user.setNickname(nickname);
         }
+
         user.setRealName("");
 
         user.setSex(Sex.secret.type);
