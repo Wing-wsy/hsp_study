@@ -89,9 +89,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             // 获得ip+端口，在redis中设置关系，以便在前端设备断线后减少在线人数
             Jedis jedis = JedisPoolUtils.getJedis();
             jedis.set(senderId, JsonUtils.objectToJson(minNode));
-
-            // 打印
-            UserChannelSession.outputMulti();
         }
         else if (msgType == MsgTypeEnum.WORDS.type
                 || msgType == MsgTypeEnum.IMAGE.type
@@ -124,6 +121,9 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         } else {
             LocalDateUtils.print("特殊类型...");
         }
+
+        // 打印
+        UserChannelSession.outputMulti();
     }
 
     /**
@@ -153,6 +153,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 
         // 移除多余的会话
         String senderId = UserChannelSession.getUserIdByChannelId(currentChannelId);
+        LocalDateUtils.print("senderId=", senderId);
         UserChannelSession.removeUselessChannels(senderId, currentChannelId);
         UserChannelSession.removeUserChannelIdRelation(currentChannelId);
 
@@ -169,7 +170,14 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             minNode = JsonUtils.jsonToPojo(jedis.get(senderId),
                     NettyServerNode.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            // 这里会报错，因此zk统计的总在线人数不准确，在线人数以 redis 保存的为准
+//            java.lang.NullPointerException: Cannot invoke "Object.toString()" because "key" is n/*ull
+//            at redis.clients.jedis.CommandArguments.key(CommandArguments.java:81)
+//            at redis.clients.jedis.CommandObjects.get(CommandObjects.java:424)
+//            at redis.clients.jedis.Jedis.get(Jedis.java:4969)
+//            at org.itzixi.netty.websocket.ChatHandler.handlerRemoved(ChatHandler.java:1*/69)
+
+//            e.printStackTrace();
             LocalDateUtils.print("在线人数累减前出错了...");
         }
         if (minNode != null) {
