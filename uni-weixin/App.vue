@@ -4,12 +4,12 @@
 	import districtList from './json/area_district.js';
 	export default {
 		globalData: {
-			// serverUrl: "http://192.168.1.24:1000",		// 开发环境(公司)，不能使用localhost
-			serverUrl: "http://192.168.3.15:1000",
+			// serverUrl: "http://192.168.3.15:1000",		// 开发环境(公司)，不能使用localhost
+			serverUrl: "http://8.217.253.19:1000",      // yc生产环境
 			// serverUrl: "http://localhost",					// 错误示范！！！
 			// serverUrl: "http://192.168.1.6",					// 生产环境
 			
-			chatServerUrl: "ws://192.168.3.15:875/ws", 
+			chatServerUrl: "ws://8.217.253.19:875/ws", 
 			
 			
 			minNode: {}, 

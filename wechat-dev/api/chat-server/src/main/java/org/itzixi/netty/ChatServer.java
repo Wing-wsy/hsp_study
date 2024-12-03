@@ -12,11 +12,9 @@ import org.itzixi.netty.utils.ZookeeperRegister;
 import org.itzixi.netty.websocket.ChatHandler;
 import org.itzixi.netty.websocket.WSServerInitializer;
 import redis.clients.jedis.Jedis;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
