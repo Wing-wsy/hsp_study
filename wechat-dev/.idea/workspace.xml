@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="在线人数调整">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../uni-weixin/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../uni-weixin/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../uni-weixin/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter07/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter07/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +190,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="165617000" />
+      <workItem from="1732275494761" duration="166216000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />

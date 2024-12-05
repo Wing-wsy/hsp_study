@@ -6,7 +6,7 @@
 #### chapter-04 - java8新特性-lambda   【 √ 】
 #### chapter-05 - JVM                 【 △ 】
 #### chapter-06 - 多线程               【 △ 】
-#### chapter-07 - mysql & jdbc & mongodb  【 √  】
+#### chapter-07 - mysql & jdbc & mongodb & FastDFS  【 √  】
 #### chapter-08 - linux              【 △ 】
 #### chapter-09 - 正则表达式            【 √ 】
 #### chapter-10 - mycat2            【 × 】
