@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="在线人数调整">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter07/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter07/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter07/MongoDB.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter07/MongoDB.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbit-parent/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rabbit-parent/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbit-parent/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rabbit-parent/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,26 +43,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/wechat-dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/wing/architect/github/project/hsp_study/wechat-dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -81,7 +87,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ChatServer">
+  <component name="RunManager" selected="Application.SplitterUtil">
     <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer" />
       <module name="chat-server" />
@@ -121,18 +127,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyTest.testCurator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chat-server" />
+    <configuration name="SplitterUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.itzixi.utils.SplitterUtil" />
+      <module name="wechat-common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.itzixi.test.*" />
+          <option name="PATTERN" value="org.itzixi.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.itzixi.test" />
-      <option name="MAIN_CLASS_NAME" value="org.itzixi.test.MyTest" />
-      <option name="METHOD_NAME" value="testCurator" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -173,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SplitterUtil" />
         <item itemvalue="Application.ChatServer" />
         <item itemvalue="Application.LocalDateUtils" />
         <item itemvalue="Application.ChatServer2" />
         <item itemvalue="Spring Boot.main-service-66" />
-        <item itemvalue="JUnit.MyTest.testCurator" />
       </list>
     </recent_temporary>
   </component>
@@ -190,7 +193,9 @@
       <option name="presentableId" value="Default" />
       <updated>1731913170016</updated>
       <workItem from="1731913171384" duration="93429000" />
-      <workItem from="1732275494761" duration="166216000" />
+      <workItem from="1732275494761" duration="169431000" />
+      <workItem from="1733541034410" duration="2372000" />
+      <workItem from="1733731934313" duration="681000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />

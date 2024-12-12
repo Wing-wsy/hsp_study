@@ -1,3 +1,11 @@
+>RabbitMQ详细：https://blog.csdn.net/weixin_42039228/article/details/123493937?spm=1001.2014.3001.5506
+>
+>RabbitMQ之批量消费：https://blog.csdn.net/CSDN_LiMingfly/article/details/138372320
+>
+>RabbitMQ之消费者确认机制：https://blog.csdn.net/qushaming/article/details/142857916
+>
+>RabbitMQ之失败消息处理策略：https://blog.csdn.net/qushaming/article/details/142861075
+
 # RabbitMQ 实战教程
 
 ## 1.MQ引言
