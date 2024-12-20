@@ -18,8 +18,4 @@ wx:
   key: 商户密钥（课程QQ群共享文件中获取）
   cert-path: 商户数字证书文件路径（课程QQ群共享文件中获取）
 
-minio:
-  endpoint: http://你本地电脑或者云主机IP:9000
-  access-key: root
-  secret-key: abc123456
 

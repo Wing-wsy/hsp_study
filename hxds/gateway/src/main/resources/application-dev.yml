@@ -1,0 +1,90 @@
+server:
+  jetty:
+    threads:
+      acceptors: 4
+      selectors: 8
+  port: 8301
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    inetutils:
+      preferred-networks: 127.0.0.1
+    nacos:
+      #配置中心
+      config:
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        server-addr: 127.0.0.1:8848
+        prefix: ${spring.application.name}
+#        namespace: hxds
+      discovery:
+#        namespace: hxds
+#        username: nacos
+#        password: nacos
+        server-addr: 127.0.0.1:8848
+        heart-beat-interval: 1000
+        heart-beat-timeout: 1000
+        group: DEFAULT_GROUP
+    sentinel:
+      transport:
+        dashboard: 8.217.253.19:8718
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 动态路由，从注册中心根据微服务的名称获得目标节点的地址
+      globalcors: # 全局的跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:3000"
+              - "http://127.0.0.1:3000"
+              - "http://192.168.99.106:3000"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 360000 # 这次跨域检测的有效期
+
+            # 允许全部写*
+#            allowedOriginPatterns: "*"
+#            allowedHeaders: "*"
+#            allowedMethods: "*"
+#            allowCredentials: true
+      routes:
+        - id: bff-driver # 每一项路由规则都有一个唯一的id编号，可以自定义
+          uri: lb://bff-driver # lb=负载均衡，会动态寻址
+          predicates:
+            - Path=/hxds-driver/**
+          filters:
+            - StripPrefix=1
+        - id: hxds-mis-api
+          uri: lb://hxds-mis-api
+          predicates:
+            - Path=/hxds-mis-api/**
+          filters:
+            - StripPrefix=1
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  # 端点检查（健康检查）
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

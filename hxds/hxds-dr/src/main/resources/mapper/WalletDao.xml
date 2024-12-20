@@ -3,5 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hxds.dr.db.dao.WalletDao">
-
+    <insert id="insert" parameterType="com.example.hxds.dr.db.pojo.WalletEntity">
+        INSERT INTO tb_wallet(id,driver_id,balance,password) VALUES(#{id},#{driverId},#{balance},#{password})
+    </insert>
 </mapper>

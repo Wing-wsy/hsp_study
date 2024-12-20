@@ -1,5 +1,6 @@
 package com.example.hxds.common.util;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -18,6 +19,8 @@ public class MicroAppUtil {
     private String appSecret;
 
     public String getOpenId(String code) {
+        // TODO 测试环境不真实请求，临时注释
+        /*
         String url = "https://api.weixin.qq.com/sns/jscode2session";
         HashMap map = new HashMap();
         map.put("appid", appId);
@@ -26,7 +29,10 @@ public class MicroAppUtil {
         map.put("grant_type", "authorization_code");
         String response = HttpUtil.post(url, map);
         JSONObject json = JSONUtil.parseObj(response);
-        String openId = json.getStr("openid");
+        String openId = json.getStr("openid");*/
+
+        // TODO 测试环境使用假的 openId
+        String openId = IdUtil.simpleUUID();
         if (openId == null || openId.length() == 0) {
             throw new RuntimeException("临时登陆凭证错误");
         }

@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
         boolean bool = redisTemplate.hasKey(uuid);
         if (bool) {
             String openId = getOpenId(code);
-            long userId = userDao.searchIdByOpenId(openId);
+            long userId = 0L;
+//            long userId = userDao.searchIdByOpenId(openId);
             redisTemplate.opsForValue().set(uuid, userId);
         }
         return bool;

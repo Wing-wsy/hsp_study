@@ -4,4 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hxds.dr.db.dao.DriverDao">
 
+    <insert id="registerNewDriver" parameterType="Map">
+        INSERT INTO tb_driver(id,open_id,nickname,photo,real_auth,summary,archive,status)
+        VALUES (#{id},#{openId},#{nickname},#{photo},1,'{"level":0,"totalOrder":0,"weekOrder":0,"weekComment":0,"appeal":0}',false,1)
+
+    </insert>
+    <select id="hasDriver" parameterType="Map" resultType="long">
+        SELECT COUNT(id) AS ct
+        FROM tb_driver
+        WHERE 1=1
+        <if test="openId!=null">
+            AND open_id = #{openId}
+        </if>
+        <if test="driverId!=null">
+            AND id = #{driverId}
+        </if>
+    </select>
+    <select id="searchDriverId" parameterType="String" resultType="String">
+        SELECT CAST(id AS CHAR) AS id
+        FROM tb_driver
+        WHERE open_id = #{openId}
+    </select>
 </mapper>

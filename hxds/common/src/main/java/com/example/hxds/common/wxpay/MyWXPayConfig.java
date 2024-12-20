@@ -22,16 +22,17 @@ public class MyWXPayConfig extends WXPayConfig {
 
     private byte[] certData;
 
-    @PostConstruct
-    public void init() throws Exception {
-        File file = new File(certPath);
-        FileInputStream in = new FileInputStream(file);
-        BufferedInputStream bin = new BufferedInputStream(in);
-        this.certData = new byte[(int) file.length()];
-        bin.read(this.certData);
-        bin.close();
-        in.close();
-    }
+    //TODO 临时注释（生产要放开）
+//    @PostConstruct
+//    public void init() throws Exception {
+//        File file = new File(certPath);
+//        FileInputStream in = new FileInputStream(file);
+//        BufferedInputStream bin = new BufferedInputStream(in);
+//        this.certData = new byte[(int) file.length()];
+//        bin.read(this.certData);
+//        bin.close();
+//        in.close();
+//    }
 
     @Override
     public String getAppID() {

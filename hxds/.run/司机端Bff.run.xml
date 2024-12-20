@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="司机端Bff" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="bff-driver" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.hxds.bff.driver.BffDriverApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
