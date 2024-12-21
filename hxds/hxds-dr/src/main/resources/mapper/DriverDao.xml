@@ -20,9 +20,71 @@
             AND id = #{driverId}
         </if>
     </select>
-    <select id="searchDriverId" parameterType="String" resultType="String">
-        SELECT CAST(id AS CHAR) AS id
+<!--    <select id="searchDriverId" parameterType="String" resultType="String">-->
+<!--        SELECT CAST(id AS CHAR) AS id-->
+<!--        FROM tb_driver-->
+<!--        WHERE open_id = #{openId}-->
+<!--    </select>-->
+    <update id="updateDriverAuth" parameterType="Map">
+        UPDATE tb_driver
+        SET `name`            = #{name},
+            sex               = #{sex},
+            pid               = #{pid},
+            birthday          = #{birthday},
+            tel               = #{tel},
+            mail_address      = #{mailAddress},
+            contact_name      = #{contactName},
+            contact_tel       = #{contactTel},
+            email             = #{email},
+            real_auth         = 3,
+            idcard_address    = #{idcardAddress},
+            idcard_expiration = #{idcardExpiration},
+            idcard_front      = #{idcardFront},
+            idcard_back       = #{idcardBack},
+            idcard_holding    = #{idcardHolding},
+            drcard_type       = #{drcardType},
+            drcard_expiration = #{drcardExpiration},
+            drcard_issue_date = #{drcardIssueDate},
+            drcard_front      = #{drcardFront},
+            drcard_back       = #{drcardBack},
+            drcard_holding    = #{drcardHolding}
+        WHERE id = #{driverId}
+    </update>
+    <select id="searchDriverNameAndSex" parameterType="long" resultType="HashMap">
+        SELECT name,
+               sex
         FROM tb_driver
-        WHERE open_id = #{openId}
+        WHERE id = #{driverId}
+    </select>
+    <update id="updateDriverArchive" parameterType="long">
+        UPDATE tb_driver
+        SET archive=1
+        WHERE id = #{driverId}
+    </update>
+    <select id="login" parameterType="String" resultType="HashMap">
+        SELECT CAST(id AS CHAR) AS id,
+               real_auth        AS realAuth,
+               archive,
+               tel
+        FROM tb_driver
+        WHERE `status` != 2 AND open_id = #{openId}
+    </select>
+    <select id="searchDriverBaseInfo" parameterType="long" resultType="HashMap">
+        SELECT d.open_id               AS openId,
+               d.`name`,
+               d.nickname,
+               d.sex,
+               d.photo,
+               d.tel,
+               d.email,
+               d.pid,
+               d.real_auth             AS realAuth,
+               d.summary,
+               d.`status`,
+               CAST(w.balance AS CHAR) AS balance,
+               d.create_time           AS createTime
+        FROM tb_driver d
+                 JOIN tb_wallet w ON d.id = w.driver_id
+        WHERE d.id = #{driverId};
     </select>
 </mapper>

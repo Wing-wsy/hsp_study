@@ -10,6 +10,9 @@ tencent:
     bucket-public: 公有存储桶名称
     region-private: 私有存储桶所在地域
     bucket-private: 私有存储桶名称
+    face:
+      groupName: hxds
+      region: ap-beijing
 
 wx:
   app-id: 你的微信小程序APPID

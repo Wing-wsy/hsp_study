@@ -10,18 +10,18 @@ public interface DrServiceApi {
     @PostMapping("/driver/registerNewDriver")
     public R registerNewDriver(RegisterNewDriverForm form);
 
-//    @PostMapping("/driver/updateDriverAuth")
-//    public R updateDriverAuth(UpdateDriverAuthForm form);
-//
-//    @PostMapping("/driver/createDriverFaceModel")
-//    public R createDriverFaceModel(CreateDriverFaceModelForm form);
-//
-//    @PostMapping("/driver/login")
-//    public R login(LoginForm form);
-//
-//    @PostMapping("/driver/searchDriverBaseInfo")
-//    public R searchDriverBaseInfo(SearchDriverBaseInfoForm form);
-//
+    @PostMapping("/driver/updateDriverAuth")
+    public R updateDriverAuth(UpdateDriverAuthForm form);
+
+    @PostMapping("/driver/createDriverFaceModel")
+    public R createDriverFaceModel(CreateDriverFaceModelForm form);
+
+    @PostMapping("/driver/login")
+    public R login(LoginForm form);
+
+    @PostMapping("/driver/searchDriverBaseInfo")
+    public R searchDriverBaseInfo(SearchDriverBaseInfoForm form);
+
 //    @PostMapping("/settings/searchDriverSettings")
 //    public R searchDriverSettings(SearchDriverSettingsForm form);
 //

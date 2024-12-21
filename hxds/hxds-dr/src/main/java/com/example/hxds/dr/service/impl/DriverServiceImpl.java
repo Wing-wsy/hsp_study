@@ -4,12 +4,11 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.a3test.component.idworker.IdWorkerConfigBean;
-import com.a3test.component.idworker.Snowflake;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.example.hxds.common.exception.HxdsException;
 import com.example.hxds.common.util.MicroAppUtil;
 import com.example.hxds.common.util.PageUtils;
+import com.example.hxds.common.util.SnowflakeIdWorker;
 import com.example.hxds.dr.db.dao.DriverDao;
 import com.example.hxds.dr.db.dao.DriverSettingsDao;
 import com.example.hxds.dr.db.dao.WalletDao;
@@ -34,17 +33,17 @@ import java.util.Map;
 @Service
 @Slf4j
 public class DriverServiceImpl implements DriverService {
-//    @Value("${tencent.cloud.secretId}")
-//    private String secretId;
-//
-//    @Value("${tencent.cloud.secretKey}")
-//    private String secretKey;
-//
-//    @Value("${tencent.cloud.face.groupName}")
-//    private String groupName;
-//
-//    @Value("${tencent.cloud.face.region}")
-//    private String region;
+    @Value("${tencent.cloud.secretId}")
+    private String secretId;
+
+    @Value("${tencent.cloud.secretKey}")
+    private String secretKey;
+
+    @Value("${tencent.cloud.face.groupName}")
+    private String groupName;
+
+    @Value("${tencent.cloud.face.region}")
+    private String region;
 
     @Resource
     private MicroAppUtil microAppUtil;
@@ -57,6 +56,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Resource
     private WalletDao walletDao;
+
+    @Resource
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
     @Transactional
@@ -76,16 +78,14 @@ public class DriverServiceImpl implements DriverService {
         param.put("openId", openId);
 
         // 此处用snowflake直接生成唯一的主键id
-        Snowflake snowflake = new Snowflake(new IdWorkerConfigBean());
-        String sid = snowflake.nextId();
-        param.put("id", Long.parseLong(sid));
+        long driverId = snowflakeIdWorker.createId();
+        param.put("id", driverId);
         driverDao.registerNewDriver(param);
-        String driverId = driverDao.searchDriverId(openId);
 
         DriverSettingsEntity settingsEntity = new DriverSettingsEntity();
-        String did = snowflake.nextId();
-        settingsEntity.setId(Long.parseLong(did));
-        settingsEntity.setDriverId(Long.parseLong(driverId));
+        long did = snowflakeIdWorker.createId();
+        settingsEntity.setId(did);
+        settingsEntity.setDriverId(driverId);
         JSONObject json = new JSONObject();
         json.set("orientation", "");
         json.set("listenService", true);
@@ -96,83 +96,83 @@ public class DriverServiceImpl implements DriverService {
         settingsDao.insertDriverSettings(settingsEntity);
 
         WalletEntity walletEntity = new WalletEntity();
-        String wid = snowflake.nextId();
-        walletEntity.setId(Long.parseLong(wid));
-        walletEntity.setDriverId(Long.parseLong(driverId));
+        long wid = snowflakeIdWorker.createId();
+        walletEntity.setId(wid);
+        walletEntity.setDriverId(driverId);
         walletEntity.setBalance(new BigDecimal("0"));
         walletEntity.setPassword(null);
         walletDao.insert(walletEntity);
-        return driverId;
+        return String.valueOf(driverId);
     }
 
-//    @Override
-//    @Transactional
-//    @LcnTransaction
-//    public int updateDriverAuth(Map param) {
-//        int rows = driverDao.updateDriverAuth(param);
-//        return rows;
-//    }
-//
-//    @Override
-//    @Transactional
-//    @LcnTransaction
-//    public String createDriverFaceModel(long driverId, String photo) {
-//        HashMap map = driverDao.searchDriverNameAndSex(driverId);
-//        String name = MapUtil.getStr(map, "name");
-//        String sex = MapUtil.getStr(map, "sex");
-//        Credential cred = new Credential(secretId, secretKey);
-//        IaiClient client = new IaiClient(cred, region);
-//        try {
-//            CreatePersonRequest req = new CreatePersonRequest();
-//            req.setGroupId(groupName);
-//            req.setPersonId(driverId + "");
-//            long gender = sex.equals("男") ? 1L : 2L;
-//            req.setGender(gender);
-//            req.setQualityControl(4L);
-//            req.setUniquePersonControl(4L);
-//            req.setPersonName(name);
-//            req.setImage(photo);
-//            CreatePersonResponse resp = client.CreatePerson(req);
-//            if (StrUtil.isNotBlank(resp.getFaceId())) {
-//                int rows = driverDao.updateDriverArchive(driverId);
-//                if (rows != 1) {
-//                    return "更新司机归档字段失败";
-//                }
-//            }
-//        } catch (Exception e) {
-//            log.error("创建腾讯云端司机档案失败", e);
-//            return "创建腾讯云端司机档案失败";
-//        }
-//        return "";
-//    }
-//
-//    @Override
-//    public HashMap login(String code, String phoneCode) {
-//        String openId = microAppUtil.getOpenId(code);
-//        HashMap result = driverDao.login(openId);
-//        if (result != null) {
-//            if (result.containsKey("archive")) {
-//                int temp = MapUtil.getInt(result, "archive");
-//                boolean archive = (temp == 1) ? true : false;
-//                result.replace("archive", archive);
-//            }
-//            String tel = MapUtil.getStr(result, "tel");
-//            String realTel = microAppUtil.getTel(phoneCode);
-//            if (!tel.equals(realTel)) {
-//                throw new HxdsException("当前手机号与注册手机号不一致");
-//            }
-//        }
-//        return result;
-//    }
-//
-//    @Override
-//    public HashMap searchDriverBaseInfo(long driverId) {
-//        HashMap result = driverDao.searchDriverBaseInfo(driverId);
-//        JSONObject summary = JSONUtil.parseObj(MapUtil.getStr(result, "summary"));
-//        result.replace("summary", summary);
-//        return result;
-//    }
-//
+    @Override
+    @Transactional
+    @LcnTransaction
+    public int updateDriverAuth(Map param) {
+        int rows = driverDao.updateDriverAuth(param);
+        return rows;
+    }
+
+    @Override
+    @Transactional
+    @LcnTransaction
+    public String createDriverFaceModel(long driverId, String photo) {
+        HashMap map = driverDao.searchDriverNameAndSex(driverId);
+        String name = MapUtil.getStr(map, "name");
+        String sex = MapUtil.getStr(map, "sex");
+        Credential cred = new Credential(secretId, secretKey);
+        IaiClient client = new IaiClient(cred, region);
+        try {
+            CreatePersonRequest req = new CreatePersonRequest();
+            req.setGroupId(groupName);
+            req.setPersonId(driverId + "");
+            long gender = sex.equals("男") ? 1L : 2L;
+            req.setGender(gender);
+            req.setQualityControl(4L);
+            req.setUniquePersonControl(4L);
+            req.setPersonName(name);
+            req.setImage(photo);
+            CreatePersonResponse resp = client.CreatePerson(req);
+            if (StrUtil.isNotBlank(resp.getFaceId())) {
+                int rows = driverDao.updateDriverArchive(driverId);
+                if (rows != 1) {
+                    return "更新司机归档字段失败";
+                }
+            }
+        } catch (Exception e) {
+            log.error("创建腾讯云端司机档案失败", e);
+            return "创建腾讯云端司机档案失败";
+        }
+        return "";
+    }
+
+    @Override
+    public HashMap login(String code, String phoneCode) {
+        String openId = microAppUtil.getOpenId(code);
+        HashMap result = driverDao.login(openId);
+        if (result != null) {
+            if (result.containsKey("archive")) {
+                int temp = MapUtil.getInt(result, "archive");
+                boolean archive = (temp == 1) ? true : false;
+                result.replace("archive", archive);
+            }
+            String tel = MapUtil.getStr(result, "tel");
+            String realTel = microAppUtil.getTel(phoneCode);
+            if (!tel.equals(realTel)) {
+                throw new HxdsException("当前手机号与注册手机号不一致");
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public HashMap searchDriverBaseInfo(long driverId) {
+        HashMap result = driverDao.searchDriverBaseInfo(driverId);
+        JSONObject summary = JSONUtil.parseObj(MapUtil.getStr(result, "summary"));
+        result.replace("summary", summary);
+        return result;
+    }
+
 //    @Override
 //    public PageUtils searchDriverByPage(Map param) {
 //        long count = driverDao.searchDriverCount(param);

@@ -1,6 +1,8 @@
 package com.example.hxds.common.util;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -18,6 +20,11 @@ public class MicroAppUtil {
     @Value("${wx.app-secret}")
     private String appSecret;
 
+    /**
+     * 临时授权码兑换openId
+     * @param code
+     * @return
+     */
     public String getOpenId(String code) {
         // TODO 测试环境不真实请求，临时注释
         /*
@@ -54,5 +61,27 @@ public class MicroAppUtil {
         } else {
             throw new HxdsException(json.getStr("errmsg"));
         }
+    }
+
+    public String getTel(String phoneCode) {
+        // TODO 测试环境不真实请求，临时注释
+        /*
+        String accessToken = getAccessToken();
+        String url = "https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=" + accessToken;
+        JSONObject param = new JSONObject();
+        param.set("code", phoneCode);
+        HttpRequest post = HttpUtil.createPost(url);
+        post.body(param.toString(), "application/json");
+        HttpResponse response = post.execute();
+        JSONObject json = JSONUtil.parseObj(response.body());
+        if (json.containsKey("phone_info")) {
+            String tel = json.getJSONObject("phone_info").getStr("purePhoneNumber");
+            return tel;
+        } else {
+            throw new HxdsException(json.getStr("errmsg"));
+        }*/
+
+        // TODO 测试环境使用假的 phoneCode
+        return phoneCode;
     }
 }

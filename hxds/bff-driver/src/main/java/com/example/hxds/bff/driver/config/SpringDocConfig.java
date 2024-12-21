@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
         ),
         security = @SecurityRequirement(name = "token")
 )
+// swagger调试面板需要填写请求头
 @SecurityScheme(
         name = "token",
         type = SecuritySchemeType.APIKEY,

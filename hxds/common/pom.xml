@@ -44,12 +44,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
-        <!-- 雪花算法 -->
-        <dependency>
-            <groupId>com.a3test.component</groupId>
-            <artifactId>idworker-snowflake</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 
     <build>

@@ -42,38 +42,38 @@ public class DriverServiceImpl implements DriverService {
         return userId;
     }
 
-//    @Override
-//    @Transactional
-//    @LcnTransaction
-//    public int updateDriverAuth(UpdateDriverAuthForm form) {
-//        R r = drServiceApi.updateDriverAuth(form);
-//        int rows = Convert.toInt(r.get("rows"));
-//        return rows;
-//    }
-//
-//    @Override
-//    @Transactional
-//    @LcnTransaction
-//    public String createDriverFaceModel(CreateDriverFaceModelForm form) {
-//        R r = drServiceApi.createDriverFaceModel(form);
-//        String result = MapUtil.getStr(r, "result");
-//        return result;
-//    }
-//
-//    @Override
-//    public HashMap login(LoginForm form) {
-//        R r = drServiceApi.login(form);
-//        HashMap map = (HashMap) r.get("result");
-//        return map;
-//    }
-//
-//    @Override
-//    public HashMap searchDriverBaseInfo(SearchDriverBaseInfoForm form) {
-//        R r = drServiceApi.searchDriverBaseInfo(form);
-//        HashMap map = (HashMap) r.get("result");
-//        return map;
-//    }
-//
+    @Override
+    @Transactional
+    @LcnTransaction
+    public int updateDriverAuth(UpdateDriverAuthForm form) {
+        R r = drServiceApi.updateDriverAuth(form);
+        int rows = Convert.toInt(r.get("rows"));
+        return rows;
+    }
+
+    @Override
+    @Transactional
+    @LcnTransaction
+    public String createDriverFaceModel(CreateDriverFaceModelForm form) {
+        R r = drServiceApi.createDriverFaceModel(form);
+        String result = MapUtil.getStr(r, "result");
+        return result;
+    }
+
+    @Override
+    public HashMap login(LoginForm form) {
+        R r = drServiceApi.login(form);
+        HashMap map = (HashMap) r.get("result");
+        return map;
+    }
+
+    @Override
+    public HashMap searchDriverBaseInfo(SearchDriverBaseInfoForm form) {
+        R r = drServiceApi.searchDriverBaseInfo(form);
+        HashMap map = (HashMap) r.get("result");
+        return map;
+    }
+
 //    @Override
 //    public HashMap searchWorkbenchData(long driverId) {
 //        SearchDriverTodayBusinessDataForm form_1 = new SearchDriverTodayBusinessDataForm();

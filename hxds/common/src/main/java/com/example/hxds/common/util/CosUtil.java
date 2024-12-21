@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * 腾讯云存储工具类
+ */
 @Component
 public class CosUtil {
     @Value("${tencent.cloud.appId}")

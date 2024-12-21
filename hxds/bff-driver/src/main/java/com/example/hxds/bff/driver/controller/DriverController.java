@@ -51,40 +51,40 @@ public class DriverController {
         return R.ok().put("token",token);
     }
 
-//    @PostMapping("/updateDriverAuth")
-//    @Operation(summary = "更新实名认证信息")
-//    @SaCheckLogin
-//    public R updateDriverAuth(@RequestBody @Valid UpdateDriverAuthForm form){
-//        long driverId=StpUtil.getLoginIdAsLong();
-//        form.setDriverId(driverId);
-//        int rows=driverService.updateDriverAuth(form);
-//        return R.ok().put("rows",rows);
-//    }
-//    @PostMapping("/createDriverFaceModel")
-//    @Operation(summary = "创建司机人脸模型归档")
-//    @SaCheckLogin
-//    public R createDriverFaceModel(@RequestBody @Valid CreateDriverFaceModelForm form){
-//        long driverId=StpUtil.getLoginIdAsLong();
-//        form.setDriverId(driverId);
-//        String result = driverService.createDriverFaceModel(form);
-//        return R.ok().put("result",result);
-//    }
-//
-//    @PostMapping("/login")
-//    @Operation(summary = "登陆系统")
-//    public R login(@RequestBody @Valid LoginForm form){
-//        HashMap map=driverService.login(form);
-//        if(map!=null){
-//            long driverId= MapUtil.getLong(map,"id");
-//            byte realAuth=Byte.parseByte(MapUtil.getStr(map,"realAuth"));
-//            boolean archive=MapUtil.getBool(map,"archive");
-//            StpUtil.login(driverId);
-//            String token=StpUtil.getTokenInfo().getTokenValue();
-//            return R.ok().put("token",token).put("realAuth",realAuth).put("archive",archive);
-//        }
-//        return R.ok();
-//    }
-//
+    @PostMapping("/updateDriverAuth")
+    @Operation(summary = "更新实名认证信息")
+    @SaCheckLogin // 该注解要求用户必须登陆之后，才能访问该方法【前端会将令牌放在请求头】
+    public R updateDriverAuth(@RequestBody @Valid UpdateDriverAuthForm form){
+        long driverId=StpUtil.getLoginIdAsLong();
+        form.setDriverId(driverId);
+        int rows=driverService.updateDriverAuth(form);
+        return R.ok().put("rows",rows);
+    }
+    @PostMapping("/createDriverFaceModel")
+    @Operation(summary = "创建司机人脸模型归档")
+    @SaCheckLogin
+    public R createDriverFaceModel(@RequestBody @Valid CreateDriverFaceModelForm form){
+        long driverId=StpUtil.getLoginIdAsLong();
+        form.setDriverId(driverId);
+        String result = driverService.createDriverFaceModel(form);
+        return R.ok().put("result",result);
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "登陆系统")
+    public R login(@RequestBody @Valid LoginForm form){
+        HashMap map=driverService.login(form);
+        if(map!=null){
+            long driverId= MapUtil.getLong(map,"id");
+            byte realAuth=Byte.parseByte(MapUtil.getStr(map,"realAuth"));
+            boolean archive=MapUtil.getBool(map,"archive");
+            StpUtil.login(driverId);
+            String token=StpUtil.getTokenInfo().getTokenValue();
+            return R.ok().put("token",token).put("realAuth",realAuth).put("archive",archive);
+        }
+        return R.ok();
+    }
+
 //    @GetMapping("/logout")
 //    @Operation(summary = "退出系统")
 //    @SaCheckLogin
@@ -93,17 +93,17 @@ public class DriverController {
 //        return R.ok();
 //    }
 //
-//    @PostMapping("/searchDriverBaseInfo")
-//    @Operation(summary = "查询司机基本信息")
-//    @SaCheckLogin
-//    public R searchDriverBaseInfo(){
-//        long driverId=StpUtil.getLoginIdAsLong();
-//        SearchDriverBaseInfoForm form=new SearchDriverBaseInfoForm();
-//        form.setDriverId(driverId);
-//        HashMap map = driverService.searchDriverBaseInfo(form);
-//        return R.ok().put("result",map);
-//    }
-//
+    @PostMapping("/searchDriverBaseInfo")
+    @Operation(summary = "查询司机基本信息")
+    @SaCheckLogin
+    public R searchDriverBaseInfo(){
+        long driverId=StpUtil.getLoginIdAsLong();
+        SearchDriverBaseInfoForm form=new SearchDriverBaseInfoForm();
+        form.setDriverId(driverId);
+        HashMap map = driverService.searchDriverBaseInfo(form);
+        return R.ok().put("result",map);
+    }
+
 //    @PostMapping("/searchWorkbenchData")
 //    @Operation(summary = "查询司机工作台数据")
 //    @SaCheckLogin
