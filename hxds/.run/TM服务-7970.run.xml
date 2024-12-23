@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Tm服务-7970" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <configuration default="false" name="TM服务-7970" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="hxds-tm" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.hxds.tm.HxdsTmApplication" />
     <method v="2">

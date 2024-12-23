@@ -76,8 +76,8 @@ public class UserController {
         Integer userId = userService.login(param);
         R r = R.ok().put("result", userId != null ? true : false);
         if (userId != null) {
-            StpUtil.setLoginId(userId);
-//            StpUtil.login(userId);
+//            StpUtil.setLoginId(userId);
+            StpUtil.login(userId);
             Set<String> permissions = userService.searchUserPermissions(userId);
             String token = StpUtil.getTokenInfo().getTokenValue();
             r.put("permissions", permissions).put("token", token);

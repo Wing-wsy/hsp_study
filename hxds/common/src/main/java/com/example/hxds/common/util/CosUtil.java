@@ -164,6 +164,9 @@ public class CosUtil {
      * 获取私有读写文件的临时URL外网访问地址
      */
     public String getPrivateFileUrl(String path) {
+
+        // TODO 临时注释
+        /*
         COSClient client = getCosPrivateClient();
         GeneratePresignedUrlRequest request =
                 new GeneratePresignedUrlRequest(bucketPrivate, path, HttpMethodName.GET);
@@ -171,7 +174,10 @@ public class CosUtil {
         request.setExpiration(expiration);
         URL url = client.generatePresignedUrl(request);
         client.shutdown();
-        return url.toString();
+        return url.toString();*/
+
+        // TODO 测试环境临时返回
+        return "http://111/222" + path;
     }
 
     /**

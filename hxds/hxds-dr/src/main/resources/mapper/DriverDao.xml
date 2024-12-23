@@ -87,4 +87,106 @@
                  JOIN tb_wallet w ON d.id = w.driver_id
         WHERE d.id = #{driverId};
     </select>
+    <select id="searchDriverByPage" parameterType="Map" resultType="HashMap">
+        SELECT CAST(id AS CHAR) AS id,
+        IFNULL(`name`,"") AS `name`,
+        IFNULL(sex,"") AS sex,
+        IFNULL(pid,"") AS pid,
+        IFNULL(tel,"") AS tel,
+        IFNULL(contact_name,"") AS contactName,
+        IFNULL(contact_tel,"") AS contactTel,
+        IFNULL(real_auth,"") AS realAuth,
+        `status`,
+        DATE_FORMAT(create_time, '%Y-%m-%d') AS createTime
+        FROM tb_driver
+        WHERE 1=1
+        <if test="name!=null">
+            AND `name` = #{name}
+        </if>
+        <if test="tel!=null">
+            AND tel = #{tel}
+        </if>
+        <if test="pid!=null">
+            AND pid = #{pid}
+        </if>
+        <if test="sex!=null">
+            AND sex = #{sex}
+        </if>
+        <if test="realAuth!=null">
+            AND `real_auth` = #{realAuth}
+        </if>
+        <if test="status!=null">
+            AND `status` = #{status}
+        </if>
+        LIMIT #{start}, #{length}
+    </select>
+    <select id="searchDriverCount" parameterType="Map" resultType="long">
+        SELECT COUNT(*)
+        FROM tb_driver
+        WHERE 1=1
+        <if test="name!=null">
+            AND `name` = #{name}
+        </if>
+        <if test="tel!=null">
+            AND tel = #{tel}
+        </if>
+        <if test="pid!=null">
+            AND pid = #{pid}
+        </if>
+        <if test="sex!=null">
+            AND sex = #{sex}
+        </if>
+        <if test="realAuth!=null">
+            AND `real_auth` = #{realAuth}
+        </if>
+        <if test="status!=null">
+            AND `status` = #{status}
+        </if>
+    </select>
+    <select id="searchDriverAuth" parameterType="long" resultType="HashMap">
+        SELECT IFNULL(`name`, '')            AS `name`,
+               IFNULL(sex, '')               AS sex,
+               IFNULL(pid, '')               AS pid,
+               IFNULL(birthday, '')          AS birthday,
+               IFNULL(tel, '')               AS tel,
+               IFNULL(mail_address, '')      AS mailAddress,
+               IFNULL(contact_name, '')      AS contactName,
+               IFNULL(contact_tel, '')       AS contactTel,
+               IFNULL(email, '')             AS email,
+               IFNULL(real_auth, '')         AS realAuth,
+               IFNULL(idcard_address, '')    AS idcardAddress,
+               IFNULL(idcard_expiration, '') AS idcardExpiration,
+               IFNULL(idcard_front, '')      AS idcardFront,
+               IFNULL(idcard_back, '')       AS idcardBack,
+               IFNULL(idcard_holding, '')    AS idcardHolding,
+               IFNULL(drcard_type, '')       AS drcardType,
+               IFNULL(drcard_expiration, '') AS drcardExpiration,
+               IFNULL(drcard_issue_date, '') AS drcardIssueDate,
+               IFNULL(drcard_front, '')      AS drcardFront,
+               IFNULL(drcard_back, '')       AS drcardBack,
+               IFNULL(drcard_holding, '')    AS drcardHolding
+        FROM tb_driver
+        WHERE id = #{driverId}
+    </select>
+    <select id="searchDriverRealSummary" parameterType="long" resultType="HashMap">
+        SELECT timestampdiff(YEAR,drcard_issue_date, NOW()) AS `year`,
+               birthday,
+               email,
+               mail_address                                 AS mailAddress,
+               idcard_address                               AS idcardAddress,
+               idcard_front                                 AS idcardFront,
+               idcard_back                                  AS idcardBack,
+               idcard_holding                               AS idcardHolding,
+               drcard_front                                 AS drcardFront,
+               drcard_back                                  AS drcardBack,
+               drcard_holding                               AS drcardHolding
+        FROM tb_driver
+        WHERE id = #{driverId}
+    </select>
+    <update id="updateDriverRealAuth" parameterType="Map">
+        UPDATE tb_driver
+        SET real_auth = #{realAuth}
+        WHERE id = #{driverId}
+    </update>
+
 </mapper>

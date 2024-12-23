@@ -17,17 +17,17 @@ public class DeptServiceImpl implements DeptService {
     @Resource
     private DeptDao deptDao;
 
-    @Override
-    public ArrayList<HashMap> searchAllDept() {
-        ArrayList<HashMap> list = deptDao.searchAllDept();
-        return list;
-    }
-
-    @Override
-    public HashMap searchById(int id) {
-        HashMap map = deptDao.searchById(id);
-        return map;
-    }
+//    @Override
+//    public ArrayList<HashMap> searchAllDept() {
+//        ArrayList<HashMap> list = deptDao.searchAllDept();
+//        return list;
+//    }
+//
+//    @Override
+//    public HashMap searchById(int id) {
+//        HashMap map = deptDao.searchById(id);
+//        return map;
+//    }
 
     @Override
     public PageUtils searchDeptByPage(Map param) {
@@ -41,24 +41,24 @@ public class DeptServiceImpl implements DeptService {
     }
 
 
-    @Override
-    public int insert(DeptEntity dept) {
-        int rows = deptDao.insert(dept);
-        return rows;
-    }
-
-    @Override
-    public int update(DeptEntity dept) {
-        int rows = deptDao.update(dept);
-        return rows;
-    }
-
-    @Override
-    public int deleteDeptByIds(Integer[] ids) {
-        if (!deptDao.searchCanDelete(ids)) {
-            throw new HxdsException("无法删除关联用户的部门");
-        }
-        int rows = deptDao.deleteDeptByIds(ids);
-        return rows;
-    }
+//    @Override
+//    public int insert(DeptEntity dept) {
+//        int rows = deptDao.insert(dept);
+//        return rows;
+//    }
+//
+//    @Override
+//    public int update(DeptEntity dept) {
+//        int rows = deptDao.update(dept);
+//        return rows;
+//    }
+//
+//    @Override
+//    public int deleteDeptByIds(Integer[] ids) {
+//        if (!deptDao.searchCanDelete(ids)) {
+//            throw new HxdsException("无法删除关联用户的部门");
+//        }
+//        int rows = deptDao.deleteDeptByIds(ids);
+//        return rows;
+//    }
 }

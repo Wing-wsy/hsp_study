@@ -11,6 +11,7 @@ public interface DriverDao {
 
     public long hasDriver(Map param);
 
+    // 该方法暂时用不上
 //    public String searchDriverId(String openId);
 
     public int updateDriverAuth(Map param);
@@ -22,6 +23,17 @@ public interface DriverDao {
     public HashMap login(String openId);
 
     public HashMap searchDriverBaseInfo(long driverId);
+
+    public ArrayList<HashMap> searchDriverByPage(Map param);
+
+    public long searchDriverCount(Map param);
+
+    public HashMap searchDriverAuth(long driverId);
+
+    public HashMap searchDriverRealSummary(long driverId);
+
+    public int updateDriverRealAuth(Map param);
+
 
 }
 

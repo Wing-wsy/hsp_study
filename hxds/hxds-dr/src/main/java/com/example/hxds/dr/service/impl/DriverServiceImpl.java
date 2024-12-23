@@ -173,41 +173,41 @@ public class DriverServiceImpl implements DriverService {
         return result;
     }
 
-//    @Override
-//    public PageUtils searchDriverByPage(Map param) {
-//        long count = driverDao.searchDriverCount(param);
-//        ArrayList<HashMap> list = null;
-//        if (count == 0) {
-//            list = new ArrayList<>();
-//        } else {
-//            list = driverDao.searchDriverByPage(param);
-//        }
-//        int start = (Integer) param.get("start");
-//        int length = (Integer) param.get("length");
-//        PageUtils pageUtils = new PageUtils(list, count, start, length);
-//        return pageUtils;
-//    }
-//
-//    @Override
-//    public HashMap searchDriverAuth(long driverId) {
-//        HashMap result = driverDao.searchDriverAuth(driverId);
-//        return result;
-//    }
-//
-//    @Override
-//    public HashMap searchDriverRealSummary(long driverId) {
-//        HashMap map = driverDao.searchDriverRealSummary(driverId);
-//        return map;
-//    }
-//
-//    @Override
-//    @Transactional
-//    @LcnTransaction
-//    public int updateDriverRealAuth(Map param) {
-//        int rows = driverDao.updateDriverRealAuth(param);
-//        return rows;
-//    }
-//
+    @Override
+    public PageUtils searchDriverByPage(Map param) {
+        long count = driverDao.searchDriverCount(param);
+        ArrayList<HashMap> list = null;
+        if (count == 0) {
+            list = new ArrayList<>();
+        } else {
+            list = driverDao.searchDriverByPage(param);
+        }
+        int start = (Integer) param.get("start");
+        int length = (Integer) param.get("length");
+        PageUtils pageUtils = new PageUtils(list, count, start, length);
+        return pageUtils;
+    }
+
+    @Override
+    public HashMap searchDriverAuth(long driverId) {
+        HashMap result = driverDao.searchDriverAuth(driverId);
+        return result;
+    }
+
+    @Override
+    public HashMap searchDriverRealSummary(long driverId) {
+        HashMap map = driverDao.searchDriverRealSummary(driverId);
+        return map;
+    }
+
+    @Override
+    @Transactional
+    @LcnTransaction
+    public int updateDriverRealAuth(Map param) {
+        int rows = driverDao.updateDriverRealAuth(param);
+        return rows;
+    }
+
 //    @Override
 //    public HashMap searchDriverBriefInfo(long driverId) {
 //        HashMap map = driverDao.searchDriverBriefInfo(driverId);

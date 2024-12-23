@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "bff-driver",
-                description = "华夏代驾司机端BFF",
+                title = "hxds-mis-api",
+                description = "华夏代驾MIS端",
                 version = "1.0"
         ),
         security = @SecurityRequirement(name = "token")
