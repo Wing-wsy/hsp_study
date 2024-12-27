@@ -46,6 +46,11 @@ public class ExceptionAdvice {
             log.error("执行异常", e);
             json.set("error", "该微信无法注册");
         }
+        //司机登陆时候的手机号不一致
+        else if (e.getMessage().contains("当前手机号与注册手机号不一致")) {
+            log.error("执行异常", e);
+            json.set("error", "当前手机号与注册手机号不一致");
+        }
         //处理其余的异常
         else {
             log.error("执行异常", e);

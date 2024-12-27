@@ -10,27 +10,27 @@ public interface OdrServiceApi {
     @PostMapping("/order/searchDriverTodayBusinessData")
     public R searchDriverTodayBusinessData(SearchDriverTodayBusinessDataForm form);
 
-//    @PostMapping("/order/acceptNewOrder")
-//    public R acceptNewOrder(AcceptNewOrderForm form);
-//
-//    @PostMapping("/order/searchDriverExecuteOrder")
-//    public R searchDriverExecuteOrder(SearchDriverExecuteOrderForm form);
-//
-//    @PostMapping("/order/searchDriverCurrentOrder")
-//    public R searchDriverCurrentOrder(SearchDriverCurrentOrderForm form);
-//
-//    @PostMapping("/order/searchOrderForMoveById")
-//    public R searchOrderForMoveById(SearchOrderForMoveByIdForm form);
-//
-//    @PostMapping("/order/arriveStartPlace")
-//    public R arriveStartPlace(ArriveStartPlaceForm form);
-//
-//    @PostMapping("/order/startDriving")
-//    public R startDriving(StartDrivingForm form);
-//
-//    @PostMapping("/order/updateOrderStatus")
-//    public R updateOrderStatus(UpdateOrderStatusForm form);
-//
+    @PostMapping("/order/acceptNewOrder")
+    public R acceptNewOrder(AcceptNewOrderForm form);
+
+    @PostMapping("/order/searchDriverExecuteOrder")
+    public R searchDriverExecuteOrder(SearchDriverExecuteOrderForm form);
+
+    @PostMapping("/order/searchDriverCurrentOrder")
+    public R searchDriverCurrentOrder(SearchDriverCurrentOrderForm form);
+
+    @PostMapping("/order/searchOrderForMoveById")
+    public R searchOrderForMoveById(SearchOrderForMoveByIdForm form);
+
+    @PostMapping("/order/arriveStartPlace")
+    public R arriveStartPlace(ArriveStartPlaceForm form);
+
+    @PostMapping("/order/startDriving")
+    public R startDriving(StartDrivingForm form);
+
+    @PostMapping("/order/updateOrderStatus")
+    public R updateOrderStatus(UpdateOrderStatusForm form);
+
 //    @PostMapping("/order/validDriverOwnOrder")
 //    public R validDriverOwnOrder(ValidDriverOwnOrderForm form);
 //

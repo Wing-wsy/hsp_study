@@ -13,6 +13,10 @@ tencent:
     face:
       groupName: hxds
       region: ap-beijing
+  # 位置服务文档：https://lbs.qq.com/service/webService/webServiceGuide/route/webServiceMatrix
+  # 腾讯地图坐标拾取：https://lbs.qq.com/getPoint
+  map:
+    key: U2ZBZ-7AJ63-2HT3O-RXI2S-JXMEE-Z2BY3
 
 wx:
   app-id: 你的微信小程序APPID

@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MPS服务-8104" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="hxds-mps" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.hxds.mps.HxdsMpsApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

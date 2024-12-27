@@ -4,22 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hxds.odr.db.dao.OrderDao">
 
-<!--    <insert id="insert" parameterType="com.example.hxds.odr.db.pojo.OrderEntity">-->
-<!--        INSERT INTO tb_order-->
-<!--        SET uuid = #{uuid},-->
-<!--            customer_id = #{customerId},-->
-<!--            start_place = #{startPlace},-->
-<!--            start_place_location = #{startPlaceLocation},-->
-<!--            end_place = #{endPlace},-->
-<!--            end_place_location = #{endPlaceLocation},-->
-<!--            expects_mileage = #{expectsMileage},-->
-<!--            expects_fee = #{expectsFee},-->
-<!--            favour_fee = #{favourFee},-->
-<!--            charge_rule_id=#{chargeRuleId},-->
-<!--            car_plate=#{carPlate},-->
-<!--            car_type=#{carType},-->
-<!--            date = #{date}-->
-<!--    </insert>-->
+    <insert id="insert" parameterType="com.example.hxds.odr.db.pojo.OrderEntity">
+        INSERT INTO tb_order
+        SET uuid = #{uuid},
+            customer_id = #{customerId},
+            start_place = #{startPlace},
+            start_place_location = #{startPlaceLocation},
+            end_place = #{endPlace},
+            end_place_location = #{endPlaceLocation},
+            expects_mileage = #{expectsMileage},
+            expects_fee = #{expectsFee},
+            favour_fee = #{favourFee},
+            charge_rule_id=#{chargeRuleId},
+            car_plate=#{carPlate},
+            car_type=#{carType},
+            date = #{date}
+    </insert>
     <select id="searchDriverTodayBusinessData" parameterType="long" resultType="HashMap">
         SELECT SUM(TIMESTAMPDIFF(HOUR,end_time, start_time)) AS duration,
                SUM(real_fee)                                 AS income,
@@ -29,88 +29,88 @@
           AND `status` IN (5, 6, 7, 8)
           AND date = CURRENT_DATE
     </select>
-<!--    <select id="searchOrderIdByUUID" parameterType="String" resultType="String">-->
-<!--        SELECT CAST(id AS CHAR) AS id-->
-<!--        FROM tb_order-->
-<!--        WHERE uuid = #{uuid}-->
-<!--    </select>-->
-<!--    <select id="searchDriverExecuteOrder" parameterType="Map" resultType="HashMap">-->
-<!--        SELECT CAST(id AS CHAR)                              AS id,-->
-<!--               customer_id                                   AS customerId,-->
-<!--               start_place                                   AS startPlace,-->
-<!--               start_place_location                          AS startPlaceLocation,-->
-<!--               end_place                                     AS endPlace,-->
-<!--               end_place_location                            AS endPlaceLocation,-->
-<!--               CAST(favour_fee AS CHAR)                      AS favourFee,-->
-<!--               car_plate                                     AS carPlate,-->
-<!--               car_type                                      AS carType,-->
-<!--               DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS createTime-->
-<!--        FROM tb_order-->
-<!--        WHERE id = #{orderId}-->
-<!--          AND driver_id = #{driverId}-->
-<!--    </select>-->
-<!--    <select id="searchOrderStatus" parameterType="Map" resultType="Integer">-->
-<!--        SELECT status-->
-<!--        FROM tb_order-->
-<!--        WHERE id = #{orderId}-->
-<!--        <if test="driverId!=null">-->
-<!--            AND driver_id = #{driverId}-->
-<!--        </if>-->
-<!--        <if test="customerId!=null">-->
-<!--            AND customer_id = #{customerId}-->
-<!--        </if>-->
-<!--    </select>-->
-<!--    <select id="searchDriverCurrentOrder" parameterType="long" resultType="HashMap">-->
-<!--        SELECT CAST(id AS CHAR)                              AS id,-->
-<!--               customer_id                                   AS customerId,-->
-<!--               start_place                                   AS startPlace,-->
-<!--               start_place_location                          AS startPlaceLocation,-->
-<!--               end_place                                     AS endPlace,-->
-<!--               end_place_location                            AS endPlaceLocation,-->
-<!--               CAST(favour_fee AS CHAR)                      AS favourFee,-->
-<!--               car_plate                                     AS carPlate,-->
-<!--               car_type                                      AS carType,-->
-<!--               DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS createTime,-->
-<!--               `status`-->
-<!--        FROM tb_order-->
-<!--        WHERE driver_id = #{driverId}-->
-<!--          AND `status` IN (2, 3, 4) LIMIT 1-->
-<!--    </select>-->
-<!--    <select id="hasCustomerUnFinishedOrder" parameterType="long" resultType="Long">-->
-<!--        SELECT CAST(id AS CHAR) AS id-->
-<!--        FROM tb_order-->
-<!--        WHERE customer_id = #{customerId}-->
-<!--          AND `status` IN (2, 3, 4) LIMIT 1;-->
-<!--    </select>-->
-<!--    <select id="hasCustomerUnAcceptOrder" parameterType="long" resultType="HashMap">-->
-<!--        SELECT CAST(id AS CHAR)     AS id,-->
-<!--               start_place          AS startPlace,-->
-<!--               start_place_location AS startPlaceLocation,-->
-<!--               end_place            AS endPlace,-->
-<!--               end_place_location   AS endPlaceLocation,-->
-<!--               car_plate            AS carPlate,-->
-<!--               car_type             AS carType-->
-<!--        FROM tb_order-->
-<!--        WHERE customer_id = #{customerId}-->
-<!--          AND `status` = 1 LIMIT 1;-->
-<!--    </select>-->
-<!--    <select id="searchOrderForMoveById" parameterType="Map" resultType="HashMap">-->
-<!--        SELECT-->
-<!--        start_place AS startPlace,-->
-<!--        start_place_location AS startPlaceLocation,-->
-<!--        end_place AS endPlace,-->
-<!--        end_place_location AS endPlaceLocation,-->
-<!--        `status`-->
-<!--        FROM tb_order-->
-<!--        WHERE id = #{orderId}-->
-<!--        <if test="customerId!=null">-->
-<!--            AND customer_id = #{customerId}-->
-<!--        </if>-->
-<!--        <if test="driverId!=null">-->
-<!--            AND driver_id = #{driverId}-->
-<!--        </if>-->
-<!--        LIMIT 1;-->
-<!--    </select>-->
+    <select id="searchOrderIdByUUID" parameterType="String" resultType="String">
+        SELECT CAST(id AS CHAR) AS id
+        FROM tb_order
+        WHERE uuid = #{uuid}
+    </select>
+    <select id="searchDriverExecuteOrder" parameterType="Map" resultType="HashMap">
+        SELECT CAST(id AS CHAR)                              AS id,
+               customer_id                                   AS customerId,
+               start_place                                   AS startPlace,
+               start_place_location                          AS startPlaceLocation,
+               end_place                                     AS endPlace,
+               end_place_location                            AS endPlaceLocation,
+               CAST(favour_fee AS CHAR)                      AS favourFee,
+               car_plate                                     AS carPlate,
+               car_type                                      AS carType,
+               DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS createTime
+        FROM tb_order
+        WHERE id = #{orderId}
+          AND driver_id = #{driverId}
+    </select>
+    <select id="searchOrderStatus" parameterType="Map" resultType="Integer">
+        SELECT status
+        FROM tb_order
+        WHERE id = #{orderId}
+        <if test="driverId!=null">
+            AND driver_id = #{driverId}
+        </if>
+        <if test="customerId!=null">
+            AND customer_id = #{customerId}
+        </if>
+    </select>
+    <select id="searchDriverCurrentOrder" parameterType="long" resultType="HashMap">
+        SELECT CAST(id AS CHAR)                              AS id,
+               customer_id                                   AS customerId,
+               start_place                                   AS startPlace,
+               start_place_location                          AS startPlaceLocation,
+               end_place                                     AS endPlace,
+               end_place_location                            AS endPlaceLocation,
+               CAST(favour_fee AS CHAR)                      AS favourFee,
+               car_plate                                     AS carPlate,
+               car_type                                      AS carType,
+               DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') AS createTime,
+               `status`
+        FROM tb_order
+        WHERE driver_id = #{driverId}
+          AND `status` IN (2, 3, 4) LIMIT 1
+    </select>
+    <select id="hasCustomerUnFinishedOrder" parameterType="long" resultType="Long">
+        SELECT CAST(id AS CHAR) AS id
+        FROM tb_order
+        WHERE customer_id = #{customerId}
+          AND `status` IN (2, 3, 4) LIMIT 1;
+    </select>
+    <select id="hasCustomerUnAcceptOrder" parameterType="long" resultType="HashMap">
+        SELECT CAST(id AS CHAR)     AS id,
+               start_place          AS startPlace,
+               start_place_location AS startPlaceLocation,
+               end_place            AS endPlace,
+               end_place_location   AS endPlaceLocation,
+               car_plate            AS carPlate,
+               car_type             AS carType
+        FROM tb_order
+        WHERE customer_id = #{customerId}
+          AND `status` = 1 LIMIT 1;
+    </select>
+    <select id="searchOrderForMoveById" parameterType="Map" resultType="HashMap">
+        SELECT
+        start_place AS startPlace,
+        start_place_location AS startPlaceLocation,
+        end_place AS endPlace,
+        end_place_location AS endPlaceLocation,
+        `status`
+        FROM tb_order
+        WHERE id = #{orderId}
+        <if test="customerId!=null">
+            AND customer_id = #{customerId}
+        </if>
+        <if test="driverId!=null">
+            AND driver_id = #{driverId}
+        </if>
+        LIMIT 1;
+    </select>
 <!--    <select id="searchOrderStartLocationIn30Days" resultType="String">-->
 <!--        SELECT start_place_location-->
 <!--        FROM tb_order-->
@@ -246,35 +246,35 @@
 <!--            AND customer_id = #{customerId}-->
 <!--        </if>-->
 <!--    </select>-->
-<!--    <update id="acceptNewOrder" parameterType="Map">-->
-<!--        UPDATE tb_order-->
-<!--        SET driver_id   = #{driverId},-->
-<!--            accept_time = NOW(),-->
-<!--            `status`=2-->
-<!--        WHERE id = #{orderId}-->
-<!--    </update>-->
-<!--    <update id="updateOrderStatus" parameterType="Map">-->
-<!--        UPDATE tb_order-->
-<!--        SET-->
-<!--        <if test="status==3">-->
-<!--            arrive_time = NOW(),-->
-<!--        </if>-->
-<!--        <if test="status==4">-->
-<!--            start_time = NOW(),-->
-<!--            waiting_minute = CEIL(TIMESTAMPDIFF(SECOND, arrive_time, NOW())/60),-->
-<!--        </if>-->
-<!--        <if test="status==5">-->
-<!--            end_time = NOW(),-->
-<!--        </if>-->
-<!--        `status` = #{status}-->
-<!--        WHERE id = #{orderId}-->
-<!--        <if test="customerId!=null">-->
-<!--            AND customer_id = #{customerId}-->
-<!--        </if>-->
-<!--        <if test="driverId!=null">-->
-<!--            AND driver_id = #{driverId}-->
-<!--        </if>-->
-<!--    </update>-->
+    <update id="acceptNewOrder" parameterType="Map">
+        UPDATE tb_order
+        SET driver_id   = #{driverId},
+            accept_time = NOW(),
+            `status`=2
+        WHERE id = #{orderId}
+    </update>
+    <update id="updateOrderStatus" parameterType="Map">
+        UPDATE tb_order
+        SET
+        <if test="status==3">
+            arrive_time = NOW(),
+        </if>
+        <if test="status==4">
+            start_time = NOW(),
+            waiting_minute = CEIL(TIMESTAMPDIFF(SECOND, arrive_time, NOW())/60),
+        </if>
+        <if test="status==5">
+            end_time = NOW(),
+        </if>
+        `status` = #{status}
+        WHERE id = #{orderId}
+        <if test="customerId!=null">
+            AND customer_id = #{customerId}
+        </if>
+        <if test="driverId!=null">
+            AND driver_id = #{driverId}
+        </if>
+    </update>
 <!--    <update id="updateOrderMileageAndFee" parameterType="Map">-->
 <!--        UPDATE tb_order-->
 <!--        SET real_mileage   = #{realMileage},-->
@@ -283,15 +283,15 @@
 <!--            real_fee       = #{total}-->
 <!--        WHERE id = #{orderId}-->
 <!--    </update>-->
-<!--    <delete id="deleteUnAcceptOrder" parameterType="Map">-->
-<!--        DELETE FROM tb_order-->
-<!--        WHERE id = #{orderId}-->
-<!--        AND `status` = 1-->
-<!--        <if test="driverId!=null">-->
-<!--            AND driver_id = #{driverId}-->
-<!--        </if>-->
-<!--        <if test="customerId!=null">-->
-<!--            AND customer_id = #{customerId}-->
-<!--        </if>-->
-<!--    </delete>-->
+    <delete id="deleteUnAcceptOrder" parameterType="Map">
+        DELETE FROM tb_order
+        WHERE id = #{orderId}
+        AND `status` = 1
+        <if test="driverId!=null">
+            AND driver_id = #{driverId}
+        </if>
+        <if test="customerId!=null">
+            AND customer_id = #{customerId}
+        </if>
+    </delete>
 </mapper>
