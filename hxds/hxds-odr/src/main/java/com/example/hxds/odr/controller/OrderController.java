@@ -176,32 +176,32 @@ public class OrderController {
         return R.ok().put("rows", rows);
     }
 
-//    @PostMapping("/searchOrderByPage")
-//    @Operation(summary = "查询订单分页记录")
-//    public R searchOrderByPage(@RequestBody @Valid SearchOrderByPageForm form) {
-//        Map param = BeanUtil.beanToMap(form);
-//        int page = form.getPage();
-//        int length = form.getLength();
-//        int start = (page - 1) * length;
-//        param.put("start", start);
-//        PageUtils pageUtils = orderService.searchOrderByPage(param);
-//        return R.ok().put("result", pageUtils);
-//    }
-//
-//    @PostMapping("/searchOrderContent")
-//    @Operation(summary = "查询订单详情")
-//    public R searchOrderContent(@RequestBody @Valid SearchOrderContentForm form) {
-//        HashMap map = orderService.searchOrderContent(form.getOrderId());
-//        return R.ok().put("result", map);
-//    }
-//
-//    @PostMapping("/searchOrderStartLocationIn30Days")
-//    @Operation(summary = "查询30天以内订单上车点定位")
-//    public R searchOrderStartLocationIn30Days() {
-//        ArrayList<HashMap> result = orderService.searchOrderStartLocationIn30Days();
-//        return R.ok().put("result", result);
-//    }
-//
+    @PostMapping("/searchOrderByPage")
+    @Operation(summary = "查询订单分页记录")
+    public R searchOrderByPage(@RequestBody @Valid SearchOrderByPageForm form) {
+        Map param = BeanUtil.beanToMap(form);
+        int page = form.getPage();
+        int length = form.getLength();
+        int start = (page - 1) * length;
+        param.put("start", start);
+        PageUtils pageUtils = orderService.searchOrderByPage(param);
+        return R.ok().put("result", pageUtils);
+    }
+
+    @PostMapping("/searchOrderContent")
+    @Operation(summary = "查询订单详情")
+    public R searchOrderContent(@RequestBody @Valid SearchOrderContentForm form) {
+        HashMap map = orderService.searchOrderContent(form.getOrderId());
+        return R.ok().put("result", map);
+    }
+
+    @PostMapping("/searchOrderStartLocationIn30Days")
+    @Operation(summary = "查询30天以内订单上车点定位")
+    public R searchOrderStartLocationIn30Days() {
+        ArrayList<HashMap> result = orderService.searchOrderStartLocationIn30Days();
+        return R.ok().put("result", result);
+    }
+
 //    @PostMapping("/validDriverOwnOrder")
 //    @Operation(summary = "查询司机是否关联某订单")
 //    public R validDriverOwnOrder(@RequestBody @Valid ValidDriverOwnOrderForm form) {

@@ -18,13 +18,13 @@ public interface NebulaServiceApi {
     public R uploadRecordFile(@RequestPart(value = "file") MultipartFile file,
                               @RequestPart("name") String name,
                               @RequestPart(value = "text", required = false) String text);
-//
-//    @PostMapping(value = "/monitoring/insertOrderMonitoring")
-//    public R insertOrderMonitoring(InsertOrderMonitoringForm form);
-//
-//    @PostMapping("/order/gps/insertOrderGps")
-//    public R insertOrderGps(InsertOrderGpsForm form);
-//
+
+    @PostMapping(value = "/monitoring/insertOrderMonitoring")
+    public R insertOrderMonitoring(InsertOrderMonitoringForm form);
+
+    @PostMapping("/order/gps/insertOrderGps")
+    public R insertOrderGps(InsertOrderGpsForm form);
+
 //    @PostMapping("/order/gps/calculateOrderMileage")
 //    public R calculateOrderMileage(CalculateOrderMileageForm form);
 }

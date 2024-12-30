@@ -35,12 +35,12 @@ public interface OrderService {
 
     public int updateOrderStatus(Map param);
 
-//    public ArrayList<HashMap> searchOrderStartLocationIn30Days();
-//
-//    public PageUtils searchOrderByPage(Map param);
-//
-//    public HashMap searchOrderContent(long orderId);
-//
+    public ArrayList<HashMap> searchOrderStartLocationIn30Days();
+
+    public PageUtils searchOrderByPage(Map param);
+
+    public HashMap searchOrderContent(long orderId);
+
 //    public boolean validDriverOwnOrder(Map param);
 //
 //    public HashMap searchSettlementNeedData(long orderId);

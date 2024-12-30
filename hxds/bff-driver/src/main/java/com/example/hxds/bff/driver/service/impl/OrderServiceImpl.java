@@ -22,6 +22,7 @@ import com.example.hxds.bff.driver.controller.form.UpdateBillFeeForm;
 import com.example.hxds.bff.driver.controller.form.UpdateOrderStatusForm;
 import com.example.hxds.bff.driver.controller.form.ValidDriverOwnOrderForm;
 import com.example.hxds.bff.driver.feign.CstServiceApi;
+import com.example.hxds.bff.driver.feign.NebulaServiceApi;
 import com.example.hxds.bff.driver.feign.OdrServiceApi;
 import com.example.hxds.bff.driver.service.OrderService;
 import com.example.hxds.common.exception.HxdsException;
@@ -42,9 +43,9 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private CstServiceApi cstServiceApi;
 
-//    @Resource
-//    private NebulaServiceApi nebulaServiceApi;
-//
+    @Resource
+    private NebulaServiceApi nebulaServiceApi;
+
 //    @Resource
 //    private RuleServiceApi ruleServiceApi;
 //
@@ -124,7 +125,7 @@ public class OrderServiceImpl implements OrderService {
         if(rows==1){
             InsertOrderMonitoringForm monitoringForm=new InsertOrderMonitoringForm();
             monitoringForm.setOrderId(form.getOrderId());
-//            nebulaServiceApi.insertOrderMonitoring(monitoringForm);
+            nebulaServiceApi.insertOrderMonitoring(monitoringForm);
             //TODO 发送通知消息
         }
 
