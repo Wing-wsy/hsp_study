@@ -12,5 +12,5 @@ public interface OrderGpsService {
 
     public HashMap searchOrderLastGps(long orderId);
 
-//    public String calculateOrderMileage(long orderId);
+    public String calculateOrderMileage(long orderId);
 }

@@ -25,6 +25,6 @@ public interface NebulaServiceApi {
     @PostMapping("/order/gps/insertOrderGps")
     public R insertOrderGps(InsertOrderGpsForm form);
 
-//    @PostMapping("/order/gps/calculateOrderMileage")
-//    public R calculateOrderMileage(CalculateOrderMileageForm form);
+    @PostMapping("/order/gps/calculateOrderMileage")
+    public R calculateOrderMileage(CalculateOrderMileageForm form);
 }

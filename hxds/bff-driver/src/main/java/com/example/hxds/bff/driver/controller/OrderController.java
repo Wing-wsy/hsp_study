@@ -105,23 +105,23 @@ public class OrderController {
         return R.ok().put("rows",rows);
     }
 
-//    @PostMapping("/updateBillFee")
-//    @SaCheckLogin
-//    @Operation(summary = "更新订单账单费用")
-//    public R updateBillFee(@RequestBody @Valid UpdateBillFeeForm form){
-//        long driverId = StpUtil.getLoginIdAsLong();
-//        form.setDriverId(driverId);
-//        int rows = orderService.updateOrderBill(form);
-//        return R.ok().put("rows",rows);
-//    }
-//
-//    @PostMapping("/searchReviewDriverOrderBill")
-//    @SaCheckLogin
-//    @Operation(summary = "查询司机预览订单")
-//    public R searchReviewDriverOrderBill(@RequestBody @Valid SearchReviewDriverOrderBillForm form){
-//        long driverId = StpUtil.getLoginIdAsLong();
-//        form.setDriverId(driverId);
-//        HashMap map = orderService.searchReviewDriverOrderBill(form);
-//        return R.ok().put("result",map);
-//    }
+    @PostMapping("/updateBillFee")
+    @SaCheckLogin
+    @Operation(summary = "更新订单账单费用")
+    public R updateBillFee(@RequestBody @Valid UpdateBillFeeForm form){
+        long driverId = StpUtil.getLoginIdAsLong();
+        form.setDriverId(driverId);
+        int rows = orderService.updateOrderBill(form);
+        return R.ok().put("rows",rows);
+    }
+
+    @PostMapping("/searchReviewDriverOrderBill")
+    @SaCheckLogin
+    @Operation(summary = "查询司机预览订单")
+    public R searchReviewDriverOrderBill(@RequestBody @Valid SearchReviewDriverOrderBillForm form){
+        long driverId = StpUtil.getLoginIdAsLong();
+        form.setDriverId(driverId);
+        HashMap map = orderService.searchReviewDriverOrderBill(form);
+        return R.ok().put("result",map);
+    }
 }

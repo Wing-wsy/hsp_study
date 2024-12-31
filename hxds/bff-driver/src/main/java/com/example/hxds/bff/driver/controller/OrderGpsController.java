@@ -33,4 +33,6 @@ public class OrderGpsController {
         int rows = orderGpsService.insertOrderGps(form);
         return R.ok().put("rows",rows);
     }
+
+
 }

@@ -46,10 +46,10 @@ public class OrderGpsController {
         return R.ok().put("result",map);
     }
 
-//    @PostMapping("/calculateOrderMileage")
-//    @Operation(summary = "计算订单里程")
-//    public R calculateOrderMileage(@RequestBody @Valid CalculateOrderMileageForm form){
-//        String mileage = orderGpsService.calculateOrderMileage(form.getOrderId());
-//        return R.ok().put("result",mileage);
-//    }
+    @PostMapping("/calculateOrderMileage")
+    @Operation(summary = "计算订单里程")
+    public R calculateOrderMileage(@RequestBody @Valid CalculateOrderMileageForm form){
+        String mileage = orderGpsService.calculateOrderMileage(form.getOrderId());
+        return R.ok().put("result",mileage);
+    }
 }

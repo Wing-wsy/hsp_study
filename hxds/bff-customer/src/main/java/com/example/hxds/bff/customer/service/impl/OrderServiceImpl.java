@@ -17,6 +17,7 @@ import com.example.hxds.bff.customer.controller.form.SearchOrderByIdForm;
 import com.example.hxds.bff.customer.controller.form.SearchOrderForMoveByIdForm;
 import com.example.hxds.bff.customer.controller.form.SearchOrderStatusForm;
 import com.example.hxds.bff.customer.controller.form.SendNewOrderMessageForm;
+import com.example.hxds.bff.customer.feign.DrServiceApi;
 import com.example.hxds.bff.customer.feign.MpsServiceApi;
 import com.example.hxds.bff.customer.feign.OdrServiceApi;
 import com.example.hxds.bff.customer.feign.RuleServiceApi;
@@ -50,8 +51,8 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private SnmServiceApi snmServiceApi;
 
-//    @Resource
-//    private DrServiceApi drServiceApi;
+    @Resource
+    private DrServiceApi drServiceApi;
 
     @Resource
     private RedisTemplate redisTemplate;
@@ -211,21 +212,21 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
-//    @Override
-//    public HashMap searchOrderById(SearchOrderByIdForm form) {
-//        R r = odrServiceApi.searchOrderById(form);
-//        HashMap map = (HashMap) r.get("result");
-//        Long driverId = MapUtil.getLong(map, "driverId");
-//        if(driverId!=null){
-//            SearchDriverBriefInfoForm infoForm=new SearchDriverBriefInfoForm();
-//            infoForm.setDriverId(driverId);
-//            r=drServiceApi.searchDriverBriefInfo(infoForm);
-//            HashMap temp = (HashMap) r.get("result");
-//            map.putAll(temp);
-//            return map;
-//        }
-//        return null;
-//    }
+    @Override
+    public HashMap searchOrderById(SearchOrderByIdForm form) {
+        R r = odrServiceApi.searchOrderById(form);
+        HashMap map = (HashMap) r.get("result");
+        Long driverId = MapUtil.getLong(map, "driverId");
+        if(driverId!=null){
+            SearchDriverBriefInfoForm infoForm=new SearchDriverBriefInfoForm();
+            infoForm.setDriverId(driverId);
+            r=drServiceApi.searchDriverBriefInfo(infoForm);
+            HashMap temp = (HashMap) r.get("result");
+            map.putAll(temp);
+            return map;
+        }
+        return null;
+    }
 
 
 }

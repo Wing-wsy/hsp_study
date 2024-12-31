@@ -41,10 +41,10 @@ public interface OrderService {
 
     public HashMap searchOrderContent(long orderId);
 
-//    public boolean validDriverOwnOrder(Map param);
-//
-//    public HashMap searchSettlementNeedData(long orderId);
-//
-//    public HashMap searchOrderById(Map param);
+    public boolean validDriverOwnOrder(Map param);
+
+    public HashMap searchSettlementNeedData(long orderId);
+
+    public HashMap searchOrderById(Map param);
 
 }

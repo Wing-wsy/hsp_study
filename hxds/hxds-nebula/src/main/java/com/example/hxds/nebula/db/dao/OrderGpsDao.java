@@ -12,5 +12,5 @@ public interface OrderGpsDao {
 
     public HashMap searchOrderLastGps(long orderId);
 
-//    public ArrayList<HashMap> searchOrderAllGps(long orderId);
+    public ArrayList<HashMap> searchOrderAllGps(long orderId);
 }

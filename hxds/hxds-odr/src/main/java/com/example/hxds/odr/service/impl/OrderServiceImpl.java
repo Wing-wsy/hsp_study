@@ -274,27 +274,27 @@ public class OrderServiceImpl implements OrderService {
         return map;
     }
 
-//    @Override
-//    public boolean validDriverOwnOrder(Map param) {
-//        long count = orderDao.validDriverOwnOrder(param);
-//        return count == 1 ? true : false;
-//    }
-//
-//    @Override
-//    public HashMap searchSettlementNeedData(long orderId) {
-//        HashMap map = orderDao.searchSettlementNeedData(orderId);
-//        return map;
-//    }
-//
-//    @Override
-//    public HashMap searchOrderById(Map param) {
-//        HashMap map = orderDao.searchOrderById(param);
-//        String startPlaceLocation=MapUtil.getStr(map,"startPlaceLocation");
-//        String endPlaceLocation=MapUtil.getStr(map,"endPlaceLocation");
-//        map.replace("startPlaceLocation",JSONUtil.parseObj(startPlaceLocation));
-//        map.replace("endPlaceLocation",JSONUtil.parseObj(endPlaceLocation));
-//        return map;
-//    }
+    @Override
+    public boolean validDriverOwnOrder(Map param) {
+        long count = orderDao.validDriverOwnOrder(param);
+        return count == 1 ? true : false;
+    }
+
+    @Override
+    public HashMap searchSettlementNeedData(long orderId) {
+        HashMap map = orderDao.searchSettlementNeedData(orderId);
+        return map;
+    }
+
+    @Override
+    public HashMap searchOrderById(Map param) {
+        HashMap map = orderDao.searchOrderById(param);
+        String startPlaceLocation=MapUtil.getStr(map,"startPlaceLocation");
+        String endPlaceLocation=MapUtil.getStr(map,"endPlaceLocation");
+        map.replace("startPlaceLocation",JSONUtil.parseObj(startPlaceLocation));
+        map.replace("endPlaceLocation",JSONUtil.parseObj(endPlaceLocation));
+        return map;
+    }
 
 
 }

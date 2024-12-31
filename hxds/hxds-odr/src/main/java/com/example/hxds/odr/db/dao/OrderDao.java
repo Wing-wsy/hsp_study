@@ -40,13 +40,13 @@ public interface OrderDao {
 
     public HashMap searchOrderContent(long orderId);
 
-//    public int updateOrderMileageAndFee(Map param);
-//
-//    public long validDriverOwnOrder(Map param);
-//
-//    public HashMap searchSettlementNeedData(long orderId);
-//
-//    public HashMap searchOrderById(Map param);
+    public int updateOrderMileageAndFee(Map param);
+
+    public long validDriverOwnOrder(Map param);
+
+    public HashMap searchSettlementNeedData(long orderId);
+
+    public HashMap searchOrderById(Map param);
 }
 
 

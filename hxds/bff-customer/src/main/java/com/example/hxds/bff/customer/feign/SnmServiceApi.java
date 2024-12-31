@@ -11,6 +11,6 @@ public interface SnmServiceApi {
     @PostMapping("/message/order/new/sendNewOrderMessageAsync")
     public R sendNewOrderMessageAsync(SendNewOrderMessageForm form);
 
-//    @PostMapping("/message/receiveBillMessage")
-//    public R receiveBillMessage(ReceiveBillMessageForm form);
+    @PostMapping("/message/receiveBillMessage")
+    public R receiveBillMessage(ReceiveBillMessageForm form);
 }

@@ -18,12 +18,12 @@ public interface SnmServiceApi {
 
 
 
-//    @PostMapping("/message/sendPrivateMessage")
-//    @Operation(summary = "同步发送私有消息")
-//    public R sendPrivateMessage(SendPrivateMessageForm form);
-//
-//    @PostMapping("/message/sendPrivateMessageSync")
-//    @Operation(summary = "异步发送私有消息")
-//    public R sendPrivateMessageSync(SendPrivateMessageForm form);
+    @PostMapping("/message/sendPrivateMessage")
+    @Operation(summary = "同步发送私有消息")
+    public R sendPrivateMessage(SendPrivateMessageForm form);
+
+    @PostMapping("/message/sendPrivateMessageSync")
+    @Operation(summary = "异步发送私有消息")
+    public R sendPrivateMessageSync(SendPrivateMessageForm form);
 
 }
