@@ -28,10 +28,6 @@ public class Strings {
      * 空格
      */
     public static final String SPACE = " ";
-    /**
-     * 字符串NULL
-     */
-    public static final String STR_NULL = null;
 
     /**
      * 星号

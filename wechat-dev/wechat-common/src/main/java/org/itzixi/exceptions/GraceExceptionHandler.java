@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 全局异常处理器
+ */
 @ControllerAdvice
 public class GraceExceptionHandler {
 

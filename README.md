@@ -9,8 +9,8 @@
 #### chapter-07 - mysql & jdbc & mongodb & FastDFS  【 √  】
 #### chapter-08 - linux              【 △ 】
 #### chapter-09 - 正则表达式            【 √ 】
-#### chapter-10 - mycat2            【 × 】
-#### chapter-11 - sharding-jdbc       【 × 】
+#### chapter-10 - 分库分表 & ShardingSphere     【 × 】
+#### chapter-11 - xxx       【 × 】
 #### chapter-12 - redis              【 √ 】
 #### chapter-13 - nginx              【 × 】
 #### chapter-14 - java 集合           【 √ 】
@@ -29,7 +29,7 @@
 #### chapter-27 - SpringSecurity        【  √  】
 #### chapter-28 - XXL_JOB        【 √  】
 #### chapter-29 - Kafka       【 △ 】
-#### chapter-30 - ElasticSearch、ELK       【 × 】
+#### chapter-30 - 自己阿里云服务器相关软件、ElasticSearch、ELK       【 × 】
 #### chapter-31 - NIO、WebSocket、Netty       【 √ 】
 #### chapter-32 - dubbo       【 × 】
 #### chapter-33 - zookeeper       【 × 】

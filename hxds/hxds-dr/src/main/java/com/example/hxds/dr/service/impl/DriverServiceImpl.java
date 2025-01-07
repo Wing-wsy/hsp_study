@@ -8,6 +8,7 @@ import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.example.hxds.common.exception.HxdsException;
 import com.example.hxds.common.util.MicroAppUtil;
 import com.example.hxds.common.util.PageUtils;
+import com.example.hxds.common.util.SnowUtil;
 import com.example.hxds.common.util.SnowflakeIdWorker;
 import com.example.hxds.dr.db.dao.DriverDao;
 import com.example.hxds.dr.db.dao.DriverSettingsDao;
@@ -57,8 +58,8 @@ public class DriverServiceImpl implements DriverService {
     @Resource
     private WalletDao walletDao;
 
-    @Resource
-    private SnowflakeIdWorker snowflakeIdWorker;
+//    @Resource
+//    private SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
     @Transactional
@@ -78,12 +79,14 @@ public class DriverServiceImpl implements DriverService {
         param.put("openId", openId);
 
         // 此处用snowflake直接生成唯一的主键id
-        long driverId = snowflakeIdWorker.createId();
+//        long driverId = snowflakeIdWorker.createId();
+        long driverId = SnowUtil.nextId();
         param.put("id", driverId);
         driverDao.registerNewDriver(param);
 
         DriverSettingsEntity settingsEntity = new DriverSettingsEntity();
-        long did = snowflakeIdWorker.createId();
+//        long did = snowflakeIdWorker.createId();
+        long did = SnowUtil.nextId();
         settingsEntity.setId(did);
         settingsEntity.setDriverId(driverId);
         JSONObject json = new JSONObject();
@@ -96,7 +99,8 @@ public class DriverServiceImpl implements DriverService {
         settingsDao.insertDriverSettings(settingsEntity);
 
         WalletEntity walletEntity = new WalletEntity();
-        long wid = snowflakeIdWorker.createId();
+//        long wid = snowflakeIdWorker.createId();
+        long wid = SnowUtil.nextId();
         walletEntity.setId(wid);
         walletEntity.setDriverId(driverId);
         walletEntity.setBalance(new BigDecimal("0"));

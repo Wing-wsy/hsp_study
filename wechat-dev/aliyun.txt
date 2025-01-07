@@ -136,6 +136,16 @@ docker run --name nacos-test \
 -p 17848:7848 \
 -d nacos/nacos-server:v2.3.1-slim
 
+=================================================  nacos  =================================================
+
+10-1）docker search bladex/sentinel-dashboard
+
+10-2）docker run --name sentinel -d -p 8858:8858 -d bladex/sentinel-dashboard
+
+10-3）http://8.217.253.19:8858/ 【默认用户名和密码：sentinel】
+
+
+
 ========= 下面的服务统一上传到 /home/jars 这个路径下 =========
 =================================================  发布 gateway  =================================================
 

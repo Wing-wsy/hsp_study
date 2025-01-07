@@ -6,13 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="在线人数调整">
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter07/MongoDB.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter07/MongoDB.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter16/编程不良人/RibbitMQ 实战教程.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rabbit-parent/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rabbit-parent/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rabbit-parent/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rabbit-parent/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter30/aliyun-linux项目位置.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter30/aliyun-linux项目位置.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/bff-customer/src/main/java/com/example/hxds/bff/customer/feign/CstServiceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/bff-customer/src/main/java/com/example/hxds/bff/customer/feign/CstServiceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/gateway/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/gateway/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wechat-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aliyun.txt" beforeDir="false" afterPath="$PROJECT_DIR$/aliyun.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/exceptions/GraceExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/exceptions/GraceExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +88,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SplitterUtil">
+  <component name="RunManager" selected="Spring Boot.Application (1)">
     <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer" />
       <module name="chat-server" />
@@ -196,6 +197,11 @@
       <workItem from="1732275494761" duration="169431000" />
       <workItem from="1733541034410" duration="2372000" />
       <workItem from="1733731934313" duration="681000" />
+      <workItem from="1734083806479" duration="1830000" />
+      <workItem from="1734577995870" duration="16405000" />
+      <workItem from="1735093979099" duration="1871000" />
+      <workItem from="1735268932780" duration="87000" />
+      <workItem from="1735640686575" duration="2754000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />

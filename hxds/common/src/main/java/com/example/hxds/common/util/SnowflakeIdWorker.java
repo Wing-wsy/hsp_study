@@ -95,7 +95,7 @@ public class SnowflakeIdWorker {
     }
 
     public static void main(String[] args) {
-        SnowflakeIdWorker snowFlake = new SnowflakeIdWorker(2, 3);
+        SnowflakeIdWorker snowFlake = new SnowflakeIdWorker(1, 1);
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {

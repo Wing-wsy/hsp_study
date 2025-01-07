@@ -1,6 +1,6 @@
 # Mac配置JDK环境变量
 
-
+jdk下载：https://blog.csdn.net/weixin_44328487/article/details/138352218
 
 切换本地JDK
 
