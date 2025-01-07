@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="在线人数调整">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter28/分布式调度XXL-JOB.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter28/分布式调度XXL-JOB.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chapter30/aliyun-linux项目位置.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter30/aliyun-linux项目位置.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/bff-customer/src/main/java/com/example/hxds/bff/customer/feign/CstServiceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/bff-customer/src/main/java/com/example/hxds/bff/customer/feign/CstServiceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/config/SnowBeanConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/config/SnowBeanConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/util/SnowflakeIdWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/util/SnowflakeIdWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/gateway/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/gateway/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hxds/hxds-dr/src/main/java/com/example/hxds/dr/service/impl/DriverServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/hxds-dr/src/main/java/com/example/hxds/dr/service/impl/DriverServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat-dev/aliyun.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/aliyun.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat-dev/api/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/api/auth-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/constant/basic/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/constant/basic/Strings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/exceptions/GraceExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/exceptions/GraceExceptionHandler.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/repository" />
+        <option name="mavenHome" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4" />
+        <option name="userSettingsFile" value="$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2p0q6zdGnkjjlOfeoZjFfzd6bmG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/fs-dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/api/chat-server" />
+      <recent name="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller" />
+      <recent name="$PROJECT_DIR$/api/main-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/api/file-service/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yz.common.constant" />
+      <recent name="org.itzixi.netty" />
+      <recent name="org.itzixi.netty.websocket" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application (1)">
+    <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer" />
+      <module name="chat-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.itzixi.netty.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChatServer2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer2" />
+      <module name="chat-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.itzixi.netty.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocalDateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.itzixi.utils.LocalDateUtils" />
+      <module name="wechat-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.itzixi.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SplitterUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.itzixi.utils.SplitterUtil" />
+      <module name="wechat-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.itzixi.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="fs-dev" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="fs-dev" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="file-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main-service-66" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+      <module name="main-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.itzixi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SplitterUtil" />
+        <item itemvalue="Application.ChatServer" />
+        <item itemvalue="Application.LocalDateUtils" />
+        <item itemvalue="Application.ChatServer2" />
+        <item itemvalue="Spring Boot.main-service-66" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="" />
+      <created>1731913170016</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731913170016</updated>
+      <workItem from="1731913171384" duration="93429000" />
+      <workItem from="1732275494761" duration="169431000" />
+      <workItem from="1733541034410" duration="2372000" />
+      <workItem from="1733731934313" duration="681000" />
+      <workItem from="1734083806479" duration="1830000" />
+      <workItem from="1734577995870" duration="16405000" />
+      <workItem from="1735093979099" duration="1871000" />
+      <workItem from="1735268932780" duration="87000" />
+      <workItem from="1735640686575" duration="2754000" />
+      <workItem from="1736219192547" duration="9981000" />
+    </task>
+    <task id="LOCAL-00001" summary="redis分布式应用结束">
+      <option name="closed" value="true" />
+      <created>1731916626724</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731916626724</updated>
+    </task>
+    <task id="LOCAL-00002" summary="分布式文件服务器">
+      <option name="closed" value="true" />
+      <created>1732021999770</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732021999770</updated>
+    </task>
+    <task id="LOCAL-00003" summary="数据库多表关系">
+      <option name="closed" value="true" />
+      <created>1732093702526</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732093702526</updated>
+    </task>
+    <task id="LOCAL-00004" summary="朋友圈功能">
+      <option name="closed" value="true" />
+      <created>1732155267536</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732155267536</updated>
+    </task>
+    <task id="LOCAL-00005" summary="聊天功能 + 百度语音">
+      <option name="closed" value="true" />
+      <created>1732276848677</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732276848677</updated>
+    </task>
+    <task id="LOCAL-00006" summary="续">
+      <option name="closed" value="true" />
+      <created>1732276920607</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732276920607</updated>
+    </task>
+    <task id="LOCAL-00007" summary="netty聊天完结">
+      <option name="closed" value="true" />
+      <created>1732279227774</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732279227774</updated>
+    </task>
+    <task id="LOCAL-00008" summary="分布式消息队列">
+      <option name="closed" value="true" />
+      <created>1732357565019</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732357565019</updated>
+    </task>
+    <task id="LOCAL-00009" summary="IM系统完结">
+      <option name="closed" value="true" />
+      <created>1732516768268</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732516768268</updated>
+    </task>
+    <task id="LOCAL-00010" summary="IM系统前端调整（netty集群）">
+      <option name="closed" value="true" />
+      <created>1732516826346</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732516826346</updated>
+    </task>
+    <task id="LOCAL-00011" summary="后端部署云服务">
+      <option name="closed" value="true" />
+      <created>1732630310595</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1732630310595</updated>
+    </task>
+    <task id="LOCAL-00012" summary="后端部署云服务">
+      <option name="closed" value="true" />
+      <created>1732630371727</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732630371727</updated>
+    </task>
+    <task id="LOCAL-00013" summary="续">
+      <option name="closed" value="true" />
+      <created>1732709258674</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732709258676</updated>
+    </task>
+    <task id="LOCAL-00014" summary="日志">
+      <option name="closed" value="true" />
+      <created>1732711868563</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1732711868563</updated>
+    </task>
+    <task id="LOCAL-00015" summary="日志续">
+      <option name="closed" value="true" />
+      <created>1732714678999</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732714678999</updated>
+    </task>
+    <task id="LOCAL-00016" summary="日志续1">
+      <option name="closed" value="true" />
+      <created>1732758988913</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1732758988913</updated>
+    </task>
+    <task id="LOCAL-00017" summary="日志续2">
+      <option name="closed" value="true" />
+      <created>1732783969480</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1732783969480</updated>
+    </task>
+    <task id="LOCAL-00018" summary="调整 jedisPool 配置参数">
+      <option name="closed" value="true" />
+      <created>1732785584654</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1732785584655</updated>
+    </task>
+    <task id="LOCAL-00019" summary="数据库脚本">
+      <option name="closed" value="true" />
+      <created>1732785785140</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1732785785140</updated>
+    </task>
+    <task id="LOCAL-00020" summary="调整为单聊">
+      <option name="closed" value="true" />
+      <created>1732875300898</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1732875300898</updated>
+    </task>
+    <task id="LOCAL-00021" summary="1">
+      <option name="closed" value="true" />
+      <created>1733107314469</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1733107314470</updated>
+    </task>
+    <task id="LOCAL-00022" summary="支持昵称填写">
+      <option name="closed" value="true" />
+      <created>1733113183201</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1733113183201</updated>
+    </task>
+    <task id="LOCAL-00023" summary="在线人数调整">
+      <option name="closed" value="true" />
+      <created>1733121307998</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1733121307998</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="454117d1-93fe-40f7-a9a0-50dca887b583" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="454117d1-93fe-40f7-a9a0-50dca887b583">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/wing/architect/github/project/hsp_study/fs-dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="redis分布式应用结束" />
+    <MESSAGE value="分布式文件服务器" />
+    <MESSAGE value="数据库多表关系" />
+    <MESSAGE value="朋友圈功能" />
+    <MESSAGE value="聊天功能 + 百度语音" />
+    <MESSAGE value="netty聊天完结" />
+    <MESSAGE value="分布式消息队列" />
+    <MESSAGE value="IM系统完结" />
+    <MESSAGE value="IM系统前端调整（netty集群）" />
+    <MESSAGE value="后端部署云服务" />
+    <MESSAGE value="续" />
+    <MESSAGE value="日志" />
+    <MESSAGE value="日志续" />
+    <MESSAGE value="日志续1" />
+    <MESSAGE value="日志续2" />
+    <MESSAGE value="调整 jedisPool 配置参数" />
+    <MESSAGE value="数据库脚本" />
+    <MESSAGE value="调整为单聊" />
+    <MESSAGE value="1" />
+    <MESSAGE value="支持昵称填写" />
+    <MESSAGE value="在线人数调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="在线人数调整" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/controller/FriendRequestController.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/main-service/src/main/java/org/itzixi/service/impl/FriendRequestServiceImpl.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller/FileController.java</url>
+          <line>245</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/MinIOUtils.java</url>
+          <line>319</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/MinIOUtils.java</url>
+          <line>325</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer2.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/mq/RabbitMQConnectUtils.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/ChatServer.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/api/chat-server/src/main/java/org/itzixi/netty/websocket/ChatHandler.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/LocalDateUtils.java</url>
+          <line>738</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/wechat_dev$ChatServer.ic" NAME="ChatServer Coverage Results" MODIFIED="1732501401209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.itzixi.netty.*</FILTER>
+    </SUITE>
+  </component>
+</project>
