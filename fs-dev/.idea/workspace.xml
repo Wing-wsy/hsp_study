@@ -4,21 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="在线人数调整">
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter02/mac_jdk环境变量.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter28/分布式调度XXL-JOB.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter28/分布式调度XXL-JOB.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chapter30/aliyun-linux项目位置.md" beforeDir="false" afterPath="$PROJECT_DIR$/../chapter30/aliyun-linux项目位置.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hxds/bff-customer/src/main/java/com/example/hxds/bff/customer/feign/CstServiceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/bff-customer/src/main/java/com/example/hxds/bff/customer/feign/CstServiceApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/config/SnowBeanConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/config/SnowBeanConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/util/SnowflakeIdWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/common/src/main/java/com/example/hxds/common/util/SnowflakeIdWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hxds/gateway/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/gateway/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hxds/hxds-dr/src/main/java/com/example/hxds/dr/service/impl/DriverServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../hxds/hxds-dr/src/main/java/com/example/hxds/dr/service/impl/DriverServiceImpl.java" afterDir="false" />
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="系统模块划分1">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/HutoolUtilTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/Stu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/Teacher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/constant/Basic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/constant/CacheTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/constant/Strings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/constant/Times.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/enums/Sex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/enums/YesOrNo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/MyCustomException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/result/GraceResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/result/ResponseStatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/util/JSONUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/util/LocalDateUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/util/StrUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fs.md" beforeDir="false" afterPath="$PROJECT_DIR$/fs.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wechat-dev/aliyun.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/aliyun.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wechat-dev/api/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/api/auth-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/constant/basic/Strings.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/constant/basic/Strings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/exceptions/GraceExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/wechat-common/src/main/java/org/itzixi/exceptions/GraceExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,9 +99,11 @@
       <recent name="$PROJECT_DIR$/api/file-service/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yz.common.exception" />
+      <recent name="com.yz.common.enums" />
+      <recent name="com.yz.common.util" />
+      <recent name="com.yz.common.result" />
       <recent name="com.yz.common.constant" />
-      <recent name="org.itzixi.netty" />
-      <recent name="org.itzixi.netty.websocket" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -104,7 +113,20 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application (1)">
+  <component name="RunManager" selected="Application.HutoolUtilTest">
+    <configuration name="CacheTime" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.yz.common.constant.CacheTime" />
+      <module name="common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yz.common.constant.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer" />
       <module name="chat-server" />
@@ -118,12 +140,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ChatServer2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer2" />
-      <module name="chat-server" />
+    <configuration name="HutoolUtilTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.yz.common.HutoolUtilTest" />
+      <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.itzixi.netty.*" />
+          <option name="PATTERN" value="com.yz.common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -191,26 +213,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main-service-66" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
-      <module name="main-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.itzixi.Application" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.itzixi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HutoolUtilTest" />
+        <item itemvalue="Application.CacheTime" />
         <item itemvalue="Application.SplitterUtil" />
         <item itemvalue="Application.ChatServer" />
         <item itemvalue="Application.LocalDateUtils" />
-        <item itemvalue="Application.ChatServer2" />
-        <item itemvalue="Spring Boot.main-service-66" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +240,7 @@
       <workItem from="1735093979099" duration="1871000" />
       <workItem from="1735268932780" duration="87000" />
       <workItem from="1735640686575" duration="2754000" />
-      <workItem from="1736219192547" duration="9981000" />
+      <workItem from="1736219192547" duration="41479000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -417,7 +426,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733121307998</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="系统模块划分">
+      <option name="closed" value="true" />
+      <created>1736246325220</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1736246325220</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +514,9 @@
     <MESSAGE value="1" />
     <MESSAGE value="支持昵称填写" />
     <MESSAGE value="在线人数调整" />
-    <option name="LAST_COMMIT_MESSAGE" value="在线人数调整" />
+    <MESSAGE value="系统模块划分" />
+    <MESSAGE value="系统模块划分1" />
+    <option name="LAST_COMMIT_MESSAGE" value="系统模块划分1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -556,6 +575,26 @@
           <url>file://$PROJECT_DIR$/wechat-common/src/main/java/org/itzixi/utils/LocalDateUtils.java</url>
           <line>738</line>
           <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/DevelopEnvironment/apache-maven-3.9.4/repository/cn/hutool/hutool-all/5.8.10/hutool-all-5.8.10-sources.jar!/cn/hutool/core/text/CharSequenceUtil.java</url>
+          <line>154</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/yz/common/util/LocalDateUtils.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/yz/common/util/LocalDateUtils.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/yz/common/HutoolUtilTest.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
