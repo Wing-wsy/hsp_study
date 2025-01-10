@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /cst
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # 不限制请求体大小
+
+
+spring:
+  application:
+    name: cst-service
+  profiles:
+    active: dev   # dev-开发环境; prod-生产环境; test-测试环境;

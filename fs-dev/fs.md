@@ -28,12 +28,15 @@ fs-dev
         - constant    # 常量
         - enums       # 枚举
         - exception   # 系统异常
+        - interceptor # 拦截器
         - result      # 响应前端实体类
         - util        # 工具类
     # 扩展模块（mybatis逆向工程、代码生成器等）
     eff
         - mybatis-generator
 ```
+
+# 2 系统模块继承关系
 
 > 项目模块之间有严格继承关系：
 >
@@ -58,6 +61,24 @@ fs-dev
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 

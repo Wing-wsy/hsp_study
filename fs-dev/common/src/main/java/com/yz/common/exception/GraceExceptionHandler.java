@@ -26,7 +26,7 @@ public class GraceExceptionHandler {
     }
 
     // 处理异常兜底
-    @ExceptionHandler(MyCustomException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseBody
     public GraceResult returnException(Exception e) {
         e.printStackTrace();
