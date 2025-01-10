@@ -5,16 +5,16 @@
 
     <parent>
         <groupId>com.yz</groupId>
-        <artifactId>service</artifactId>
+        <artifactId>bff</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>service-base</artifactId>
+    <artifactId>mis-bff</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.yz</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>bff-base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

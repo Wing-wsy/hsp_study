@@ -17,6 +17,13 @@
         <option value="$PROJECT_DIR$/service/base/pom.xml" />
         <option value="$PROJECT_DIR$/service/service-base/pom.xml" />
         <option value="$PROJECT_DIR$/bff/bff-base/pom.xml" />
+        <option value="$PROJECT_DIR$/model/pom.xml" />
+        <option value="$PROJECT_DIR$/api/pom.xml" />
+        <option value="$PROJECT_DIR$/service/cst/pom.xml" />
+        <option value="$PROJECT_DIR$/service/odr/pom.xml" />
+        <option value="$PROJECT_DIR$/service/pay/pom.xml" />
+        <option value="$PROJECT_DIR$/bff/cst-bff/pom.xml" />
+        <option value="$PROJECT_DIR$/bff/mis-bff/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

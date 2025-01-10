@@ -9,12 +9,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>service-base</artifactId>
+    <artifactId>cst</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.yz</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>service-base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

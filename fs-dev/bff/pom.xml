@@ -12,7 +12,10 @@
     <packaging>pom</packaging>
     <artifactId>bff</artifactId>
     <modules>
+        <!-- 这里管理全部bff服务-->
         <module>bff-base</module>
+        <module>cst-bff</module>
+        <module>mis-bff</module>
     </modules>
 
 
