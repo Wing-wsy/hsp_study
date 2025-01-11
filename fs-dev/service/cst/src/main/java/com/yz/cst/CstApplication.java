@@ -22,7 +22,11 @@ public class CstApplication {
                 env.getProperty("server.port"),
                 env.getProperty("server.servlet.context-path")
         );
-
+        LOG.info(
+                "文档地址: \thttp://127.0.0.1:{}{}/swagger-ui/index.html?configUrl=/doc-api.html",
+                env.getProperty("server.port"),
+                env.getProperty("server.servlet.context-path")
+        );
     }
 
 }

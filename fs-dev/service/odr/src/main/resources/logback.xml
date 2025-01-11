@@ -15,7 +15,7 @@
     <if condition='property("env").equals("prod")'>
         <then>
             <!-- 生产环境-日志格式不带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{LOG_ID}] - %msg%n"/>
         </then>
     </if>
     <if condition='!property("env").equals("prod")'>
