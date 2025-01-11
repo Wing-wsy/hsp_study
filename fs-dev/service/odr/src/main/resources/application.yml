@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /cst
+    context-path: /odr
   tomcat:
     uri-encoding: UTF-8
     max-swallow-size: -1  # 不限制请求体大小
@@ -8,9 +8,6 @@ server:
 
 spring:
   application:
-    name: cst-service
+    name: odr-service
   profiles:
     active: dev   # dev-开发环境; prod-生产环境; test-测试环境;
-#    active: test   # dev-开发环境; prod-生产环境; test-测试环境;
-#    active: prod   # dev-开发环境; prod-生产环境; test-测试环境;
-

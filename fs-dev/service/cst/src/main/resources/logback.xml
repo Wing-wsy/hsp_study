@@ -7,15 +7,28 @@
     <contextName>logback</contextName>
     <!-- 读取yml中的项目名称 -->
     <springProperty name="application_name" scope="context" source="spring.application.name"/>
+    <springProperty name="active_profiles" scope="context" source="spring.profiles.active"/>
     <!-- 日志保存路径 -->
     <property name="log.path" value="logs/${application_name}"></property>
 
+    <property name="env" value="${active_profiles}" />
+    <if condition='property("env").equals("prod")'>
+        <then>
+            <!-- 生产环境-日志格式不带颜色 -->
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>
+        </then>
+    </if>
+    <if condition='!property("env").equals("prod")'>
+        <then>
+            <!-- 开发环境-日志格式带颜色 -->
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>
+        </then>
+    </if>
+
     <!-- 日志格式不带颜色 -->
-<!--    <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>-->
+    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>-->
     <!-- 日志格式带颜色 -->
-    <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>
-    <!-- 读取SpringBoot配置文件获取logstash的地址和端口 -->
-    <springProperty scope="context" name="logstash-host" source="log.logstash-host"/>
+    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>-->
 
     <!-- 标准输出：控制台 -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
@@ -100,7 +113,7 @@
 
     <!-- root指定所有的打印日志级别（如果使用<logger>标签指定了打印级别，则使用logger指定的） -->
     <!-- 从低到高为（不区分大小写）：All < Trace < Debug < Info < Warn < Error < Fatal < OFF-->
-<!--    <root level="Info">-->
+    <!--    <root level="Info">-->
     <root level="Info">
         <appender-ref ref="Console"/>
         <appender-ref ref="RollingFileInfo"/>
@@ -108,22 +121,13 @@
         <appender-ref ref="RollingFileError"/>
     </root>
 
-    <!--如果指定的包需要特殊的打印日志级别<logger>标签来改变具体某个包下打印日志的级别，否则默认使用root标签配置。-->
-<!--    <logger name="org.springframework" level="INFO" additivity="false">-->
-<!--        <appender-ref ref="Console"/>-->
-<!--        <appender-ref ref="RollingFileInfo"/>-->
-<!--    </logger>-->
-<!--    <logger name="org.mybatis" level="info"/>-->
-<!--    <Logger name="org.apache.catalina" level="info"/>-->
-<!--    <Logger name="org.apache.tomcat.util" level="info"/>-->
-
-
     <!--生产环境-->
     <!--
         yml配置环境激活：spring.profiles.active=prod 则下面生效
     -->
     <springProfile name="prod">
-        <root level="error">
+<!--        <root level="error">-->
+        <root level="info">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
             <appender-ref ref="RollingFileWarn"/>

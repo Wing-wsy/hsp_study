@@ -1,6 +1,5 @@
 package com.yz.common.interceptor;
 
-import cn.hutool.core.util.RandomUtil;
 import com.yz.common.util.RandomUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

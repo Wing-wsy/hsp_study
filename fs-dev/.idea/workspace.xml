@@ -4,12 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="基础系统框架搭建完成">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="增加日志框架">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/yz/common/interceptor/LogInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/interceptor/LogInterceptor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fs.md" beforeDir="false" afterPath="$PROJECT_DIR$/fs.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/CstApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/CstApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/application_name_IS_UNDEFINED/info.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/application_name_IS_UNDEFINED/warn.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/cst-service/error.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/cst-service/info.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/cst-service/warn.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/cst/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/cst/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/cst/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/odr/src/main/java/com/yz/odr/OdrApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/odr/src/main/java/com/yz/odr/OdrApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,13 +71,16 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/fs-dev/service/cst/src/main/resources/mapper",
+    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/fs-dev/service/odr/src/main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "MavenSettings",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
     "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -77,11 +90,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/service/odr/src/main" />
+      <recent name="$PROJECT_DIR$/service/odr/src/main/java/com/yz/odr" />
       <recent name="$PROJECT_DIR$/service/cst/src/main/resources/mapper" />
       <recent name="$PROJECT_DIR$/service/cst/src/main/resources" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/api/chat-server" />
-      <recent name="$PROJECT_DIR$/api/file-service/src/main/java/org/itzixi/controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/service/cst/src/main/resources" />
@@ -108,19 +121,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.yz.common.constant.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.itzixi.netty.ChatServer" />
-      <module name="chat-server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.itzixi.netty.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -201,13 +201,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OdrApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="odr" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yz.odr.OdrApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yz.odr.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.CstApplication" />
+        <item itemvalue="Spring Boot.OdrApplication" />
         <item itemvalue="Application.HutoolUtilTest" />
         <item itemvalue="Application.CacheTime" />
         <item itemvalue="Application.SplitterUtil" />
-        <item itemvalue="Application.ChatServer" />
       </list>
     </recent_temporary>
   </component>
@@ -229,7 +242,7 @@
       <workItem from="1735268932780" duration="87000" />
       <workItem from="1735640686575" duration="2754000" />
       <workItem from="1736219192547" duration="47071000" />
-      <workItem from="1736498964180" duration="15423000" />
+      <workItem from="1736498964180" duration="26267000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -439,7 +452,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736503112939</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="增加日志框架">
+      <option name="closed" value="true" />
+      <created>1736522494979</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1736522494979</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="redis分布式应用结束" />
     <MESSAGE value="分布式文件服务器" />
     <MESSAGE value="数据库多表关系" />
     <MESSAGE value="朋友圈功能" />
@@ -523,7 +543,8 @@
     <MESSAGE value="系统模块划分1" />
     <MESSAGE value="基础工具类" />
     <MESSAGE value="基础系统框架搭建完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="基础系统框架搭建完成" />
+    <MESSAGE value="增加日志框架" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加日志框架" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -602,6 +623,11 @@
           <url>file://$PROJECT_DIR$/common/src/main/java/com/yz/common/HutoolUtilTest.java</url>
           <line>15</line>
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceExceptionHandler.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
