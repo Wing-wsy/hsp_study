@@ -4,22 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="日志格式颜色（生产不带颜色，开发环境带颜色）">
+    <list default="true" id="7d614c23-104e-4e7f-b6b9-625d10752660" name="Changes" comment="加入swagger文档">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/GraceExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/MyCustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/exception/MyCustomException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/yz/common/result/ResponseStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/yz/common/result/ResponseStatusEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fs.md" beforeDir="false" afterPath="$PROJECT_DIR$/fs.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/application_name_IS_UNDEFINED/error.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/CstApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/CstApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/cst/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/cst/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/cst/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service/cst/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/odr/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service/odr/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/odr/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service/odr/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/odr/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service/odr/src/main/resources/logback.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wechat-dev/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -71,7 +63,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/fs-dev/common/src/main",
+    "last_opened_file_path": "/Users/wing/architect/github/project/hsp_study/fs-dev/bff/bff-base/src/main/java/com/eyz/bff/base",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -90,21 +82,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bff/bff-base/src/main/java/com/eyz/bff/base" />
       <recent name="$PROJECT_DIR$/common/src/main" />
       <recent name="$PROJECT_DIR$/model/src/main/java/com/yz/model/vo" />
       <recent name="$PROJECT_DIR$/service/odr/src/main" />
       <recent name="$PROJECT_DIR$/service/odr/src/main/java/com/yz/odr" />
-      <recent name="$PROJECT_DIR$/service/cst/src/main/resources/mapper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/service/cst/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yz.service.base.controller" />
       <recent name="com.yz.cst.config" />
       <recent name="com.yz.service.base.config.exception" />
       <recent name="com.yz.service.base.config" />
       <recent name="com.yz.common.interceptor" />
-      <recent name="com.yz.common.exception" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -242,7 +234,7 @@
       <workItem from="1735268932780" duration="87000" />
       <workItem from="1735640686575" duration="2754000" />
       <workItem from="1736219192547" duration="47071000" />
-      <workItem from="1736498964180" duration="33908000" />
+      <workItem from="1736498964180" duration="36989000" />
     </task>
     <task id="LOCAL-00001" summary="redis分布式应用结束">
       <option name="closed" value="true" />
@@ -468,7 +460,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736587621704</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="加入swagger文档">
+      <option name="closed" value="true" />
+      <created>1736595531510</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1736595531510</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +527,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="数据库多表关系" />
     <MESSAGE value="朋友圈功能" />
     <MESSAGE value="聊天功能 + 百度语音" />
     <MESSAGE value="netty聊天完结" />
@@ -552,7 +551,8 @@
     <MESSAGE value="基础系统框架搭建完成" />
     <MESSAGE value="增加日志框架" />
     <MESSAGE value="日志格式颜色（生产不带颜色，开发环境带颜色）" />
-    <option name="LAST_COMMIT_MESSAGE" value="日志格式颜色（生产不带颜色，开发环境带颜色）" />
+    <MESSAGE value="加入swagger文档" />
+    <option name="LAST_COMMIT_MESSAGE" value="加入swagger文档" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -631,6 +631,11 @@
           <url>file://$PROJECT_DIR$/common/src/main/java/com/yz/common/HutoolUtilTest.java</url>
           <line>15</line>
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/service/cst/src/main/java/com/yz/cst/controller/HelloController.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="65" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

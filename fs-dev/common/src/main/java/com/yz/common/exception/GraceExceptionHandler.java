@@ -29,7 +29,7 @@ public class GraceExceptionHandler {
     @ResponseBody
     public GraceResult returnMyCustomException(MyCustomException e) {
         log.error("业务异常：", e);
-        return GraceResult.exception(ResponseStatusEnum.SYSTEM_ERROR_GRACE);
+        return GraceResult.exception(e.getResponseStatusEnum());
     }
 
     // 处理异常兜底

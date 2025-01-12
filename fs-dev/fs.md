@@ -485,7 +485,9 @@ public enum ResponseStatusEnum {
 }
 ```
 
-# 5 全局异常处理器
+# 5 异常相关
+
+## 5.1 全局异常处理器
 
 ```java
 /**
@@ -515,6 +517,13 @@ public class GraceExceptionHandler {
         return GraceResult.exception(ResponseStatusEnum.SYSTEM_ERROR_GRACE);
     }
 }
+```
+
+## 5.2 系统抛出异常
+
+```java
+// 直接使用该方法抛出即可
+GraceException.display(ResponseStatusEnum.ORDER_NOT_FIND);
 ```
 
 # 6 Swagger 文档

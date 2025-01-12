@@ -1,5 +1,7 @@
 package com.yz.common.result;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * 响应结果枚举，用于提供给GraceResult返回给前端
  * 本枚举类中包含了很多的不同的状态码供使用，可以自定义
@@ -93,7 +95,10 @@ public enum ResponseStatusEnum {
     PAYMENT_USER_INFO_ERROR(5901, false, "用户id或密码不正确！"),
     PAYMENT_ACCOUT_EXPIRE_ERROR(5902, false, "该账户授权访问日期已失效！"),
     PAYMENT_HEADERS_ERROR(5903, false, "请在header中携带支付中心所需的用户id以及密码！"),
-    PAYMENT_ORDER_CREATE_ERROR(5904, false, "支付中心订单创建失败，请联系管理员！");
+    PAYMENT_ORDER_CREATE_ERROR(5904, false, "支付中心订单创建失败，请联系管理员！"),
+
+    //订单错误相关
+    ORDER_NOT_FIND(51001, false, "订单不存在！");
 
 
     // 响应业务状态
