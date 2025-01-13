@@ -1,5 +1,7 @@
 package com.yz.common.result;
 
+import org.slf4j.MDC;
+
 import java.util.Map;
 
 /**
@@ -23,6 +25,9 @@ public class GraceResult {
     // 响应数据，可以是Object，也可以是List或Map等
     private Object data;
 
+    // LOG_ID
+    private String id;
+
     /**
      * 成功返回，带有数据的，直接往OK方法丢data数据即可
      * @param data
@@ -43,6 +48,7 @@ public class GraceResult {
         this.msg = ResponseStatusEnum.SUCCESS.msg();
         this.success = ResponseStatusEnum.SUCCESS.success();
         this.data = data;
+        this.id = MDC.get("LOG_ID");
     }
 
 
@@ -100,17 +106,20 @@ public class GraceResult {
         this.status = responseStatus.status();
         this.msg = responseStatus.msg();
         this.success = responseStatus.success();
+        this.id = MDC.get("LOG_ID");
     }
     public GraceResult(ResponseStatusEnum responseStatus, Object data) {
         this.status = responseStatus.status();
         this.msg = responseStatus.msg();
         this.success = responseStatus.success();
         this.data = data;
+        this.id = MDC.get("LOG_ID");
     }
     public GraceResult(ResponseStatusEnum responseStatus, String msg) {
         this.status = responseStatus.status();
         this.msg = msg;
         this.success = responseStatus.success();
+        this.id = MDC.get("LOG_ID");
     }
 
     public GraceResult() {
@@ -146,5 +155,13 @@ public class GraceResult {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+    }
+
+    public Object getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

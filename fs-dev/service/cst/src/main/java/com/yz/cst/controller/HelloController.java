@@ -2,12 +2,9 @@ package com.yz.cst.controller;
 
 import com.yz.api.controller.cst.HelloControllerApi;
 import com.yz.common.result.GraceResult;
-import com.yz.model.bo.cst.TestBo;
+import com.yz.model.bo.cst.TestBO;
 import com.yz.service.base.controller.ServiceBaseController;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,12 +18,18 @@ public class HelloController extends ServiceBaseController implements HelloContr
         return GraceResult.ok();
     }
 
-    public GraceResult testGet(TestBo testBo) {
-        System.out.println(testBo);
-        return GraceResult.ok();
+    public GraceResult testGet(TestBO testBo) {
+        log.info("testGet");
+        log.warn("testGet");
+        log.error("testGet");
+//        int i = 1/0;
+//        System.out.println(testBo);
+//        return GraceResult.ok();
+        GraceResult result = GraceResult.ok();
+        return result;
     }
 
-    public GraceResult testPost(@RequestBody TestBo testBo) {
+    public GraceResult testPost(@RequestBody TestBO testBo) {
         System.out.println(testBo);
         return GraceResult.ok();
     }

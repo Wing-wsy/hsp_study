@@ -1,7 +1,6 @@
 package com.yz.cst;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.yz.common.util.StrUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,22 +10,15 @@ import org.springframework.core.env.Environment;
 @ComponentScan("com.yz")
 public class CstApplication {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CstApplication.class);
-
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(CstApplication.class);
         Environment env = app.run(args).getEnvironment();
-        LOG.info("启动成功！！");
-        LOG.info(
-                "测试地址: \thttp://127.0.0.1:{}{}/h/hello",
-                env.getProperty("server.port"),
-                env.getProperty("server.servlet.context-path")
-        );
-        LOG.info(
-                "文档地址: \thttp://127.0.0.1:{}{}/swagger-ui/index.html?configUrl=/doc-api.html",
-                env.getProperty("server.port"),
-                env.getProperty("server.servlet.context-path")
-        );
+        String ip = "127.0.0.1";
+        String port = env.getProperty("server.port");
+        String contextPath = env.getProperty("server.servlet.context-path");
+        System.out.println(StrUtils.format("启动成功！！"));
+        System.out.println(StrUtils.format("测试地址: \thttp://{}:{}{}/h/hello",ip, port, contextPath));
+        System.out.println(StrUtils.format("文档地址: \thttp://{}:{}{}/swagger-ui/index.html?configUrl=/doc-api.html",ip, port, contextPath));
     }
 
 }

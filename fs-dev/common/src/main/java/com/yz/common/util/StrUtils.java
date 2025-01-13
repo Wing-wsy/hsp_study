@@ -154,5 +154,25 @@ public class StrUtils {
         return StrUtil.format(template, params);
     }
 
+    /**
+     * 【功能描述】返回指定字符在目标字符串中第几次出现的位置索引
+     *
+     * @param str 目标字符串
+     * @param charToFind 指定字符
+     * @param n 第几次出现的位置
+     * @return
+     */
+    public static int findNthOccurrence(String str, char charToFind, int n) {
+        int position = -1;
+        int occurrences = 0;
+        while ((position = str.indexOf(charToFind, position + 1)) != -1) {
+            occurrences++;
+            if (occurrences == n) {
+                break;
+            }
+        }
+        return occurrences < n ? -1 : position;
+    }
+
 
 }

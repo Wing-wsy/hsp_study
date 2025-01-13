@@ -1,7 +1,7 @@
 package com.yz.api.controller.cst;
 
 import com.yz.common.result.GraceResult;
-import com.yz.model.bo.cst.TestBo;
+import com.yz.model.bo.cst.TestBO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +19,9 @@ public interface HelloControllerApi {
 
     @GetMapping("test-get")
     @Operation(summary = "测试接口get")
-    public GraceResult testGet(TestBo testBo);
+    public GraceResult testGet(TestBO testBo);
 
     @PostMapping("test-post")
     @Operation(summary = "测试接口post")
-    public GraceResult testPost(@RequestBody TestBo testBo);
+    public GraceResult testPost(@RequestBody TestBO testBo);
 }

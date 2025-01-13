@@ -3,6 +3,8 @@ package com.yz.common.util;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.serializer.SerializeFilter;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
  * JSON工具类
@@ -32,6 +34,17 @@ public class JSONUtils {
      */
     public static String toJsonStr(Object obj) {
         return JSONUtil.toJsonStr(obj);
+    }
+
+
+    /**
+     * 【功能描述】Obj 转成 json字符串
+     * @param object
+     * @param filter 需要过滤的内容
+     * @return
+     */
+    public static String toJSONString(Object object, SerializeFilter filter) {
+        return com.alibaba.fastjson.JSONObject.toJSONString(object, filter);
     }
 
     /**

@@ -1,5 +1,7 @@
 # 1 系统代码结构
 
+> 结构模块清晰，各司其职
+
 ```sh
 # 项目名称
 fs-dev
@@ -38,6 +40,8 @@ fs-dev
 
 # 2 系统模块继承关系
 
+> 良好的模块继承可以避免项目的循环依赖问题，让模块更加通用，加快代码开发。
+
 > 项目模块之间有严格继承关系：
 >
 > ​	`common`作为最基础模块 
@@ -57,6 +61,8 @@ fs-dev
 ***
 
 # 3 logback日志
+
+> 日志对于系统来说，重要程度不言而喻，线上的问题都需要通过日志来排查，因此好的日志功能和日志归档，有助于程序员快速定位线上问题。
 
 ## 3.1 日志唯一ID
 
@@ -132,12 +138,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
             <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>
         </then>
     </if>
-
-    <!-- 日志格式不带颜色 -->
-    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>-->
-    <!-- 日志格式带颜色 -->
-    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>-->
-
     <!-- 标准输出：控制台 -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -248,6 +248,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
 # 4 优雅响应
 
+> `app`、`pc`、`ipad`等设备接入我们系统，需要有统一的响应结果，更方便前端进行处理和展示。
+>
+> 系统的错误，不应该直接返回给前端，不应该让用户能直接看到500错误信息（不友好的用户，可以通过错误信息判断出系统的漏洞进而攻击），而应该返回友好地统一提示，比如：`系统繁忙，请稍后再试！`
+
 ## 4.1 响应实体类
 
 ```java
@@ -283,82 +287,7 @@ public class GraceResult {
     public static GraceResult ok() {
         return new GraceResult(ResponseStatusEnum.SUCCESS);
     }
-    public GraceResult(Object data) {
-        this.status = ResponseStatusEnum.SUCCESS.status();
-        this.msg = ResponseStatusEnum.SUCCESS.msg();
-        this.success = ResponseStatusEnum.SUCCESS.success();
-        this.data = data;
-    }
-
-    /**
-     * 错误返回，直接调用error方法即可，当然也可以在ResponseStatusEnum中自定义错误后再返回也都可以
-     * @return
-     */
-    public static GraceResult error() {
-        return new GraceResult(ResponseStatusEnum.FAILED);
-    }
-
-    /**
-     * 错误返回，map中包含了多条错误信息，可以用于表单验证，把错误统一的全部返回出去
-     * @param map
-     * @return
-     */
-    public static GraceResult errorMap(Map map) {
-        return new GraceResult(ResponseStatusEnum.FAILED, map);
-    }
-
-    /**
-     * 错误返回，直接返回错误的消息
-     * @param msg
-     * @return
-     */
-    public static GraceResult errorMsg(String msg) {
-        return new GraceResult(ResponseStatusEnum.FAILED, msg);
-    }
-
-    /**
-     * 错误返回，token异常，一些通用的可以在这里统一定义
-     * @return
-     */
-    public static GraceResult errorTicket() {
-        return new GraceResult(ResponseStatusEnum.TICKET_INVALID);
-    }
-
-    /**
-     * 自定义错误范围，需要传入一个自定义的枚举，可以到[ResponseStatusEnum.java[中自定义后再传入
-     * @param responseStatus
-     * @return
-     */
-    public static GraceResult errorCustom(ResponseStatusEnum responseStatus) {
-        return new GraceResult(responseStatus);
-    }
-    public static GraceResult exception(ResponseStatusEnum responseStatus) {
-        return new GraceResult(responseStatus);
-    }
-
-    public static GraceResult exception() {
-        return GraceResult.error();
-    }
-
-    public GraceResult(ResponseStatusEnum responseStatus) {
-        this.status = responseStatus.status();
-        this.msg = responseStatus.msg();
-        this.success = responseStatus.success();
-    }
-    public GraceResult(ResponseStatusEnum responseStatus, Object data) {
-        this.status = responseStatus.status();
-        this.msg = responseStatus.msg();
-        this.success = responseStatus.success();
-        this.data = data;
-    }
-    public GraceResult(ResponseStatusEnum responseStatus, String msg) {
-        this.status = responseStatus.status();
-        this.msg = msg;
-        this.success = responseStatus.success();
-    }
-
-    public GraceResult() {
-    }
+   ......
 }
 ```
 
@@ -459,7 +388,6 @@ public enum ResponseStatusEnum {
     PAYMENT_HEADERS_ERROR(5903, false, "请在header中携带支付中心所需的用户id以及密码！"),
     PAYMENT_ORDER_CREATE_ERROR(5904, false, "支付中心订单创建失败，请联系管理员！");
 
-
     // 响应业务状态
     private Integer status;
     // 调用是否成功
@@ -486,6 +414,14 @@ public enum ResponseStatusEnum {
 ```
 
 # 5 异常相关
+
+> 系统出现异常不可避免，`统一异常处理器`，可以让程序员更关注于业务，大部分异常可以交由统一处理器处理即可。
+>
+> **重点**：尽量少使用 try catch 代码块，除非已经明确知道该代码会有异常出现并需要处理。
+>
+> **原因**：大量 try catch 代码块，会导致业务代码阅读困难，其他的开发同事维护时，阅读到这都要停下考虑为什么这里需要 try （因为正常出现错误，直接抛出让 `统一异常处理器` 处理即可），导致开发业务精力被分散。
+>
+> **好处**：有些系统异常是需要及时抛出的，而不是 try 进行异常吞并，让异常正常抛出后早期就能及时发现，然后程序员才能及时进行修复，这样才能让系统更加健壮。
 
 ## 5.1 全局异常处理器
 
@@ -528,7 +464,9 @@ GraceException.display(ResponseStatusEnum.ORDER_NOT_FIND);
 
 # 6 Swagger 文档
 
-## 6.1 坐标
+> 在线接口文档，方便对接的前端和开发进行在线调试接口，更加方便（这个只作为补充，不用也可以）。
+
+## 6.1 pom坐标
 
 ```xml
 <dependency>
@@ -538,7 +476,7 @@ GraceException.display(ResponseStatusEnum.ORDER_NOT_FIND);
 </dependency>
 ```
 
-## 6.2 yml文件新增配置
+## 6.2 yml配置
 
 ```yaml
 springdoc:
@@ -565,7 +503,15 @@ public class SpringDocConfig {
 }
 ```
 
+# 7 接口出入参打印
 
+> 统一接口的出入参数打印，使用Spring AOP切面功能，无需手动每个接口编写，让接口更加简洁，性能更高。
+
+
+
+
+
+# 8 MyBatisPlus工具
 
 
 
