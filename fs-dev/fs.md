@@ -666,6 +666,52 @@ public GraceResult returnNotValidException(MethodArgumentNotValidException e) {
 
 # 9 MyBatisPlus
 
+> 说明：只在`mapper层`使用 MyBatisPlus 的功能，`service层`不使用 MyBatisPlus 功能
+
+## 9.1 mapper层增强
+
+举例：
+
+```java
+// BaseMapper 由 MyBatisPlus 提供
+public interface TUserMapper extends BaseMapper<TUser> {
+    public TUser getById(Long userId);
+}
+```
+
+## 9.2 通用属性填充
+
+```java
+/**
+ * 通用字段填充
+ */
+@Component
+public class MyBatisPlusFieldConfig implements MetaObjectHandler {
+    /**
+     * 使用mp做添加操作时候，这个方法执行
+     * @param metaObject
+     */
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        //设置属性值
+        this.setFieldValByName("createTime",localDateTime,metaObject);
+        this.setFieldValByName("updateTime",localDateTime,metaObject);
+        // 0:正常，1已删除
+        this.setFieldValByName("isDelete",0,metaObject);
+    }
+
+    /**
+     * 使用mp做修改操作时候，这个方法执行
+     * @param metaObject
+     */
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
+    }
+}
+```
+
 # 10  BO、VO、DTO的区别
 
 > `BO`：

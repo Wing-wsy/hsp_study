@@ -64,7 +64,8 @@
         </javaClientGenerator>
 
         <!-- 表名和对应的实体类名-->
-        <table tableName="t_loan_order" domainObjectName="TLoanOrder"/>
+        <table tableName="t_app_item_about" domainObjectName="TAppItemAbout"/>
+<!--        <table tableName="t_loan_order" domainObjectName="TLoanOrder"/>-->
 <!--        <table tableName="t_car" domainObjectName="Car"/>-->
 
     </context>
