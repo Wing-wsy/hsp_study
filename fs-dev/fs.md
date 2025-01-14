@@ -507,19 +507,184 @@ public class SpringDocConfig {
 
 > 统一接口的出入参数打印，使用Spring AOP切面功能，无需手动每个接口编写，让接口更加简洁，性能更高。
 
+```java
+@Slf4j
+@Aspect
+@Component
+public class LogAspect {
+    /**
+     * 切入点
+     * 【controller包下，包括子包以 Controller结尾的控制器全部方法打印请求接口入参和接口响应出参】
+     */
+    @Pointcut("execution(public * com.yz.*.controller..*Controller.*(..))")
+    public void log() {
+    }
+    /**
+     *  Before建议通常在连接点之前执行，而Around建议可以在方法调用前后执行自定义行为。
+     *  因此，@Before和@Around的执行顺序取决于它们在切面中的声明顺序。通常，@Before会先执行
+     *  在本系统@Before会先执行
+     */
+    @Before("log()")
+    public void doBefore(JoinPoint joinPoint) {
+        // 开始打印请求日志
+        ServletRequestAttributes attributes =
+                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        Signature signature = joinPoint.getSignature();
+        String name = signature.getName();
 
+        // 打印请求信息
+        log.info("------------- 开始 -------------");
+        // 完整URL：http://127.0.0.1:8081/cst/h/hello
+        String requestURL = request.getRequestURL().toString();
+        int index = StrUtils.findNthOccurrence(requestURL, Strings.SLASH.charAt(0), 3);
+        String uri = requestURL.substring(index,requestURL.length());
+        log.info("请求uri: {}", uri);
+        // 打印请求参数
+        Object[] args = joinPoint.getArgs();
+//        log.info("请求参数: {}", JSONUtils.toJsonStr(args));
 
+        // 排除特殊类型的参数，如文件类型
+        Object[] arguments = new Object[args.length];
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] instanceof ServletRequest
+                    || args[i] instanceof ServletResponse
+                    || args[i] instanceof MultipartFile) {
+                continue;
+            }
+            arguments[i] = args[i];
+        }
 
+        // 请求参数排除字段，敏感字段或太长的字段不显示：身份证、手机号、邮箱、密码等
+//        String[] excludeProperties = {"mobile","password"};
+        // 目前先不排除，敏感字段也正常打印
+        String[] excludeProperties = {};
+        PropertyPreFilters filters = new PropertyPreFilters();
+        PropertyPreFilters.MySimplePropertyPreFilter excludefilter = filters.addFilter();
+        excludefilter.addExcludes(excludeProperties);
+        log.info("请求参数: {}", JSONUtils.toJSONString(arguments, excludefilter));
+    }
 
-# 8 MyBatisPlus工具
+    @Around("log()")
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        // 1.执行真正的controller之前的自定义操作
+        long startTime = System.currentTimeMillis();
 
+        // 2.执行真正的controller
+        Object result = joinPoint.proceed();
+        String pointName = joinPoint.getTarget().getClass().getName()
+                + "."
+                + joinPoint.getSignature().getName();
 
+        // 3.执行真正的controller之后的自定义操作
+        // 响应结果排除字段，敏感字段或太长的字段不显示：身份证、手机号、邮箱、密码等
+        String[] excludeProperties = {};
+        PropertyPreFilters filters = new PropertyPreFilters();
+        PropertyPreFilters.MySimplePropertyPreFilter excludefilter = filters.addFilter();
+        excludefilter.addExcludes(excludeProperties);
+        log.info("返回结果: {}", JSONUtils.toJSONString(result, excludefilter));
+        log.info("------------- 结束 耗时：{} ms -------------", System.currentTimeMillis() - startTime);
+        long endTime = System.currentTimeMillis() - startTime;
+        if (endTime > 2000) {
+            log.error("执行位置{}，执行时间太长了，耗费了{}毫秒", pointName, endTime);
+        } else if (endTime > 1000) {
+            log.warn("执行位置{}，执行时间稍微有点长，耗费了{}毫秒", pointName, endTime);
+        } else {
+//            log.debug("执行位置{}，执行时间正常，耗费了{}毫秒", pointName, endTime);
+        }
+        return result;
+    }
+}
+```
 
+# 8 请求参数校验工具
 
+## 8.1 pom 坐标
 
+```xml
+<!-- validation参数校验工具 -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+    <version>2.3.7.RELEASE</version>
+</dependency>
+```
 
+## 8.2 常用使用注解
 
+```shell
+ # 字段不允许为null，可以为""字符串
+@NotNull(name = "name不能为空")               
+private String name;
 
+# 字段不允许为null，也不允许为""字符串
+@NotBlank(name = "name不能为空")               
+private String name;
+
+# 值不能小于1
+@Min(value = 1, message = "age不能小于1")      
+private Integer age;
+
+@Range(min = 10, max = 50, message = "length必须在10~50之间")
+private Integer length;
+
+# deptName值只能是 0-9a-zA-Z 和 中文
+@Pattern(regexp = "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,10}$", message = "deptName内容不正确")
+private String deptName;
+
+# 多注解一起使用：出行方式不能为空，并且只能是 driving、walking、bicycling
+@NotBlank(message = "mode不能为空")
+@Pattern(regexp = "^driving$|^walking$|^bicycling$")
+private String mode;
+```
+
+> @Pattern 注解支持正则表达式，可以实现
+
+## 8.3 异常处理器统一处理参数校验异常
+
+```java
+// 处理参数校验异常
+@ResponseBody
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public GraceResult returnNotValidException(MethodArgumentNotValidException e) {
+    // 出错的方法全路径名
+    String method = e.getParameter().getMethod().toString();
+    BindingResult result = e.getBindingResult();
+    Map<String, String> errors = getErrors(result);
+    String errorKey = "";
+    String errorVal = "";
+    for (String key : errors.keySet()) {
+        String val = errors.get(key);
+        errorKey = key;
+        errorVal = val;
+        break;
+    }
+    log.error("校验异常：{} {} 【{}】", errorKey, errorVal, method);
+    return GraceResult.errorMsg(errorVal);
+}
+```
+
+# 9 MyBatisPlus
+
+# 10  BO、VO、DTO的区别
+
+> `BO`：
+>
+> ​         `全称`：Business Object(业务对象)
+>
+> ​         `职责`：负责控制层接收前端传来的参数
+>
+> `VO`：
+>
+> ​         `全称`：View Object(视图对象)
+>
+> ​         `职责`：负责响应给前端进行数据展示
+>
+> `DTO`：
+>
+> ​         `全称`：Data Transfer Object(数据传输对象)
+>
+> ​         `职责`：负责系统内部数据传递，通常用于service层和controller层之间的数据传递
 
 
 

@@ -4,6 +4,7 @@ import com.yz.api.controller.cst.HelloControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.model.bo.cst.TestBO;
 import com.yz.service.base.controller.ServiceBaseController;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +19,8 @@ public class HelloController extends ServiceBaseController implements HelloContr
         return GraceResult.ok();
     }
 
-    public GraceResult testGet(TestBO testBo) {
+    public GraceResult testGet(@Valid TestBO testBo) {
         log.info("testGet");
-        log.warn("testGet");
-        log.error("testGet");
-//        int i = 1/0;
-//        System.out.println(testBo);
-//        return GraceResult.ok();
         GraceResult result = GraceResult.ok();
         return result;
     }

@@ -23,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Aspect
 @Component
+/**
+ * 日志切面
+ */
 public class LogAspect {
 
     /**

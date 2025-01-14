@@ -62,6 +62,23 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.70</version>
         </dependency>
+        <!-- validation参数校验工具 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>2.3.7.RELEASE</version>
+        </dependency>
+        <!-- MySql驱动包 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+        <!-- MyBatis-Plus依赖包 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>3.5.10.1</version>
+        </dependency>
     </dependencies>
 
 </project>
