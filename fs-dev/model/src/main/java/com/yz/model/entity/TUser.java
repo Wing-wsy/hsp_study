@@ -1,11 +1,12 @@
 package com.yz.model.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 
 /**
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName("t_user")
-public class TUser implements Serializable {
+public class TUser extends BaseEntity implements Serializable {
     /**用户表主键ID*/
     @TableId
     private Long userId;
@@ -24,13 +25,5 @@ public class TUser implements Serializable {
     /**年龄*/
     private Integer age;
 
-    /**创建日期*/
-    private LocalDateTime createTime;
-
-    /**更新日期*/
-    private LocalDateTime updateTime;
-
-    /**是否删除*/
-    private int isDelete;
 
 }
