@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * 测试控制层1
+ */
 @Slf4j
 @RestController
 public class HelloController extends ServiceBaseController implements HelloControllerApi {

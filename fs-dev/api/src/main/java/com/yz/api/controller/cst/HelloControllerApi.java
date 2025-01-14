@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 测试控制层1
+ */
 @Tag(name = "HelloController", description = "测试控制器")
 @RequestMapping("h")
 public interface HelloControllerApi {

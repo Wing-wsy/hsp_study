@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 测试控制层2
+ */
 @Slf4j
 @RestController
-public class TUserServiceController extends ServiceBaseController implements TUserServiceControllerApi {
+public class TUserServiceController
+        extends ServiceBaseController implements TUserServiceControllerApi {
 
     @Resource
     private TUserService tUserService;

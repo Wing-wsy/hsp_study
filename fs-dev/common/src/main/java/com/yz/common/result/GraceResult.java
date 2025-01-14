@@ -1,5 +1,6 @@
 package com.yz.common.result;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.MDC;
 
 import java.util.Map;
@@ -11,21 +12,22 @@ import java.util.Map;
  * 				本类可提供给 H5/ios/安卓/公众号/小程序 使用
  * 				前端接受此类数据（json object)后，可自行根据业务去实现相关功能
  */
+@Schema(description = "响应结果模型")
 public class GraceResult {
 
-    // 响应业务状态码
+    @Schema(description = "响应业务状态码：200成功 其他状态码均为失败")
     private Integer status;
 
-    // 响应消息
+    @Schema(description = "响应消息（响应非200状态时，msg为错误原因）")
     private String msg;
 
-    // 是否成功
+    @Schema(description = "是否请求成功（true 或者 false，status=200时，对应这里的值为true，否则为false）")
     private Boolean success;
 
-    // 响应数据，可以是Object，也可以是List或Map等
+    @Schema(description = "响应数据（响应200状态时，成功数据包装在data中）")
     private Object data;
 
-    // LOG_ID
+    @Schema(description = "当前请求的日志ID，接口出错可提供给后端进行排查")
     private String id;
 
     /**
@@ -157,7 +159,7 @@ public class GraceResult {
         this.success = success;
     }
 
-    public Object getId() {
+    public String getId() {
         return id;
     }
 

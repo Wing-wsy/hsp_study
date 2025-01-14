@@ -15,7 +15,9 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public SearchUserBriefInfoDTO searchCustomerBriefInfo(Long userId) {
+        // mybasits plus 内置方法
         TUser tUser = tUserMapper.selectById(userId);
+        // 自定义方法
 //        TUser tUser1 = tUserMapper.getById(userId);
         SearchUserBriefInfoDTO dto = BeanUtil.toBean(tUser,SearchUserBriefInfoDTO.class);
         return dto;
