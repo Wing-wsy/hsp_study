@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class HelloController extends ServiceBaseController implements HelloControllerApi {
 
     public GraceResult hello() {
-        System.out.println("hello");
+//        System.out.println("hello");
+        log.info("info");
+        log.warn("info");
+        log.error("info");
+        int i = 1/0;
         serviceBaseController();
         return GraceResult.ok();
     }

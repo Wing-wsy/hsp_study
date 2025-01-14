@@ -24,8 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-public class TUserServiceController
-        extends ServiceBaseController implements TUserServiceControllerApi {
+public class TUserServiceController extends ServiceBaseController implements TUserServiceControllerApi {
 
     @Resource
     private TUserService tUserService;

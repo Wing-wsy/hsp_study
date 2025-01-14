@@ -1,4 +1,4 @@
-# 1 系统代码结构
+# 1 微服务系统结构
 
 > 结构模块清晰，各司其职
 
@@ -9,20 +9,20 @@ fs-dev
     gateway
     # bff模块（与微服务进行交互，获取所需数据并整合返回给用户端）
     bff
-        - bff-base # bff服务的基础依赖
-        - customer
-        - mis
+        - bff-base # 全部bff服务的基础依赖
+        - cst-bff
+        - mis-bff
         - ...
     # 微服务模块（提供具体的服务，如用户服务、订单服务、文件服务等）
     service
-        - service-base # 微服务的基础依赖
+        - service-base # 全部微服务的基础依赖
         - cst
         - odr
         - pay
         - ...
     # api接口模块(管理全系统api，一目了然)
     api
-    # 模型层（bo、vo、entity）
+    # 模型层（bo、vo、dto、entity）
     model
     # 公共模块
     common
@@ -37,6 +37,24 @@ fs-dev
     eff
         - mybatis-generator
 ```
+
+## 1.1 什么是 BFF 架构？
+
+从本质上讲，**Backend for Frontend**是一种架构模式，它为每个前端接口提供专用的后端层。每个前端（例如移动应用、Web 应用、智能设备等）可能具有不同的性能、数据和交互需求。BFF 不会依赖单个整体式或通用 API，而是根据给定前端的特定需求定制后端。
+
+本质上，对于每个客户端或客户端组（例如移动客户端或 Web 客户端），您都需要构建一个单独的后端，以便：
+
+- 整合或协调对各种服务的调用。
+- 以客户端友好的格式准备数据。
+- 处理与前端相关的特定逻辑。
+
+这样可以分离关注点，从而更容易针对客户端的特定用例优化每个后端。
+
+![](https://i-blog.csdnimg.cn/img_convert/b52928291187984ee99e54bc30f42477.jpeg)
+
+> 具体可以百度关键字：BFF 架构
+
+***
 
 # 2 系统模块继承关系
 
@@ -62,7 +80,7 @@ fs-dev
 
 # 3 logback日志
 
-> 日志对于系统来说，重要程度不言而喻，线上的问题都需要通过日志来排查，因此好的日志功能和日志归档，有助于程序员快速定位线上问题。
+> 日志对于系统来说，重要程度不言而喻，线上的问题都需要通过日志来排查，因此好的日志功能和`日志归档`，有助于程序员快速定位线上问题。
 
 ## 3.1 日志唯一ID
 
@@ -245,6 +263,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 </configuration>
 
 ```
+
+
 
 # 4 优雅响应
 
@@ -613,7 +633,7 @@ public class LogAspect {
 ## 8.2 常用使用注解
 
 ```shell
- # 字段不允许为null，可以为""字符串
+# 字段不允许为null，可以为""字符串
 @NotNull(name = "name不能为空")               
 private String name;
 
@@ -712,6 +732,16 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
 }
 ```
 
+## 9.3 分页功能
+
+## 9.4 通用查询条件
+
+> 全部查询 过滤 isDelete = 1 的数据
+
+
+
+***
+
 # 10  BO、VO、DTO的区别
 
 > `BO`：
@@ -731,6 +761,76 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
 > ​         `全称`：Data Transfer Object(数据传输对象)
 >
 > ​         `职责`：负责系统内部数据传递，通常用于service层和controller层之间的数据传递
+
+***
+
+# 11 sa-token权限控制
+
+# 12 nacos 服务注册、配置中心
+
+# 13 feign 远程服务调用
+
+# 14 gateway 网关
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
