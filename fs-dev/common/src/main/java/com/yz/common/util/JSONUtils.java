@@ -58,6 +58,18 @@ public class JSONUtils {
     }
 
     /**
+     * 【功能描述】map类型 转成 Obj
+     * @param data – map类型
+     *        beanClass – 实体类对象
+     * @return 实体类对象
+     */
+    public static <T> T mapToBean(Object data, Class<T> beanClass) {
+        String json = toJsonStr(data);
+        return toBean(json, beanClass);
+    }
+
+
+    /**
      * 【功能描述】JSON字符串转JSONObject对象
      * @param obj – Bean对象或者Map
      * @return JSONObject

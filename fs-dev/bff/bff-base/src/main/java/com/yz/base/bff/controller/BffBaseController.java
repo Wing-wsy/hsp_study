@@ -1,4 +1,4 @@
-package com.eyz.bff.base.controller;
+package com.yz.base.bff.controller;
 
 /**
  * 通用BaseController控制器

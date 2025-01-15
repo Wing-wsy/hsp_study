@@ -5,7 +5,6 @@ server:
     uri-encoding: UTF-8
     max-swallow-size: -1  # 不限制请求体大小
 
-
 spring:
   application:
     name: mis-bff-service
@@ -14,13 +13,12 @@ spring:
 #    active: test
 #    active: prod
 
-#mybatis-plus:
-#  global-config:
-#    db-config:
-#      id-type: assign_id
-#      update-strategy: not_empty
-#    banner: false
-#  mapper-locations: classpath*:/mapper/*.xml
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 300000
 
 # swagger在线文档配置
 springdoc:

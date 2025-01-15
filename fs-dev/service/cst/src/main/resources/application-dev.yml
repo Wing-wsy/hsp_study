@@ -44,6 +44,7 @@ spring:
         heart-beat-timeout: 1000
         group: DEFAULT_GROUP
 
+# 测试环境打印SQL语句
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

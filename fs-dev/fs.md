@@ -768,6 +768,62 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
 
 # 12 nacos 服务注册、配置中心
 
+## 12.1 pom
+
+```xml
+<!-- nacos -->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+</dependency>
+```
+
+## 12.2 yml配置
+
+```yaml
+spring:
+  cloud:
+    nacos:
+      #配置子系统在Web管理页面上的注册信息
+      config:
+        group: DEFAULT_GROUP
+        prefix: ${spring.application.name}
+        file-extension: yaml
+        # 本地环境
+        server-addr: 127.0.0.1:8848
+        import-check:
+          enabled: false
+      #        namespace: hxds
+      #配置子系统在Nacos上的注册信息
+      discovery:
+        #        namespace: hxds
+        #        username: nacos
+        #        password: nacos
+        # 本地环境
+        server-addr: 127.0.0.1:8848
+        heart-beat-interval: 1000
+        heart-beat-timeout: 1000
+        group: DEFAULT_GROUP
+```
+
+## 12.3 启动类
+
+```java
+@EnableDiscoveryClient  // 开启服务的注册和发现功能
+```
+
+***
+
+## 12.4 nacos控制台
+
+![](z-imgs/02.png)
+
+***
+
 # 13 feign 远程服务调用
 
 # 14 gateway 网关

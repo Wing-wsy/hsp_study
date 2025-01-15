@@ -22,6 +22,13 @@ mybatis-plus:
     banner: false
   mapper-locations: classpath*:/mapper/*.xml
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 300000
+
 # swagger在线文档配置
 springdoc:
   api-docs:

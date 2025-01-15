@@ -17,6 +17,32 @@ spring:
       pool-name: DataSourceHikariCP           # 连接池的名字
       max-lifetime: 18000000                  # 连接池的最大生命时长（毫秒），超时则会被释放（retired）
       connection-test-query: SELECT 1
+  cloud:
+    nacos:
+      #配置子系统在Web管理页面上的注册信息
+      config:
+        group: DEFAULT_GROUP
+        prefix: ${spring.application.name}
+        file-extension: yaml
+        # 本地环境
+        server-addr: 127.0.0.1:8848
+        # 测试环境
+        #        server-addr: 8.217.253.19:18848
+        import-check:
+          enabled: false
+      #        namespace: hxds
+      #配置子系统在Nacos上的注册信息
+      discovery:
+        #        namespace: hxds
+        #        username: nacos
+        #        password: nacos
+        # 本地环境
+        server-addr: 127.0.0.1:8848
+        # 测试环境
+        #        server-addr: 8.217.253.19:18848
+        heart-beat-interval: 1000
+        heart-beat-timeout: 1000
+        group: DEFAULT_GROUP
 
 mybatis-plus:
   configuration:

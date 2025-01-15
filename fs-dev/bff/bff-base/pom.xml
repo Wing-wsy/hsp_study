@@ -52,11 +52,6 @@
             <artifactId>sa-token-spring-aop</artifactId>
             <version>1.28.0</version>
         </dependency>
-        <!--openfeign-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

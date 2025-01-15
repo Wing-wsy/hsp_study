@@ -97,8 +97,11 @@ public enum ResponseStatusEnum {
     PAYMENT_HEADERS_ERROR(5903, false, "请在header中携带支付中心所需的用户id以及密码！"),
     PAYMENT_ORDER_CREATE_ERROR(5904, false, "支付中心订单创建失败，请联系管理员！"),
 
+    //用户错误相关
+    USER_NOT_FIND(51001, false, "用户信息不存在！"),
+
     //订单错误相关
-    ORDER_NOT_FIND(51001, false, "订单不存在！");
+    ORDER_NOT_FIND(52001, false, "订单不存在！");
 
 
     // 响应业务状态

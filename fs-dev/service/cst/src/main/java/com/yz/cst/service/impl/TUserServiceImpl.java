@@ -21,10 +21,11 @@ public class TUserServiceImpl implements TUserService {
     public SearchUserBriefInfoDTO searchCustomerBriefInfo(Long userId) {
         // mybasits plus 内置方法
         TUser tUser = tUserMapper.selectById(userId);
+//        int i = 1/0;
 
-        tUser.setUserId(SnowUtil.nextId());
-        tUser.setName("createName222");
-        tUserMapper.insert(tUser);
+//        tUser.setUserId(SnowUtil.nextId());
+//        tUser.setName("createName222");
+//        tUserMapper.insert(tUser);
 
 //        tUser.setName("createNameupdate");
 //        tUserMapper.updateById(tUser);

@@ -1,9 +1,9 @@
-package com.yz.common.exception;
+package com.yz.base.bff.exception;
 
+import com.yz.common.exception.MyCustomException;
 import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,15 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 微服务全局兜底异常处理器
- *
- * 其他服务若没有配置异常处理器，则使用该处理器
- * 若配置了异常处理器，则使用配置的处理器
- * 正常使用该处理器即可
+ * bff服务全局兜底异常处理器
  */
 @Slf4j
 @ControllerAdvice
-public class GraceExceptionHandler {
+public class GraceExceptionHandlerBff {
 
     // 处理系统自定义异常
     @ResponseBody
