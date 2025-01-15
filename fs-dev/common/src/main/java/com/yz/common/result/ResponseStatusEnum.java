@@ -1,6 +1,7 @@
 package com.yz.common.result;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * 响应结果枚举，用于提供给GraceResult返回给前端
@@ -126,4 +127,18 @@ public enum ResponseStatusEnum {
     public String msg() {
         return msg;
     }
+
+
+    public static ResponseStatusEnum get(String code){
+        Iterator<ResponseStatusEnum> iterator = Arrays.stream(ResponseStatusEnum.values()).iterator();
+        while (iterator.hasNext()){
+            ResponseStatusEnum next = iterator.next();
+            String name = next.name();
+            if (name.equals(code)) {
+                return next;
+            }
+        }
+        return null;
+    }
+
 }

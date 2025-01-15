@@ -74,7 +74,7 @@ fs-dev
 >
 > ​    全部bff服务继承 `bff-base`
 
-<img src="z-imgs/01.jpg" style="zoom: 50%;" />
+<img src="z-imgs/02.png" style="zoom: 50%;" />
 
 ***
 
@@ -252,7 +252,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
         yml配置环境激活：spring.profiles.active=prod 则下面生效
     -->
     <springProfile name="prod">
-<!--        <root level="error">-->
         <root level="info">
             <appender-ref ref="Console"/>
             <appender-ref ref="RollingFileInfo"/>
@@ -263,8 +262,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
 </configuration>
 
 ```
-
-
 
 # 4 优雅响应
 
@@ -312,6 +309,8 @@ public class GraceResult {
 ```
 
 ## 4.2 响应结果枚举
+
+> 系统的错误提示，都配置在这个类中
 
 ```java
 /**
@@ -658,7 +657,7 @@ private String deptName;
 private String mode;
 ```
 
-> @Pattern 注解支持正则表达式，可以实现
+> @Pattern 注解支持正则表达式，可以实现更复杂的校验
 
 ## 8.3 异常处理器统一处理参数校验异常
 
@@ -742,13 +741,17 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
 
 ***
 
-# 10  BO、VO、DTO的区别
+# 10 系统的实体对象描述
+
+## 10.1 BO、VO、DTO
+
+**这三者是通用分类方案，在本系统中，微服务系统中使用**
 
 > `BO`：
 >
 > ​         `全称`：Business Object(业务对象)
 >
-> ​         `职责`：负责控制层接收前端传来的参数
+> ​         `职责`：在微服务控制层接收bff层传来的参数
 >
 > `VO`：
 >
@@ -760,7 +763,19 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
 >
 > ​         `全称`：Data Transfer Object(数据传输对象)
 >
-> ​         `职责`：负责系统内部数据传递，通常用于service层和controller层之间的数据传递
+> ​         `职责`：负责系统内部数据传递，用于service层和controller层之间的数据传递
+
+## 10.2 From、Res
+
+**这两个是我们本系统自定义的实体对象，在 bff服务层中使用**
+
+>`From`：
+>
+>​         `职责`：在bff层控制层接收前端传来的参数
+>
+>`Res`：
+>
+>​         `职责`：在bff层负责将全部微服务的返回数据进行组装成前端所需要的完整数据
 
 ***
 
@@ -820,11 +835,54 @@ spring:
 
 ## 12.4 nacos控制台
 
-![](z-imgs/02.png)
+![](z-imgs/03.png)
 
 ***
 
 # 13 feign 远程服务调用
+
+## 13.1 pom
+
+```xml
+<!--openfeign-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+<!-- Feign进行跨服务传递文件依赖-->
+<dependency>
+    <groupId>io.github.openfeign.form</groupId>
+    <artifactId>feign-form</artifactId>
+    <version>3.8.0</version>
+</dependency>
+<dependency>
+    <groupId>io.github.openfeign.form</groupId>
+    <artifactId>feign-form-spring</artifactId>
+    <version>3.8.0</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-loadbalancer</artifactId>
+</dependency>
+```
+
+## 13.2 yml配置
+
+```yaml
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 300000
+```
+
+## 13.3 启动类
+
+```java
+// 开启 feign 调用
+@EnableFeignClients
+```
 
 # 14 gateway 网关
 

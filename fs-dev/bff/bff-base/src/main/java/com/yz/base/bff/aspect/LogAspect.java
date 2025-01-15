@@ -1,4 +1,4 @@
-package com.yz.common.aspect;
+package com.yz.base.bff.aspect;
 
 import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.yz.common.constant.Strings;
@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Aspect
 @Component
 /**
- * 微服务日志切面
+ * bff服务日志切面
  */
 public class LogAspect {
 
@@ -32,7 +32,7 @@ public class LogAspect {
      * 切入点
      * 【controller包下，包括子包以 Controller结尾的控制器全部方法打印请求接口入参和接口响应出参】
      */
-    @Pointcut("execution(public * com.yz.*.controller..*Controller.*(..))")
+    @Pointcut("execution(public * com.yz.*.*.controller..*Controller.*(..))")
     public void log() {
     }
 

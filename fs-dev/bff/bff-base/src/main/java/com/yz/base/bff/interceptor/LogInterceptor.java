@@ -1,4 +1,4 @@
-package com.yz.common.interceptor;
+package com.yz.base.bff.interceptor;
 
 import com.yz.common.constant.Strings;
 import com.yz.common.util.RandomUtils;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 微服务日志拦截器
+ * bff服务日志拦截器
  */
 @Component
 public class LogInterceptor implements HandlerInterceptor {

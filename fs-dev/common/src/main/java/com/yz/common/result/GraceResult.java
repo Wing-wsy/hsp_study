@@ -1,5 +1,6 @@
 package com.yz.common.result;
 
+import com.yz.common.constant.Strings;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.slf4j.MDC;
 
@@ -20,6 +21,9 @@ public class GraceResult {
 
     @Schema(description = "响应消息（响应非200状态时，msg为错误原因）")
     private String msg;
+
+    @Schema(description = "响应状态码（响应非200状态时，code为错误编码）")
+    private String code;
 
     @Schema(description = "是否请求成功（true 或者 false，status=200时，对应这里的值为true，否则为false）")
     private Boolean success;
@@ -50,7 +54,7 @@ public class GraceResult {
         this.msg = ResponseStatusEnum.SUCCESS.msg();
         this.success = ResponseStatusEnum.SUCCESS.success();
         this.data = data;
-        this.id = MDC.get("LOG_ID");
+        this.id = MDC.get(Strings.TRACE_ID);
     }
 
 
@@ -107,21 +111,24 @@ public class GraceResult {
     public GraceResult(ResponseStatusEnum responseStatus) {
         this.status = responseStatus.status();
         this.msg = responseStatus.msg();
+        this.code = responseStatus.name();
         this.success = responseStatus.success();
-        this.id = MDC.get("LOG_ID");
+        this.id = MDC.get(Strings.TRACE_ID);
     }
     public GraceResult(ResponseStatusEnum responseStatus, Object data) {
         this.status = responseStatus.status();
         this.msg = responseStatus.msg();
+        this.code = responseStatus.name();
         this.success = responseStatus.success();
         this.data = data;
-        this.id = MDC.get("LOG_ID");
+        this.id = MDC.get(Strings.TRACE_ID);
     }
     public GraceResult(ResponseStatusEnum responseStatus, String msg) {
         this.status = responseStatus.status();
         this.msg = msg;
+        this.code = responseStatus.name();
         this.success = responseStatus.success();
-        this.id = MDC.get("LOG_ID");
+        this.id = MDC.get(Strings.TRACE_ID);
     }
 
     public GraceResult() {
@@ -141,6 +148,13 @@ public class GraceResult {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Object getData() {

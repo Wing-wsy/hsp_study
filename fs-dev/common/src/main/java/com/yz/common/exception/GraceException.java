@@ -11,4 +11,9 @@ public class GraceException {
         throw new MyCustomException(statusEnum);
     }
 
+    public static void displayCustom(String code) {
+        ResponseStatusEnum responseStatusEnum = ResponseStatusEnum.get(code);
+        display(responseStatusEnum);
+    }
+
 }

@@ -2,7 +2,6 @@ package com.yz.mis.bff.service.impl;
 
 import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
-import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.JSONUtils;
 import com.yz.cst.mapper.TUserMapper;
 import com.yz.mis.bff.feign.CstServiceApi;
@@ -39,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
         bo_1.setUserId(userId);
         GraceResult result_1 = cstServiceApi.searchUserBriefInfo(bo_1);
         if (!result_1.getSuccess()) {
-            GraceException.display(ResponseStatusEnum.USER_NOT_FIND);
+            GraceException.displayCustom(result_1.getCode());
         }
         SearchUserBriefInfoVO searchUserBriefInfoVO = JSONUtils.mapToBean(result_1.getData(), SearchUserBriefInfoVO.class);
         res.setSearchUserBriefInfoVO(searchUserBriefInfoVO);

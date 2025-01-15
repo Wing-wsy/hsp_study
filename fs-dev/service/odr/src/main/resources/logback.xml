@@ -15,20 +15,20 @@
     <if condition='property("env").equals("prod")'>
         <then>
             <!-- 生产环境-日志格式不带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{LOG_ID}] - %msg%n"/>
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{trace_id}] - %msg%n"/>
         </then>
     </if>
     <if condition='!property("env").equals("prod")'>
         <then>
             <!-- 开发环境-日志格式带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{trace_id})] - %msg%n"/>
         </then>
     </if>
 
     <!-- 日志格式不带颜色 -->
     <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>-->
     <!-- 日志格式带颜色 -->
-    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>-->
+    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{trace_id})] - %msg%n"/>-->
 
     <!-- 标准输出：控制台 -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">

@@ -1,6 +1,8 @@
 package com.yz.cst.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.yz.common.exception.GraceException;
+import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.snow.SnowUtil;
 import com.yz.cst.mapper.TUserMapper;
 import com.yz.cst.service.TUserService;
@@ -19,9 +21,12 @@ public class TUserServiceImpl implements TUserService {
 
     @Override
     public SearchUserBriefInfoDTO searchCustomerBriefInfo(Long userId) {
+
         // mybasits plus 内置方法
         TUser tUser = tUserMapper.selectById(userId);
-//        int i = 1/0;
+        if (tUser == null) {
+            GraceException.display(ResponseStatusEnum.USER_NOT_FIND);
+        }
 
 //        tUser.setUserId(SnowUtil.nextId());
 //        tUser.setName("createName222");

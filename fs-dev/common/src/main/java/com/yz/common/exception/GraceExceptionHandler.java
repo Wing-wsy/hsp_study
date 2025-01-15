@@ -59,7 +59,8 @@ public class GraceExceptionHandler {
     @ExceptionHandler(Exception.class)
     public GraceResult returnException(Exception e) {
         log.error("系统异常：", e);
-        return GraceResult.exception(ResponseStatusEnum.SYSTEM_ERROR_GRACE);
+        GraceResult result = GraceResult.exception(ResponseStatusEnum.SYSTEM_ERROR_GRACE);
+        return result;
     }
 
     public Map<String, String> getErrors(BindingResult result) {

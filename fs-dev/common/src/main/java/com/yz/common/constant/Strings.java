@@ -173,5 +173,9 @@ public class Strings {
      * 占位符后缀
      */
     public static final String PLACEHOLDER_SUFFIX = "}";
+    /**
+     * traceId
+     */
+    public static final String TRACE_ID = "traceId";
 
 }

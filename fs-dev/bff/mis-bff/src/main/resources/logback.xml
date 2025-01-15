@@ -16,7 +16,7 @@
     <if condition='property("env").equals("prod")'>
         <then>
             <!-- 日志格式不带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{LOG_ID}] - %msg%n"/>
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{traceId}] - %msg%n"/>
             <!-- 标准输出：控制台 -->
             <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
                 <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -33,7 +33,7 @@
     <if condition='!property("env").equals("prod")'>
         <then>
             <!-- 日志格式带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{traceId})] - %msg%n"/>
             <!-- 标准输出：控制台 -->
             <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
                 <encoder>
