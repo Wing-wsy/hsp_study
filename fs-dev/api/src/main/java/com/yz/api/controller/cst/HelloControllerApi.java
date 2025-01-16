@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 测试控制层1
  */
-@Tag(name = "HelloController", description = "测试控制器")
+//@Tag(name = "HelloController", description = "测试控制器")
 @RequestMapping("h")
 public interface HelloControllerApi {
 

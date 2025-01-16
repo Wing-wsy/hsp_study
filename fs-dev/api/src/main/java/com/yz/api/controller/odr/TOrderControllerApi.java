@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface TOrderControllerApi {
 
     @PostMapping("/searchOrderByOrderId")
-    @Operation(summary = "查询订单信息")
+    @Operation(summary = "根据订单ID查询订单信息")
     @ApiResponse(content = @Content(schema = @Schema(implementation = OrderVO.class)))
     public GraceResult searchOrderByOrderId(SearchOrderByOrderIdBO bo);
 
     @PostMapping("/searchOrderByUser")
-    @Operation(summary = "查询用户订单信息")
+    @Operation(summary = "根据用户ID查询用户订单信息")
     @ApiResponse(content = @Content(schema = @Schema(implementation = OrderListVO.class)))
     public GraceResult searchOrderByUser(SearchOrderByUserBO bo);
 }

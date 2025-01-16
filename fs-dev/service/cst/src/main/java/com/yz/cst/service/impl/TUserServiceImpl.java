@@ -33,12 +33,12 @@ public class TUserServiceImpl implements TUserService {
         UserBriefInfoDTO dto = BeanUtils.toBean(tUser, UserBriefInfoDTO.class);
 
         // 演示在cst微服务调用odr微服务
-        SearchOrderByUserBO bo = new SearchOrderByUserBO();
+        /*SearchOrderByUserBO bo = new SearchOrderByUserBO();
         bo.setUserId(userId);
         GraceResult result_1 = odrServiceApi.searchOrderByUser(bo);
         if (!result_1.getSuccess()) {
             GraceException.displayCustom(result_1.getCode());
-        }
+        }*/
 
         return dto;
     }

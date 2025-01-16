@@ -1,7 +1,9 @@
 package com.yz.api.controller.mis_bff;
 
 import com.yz.common.result.GraceResult;
+import com.yz.model.from.mis_bff.SearchOrderAndUserBriefInfoFrom;
 import com.yz.model.from.mis_bff.SearchUserBriefInfoFrom;
+import com.yz.model.res.mis_bff.SearchOrderAndUserBriefInfoRes;
 import com.yz.model.res.mis_bff.SearchUserBriefInfoRes;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,7 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface CustomerControllerApi {
 
     @PostMapping("/searchUserBriefInfo")
-    @Operation(summary = "根据ID查找用户")
+    @Operation(summary = "根据用户ID查找用户信息")
     @ApiResponse(content = @Content(schema = @Schema(implementation = SearchUserBriefInfoRes.class)))
     public GraceResult searchUserBriefInfo(SearchUserBriefInfoFrom from);
+
+    @PostMapping("/searchOrderAndUserBriefInfo")
+    @Operation(summary = "根据用户ID查找用户和订单信息")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = SearchOrderAndUserBriefInfoRes.class)))
+    public GraceResult searchOrderAndUserBriefInfo(SearchOrderAndUserBriefInfoFrom from);
 }

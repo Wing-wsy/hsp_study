@@ -276,6 +276,36 @@ public class FeignInterceptor implements RequestInterceptor {
 
 ```
 
+## 3.3 日志归档说明
+
+> 每一个服务都有自己的日志文件夹，日志会按日期和文件大小自动进行归档
+>
+> 1）文件大小归档举例：在同一天`info.log`文件大小已经超过 `2MB`，日志会自动按当前日期进行归档，如：
+>
+> `log-info-2025-01-01.0.log`、
+>
+> `log-info-2025-01-01.1.log`，
+>
+> 按顺序进行编号。
+>
+> 
+>
+> 2）日期归档举例：过了一天都会重新用新的一天进行归档（即使文件大小不超过 `2MB`），如：
+>
+> `log-info-2025-01-01.0.log`、
+>
+> `log-info-2025-01-02.0.log`
+>
+> 按日期进行编号。
+>
+> 
+>
+> 3）日志文件保留天数`15天`，超过自动删除
+
+![](z-imgs/04.png)
+
+
+
 # 4 优雅响应
 
 > `app`、`pc`、`ipad`等设备接入我们系统，需要有统一的响应结果，更方便前端进行处理和展示。
@@ -901,7 +931,7 @@ feign:
 
 
 
-# 问题汇总
+# 问题解决汇总
 
 ## 1 日期格式
 
@@ -920,7 +950,7 @@ feign:
 
 ***
 
-## 2 主键精度丢失
+## 2 雪花主键值精度丢失
 
 **问题：**
 
@@ -934,7 +964,6 @@ feign:
  */
 @JsonComponent
 public class JsonSerializerManage {
-
     @Bean
     public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
