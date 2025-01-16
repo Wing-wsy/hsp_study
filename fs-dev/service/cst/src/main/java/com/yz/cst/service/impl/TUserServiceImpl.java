@@ -1,12 +1,14 @@
 package com.yz.cst.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.yz.common.exception.GraceException;
+import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
-import com.yz.common.util.snow.SnowUtil;
+import com.yz.common.util.BeanUtils;
+import com.yz.cst.feign.OdrServiceApi;
 import com.yz.cst.mapper.TUserMapper;
 import com.yz.cst.service.TUserService;
-import com.yz.model.dto.cst.SearchUserBriefInfoDTO;
+import com.yz.model.bo.odr.SearchOrderByUserBO;
+import com.yz.model.dto.cst.UserBriefInfoDTO;
 import com.yz.model.entity.TUser;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -19,25 +21,25 @@ public class TUserServiceImpl implements TUserService {
     @Resource
     private TUserMapper tUserMapper;
 
-    @Override
-    public SearchUserBriefInfoDTO searchCustomerBriefInfo(Long userId) {
+    @Resource
+    private OdrServiceApi odrServiceApi;
 
-        // mybasits plus 内置方法
+    @Override
+    public UserBriefInfoDTO searchCustomerBriefInfo(Long userId) {
         TUser tUser = tUserMapper.selectById(userId);
         if (tUser == null) {
             GraceException.display(ResponseStatusEnum.USER_NOT_FIND);
         }
+        UserBriefInfoDTO dto = BeanUtils.toBean(tUser, UserBriefInfoDTO.class);
 
-//        tUser.setUserId(SnowUtil.nextId());
-//        tUser.setName("createName222");
-//        tUserMapper.insert(tUser);
-//
-//        tUser.setName("createNameupdate");
-//        tUserMapper.updateById(tUser);
+        // 演示在cst微服务调用odr微服务
+        SearchOrderByUserBO bo = new SearchOrderByUserBO();
+        bo.setUserId(userId);
+        GraceResult result_1 = odrServiceApi.searchOrderByUser(bo);
+        if (!result_1.getSuccess()) {
+            GraceException.displayCustom(result_1.getCode());
+        }
 
-        // 自定义方法
-//        TUser tUser1 = tUserMapper.getById(userId);
-        SearchUserBriefInfoDTO dto = BeanUtil.toBean(tUser,SearchUserBriefInfoDTO.class);
         return dto;
     }
 }

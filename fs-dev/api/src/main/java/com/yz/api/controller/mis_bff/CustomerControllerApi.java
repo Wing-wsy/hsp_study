@@ -3,7 +3,6 @@ package com.yz.api.controller.mis_bff;
 import com.yz.common.result.GraceResult;
 import com.yz.model.from.mis_bff.SearchUserBriefInfoFrom;
 import com.yz.model.res.mis_bff.SearchUserBriefInfoRes;
-import com.yz.model.vo.cst.SearchUserBriefInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

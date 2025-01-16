@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "查询用户基础信息VO")
-public class SearchUserBriefInfoVO {
+public class UserBriefInfoVO {
 
     @Schema(description = "用户ID")
     private Long userId;

@@ -5,8 +5,8 @@ import com.yz.api.controller.cst.TUserControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.cst.service.TUserService;
 import com.yz.model.bo.cst.SearchUserBriefInfoBO;
-import com.yz.model.dto.cst.SearchUserBriefInfoDTO;
-import com.yz.model.vo.cst.SearchUserBriefInfoVO;
+import com.yz.model.dto.cst.UserBriefInfoDTO;
+import com.yz.model.vo.cst.UserBriefInfoVO;
 import com.yz.service.base.controller.ServiceBaseController;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -25,8 +25,9 @@ public class TUserController extends ServiceBaseController implements TUserContr
     private TUserService tUserService;
 
     public GraceResult searchUserBriefInfo(@RequestBody @Valid SearchUserBriefInfoBO bo){
-        SearchUserBriefInfoDTO searchUserBriefInfoDTO = tUserService.searchCustomerBriefInfo(bo.getUserId());
-        SearchUserBriefInfoVO vo = BeanUtil.toBean(searchUserBriefInfoDTO,SearchUserBriefInfoVO.class);
+        UserBriefInfoDTO userBriefInfoDTO = tUserService.searchCustomerBriefInfo(bo.getUserId());
+        UserBriefInfoVO vo = BeanUtil.toBean(userBriefInfoDTO, UserBriefInfoVO.class);
         return GraceResult.ok(vo);
     }
+
 }

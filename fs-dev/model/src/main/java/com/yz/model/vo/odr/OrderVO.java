@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Schema(description = "查询订单信息VO")
-public class SearchOrderVO {
+public class OrderVO {
 
     @Schema(description = "订单ID")
     private Long orderId;

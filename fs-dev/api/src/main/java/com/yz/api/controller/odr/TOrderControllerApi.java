@@ -1,18 +1,16 @@
 package com.yz.api.controller.odr;
 
 import com.yz.common.result.GraceResult;
-import com.yz.model.bo.cst.SearchUserBriefInfoBO;
-import com.yz.model.bo.odr.SearchOrderBO;
-import com.yz.model.vo.cst.SearchUserBriefInfoVO;
-import com.yz.model.vo.odr.SearchOrderVO;
+import com.yz.model.bo.odr.SearchOrderByOrderIdBO;
+import com.yz.model.bo.odr.SearchOrderByUserBO;
+import com.yz.model.vo.odr.OrderVO;
+import com.yz.model.vo.odr.OrderListVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -22,8 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/order")
 public interface TOrderControllerApi {
 
-    @PostMapping("/searchOrder")
+    @PostMapping("/searchOrderByOrderId")
     @Operation(summary = "查询订单信息")
-    @ApiResponse(content = @Content(schema = @Schema(implementation = SearchOrderVO.class)))
-    public GraceResult searchOrder(@RequestBody @Valid SearchOrderBO bo);
+    @ApiResponse(content = @Content(schema = @Schema(implementation = OrderVO.class)))
+    public GraceResult searchOrderByOrderId(SearchOrderByOrderIdBO bo);
+
+    @PostMapping("/searchOrderByUser")
+    @Operation(summary = "查询用户订单信息")
+    @ApiResponse(content = @Content(schema = @Schema(implementation = OrderListVO.class)))
+    public GraceResult searchOrderByUser(SearchOrderByUserBO bo);
 }

@@ -3,7 +3,7 @@ package com.yz.model.dto.cst;
 import lombok.Data;
 
 @Data
-public class SearchUserBriefInfoDTO {
+public class UserBriefInfoDTO {
 
     private Long userId;
 

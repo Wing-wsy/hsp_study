@@ -8,11 +8,11 @@ import com.yz.mis.bff.feign.CstServiceApi;
 import com.yz.mis.bff.feign.OdrServiceApi;
 import com.yz.mis.bff.service.CustomerService;
 import com.yz.model.bo.cst.SearchUserBriefInfoBO;
-import com.yz.model.bo.odr.SearchOrderBO;
+import com.yz.model.bo.odr.SearchOrderByOrderIdBO;
 import com.yz.model.from.mis_bff.SearchUserBriefInfoFrom;
 import com.yz.model.res.mis_bff.SearchUserBriefInfoRes;
-import com.yz.model.vo.cst.SearchUserBriefInfoVO;
-import com.yz.model.vo.odr.SearchOrderVO;
+import com.yz.model.vo.cst.UserBriefInfoVO;
+import com.yz.model.vo.odr.OrderVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -45,21 +45,21 @@ public class CustomerServiceImpl implements CustomerService {
         if (!result_1.getSuccess()) {
             GraceException.displayCustom(result_1.getCode());
         }
-        SearchUserBriefInfoVO searchUserBriefInfoVO = JSONUtils.mapToBean(result_1.getData(), SearchUserBriefInfoVO.class);
+        UserBriefInfoVO userBriefInfoVO = JSONUtils.mapToBean(result_1.getData(), UserBriefInfoVO.class);
 
         // 2.需要订单数据，请求订单微服务
-        SearchOrderBO bo_2 = new SearchOrderBO();
+        SearchOrderByOrderIdBO bo_2 = new SearchOrderByOrderIdBO();
         bo_2.setOrderId(orderId);
         GraceResult result_2 = odrServiceApi.searchOrder(bo_2);
         if (!result_2.getSuccess()) {
             GraceException.displayCustom(result_2.getCode());
         }
-        SearchOrderVO searchOrderVO = JSONUtils.mapToBean(result_2.getData(), SearchOrderVO.class);
+        OrderVO orderVO = JSONUtils.mapToBean(result_2.getData(), OrderVO.class);
 
         // 3.组装数据
         SearchUserBriefInfoRes res = new SearchUserBriefInfoRes();
-        res.setSearchUserBriefInfoVO(searchUserBriefInfoVO);
-        res.setSearchOrderVO(searchOrderVO);
+        res.setUserBriefInfoVO(userBriefInfoVO);
+        res.setOrderVO(orderVO);
         return res;
 
     }

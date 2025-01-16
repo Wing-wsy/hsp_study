@@ -1,7 +1,7 @@
 package com.yz.model.res.mis_bff;
 
-import com.yz.model.vo.cst.SearchUserBriefInfoVO;
-import com.yz.model.vo.odr.SearchOrderVO;
+import com.yz.model.vo.cst.UserBriefInfoVO;
+import com.yz.model.vo.odr.OrderVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -10,9 +10,9 @@ import lombok.Data;
 public class SearchUserBriefInfoRes {
 
     @Schema(description = "用户信息")
-    private SearchUserBriefInfoVO searchUserBriefInfoVO;
+    private UserBriefInfoVO userBriefInfoVO;
 
     @Schema(description = "订单信息")
-    private SearchOrderVO searchOrderVO;
+    private OrderVO orderVO;
 
 }

@@ -901,9 +901,59 @@ feign:
 
 
 
+# 问题汇总
 
+## 1 日期格式
 
+**问题：**
 
+> 返回日期数据给前端，前端展示的日期内容是：2025-01-18T10:43:09
+>
+> 要的效果是：2025-01-18 10:43:09
+
+**解决方案：**
+
+```java
+// 实体类增加该注释
+@JsonFormat(pattern = Times.DATE_PATTERN_YYYY_MM_DD_HH_MM_SS)
+```
+
+***
+
+## 2 主键精度丢失
+
+**问题：**
+
+> 返回雪花生成的主键值给前端，前端展示的Long类型出现进度丢失
+
+**解决方案：**
+
+```java
+/**
+ * 把Long类型和浮点类型数据转换成字符串，返回前端的时候避免丢失精度
+ */
+@JsonComponent
+public class JsonSerializerManage {
+
+    @Bean
+    public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
+        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
+        //忽略value为null 时 key的输出
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        SimpleModule module = new SimpleModule();
+        //长整型和浮点型在JavaScript上面都会丢失精度，所以要转换成字符串类型
+        module.addSerializer(Long.class, ToStringSerializer.instance);
+        module.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        module.addSerializer(Double.class, ToStringSerializer.instance);
+        module.addSerializer(Double.TYPE, ToStringSerializer.instance);
+        module.addSerializer(Float.class, ToStringSerializer.instance);
+        module.addSerializer(Float.TYPE, ToStringSerializer.instance);
+        objectMapper.registerModule(module);
+        return objectMapper;
+    }
+}
+```
 
 
 

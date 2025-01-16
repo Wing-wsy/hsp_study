@@ -26,5 +26,5 @@ public interface HelloControllerApi {
 
     @PostMapping("test-post")
     @Operation(summary = "测试接口post")
-    public GraceResult testPost(@RequestBody TestBO testBo);
+    public GraceResult testPost(TestBO testBo);
 }
