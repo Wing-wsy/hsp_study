@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 测试控制层2
  */
-@Tag(name = "TUserServiceController", description = "用户接口")
+@Tag(name = "TUserController", description = "用户接口")
 @RequestMapping("/user")
-public interface TUserServiceControllerApi {
+public interface TUserControllerApi {
 
     @PostMapping("/searchUserBriefInfo")
     @Operation(summary = "查询用户基础信息")

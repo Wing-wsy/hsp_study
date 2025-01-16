@@ -1,3 +1,51 @@
 server:
-  port: 8082
+  port: 8083
+
+spring:
+  datasource: # 数据源的相关配置
+    type: com.zaxxer.hikari.HikariDataSource    # 数据源的类型
+    driver-class-name: com.mysql.cj.jdbc.Driver # mysql的数据库驱动类名称
+    url:  jdbc:mysql://8.218.31.154:3306/mexico_loanover?useSSL=false&serverTimezone=GMT%2B7
+    username: wangshaoyou
+    password: ycfhto_lNew_853@itf1264
+    hikari:
+      connection-timeout: 30000               # 等待连接池分配连接的最大时间（毫秒），超过这个时长还没有可用的连接，则会抛出SQLException
+      minimum-idle: 5                         # 最小连接数
+      maximum-pool-size: 20                   # 最大连接数
+      auto-commit: true                       # 自动提交
+      idle-timeout: 600000                    # 连接超时的最大时长（毫秒），超时则会被释放（retired）
+      pool-name: DataSourceHikariCP           # 连接池的名字
+      max-lifetime: 18000000                  # 连接池的最大生命时长（毫秒），超时则会被释放（retired）
+      connection-test-query: SELECT 1
+  cloud:
+    nacos:
+      #配置子系统在Web管理页面上的注册信息
+      config:
+        group: DEFAULT_GROUP
+        prefix: ${spring.application.name}
+        file-extension: yaml
+        # 本地环境
+        server-addr: 127.0.0.1:8848
+        # 测试环境
+        #        server-addr: 8.217.253.19:18848
+        import-check:
+          enabled: false
+      #        namespace: hxds
+      #配置子系统在Nacos上的注册信息
+      discovery:
+        #        namespace: hxds
+        #        username: nacos
+        #        password: nacos
+        # 本地环境
+        server-addr: 127.0.0.1:8848
+        # 测试环境
+        #        server-addr: 8.217.253.19:18848
+        heart-beat-interval: 1000
+        heart-beat-timeout: 1000
+        group: DEFAULT_GROUP
+
+# 测试环境打印SQL语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 

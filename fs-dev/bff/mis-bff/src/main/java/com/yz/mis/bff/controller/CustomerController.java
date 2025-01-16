@@ -19,11 +19,6 @@ public class CustomerController extends BffBaseController implements CustomerCon
     private CustomerService customerService;
 
     public GraceResult searchUserBriefInfo(@RequestBody @Valid SearchUserBriefInfoFrom from) {
-//        log.debug("debug!~~~~");
-//        log.info("info!~~~~");
-//        log.warn("warn!~~~~");
-//        log.error("error!~~~~");
-//        int i = 1/0;
         SearchUserBriefInfoRes searchUserBriefInfoRes = customerService.searchUserBriefInfo(from);
         return GraceResult.ok(searchUserBriefInfoRes);
     }

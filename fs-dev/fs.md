@@ -127,6 +127,19 @@ public class InterceptorConfig implements WebMvcConfigurer {
 }
 ```
 
+**TraceId传递**
+
+```java
+@Configuration
+public class FeignInterceptor implements RequestInterceptor {
+
+    @Override
+    public void apply(RequestTemplate requestTemplate) {
+        requestTemplate.header(Strings.TRACE_ID, MDC.get(Strings.TRACE_ID));
+    }
+}
+```
+
 ## 3.2 logback.xml 配置文件
 
 ```xml

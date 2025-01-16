@@ -12,32 +12,37 @@
     <property name="log.path" value="logs/${application_name}"></property>
 
     <property name="env" value="${active_profiles}" />
+    <!-- 生产环境配置 -->
     <if condition='property("env").equals("prod")'>
         <then>
-            <!-- 生产环境-日志格式不带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{trace_id}] - %msg%n"/>
+            <!-- 日志格式不带颜色 -->
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{traceId}] - %msg%n"/>
+            <!-- 标准输出：控制台 -->
+            <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+                <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                    <level>ERROR</level>
+                </filter>
+                <encoder>
+                    <Pattern>${Console_Pattern}</Pattern>
+                    <charset>UTF-8</charset>
+                </encoder>
+            </appender>
         </then>
     </if>
+    <!-- 开发环境配置 -->
     <if condition='!property("env").equals("prod")'>
         <then>
-            <!-- 开发环境-日志格式带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{trace_id})] - %msg%n"/>
+            <!-- 日志格式带颜色 -->
+            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{traceId})] - %msg%n"/>
+            <!-- 标准输出：控制台 -->
+            <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <Pattern>${Console_Pattern}</Pattern>
+                    <charset>UTF-8</charset>
+                </encoder>
+            </appender>
         </then>
     </if>
-
-    <!-- 日志格式不带颜色 -->
-    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] - %msg%n"/>-->
-    <!-- 日志格式带颜色 -->
-    <!-- <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{trace_id})] - %msg%n"/>-->
-
-    <!-- 标准输出：控制台 -->
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <Pattern>${Console_Pattern}</Pattern>
-            <!-- 设置字符集 -->
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
 
     <!-- 时间滚动输出 level为 INFO 日志 -->
     <appender name="RollingFileInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -113,7 +118,6 @@
 
     <!-- root指定所有的打印日志级别（如果使用<logger>标签指定了打印级别，则使用logger指定的） -->
     <!-- 从低到高为（不区分大小写）：All < Trace < Debug < Info < Warn < Error < Fatal < OFF-->
-    <!--    <root level="Info">-->
     <root level="Info">
         <appender-ref ref="Console"/>
         <appender-ref ref="RollingFileInfo"/>
@@ -121,17 +125,4 @@
         <appender-ref ref="RollingFileError"/>
     </root>
 
-    <!--生产环境-->
-    <!--
-        yml配置环境激活：spring.profiles.active=prod 则下面生效
-    -->
-    <springProfile name="prod">
-        <!--        <root level="error">-->
-        <root level="info">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="RollingFileInfo"/>
-            <appender-ref ref="RollingFileWarn"/>
-            <appender-ref ref="RollingFileError"/>
-        </root>
-    </springProfile>
 </configuration>

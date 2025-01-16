@@ -52,6 +52,7 @@ public class GraceResult {
     public GraceResult(Object data) {
         this.status = ResponseStatusEnum.SUCCESS.status();
         this.msg = ResponseStatusEnum.SUCCESS.msg();
+        this.code = ResponseStatusEnum.SUCCESS.name();
         this.success = ResponseStatusEnum.SUCCESS.success();
         this.data = data;
         this.id = MDC.get(Strings.TRACE_ID);

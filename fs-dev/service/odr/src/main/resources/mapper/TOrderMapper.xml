@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.odr.mapper.TOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.yz.model.entity.TOrder" >
+    <id column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="actual_amounts" property="actualAmounts" jdbcType="DECIMAL" />
+    <result column="sure_repay_amounts" property="sureRepayAmounts" jdbcType="DECIMAL" />
+    <result column="real_repay_amounts" property="realRepayAmounts" jdbcType="DECIMAL" />
+    <result column="repay_date" property="repayDate" jdbcType="TIMESTAMP" />
+    <result column="sell_date" property="sellDate" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+  </resultMap>
+
+</mapper>

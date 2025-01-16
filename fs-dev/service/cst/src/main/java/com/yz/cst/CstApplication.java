@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
-@EnableDiscoveryClient  // 开启服务的注册和发现功能
+@EnableDiscoveryClient
 @EnableFeignClients
 @ComponentScan("com.yz")
 @MapperScan(basePackages = "com.yz.cst.mapper")
