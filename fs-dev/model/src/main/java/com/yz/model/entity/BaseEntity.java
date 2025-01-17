@@ -2,6 +2,7 @@ package com.yz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -22,5 +23,6 @@ public class BaseEntity {
 
     /**是否删除*/
     @TableField(value = "is_delete",fill = FieldFill.INSERT)
+    @TableLogic // 逻辑删除字段 查询语句自动添加 is_delete = 0
     private int isDelete;
 }

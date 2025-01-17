@@ -3,13 +3,14 @@ package com.yz.odr.controller;
 import com.yz.api.controller.odr.TOrderControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.common.util.BeanUtils;
+import com.yz.common.util.page.PageResult;
 import com.yz.model.bo.odr.SearchOrderByOrderIdBO;
 import com.yz.model.bo.odr.SearchOrderByUserBO;
 import com.yz.model.dto.odr.OrderDTO;
 import com.yz.model.vo.odr.OrderVO;
 import com.yz.model.vo.odr.OrderListVO;
 import com.yz.odr.service.TOrderService;
-import com.yz.service.base.controller.ServiceBaseController;
+import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-public class TOrderController extends ServiceBaseController implements TOrderControllerApi {
+public class TOrderController extends BaseController implements TOrderControllerApi {
 
     @Resource
     private TOrderService tOrderService;
@@ -37,14 +38,14 @@ public class TOrderController extends ServiceBaseController implements TOrderCon
 
     @Override
     public GraceResult searchOrderByUser(@RequestBody @Valid SearchOrderByUserBO bo) {
-        OrderListVO orderListVO = new OrderListVO();
         List<OrderVO> orderVOList = new ArrayList<>();
-        List<OrderDTO> orderDTOList = tOrderService.searchOrderByUser(bo.getUserId());
-        for (OrderDTO orderDTO : orderDTOList) {
+        PageResult<OrderDTO> pageResultOrderDTO = tOrderService.searchOrderByUser(bo.getUserId(), bo.getPage(), bo.getPageSize());
+        List<OrderDTO> rows = pageResultOrderDTO.getRows();
+        for (OrderDTO orderDTO : rows) {
             OrderVO vo = BeanUtils.toBean(orderDTO, OrderVO.class);
             orderVOList.add(vo);
         }
-        orderListVO.setOrderVOList(orderVOList);
-        return GraceResult.ok(orderListVO);
+        PageResult<OrderVO> pageResultOrderVO = convertPageResult(pageResultOrderDTO,orderVOList);
+        return GraceResult.ok(pageResultOrderVO);
     }
 }

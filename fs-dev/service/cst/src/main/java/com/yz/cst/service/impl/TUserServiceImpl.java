@@ -4,6 +4,7 @@ import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.BeanUtils;
+import com.yz.common.util.snow.SnowUtil;
 import com.yz.cst.feign.OdrServiceApi;
 import com.yz.cst.mapper.TUserMapper;
 import com.yz.cst.service.TUserService;
@@ -30,6 +31,14 @@ public class TUserServiceImpl implements TUserService {
         if (tUser == null) {
             GraceException.display(ResponseStatusEnum.USER_NOT_FIND);
         }
+
+        tUser.setUserId(SnowUtil.nextId());
+        tUser.setName("createName888");
+        tUserMapper.insert(tUser);
+
+//        tUser.setName("createNameupdate999");
+//        tUserMapper.updateById(tUser);
+
         UserBriefInfoDTO dto = BeanUtils.toBean(tUser, UserBriefInfoDTO.class);
 
         // 演示在cst微服务调用odr微服务

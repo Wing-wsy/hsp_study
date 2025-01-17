@@ -1,31 +1,32 @@
-# 1 微服务系统结构与技术栈
+# 1 系统结构与技术栈
 
 ## 1.1 技术栈
 
 | 技术         | 版本       | 功能          |
 | ------------ | ---------- | ------------- |
-| jdk          | 17         |               |
-| maven        | 3.3.0+     | 依赖管理      |
-| mysql        | 8.0+       |               |
+| JDK          | 17         |               |
+| Maven        | 3.3.0+     | 依赖管理      |
+| Mysql        | 8.0+       | 数据库        |
 | SpringBoot   | 3.0.13     |               |
 | SpringCloud  | 2022.0.4   | 微服务        |
-| nacos        | 2022.0.0.0 | 注册&配置中心 |
-| openfeign    | 4.0.4      | 远程调用      |
-| mybatis plus | 3.5.10.1   | 持久层增强    |
-| swagger3     | 2.3.0      | 在线文档      |
+| Nacos        | 2022.0.0.0 | 注册&配置中心 |
+| Openfeign    | 4.0.4      | 远程调用      |
+| Mybatis Plus | 3.5.10.1   | 持久层增强    |
+| Swagger3     | 2.3.0      | 在线文档      |
+| ...          | ...        | ...           |
 
 ## 1.2 系统架构图
 
 ![](z-imgs/05.png)
 
-
+## 1.3 项目模块介绍
 
 ```sh
 # 项目名称
 fs-dev
     # 网关服务(系统的统一入口)
     gateway
-    # bff模块（与微服务进行交互，获取所需数据并整合返回给用户端）
+    # bff服务（与微服务进行交互，获取所需数据并整合返回给用户端）
     bff
         - bff-base # 全部bff服务的基础依赖
         - cst-bff
@@ -40,7 +41,7 @@ fs-dev
         - ...
     # api接口模块(管理全系统api，一目了然)
     api
-    # 模型层（bo、vo、dto、entity）
+    # 模型层（from、res、bo、vo、dto、entity）
     model
     # 公共模块
     common
@@ -56,7 +57,7 @@ fs-dev
         - mybatis-generator
 ```
 
-## 1.3 什么是 BFF 架构？
+## 1.4 什么是 BFF 架构？
 
 从本质上讲，**Backend for Frontend**是一种架构模式，它为每个前端接口提供专用的后端层。每个前端（例如移动应用、Web 应用、智能设备等）可能具有不同的性能、数据和交互需求。BFF 不会依赖单个整体式或通用 API，而是根据给定前端的特定需求定制后端。
 
@@ -70,13 +71,11 @@ fs-dev
 
 ![](https://i-blog.csdnimg.cn/img_convert/b52928291187984ee99e54bc30f42477.jpeg)
 
-> 具体可以百度关键字：BFF 架构
-
 ***
 
 # 2 系统模块继承关系
 
-> 良好的模块继承可以避免项目的循环依赖问题，让模块更加通用，加快代码开发。
+> 良好的模块继承可以避免项目的循环依赖问题，让模块的业务边界更加清晰。
 
 > 项目模块之间有严格继承关系：
 >
@@ -86,11 +85,13 @@ fs-dev
 >
 > ​	`api` 继承 `model`
 >
-> ​    `service-base`、`bff-base` 继承 `api`
+> ​    `service-base` 继承 `api`
 >
 > ​    全部微服务继承 `service-base`
 >
-> ​    全部bff服务继承 `bff-base`
+> ​    `bff-base`继承所有的微服务
+>
+> ​    全部bff服务继承`bff-base`
 
 <img src="z-imgs/02.png" style="zoom: 50%;" />
 
@@ -150,7 +151,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
 ```java
 @Configuration
 public class FeignInterceptor implements RequestInterceptor {
-
     @Override
     public void apply(RequestTemplate requestTemplate) {
         requestTemplate.header(Strings.TRACE_ID, MDC.get(Strings.TRACE_ID));
@@ -294,7 +294,28 @@ public class FeignInterceptor implements RequestInterceptor {
 
 ```
 
-## 3.3 日志归档说明
+## 3.3 项目日志使用
+
+> 日志等级：debug  < info < warn < error 【只列举最常用的这几个】
+
+```java
+@Slf4j
+public class xxxServiceImpl {
+    public Object hello() {
+        // debug 测试环境调试使用（不会在生产打印该级别的日志）
+        log.debug("debug!~~~~");
+        // info 考虑到方便排查，在统测试和生产打印的最低级别为 info【测试和生产的区别是：测试 info 会打印到控制台，生产不会】
+        log.info("info!~~~~");
+        // warn 【测试和生产都会打印到控制台】
+        log.warn("warn!~~~~");
+        // error 【测试和生产都会打印到控制台】
+        log.error("error!~~~~");
+        return "Hello world~";
+    }
+}
+```
+
+## 3.4 日志归档说明
 
 > 每一个服务都有自己的日志文件夹，日志会按日期和文件大小自动进行归档
 >
@@ -321,8 +342,6 @@ public class FeignInterceptor implements RequestInterceptor {
 > 3）日志文件保留天数`15天`，超过自动删除
 
 ![](z-imgs/04.png)
-
-
 
 # 4 优雅响应
 
@@ -371,7 +390,7 @@ public class GraceResult {
 
 ## 4.2 响应结果枚举
 
-> 系统的错误提示，都配置在这个类中
+> 系统的错误提示，都配置在这个类中（不推荐配置在数据库）
 
 ```java
 /**
@@ -468,28 +487,7 @@ public enum ResponseStatusEnum {
     PAYMENT_HEADERS_ERROR(5903, false, "请在header中携带支付中心所需的用户id以及密码！"),
     PAYMENT_ORDER_CREATE_ERROR(5904, false, "支付中心订单创建失败，请联系管理员！");
 
-    // 响应业务状态
-    private Integer status;
-    // 调用是否成功
-    private Boolean success;
-    // 响应消息，可以为成功或者失败的消息
-    private String msg;
-
-    ResponseStatusEnum(Integer status, Boolean success, String msg) {
-        this.status = status;
-        this.success = success;
-        this.msg = msg;
-    }
-
-    public Integer status() {
-        return status;
-    }
-    public Boolean success() {
-        return success;
-    }
-    public String msg() {
-        return msg;
-    }
+		...
 }
 ```
 
@@ -499,9 +497,9 @@ public enum ResponseStatusEnum {
 >
 > **重点**：尽量少使用 try catch 代码块，除非已经明确知道该代码会有异常出现并需要处理。
 >
-> **原因**：大量 try catch 代码块，会导致业务代码阅读困难，其他的开发同事维护时，阅读到这都要停下考虑为什么这里需要 try （因为正常出现错误，直接抛出让 `统一异常处理器` 处理即可），导致开发业务精力被分散。
+> **原因**：try catch 代码块过多的话，会导致业务代码阅读困难。
 >
-> **好处**：有些系统异常是需要及时抛出的，而不是 try 进行异常吞并，让异常正常抛出后早期就能及时发现，然后程序员才能及时进行修复，这样才能让系统更加健壮。
+> **好处**：有些系统异常是需要及时抛出的，而**不应该直接 try 进行异常吞并**，让异常正常抛出后早期就能及时发现，然后程序员才能及时进行修复，这样才能让系统更加健壮。
 
 ## 5.1 全局异常处理器
 
@@ -585,7 +583,7 @@ public class SpringDocConfig {
 
 # 7 接口出入参打印
 
-> 统一接口的出入参数打印，使用Spring AOP切面功能，无需手动每个接口编写，让接口更加简洁，性能更高。
+> 统一接口的出入参数打印，使用Spring AOP切面功能，无需手动每个接口编写，让接口更加简洁，性能也更高。
 
 ```java
 @Slf4j
@@ -594,7 +592,7 @@ public class SpringDocConfig {
 public class LogAspect {
     /**
      * 切入点
-     * 【controller包下，包括子包以 Controller结尾的控制器全部方法打印请求接口入参和接口响应出参】
+     * controller包下，包括子包以 Controller结尾的控制器全部方法打印请求接口入参和接口响应出参
      */
     @Pointcut("execution(public * com.yz.*.controller..*Controller.*(..))")
     public void log() {
@@ -615,14 +613,12 @@ public class LogAspect {
 
         // 打印请求信息
         log.info("------------- 开始 -------------");
-        // 完整URL：http://127.0.0.1:8081/cst/h/hello
         String requestURL = request.getRequestURL().toString();
         int index = StrUtils.findNthOccurrence(requestURL, Strings.SLASH.charAt(0), 3);
         String uri = requestURL.substring(index,requestURL.length());
         log.info("请求uri: {}", uri);
         // 打印请求参数
         Object[] args = joinPoint.getArgs();
-//        log.info("请求参数: {}", JSONUtils.toJsonStr(args));
 
         // 排除特殊类型的参数，如文件类型
         Object[] arguments = new Object[args.length];
@@ -755,11 +751,12 @@ public GraceResult returnNotValidException(MethodArgumentNotValidException e) {
 ```java
 // BaseMapper 由 MyBatisPlus 提供
 public interface TUserMapper extends BaseMapper<TUser> {
-    public TUser getById(Long userId);
 }
 ```
 
-## 9.2 通用属性填充
+## 9.2 SQL通用属性条件填充
+
+### 9.2.1 insert和update
 
 ```java
 /**
@@ -792,11 +789,16 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
 }
 ```
 
+### 9.2.2 select
+
+```java
+@TableLogic // 逻辑删除字段 查询语句自动添加 is_delete = 0
+private int isDelete;
+```
+
 ## 9.3 分页功能
 
-## 9.4 通用查询条件
 
-> 全部查询 过滤 isDelete = 1 的数据
 
 
 

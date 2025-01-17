@@ -67,6 +67,10 @@ public enum ResponseStatusEnum {
     ADMIN_FACE_LOGIN_ERROR(569, false, "人脸识别失败，请重试！"),
     ADMIN_DELETE_ERROR(5691, false, "删除管理员失败！"),
 
+    // 查询分页错误 57x
+    PAGE_ERROR_LIMIT(570, false, "查询分页超过最大分页数！"),
+
+
 
     // 人脸识别错误代码
     FACE_VERIFY_TYPE_ERROR(600, false, "人脸比对验证类型不正确！"),

@@ -7,7 +7,7 @@ import com.yz.cst.service.TUserService;
 import com.yz.model.bo.cst.SearchUserBriefInfoBO;
 import com.yz.model.dto.cst.UserBriefInfoDTO;
 import com.yz.model.vo.cst.UserBriefInfoVO;
-import com.yz.service.base.controller.ServiceBaseController;
+import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-public class TUserController extends ServiceBaseController implements TUserControllerApi {
+public class TUserController extends BaseController implements TUserControllerApi {
 
     @Resource
     private TUserService tUserService;

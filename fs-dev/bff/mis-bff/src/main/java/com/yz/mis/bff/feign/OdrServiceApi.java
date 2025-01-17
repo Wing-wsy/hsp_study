@@ -6,13 +6,13 @@ import com.yz.model.bo.odr.SearchOrderByUserBO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(value = "odr-service", path = "odr")
+@FeignClient(value = "odr-service", path = "/odr/order")
 public interface OdrServiceApi {
 
-    @PostMapping("/order/searchOrder")
+    @PostMapping("searchOrder")
     public GraceResult searchOrder(SearchOrderByOrderIdBO bo);
 
-    @PostMapping("/order/searchOrderByUser")
+    @PostMapping("searchOrderByUser")
     public GraceResult searchOrderByUser(SearchOrderByUserBO bo);
 }
 

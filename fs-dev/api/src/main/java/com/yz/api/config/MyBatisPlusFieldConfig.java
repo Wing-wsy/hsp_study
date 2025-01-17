@@ -1,6 +1,8 @@
 package com.yz.api.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.yz.common.constant.FieldConstants;
+import com.yz.common.enums.YesOrNo;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
@@ -18,10 +20,11 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         LocalDateTime localDateTime = LocalDateTime.now();
         //设置属性值
-        this.setFieldValByName("createTime",localDateTime,metaObject);
-        this.setFieldValByName("updateTime",localDateTime,metaObject);
+        this.setFieldValByName(FieldConstants.CREATE_TIME,localDateTime,metaObject);
+        this.setFieldValByName(FieldConstants.UPDATE_TIME,localDateTime,metaObject);
         // 0:正常，1已删除
-        this.setFieldValByName("isDelete",0,metaObject);
+        this.setFieldValByName(FieldConstants.IS_DELETE, YesOrNo.NO.type,metaObject);
+
     }
 
     /**
@@ -30,6 +33,7 @@ public class MyBatisPlusFieldConfig implements MetaObjectHandler {
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName("updateTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName(FieldConstants.UPDATE_TIME,LocalDateTime.now(),metaObject);
+
     }
 }
