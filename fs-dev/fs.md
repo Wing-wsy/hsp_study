@@ -798,6 +798,21 @@ private int isDelete;
 
 ## 9.3 分页功能
 
+```java
+@Configuration
+public class MybatisPlusConfig {
+    /**
+     * 分页插件
+     */
+    @Bean
+    public MybatisPlusInterceptor paginationInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
+    }
+}
+```
+
 
 
 
@@ -843,6 +858,8 @@ private int isDelete;
 ***
 
 # 11 sa-token权限控制
+
+
 
 # 12 nacos 服务注册、配置中心
 

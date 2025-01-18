@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MybatisPlusConfig {
-
     /**
-     * 分页插件。如果你不配置，分页插件将不生效
+     * 分页插件
      */
     @Bean
     public MybatisPlusInterceptor paginationInterceptor() {
