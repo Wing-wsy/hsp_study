@@ -2,7 +2,6 @@ package com.yz.mis.bff.service.impl;
 
 import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
-import com.yz.common.util.BeanUtils;
 import com.yz.common.util.JSONUtils;
 import com.yz.common.util.ListUtils;
 import com.yz.cst.mapper.TUserMapper;
@@ -10,7 +9,6 @@ import com.yz.mis.bff.feign.CstServiceApi;
 import com.yz.mis.bff.feign.OdrServiceApi;
 import com.yz.mis.bff.service.CustomerService;
 import com.yz.model.bo.cst.SearchUserBriefInfoBO;
-import com.yz.model.bo.odr.SearchOrderByOrderIdBO;
 import com.yz.model.bo.odr.SearchOrderByUserBO;
 import com.yz.model.from.mis_bff.SearchOrderAndUserBriefInfoFrom;
 import com.yz.model.from.mis_bff.SearchUserBriefInfoFrom;
@@ -21,11 +19,7 @@ import com.yz.model.vo.odr.OrderVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

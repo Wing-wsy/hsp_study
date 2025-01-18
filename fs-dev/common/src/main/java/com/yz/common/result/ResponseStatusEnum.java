@@ -1,7 +1,11 @@
 package com.yz.common.result;
 
+import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * 响应结果枚举，用于提供给GraceResult返回给前端
@@ -143,6 +147,29 @@ public enum ResponseStatusEnum {
             }
         }
         return null;
+    }
+
+    public static List<ResponseStatusResult> getAllResponseStatus(){
+        List<ResponseStatusResult> list = new ArrayList<>();
+        Iterator<ResponseStatusEnum> iterator = Arrays.stream(ResponseStatusEnum.values()).iterator();
+        while (iterator.hasNext()){
+            ResponseStatusEnum next = iterator.next();
+            ResponseStatusResult responseStatusResult = new ResponseStatusResult();
+            responseStatusResult.name = next.name();
+            responseStatusResult.status = next.status;
+            responseStatusResult.success = next.success;
+            responseStatusResult.msg = next.msg;
+            list.add(responseStatusResult);
+        }
+        return list;
+    }
+
+    @Data
+    public static class ResponseStatusResult {
+        private String name;
+        private Integer status;
+        private Boolean success;
+        private String msg;
     }
 
 }

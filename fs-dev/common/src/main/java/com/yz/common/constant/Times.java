@@ -48,7 +48,15 @@ public class Times {
      */
     public static final String DATE_PATTERN_YYYY_MM_DD_HH_MM_SS_1 = "yyyy/MM/dd HH:mm:ss";
 
-    public static final String TIMEZONE_GMT8 = "GMT+8";
+    /**
+     * 开始时间后缀
+     */
+    public static final String START_TIME_SUFFIX = " 00:00:00";
+
+    /**
+     * 结束时间后缀
+     */
+    public static final String END_TIME_SUFFIX = " 23:59:59";
 
 
     /**

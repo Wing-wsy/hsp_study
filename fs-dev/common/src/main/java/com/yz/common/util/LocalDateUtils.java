@@ -39,6 +39,21 @@ public class LocalDateUtils {
     }
 
     /**
+     * 【功能描述】获取当前日期最小时间字符串.
+     * @return String 日期字符串，例如2023-12-25 00:00:00
+     */
+    public static String getLocalDateMinStr() {
+        return getLocalDateStr() + Times.START_TIME_SUFFIX;
+    }
+    /**
+     * 【功能描述】获取当前日期最大时间字符串.
+     * @return String 日期字符串，例如2023-12-25 23:59:59
+     */
+    public static String getLocalDateMaxStr() {
+        return getLocalDateStr() + Times.END_TIME_SUFFIX;
+    }
+
+    /**
      * 【功能描述】获取当前时间字符串.
      * @return String 时间字符串，例如 09:51:53
      */
