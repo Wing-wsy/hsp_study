@@ -1,0 +1,40 @@
+server:
+  servlet:
+    context-path: /mis
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # 不限制请求体大小
+
+
+spring:
+  application:
+    name: mis-service
+  profiles: # dev-开发环境; prod-生产环境; test-测试环境;
+    active: dev
+#    active: test
+#    active: prod
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: assign_id
+      update-strategy: not_empty
+    banner: false
+  mapper-locations: classpath*:/mapper/*.xml
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 300000
+
+# swagger在线文档配置
+springdoc:
+  api-docs:
+    enabled: true
+    path: /doc-api.html
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: on
+

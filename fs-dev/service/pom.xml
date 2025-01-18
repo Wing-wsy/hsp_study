@@ -12,9 +12,10 @@
     <artifactId>service</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <!-- 这里管理全部微服务-->
+        <!-- 这里管理全部子服务-->
         <module>service-base</module>
         <module>cst</module>
+        <module>mis</module>
         <module>odr</module>
         <module>pay</module>
     </modules>

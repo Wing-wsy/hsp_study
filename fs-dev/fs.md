@@ -8,7 +8,7 @@
 | Maven        | 3.3.0+     | 依赖管理      |
 | Mysql        | 8.0+       | 数据库        |
 | SpringBoot   | 3.0.13     |               |
-| SpringCloud  | 2022.0.4   | 微服务        |
+| SpringCloud  | 2022.0.4   |               |
 | Nacos        | 2022.0.0.0 | 注册&配置中心 |
 | Openfeign    | 4.0.4      | 远程调用      |
 | Mybatis Plus | 3.5.10.1   | 持久层增强    |
@@ -26,15 +26,15 @@
 fs-dev
     # 网关服务(系统的统一入口)
     gateway
-    # bff服务（与微服务进行交互，获取所需数据并整合返回给用户端）
+    # bff服务（与子服务进行交互，获取所需数据并整合返回给用户端）
     bff
         - bff-base # 全部bff服务的基础依赖
         - cst-bff
         - mis-bff
         - ...
-    # 微服务模块（提供具体的服务，如用户服务、订单服务、文件服务等）
+    # 子服务模块（提供具体的服务，如用户服务、订单服务、文件服务等）
     service
-        - service-base # 全部微服务的基础依赖
+        - service-base # 全部子服务的基础依赖
         - cst
         - odr
         - pay
@@ -75,8 +75,6 @@ fs-dev
 
 # 2 系统模块继承关系
 
-> 良好的模块继承可以避免项目的循环依赖问题，让模块的业务边界更加清晰。
-
 > 项目模块之间有严格继承关系：
 >
 > ​	`common`作为最基础模块 
@@ -87,9 +85,9 @@ fs-dev
 >
 > ​    `service-base` 继承 `api`
 >
-> ​    全部微服务继承 `service-base`
+> ​    全部子服务继承 `service-base`
 >
-> ​    `bff-base`继承所有的微服务
+> ​    `bff-base`继承所有的子服务
 >
 > ​    全部bff服务继承`bff-base`
 
@@ -158,143 +156,7 @@ public class FeignInterceptor implements RequestInterceptor {
 }
 ```
 
-## 3.2 logback.xml 配置文件
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!--<configuration>-->
-<configuration scan="true" scanPeriod="5 seconds">
-    <!-- scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true -->
-    <!-- scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
-    <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
-    <contextName>logback</contextName>
-    <!-- 读取yml中的项目名称 -->
-    <springProperty name="application_name" scope="context" source="spring.application.name"/>
-    <springProperty name="active_profiles" scope="context" source="spring.profiles.active"/>
-    <!-- 日志保存路径 -->
-    <property name="log.path" value="logs/${application_name}"></property>
-
-    <property name="env" value="${active_profiles}" />
-    <if condition='property("env").equals("prod")'>
-        <then>
-            <!-- 生产环境-日志格式不带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%logger{50}] [%-18X{LOG_ID}] - %msg%n"/>
-        </then>
-    </if>
-    <if condition='!property("env").equals("prod")'>
-        <then>
-            <!-- 开发环境-日志格式带颜色 -->
-            <property name="Console_Pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) [%blue(%logger{50})] [%green(%-18X{LOG_ID})] - %msg%n"/>
-        </then>
-    </if>
-    <!-- 标准输出：控制台 -->
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <Pattern>${Console_Pattern}</Pattern>
-            <!-- 设置字符集 -->
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
-    <!-- 时间滚动输出 level为 INFO 日志 -->
-    <appender name="RollingFileInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--引用上面变量-->
-        <file>${log.path}/info.log</file>
-        <encoder>
-            <pattern>${Console_Pattern}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 每天日志归档路径以及格式 -->
-            <fileNamePattern>${log.path}/info/log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>2MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!--日志文件保留天数-->
-            <maxHistory>15</maxHistory>
-        </rollingPolicy>
-        <append>true</append>
-        <!-- 此日志文件只记录info级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-
-    <!-- 时间滚动输出 level为 WARN 日志 -->
-    <appender name="RollingFileWarn" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/warn.log</file>
-        <encoder>
-            <pattern>${Console_Pattern}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/warn/log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>2MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>15</maxHistory>
-        </rollingPolicy>
-        <!-- 此日志文件只记录warn级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>warn</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-
-    <!-- 时间滚动输出 level为 ERROR 日志 -->
-    <appender name="RollingFileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/error.log</file>
-        <encoder>
-            <pattern>${Console_Pattern}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/error/log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>2MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!--日志文件保留天数-->
-            <maxHistory>15</maxHistory>
-        </rollingPolicy>
-        <!-- 此日志文件只记录ERROR级别的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-
-    <!-- root指定所有的打印日志级别（如果使用<logger>标签指定了打印级别，则使用logger指定的） -->
-    <!-- 从低到高为（不区分大小写）：All < Trace < Debug < Info < Warn < Error < Fatal < OFF-->
-    <!--    <root level="Info">-->
-    <root level="Info">
-        <appender-ref ref="Console"/>
-        <appender-ref ref="RollingFileInfo"/>
-        <appender-ref ref="RollingFileWarn"/>
-        <appender-ref ref="RollingFileError"/>
-    </root>
-
-    <!--生产环境-->
-    <!--
-        yml配置环境激活：spring.profiles.active=prod 则下面生效
-    -->
-    <springProfile name="prod">
-        <root level="info">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="RollingFileInfo"/>
-            <appender-ref ref="RollingFileWarn"/>
-            <appender-ref ref="RollingFileError"/>
-        </root>
-    </springProfile>
-</configuration>
-
-```
-
-## 3.3 项目日志使用
+## 3.2 项目日志使用
 
 > 日志等级：debug  < info < warn < error 【只列举最常用的这几个】
 
@@ -302,15 +164,10 @@ public class FeignInterceptor implements RequestInterceptor {
 @Slf4j
 public class xxxServiceImpl {
     public Object hello() {
-        // debug 测试环境调试使用（不会在生产打印该级别的日志）
         log.debug("debug!~~~~");
-        // info 考虑到方便排查，在统测试和生产打印的最低级别为 info【测试和生产的区别是：测试 info 会打印到控制台，生产不会】
         log.info("info!~~~~");
-        // warn 【测试和生产都会打印到控制台】
         log.warn("warn!~~~~");
-        // error 【测试和生产都会打印到控制台】
         log.error("error!~~~~");
-        return "Hello world~";
     }
 }
 ```
@@ -343,11 +200,11 @@ public class xxxServiceImpl {
 
 ![](z-imgs/04.png)
 
-# 4 优雅响应
+# 4 规范响应
 
 > `app`、`pc`、`ipad`等设备接入我们系统，需要有统一的响应结果，更方便前端进行处理和展示。
 >
-> 系统的错误，不应该直接返回给前端，不应该让用户能直接看到500错误信息（不友好的用户，可以通过错误信息判断出系统的漏洞进而攻击），而应该返回友好地统一提示，比如：`系统繁忙，请稍后再试！`
+> 系统的错误，不应该直接返回给前端，不应该让用户能直接看到500错误信息，而应该返回友好地统一提示，比如：`系统繁忙，请稍后再试！`
 
 ## 4.1 响应实体类
 
@@ -390,7 +247,7 @@ public class GraceResult {
 
 ## 4.2 响应结果枚举
 
-> 系统的错误提示，都配置在这个类中（不推荐配置在数据库）
+> 系统的错误提示，都配置在这个类中
 
 ```java
 /**
@@ -542,7 +399,7 @@ GraceException.display(ResponseStatusEnum.ORDER_NOT_FIND);
 
 # 6 Swagger 文档
 
-> 在线接口文档，方便对接的前端和开发进行在线调试接口，更加方便（这个只作为补充，不用也可以）。
+> 在线接口文档
 
 ## 6.1 pom坐标
 
@@ -583,7 +440,7 @@ public class SpringDocConfig {
 
 # 7 接口出入参打印
 
-> 统一接口的出入参数打印，使用Spring AOP切面功能，无需手动每个接口编写，让接口更加简洁，性能也更高。
+> 统一接口的出入参数打印，使用Spring AOP切面功能实现
 
 ```java
 @Slf4j
@@ -823,13 +680,13 @@ public class MybatisPlusConfig {
 
 ## 10.1 BO、VO、DTO
 
-**这三者是通用分类方案，在本系统中，微服务系统中使用**
+**这三者是通用分类方案，在本系统中，子服务系统中使用**
 
 > `BO`：
 >
 > ​         `全称`：Business Object(业务对象)
 >
-> ​         `职责`：在微服务控制层接收bff层传来的参数
+> ​         `职责`：在子服务控制层接收bff层传来的参数
 >
 > `VO`：
 >
@@ -853,7 +710,7 @@ public class MybatisPlusConfig {
 >
 >`Res`：
 >
->​         `职责`：在bff层负责将全部微服务的返回数据进行组装成前端所需要的完整数据
+>​         `职责`：在bff层负责将全部子服务的返回数据进行组装成前端所需要的完整数据
 
 ***
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 测试控制层2
  */
-@Tag(name = "TUserController", description = "用户接口")
+@Tag(name = "TUserController", description = "用户控制层")
 @RequestMapping("/user")
 public interface TUserControllerApi {
 

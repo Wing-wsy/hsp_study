@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Aspect
 @Component
 /**
- * 微服务日志切面
+ * 子服务日志切面
  */
 public class LogAspect {
 

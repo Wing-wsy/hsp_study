@@ -38,11 +38,11 @@ public class CustomerServiceImpl implements CustomerService {
         Long userId = from.getUserId();
         /*
             允许bff层使用mapper进行简单查询（比如：tUserMapper.selectById(userId)），但不建议使用自定义SQL复杂查询，
-            因为bff职责只是对微服务的返回的数据进行整合
+            因为bff职责只是对子服务的返回的数据进行整合
          */
 //        TUser tUser = tUserMapper.selectById(userId);
 
-        // 1.需要用户数据，请求用户微服务
+        // 1.需要用户数据，请求用户子服务
         SearchUserBriefInfoBO bo_1 = new SearchUserBriefInfoBO();
         bo_1.setUserId(userId);
         GraceResult result_1 = cstServiceApi.searchUserBriefInfo(bo_1);
@@ -61,7 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
     public SearchOrderAndUserBriefInfoRes searchOrderAndUserBriefInfo(SearchOrderAndUserBriefInfoFrom from) {
         Long userId = from.getUserId();
 
-        // 1.需要用户数据，请求用户微服务
+        // 1.需要用户数据，请求用户子服务
         SearchUserBriefInfoBO bo_1 = new SearchUserBriefInfoBO();
         bo_1.setUserId(userId);
         GraceResult result_1 = cstServiceApi.searchUserBriefInfo(bo_1);
@@ -70,7 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
         UserBriefInfoVO userBriefInfoVO = JSONUtils.mapToBean(result_1.getData(), UserBriefInfoVO.class);
 
-        // 2.需要订单数据，请求订单微服务
+        // 2.需要订单数据，请求订单子服务
         SearchOrderByUserBO bo_2 = new SearchOrderByUserBO();
         bo_2.setUserId(userId);
         GraceResult result_2 = odrServiceApi.searchOrderByUser(bo_2);

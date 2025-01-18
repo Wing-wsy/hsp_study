@@ -10,7 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 微服务日志拦截器
+ * 子服务日志拦截器
  */
 @Component
 public class LogInterceptor implements HandlerInterceptor {
