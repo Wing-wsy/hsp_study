@@ -1,6 +1,6 @@
 package com.yz.model.bo.odr;
 
-import com.yz.model.bo.PageBO;
+import com.yz.model.bo.common.CommonPageBO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "查询用户订单信息BO")
-public class SearchOrderByUserBO extends PageBO {
+public class SearchOrderByUserBO extends CommonPageBO {
 
     @NotNull(message = "用户ID不能为空")
     @Min(value = 1, message = "用户ID不能小于1")

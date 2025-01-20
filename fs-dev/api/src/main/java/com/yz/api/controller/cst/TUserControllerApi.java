@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Tag(name = "TUserController", description = "用户控制层")
 @RequestMapping("/user")
+
 public interface TUserControllerApi {
 
     @PostMapping("/searchUserBriefInfo")
     @Operation(summary = "查询用户基础信息")
     @ApiResponse(content = @Content(schema = @Schema(implementation = UserBriefInfoVO.class)))
+
     public GraceResult searchUserBriefInfo(SearchUserBriefInfoBO bo);
 
 }

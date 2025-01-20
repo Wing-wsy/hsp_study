@@ -9,4 +9,6 @@ public interface FieldConstants {
     // TODO 下面两个是否需要加上
     public static final String CREATOR = "createdBy";
     public static final String UPDATER = "updatedBy";
+
+    public static final String LANGUAGE = "language";
 }

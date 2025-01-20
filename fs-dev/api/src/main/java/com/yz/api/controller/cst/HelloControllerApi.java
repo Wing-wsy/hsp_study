@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface HelloControllerApi {
 
     @Operation(summary = "hello接口")
-    @GetMapping("hello")
+    @PostMapping("hello")
     public GraceResult hello();
 
-    @GetMapping("test-get")
+    @PostMapping("test-get")
     @Operation(summary = "测试接口get")
-    public GraceResult testGet(TestBO testBo);
+    public GraceResult testGet(@RequestBody TestBO testBo);
 
     @PostMapping("test-post")
     @Operation(summary = "测试接口post")
