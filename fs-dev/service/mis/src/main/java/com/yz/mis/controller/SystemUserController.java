@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-public class TSystemUserController extends BaseController implements TSystemUserControllerApi {
+public class SystemUserController extends BaseController implements TSystemUserControllerApi {
 
 
 }

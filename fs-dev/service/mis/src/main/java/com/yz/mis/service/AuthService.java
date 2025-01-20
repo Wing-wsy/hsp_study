@@ -7,6 +7,11 @@ import com.yz.model.dto.mis.LoginDTO;
  */
 public interface AuthService {
 
-    public boolean login(LoginDTO loginDTO);
+    /**
+     * 登录接口
+     * @param loginDTO
+     * @return 系统用户ID(登录成功返回，否则返回null)
+     */
+    public Long login(LoginDTO loginDTO);
 
 }

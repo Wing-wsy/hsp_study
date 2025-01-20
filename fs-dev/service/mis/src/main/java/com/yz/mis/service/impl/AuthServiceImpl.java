@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
     @Override
-    public boolean login(LoginDTO loginDTO) {
-
-        return true;
+    public Long login(LoginDTO loginDTO) {
+        // TODO 登录验证通过后，返回用户ID
+        return 667318461394980864L;
     }
 }
