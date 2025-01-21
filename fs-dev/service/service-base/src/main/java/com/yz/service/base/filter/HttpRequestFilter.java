@@ -132,7 +132,11 @@ public class HttpRequestFilter extends OncePerRequestFilter {
 
             // 12. 对响应数据进行处理
             // 根据语言编码赋值对应的值
-            responseJson.put("msg","你好呀");
+            if (Strings.LOCALE_ZH.equals(bodyJson.get(FieldConstants.LANGUAGE))) {
+                responseJson.put("msg","你好呀");
+            } else {
+                responseJson.put("msg","ni hao ya");
+            }
 
             // 13. 将修改后的 JSON 对象转换为字符串
             responseData = JSONUtils.toJsonStr(responseJson);

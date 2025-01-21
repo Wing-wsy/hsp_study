@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 测试控制层2
  */
 @Tag(name = "AuthController", description = "系统用户权限控制层")
-@RequestMapping("/system")
+@RequestMapping("/auth")
 public interface AuthControllerApi {
 
     @PostMapping("/login")

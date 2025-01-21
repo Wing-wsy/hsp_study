@@ -9,8 +9,7 @@ import java.util.List;
 
 /**
  * 响应结果枚举，用于提供给GraceResult返回给前端
- * 本枚举类中包含了很多的不同的状态码供使用，可以自定义
- * 便于更优雅的对状态码进行管理，一目了然
+ * 【这里的中文提示信息仅开发人员方便查看，真实提示信息配置在数据库】
  */
 public enum ResponseStatusEnum {
 
@@ -155,7 +154,7 @@ public enum ResponseStatusEnum {
         while (iterator.hasNext()){
             ResponseStatusEnum next = iterator.next();
             ResponseStatusResult responseStatusResult = new ResponseStatusResult();
-            responseStatusResult.name = next.name();
+            responseStatusResult.code = next.name();
             responseStatusResult.status = next.status;
             responseStatusResult.success = next.success;
             responseStatusResult.msg = next.msg;
@@ -166,7 +165,7 @@ public enum ResponseStatusEnum {
 
     @Data
     public static class ResponseStatusResult {
-        private String name;
+        private String code;
         private Integer status;
         private Boolean success;
         private String msg;

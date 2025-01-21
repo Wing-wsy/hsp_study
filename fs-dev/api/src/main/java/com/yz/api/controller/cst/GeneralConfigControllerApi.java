@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 测试控制层2
+ * 通用配置控制器
  */
-@Tag(name = "系统响应结果类型控制层", description = "系统返回的错误编码")
-@RequestMapping("/result")
-public interface ResponseResultControllerApi {
+@Tag(name = "GeneralConfigController", description = "通用配置控制器")
+@RequestMapping("/general-config")
+public interface GeneralConfigControllerApi {
 
     @PostMapping("/searchResponseResult")
     @Operation(summary = "查询系统响应结果类型")

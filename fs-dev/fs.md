@@ -823,7 +823,137 @@ feign:
 
 # 14 gateway 网关
 
-# 15 自定义属性配置文件
+# 15 多语言过滤器
+
+**filterExcludeUrlPath.properties**
+
+```properties
+# 需要过滤的URL
+filter.urls[0]=/mis/test/*
+filter.urls[1]=/mis/config/*
+...
+
+# 排除过滤的URL
+filter.excludeUrls[0]=/mis/aaa
+filter.excludeUrls[1]=/mis/bbb
+...
+```
+
+**FilterExcludeUrlProperties.java**
+
+```java
+/**
+ * 自定义过滤器排除URI
+ */
+@Component
+@Data
+@PropertySource("classpath:filterExcludeUrlPath.properties")
+@ConfigurationProperties(prefix = "filter")
+public class FilterExcludeUrlProperties {
+    // 需要过滤的URL
+    private List<String> urls;
+    // 排除过滤的URL
+    private List<String> excludeUrls;
+}
+```
+
+**过滤器 HttpRequestFilter**
+
+```java
+/**
+ * 过滤器
+ */
+@Component
+public class HttpRequestFilter extends OncePerRequestFilter {
+    @Resource
+    private FilterExcludeUrlProperties filterExcludeUrlProperties;
+    // 路径匹配规则器
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+    // 请求体参数
+    private String body;
+    @Override
+    protected void doFilterInternal(HttpServletRequest httpServletRequest,
+                                    HttpServletResponse httpServletResponse,
+                                    FilterChain chain)
+            throws ServletException, IOException {
+
+        // 1. 获取当前请求URI
+        String requestURI = httpServletRequest.getRequestURI();
+        // System.out.println(requestURI);
+
+        // 2. 根据自定义配置判断，是否执行过滤 true过滤，false放行
+        boolean filterFlag = filterPath(requestURI);
+        if (filterFlag) {
+            // 缓存请求体
+            BufferedReader bufferedReader = httpServletRequest.getReader();
+
+            // 3.获取原始请求body参数
+            body = bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
+            if (StrUtils.isBlank(body)) {
+                body = "{}";
+            }
+
+            // 4.解析请求体内容为JSON对象
+            JSONObject bodyJson = JSONUtils.parseObj(body);
+            //System.out.println(bodyJson);
+
+            // 5.获取请求头语言编码
+            String language = httpServletRequest.getHeader(FieldConstants.LANGUAGE);
+
+            // 6.重置请求体 language 参数
+            //请求头有设置语言编码，则优先使用
+            if (StrUtils.isNotBlank(language)) {
+                bodyJson.put(FieldConstants.LANGUAGE,language);
+                // 重置后请求body参数
+                body = JSONUtils.toJsonStr(bodyJson);
+            }
+            String finalLanguage = (String)bodyJson.get(FieldConstants.LANGUAGE);
+            if (StrUtils.isBlank(finalLanguage)) {
+                // 请求头和请求体都没有 language 参数，则默认西语
+                finalLanguage = Strings.LOCALE_ES_LOWER;
+                bodyJson.put(FieldConstants.LANGUAGE,finalLanguage);
+                // 重置后请求body参数
+                body = JSONUtils.toJsonStr(bodyJson);
+            }
+
+            // 7. 包装 HttpServletRequestWrapper 对象，以便后续的处理
+            HttpServletRequestWrapper requestWrapper = new HttpServletRequestWrapper(httpServletRequest) {};
+
+            // 8. 包装 自定义的 HttpResponseWrapper 对象，以便后续的处理
+            HttpResponseWrapper responseWrapper = new HttpResponseWrapper(httpServletResponse);
+
+            // 9. 放行，调用下一个过滤器或Servlet
+            chain.doFilter(requestWrapper, responseWrapper);
+
+            // 10.获取响应数据
+            String responseData = responseWrapper.getResponseData(StandardCharsets.UTF_8.name());
+            //System.out.println(responseData);
+
+            // 11. 解析响应数据为JSON对象
+            JSONObject responseJson = JSONUtils.parseObj(responseData);
+
+            // 12. 对响应数据进行处理
+            // 根据语言编码赋值对应的值
+            responseJson.put("msg","你好呀");
+
+            // 13. 将修改后的 JSON 对象转换为字符串
+            responseData = JSONUtils.toJsonStr(responseJson);
+
+            // 14. 将修改后的 JSON 对象设置为最终的响应数据
+            responseWrapper.setResponseData(responseData, StandardCharsets.UTF_8.name());
+
+            // 15. 将响应数据写入原始的响应对象，解决响应数据无法被多个过滤器处理问题
+            OutputStream outputStream = httpServletResponse.getOutputStream();
+            outputStream.write(responseData.getBytes(StandardCharsets.UTF_8));
+            outputStream.flush();
+        } else {
+            // 16. 非过滤路径的请求，直接放行
+            chain.doFilter(httpServletRequest, httpServletResponse);
+        }
+    }
+   ...
+}
+```
 
 
 
