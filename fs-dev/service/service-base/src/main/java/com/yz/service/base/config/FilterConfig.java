@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfig {
     @Bean
-    public FilterRegistrationBean simpleCORSFilter() {
+    public FilterRegistrationBean myFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new HttpRequestFilter());
-        registration.addUrlPatterns("/*");
+        registration.addUrlPatterns("/*"); // 过滤全部(具体放行的URI，在过滤器内部判断)
+        registration.setOrder(1);  // 需要越小优先级越高
         registration.setName("MyFilter");
-        registration.setOrder(1);
         return registration;
     }
 }

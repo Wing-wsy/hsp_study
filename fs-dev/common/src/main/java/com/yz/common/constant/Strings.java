@@ -152,6 +152,11 @@ public class Strings {
      * 简体中文-默认
      */
     public static final String LOCALE_ZH = "zh";
+
+    /**
+     * 简体中文
+     */
+    public static final String LOCALE_CN = "CN";
     /**
      * 简体中文
      */
@@ -161,9 +166,22 @@ public class Strings {
      */
     public static final String LOCALE_TC = "zh_TW";
     /**
+     * 西班牙语
+     */
+    public static final String LOCALE_ES_LOWER = "es";
+
+    /**
+     * 西班牙语
+     */
+    public static final String LOCALE_ES_UPPER = "ES";
+    /**
      * 英文
      */
     public static final String LOCALE_EN = "en";
+    /**
+     * 英文
+     */
+    public static final String LOCALE_US = "US";
 
     /**
      * 占位符前缀
