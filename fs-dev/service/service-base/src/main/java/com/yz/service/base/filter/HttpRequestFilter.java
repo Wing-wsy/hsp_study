@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 过滤器
+ * 多语言处理过滤器
  */
 @Component
 public class HttpRequestFilter extends OncePerRequestFilter {

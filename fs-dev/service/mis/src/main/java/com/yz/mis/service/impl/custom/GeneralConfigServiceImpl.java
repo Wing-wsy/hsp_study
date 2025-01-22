@@ -56,4 +56,5 @@ public class GeneralConfigServiceImpl implements GeneralConfigService {
         }
         return resultList;
     }
+
 }

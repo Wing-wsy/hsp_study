@@ -32,6 +32,11 @@ public class AuthController extends BaseController implements AuthControllerApi 
     public GraceResult login(@RequestBody @Valid SystemLoginBO bo) {
         LoginDTO loginDTO = BeanUtils.toBean(bo, LoginDTO.class);
         Long systemUserId = authService.login(loginDTO);
+        // 1. 判断是否验证通过
+        if (ObjectUtils.isNull(systemUserId)) {
+
+        }
+
         SystemLoginVO vo = new SystemLoginVO();
         vo.setSystemUserId(systemUserId);
         if (ObjectUtils.isNotNull(systemUserId)) {
