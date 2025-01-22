@@ -3,7 +3,7 @@ package com.yz.mis.controller;
 import com.yz.api.controller.cst.GeneralConfigControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
-import com.yz.mis.service.GeneralConfigService;
+import com.yz.mis.service.custom.GeneralConfigService;
 import com.yz.model.bo.common.CommonLanguageBO;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -25,7 +25,6 @@ public class GeneralConfigController implements GeneralConfigControllerApi {
 
         List<ResponseStatusEnum.ResponseStatusResult> responseStatusResults =
                 generalConfigService.searchResponseResult(bo.getLanguage());
-
         return GraceResult.ok(responseStatusResults);
 
     }

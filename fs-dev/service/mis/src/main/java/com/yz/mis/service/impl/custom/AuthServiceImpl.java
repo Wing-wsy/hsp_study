@@ -1,6 +1,6 @@
-package com.yz.mis.service.impl;
+package com.yz.mis.service.impl.custom;
 
-import com.yz.mis.service.AuthService;
+import com.yz.mis.service.custom.AuthService;
 import com.yz.model.dto.mis.LoginDTO;
 import org.springframework.stereotype.Service;
 

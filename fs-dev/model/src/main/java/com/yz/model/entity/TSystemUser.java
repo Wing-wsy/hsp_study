@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@TableName("tb_system_user")
-public class SystemUser {
+@TableName("t_system_user")
+public class TSystemUser extends BaseEntity implements Serializable {
     /**主键*/
     @TableId
     private Long id;
@@ -42,14 +43,5 @@ public class SystemUser {
 
     /**1有效，2离职，3禁用*/
     private Byte status;
-
-    /**创建日期*/
-    private Date createTime;
-
-    /**更新时间*/
-    private Date updateTime;
-
-    /**0有效，1删除*/
-    private Byte isDelete;
 
 }

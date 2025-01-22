@@ -1,7 +1,7 @@
 package com.yz.mis.service.impl;
 
-import com.yz.mis.mapper.SystemUserMapper;
-import com.yz.mis.service.SystemUserService;
+import com.yz.mis.mapper.TSystemUserMapper;
+import com.yz.mis.service.TSystemUserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Set;
  * 测试
  */
 @Service
-public class SystemUserServiceImpl implements SystemUserService {
+public class TSystemUserServiceImpl implements TSystemUserService {
 
     @Resource
-    private SystemUserMapper systemUserMapper;
+    private TSystemUserMapper systemUserMapper;
 
     @Override
     public Set<String> searchUserPermissions(Long systemUserId) {

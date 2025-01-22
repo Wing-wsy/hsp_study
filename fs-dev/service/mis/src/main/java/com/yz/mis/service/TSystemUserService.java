@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * 测试
  */
-public interface SystemUserService {
+public interface TSystemUserService {
 
     /**
      * 查询系统用户权限

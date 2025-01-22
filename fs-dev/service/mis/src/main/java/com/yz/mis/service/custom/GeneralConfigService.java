@@ -1,4 +1,4 @@
-package com.yz.mis.service;
+package com.yz.mis.service.custom;
 
 import com.yz.common.result.ResponseStatusEnum;
 

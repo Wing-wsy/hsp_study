@@ -1,9 +1,12 @@
 package com.yz.service.base.filter;
 
 import cn.hutool.json.JSONObject;
+import com.yz.common.constant.CacheKey;
 import com.yz.common.constant.FieldConstants;
 import com.yz.common.constant.Strings;
 import com.yz.common.util.JSONUtils;
+import com.yz.common.util.ObjectUtils;
+import com.yz.common.util.RedisOperator;
 import com.yz.common.util.StrUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
@@ -32,6 +35,8 @@ import java.util.stream.Collectors;
 @Component
 public class HttpRequestFilter extends OncePerRequestFilter {
 
+    @Resource
+    private RedisOperator redisOperator;
     @Resource
     private FilterExcludeUrlProperties filterExcludeUrlProperties;
 
@@ -108,7 +113,6 @@ public class HttpRequestFilter extends OncePerRequestFilter {
                         @Override
                         public void setReadListener(ReadListener readListener) {
                         }
-
                         @Override
                         public int read() {
                             return byteArrayInputStream.read();
@@ -132,12 +136,16 @@ public class HttpRequestFilter extends OncePerRequestFilter {
 
             // 12. 对响应数据进行处理
             // 根据语言编码赋值对应的值
-            if (Strings.LOCALE_ZH.equals(bodyJson.get(FieldConstants.LANGUAGE))) {
-                responseJson.put("msg","你好呀");
+            String code = (String)responseJson.get("code");
+            language = (String)bodyJson.get(FieldConstants.LANGUAGE);
+            String key = CacheKey.MIS + CacheKey.T_RESPONSE_ERROR_ENUMS + code + Strings.COLON + language;
+            String msg = redisOperator.get(key);
+            if (ObjectUtils.isNotNull(msg)) {
+                responseJson.put("msg",msg);
             } else {
-                responseJson.put("msg","ni hao ya");
+                // 缓存没有查询数据库
+                responseJson.put("msg","Not configured");
             }
-
             // 13. 将修改后的 JSON 对象转换为字符串
             responseData = JSONUtils.toJsonStr(responseJson);
 

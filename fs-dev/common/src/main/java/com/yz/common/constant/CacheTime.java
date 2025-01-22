@@ -5,7 +5,7 @@ package com.yz.common.constant;
  * 缓存时间常量集
  */
 public class CacheTime {
-    private CacheTime() { // 禁止实例化
+    private CacheTime() {
     }
 
     /**

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 通用配置控制器
  */
-@Tag(name = "GeneralConfigController", description = "通用配置控制器")
+@Tag(name = "GeneralConfigController", description = "通用配置查询控制器")
 @RequestMapping("/general-config")
 public interface GeneralConfigControllerApi {
 

@@ -5,9 +5,8 @@ import com.yz.api.controller.mis.AuthControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.common.util.BeanUtils;
 import com.yz.common.util.ObjectUtils;
-import com.yz.common.util.StrUtils;
-import com.yz.mis.service.AuthService;
-import com.yz.mis.service.SystemUserService;
+import com.yz.mis.service.custom.AuthService;
+import com.yz.mis.service.TSystemUserService;
 import com.yz.model.bo.mis.SystemLoginBO;
 import com.yz.model.dto.mis.LoginDTO;
 import com.yz.model.vo.mis.SystemLoginVO;
@@ -27,7 +26,7 @@ public class AuthController extends BaseController implements AuthControllerApi 
     @Resource
     private AuthService authService;
     @Resource
-    private SystemUserService systemUserService;
+    private TSystemUserService TSystemUserService;
 
     @Override
     public GraceResult login(@RequestBody @Valid SystemLoginBO bo) {
@@ -38,10 +37,10 @@ public class AuthController extends BaseController implements AuthControllerApi 
         if (ObjectUtils.isNotNull(systemUserId)) {
             // 登录成功
             // 获取用户权限
-            Set<String> permissions = systemUserService.searchUserPermissions(systemUserId);
+            Set<String> permissions = TSystemUserService.searchUserPermissions(systemUserId);
             vo.setPermissions(permissions);
             // 获取用户权限
-            Set<String> menus = systemUserService.searchUserMenus(systemUserId);
+            Set<String> menus = TSystemUserService.searchUserMenus(systemUserId);
             vo.setMenus(menus);
         }
         return GraceResult.ok(vo);

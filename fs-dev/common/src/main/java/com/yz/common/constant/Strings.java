@@ -5,7 +5,7 @@ package com.yz.common.constant;
  */
 public class Strings {
 
-    private Strings() { // 禁止实例化
+    private Strings() {
     }
 
     /**

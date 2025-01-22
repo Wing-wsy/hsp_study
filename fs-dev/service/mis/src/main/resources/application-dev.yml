@@ -2,10 +2,15 @@ server:
   port: 8084
 
 spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 5379
+      database: 0 # 初版全部缓存数据都放到0库中
   datasource: # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource    # 数据源的类型
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql的数据库驱动类名称
-    url:  jdbc:mysql://8.218.31.154:3306/mexico_loanover?useSSL=false&serverTimezone=GMT%2B7
+    url:  jdbc:mysql://8.218.31.154:3306/new_m_system?useSSL=false&serverTimezone=GMT%2B7
     username: wangshaoyou
     password: ycfhto_lNew_853@itf1264
     hikari:
