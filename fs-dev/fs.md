@@ -1018,20 +1018,26 @@ public class JsonSerializerManage {
 
 
 
-# 新增的表
+
+
+# 数据库
+
+## 新增的表
 
 ```java
 // 1. 系统接口状态码表
 t_response_error_enums
 // 2. 管理系统用户表
 t_system_user
-// 3. 角色表
+// 3. 菜单表
+t_system_menu
+// 4. 角色表
 t_system_role
-// 4. 权限表
+// 5. 权限表
 tb_system_permission
 ```
 
-# 表的索引（待设计）
+## 表的索引（待设计）
 
 
 

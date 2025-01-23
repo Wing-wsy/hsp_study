@@ -5,7 +5,7 @@ import com.yz.common.constant.Strings;
 import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.ObjectUtils;
 import com.yz.common.util.RedisOperator;
-import com.yz.mis.service.CacheService;
+import com.yz.mis.service.custom.CacheService;
 import com.yz.mis.service.TResponseErrorEnumsService;
 import com.yz.model.entity.TResponseErrorEnums;
 import jakarta.annotation.Resource;

@@ -16,6 +16,8 @@ public enum ResponseStatusEnum {
     SUCCESS(200, true, "操作成功！"),
     FAILED(500, false, "操作失败！"),
 
+    ARGUMENT_NOT_VALID(500, false, "参数校验不通过！"),
+
     SYSTEM_ERROR(500, false, "系统出现异常，请联系管理员！"),
     SYSTEM_ERROR_GRACE(500, false, "系统繁忙，请稍后再试！"),
 
@@ -65,7 +67,7 @@ public enum ResponseStatusEnum {
     ADMIN_PASSWORD_ERROR(564, false, "密码不能为空或者两次输入不一致！"),
     ADMIN_CREATE_ERROR(565, false, "添加管理员失败！"),
     ADMIN_PASSWORD_NULL_ERROR(566, false, "密码不能为空！"),
-    ADMIN_LOGIN_ERROR(567, false, "管理员不存在或密码不正确！"),
+    ADMIN_LOGIN_ERROR(567, false, "用户名或密码错误！"),
     ADMIN_FACE_NULL_ERROR(568, false, "人脸信息不能为空！"),
     ADMIN_FACE_LOGIN_ERROR(569, false, "人脸识别失败，请重试！"),
     ADMIN_DELETE_ERROR(5691, false, "删除管理员失败！"),

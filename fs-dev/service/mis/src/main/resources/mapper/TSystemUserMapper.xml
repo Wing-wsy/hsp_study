@@ -19,27 +19,37 @@
   </resultMap>
 
   <!-- 定义公共SQL -->
-  <sql id="commonConditions">
+  <sql id="commonConditions1">
       AND u.status = 1
       AND u.is_delete = 0
+      AND p.status = 1
   </sql>
 
   <select id="searchUserPermissions" parameterType="Long" resultType="String">
     SELECT DISTINCT p.permission_name
-    FROM tb_system_user u
-           JOIN tb_system_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
-           JOIN tb_system_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
+    FROM t_system_user u
+           JOIN t_system_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+           JOIN t_system_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
     WHERE u.id = #{systemUserId}
-      <include refid="commonConditions"/>
+      <include refid="commonConditions1"/>
+  </select>
+
+  <select id="searchUserPermissionsMenus" parameterType="Long" resultType="String">
+    SELECT DISTINCT p.menu_code
+    FROM t_system_user u
+           JOIN t_system_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+           JOIN t_system_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
+    WHERE u.id = #{systemUserId}
+      <include refid="commonConditions1"/>
   </select>
 
   <select id="searchUserMenus" parameterType="Long" resultType="String">
     SELECT DISTINCT p.menu_name
-    FROM tb_system_user u
-           JOIN tb_system_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
-           JOIN tb_system_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
+    FROM t_system_user u
+           JOIN t_system_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+           JOIN t_system_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
     WHERE u.id = #{systemUserId}
-     <include refid="commonConditions"/>
+     <include refid="commonConditions1"/>
   </select>
 
 

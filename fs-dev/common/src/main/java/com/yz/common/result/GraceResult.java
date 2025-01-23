@@ -86,6 +86,15 @@ public class GraceResult {
     }
 
     /**
+     * 参数不通过异常
+     * @param errorArgument 不通过的参数
+     * @return
+     */
+    public static GraceResult errorArgumentNotValid(String errorArgument) {
+        return new GraceResult(ResponseStatusEnum.ARGUMENT_NOT_VALID, errorArgument);
+    }
+
+    /**
      * 错误返回，token异常，一些通用的可以在这里统一定义
      * @return
      */

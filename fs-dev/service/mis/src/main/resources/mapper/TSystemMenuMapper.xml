@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.mis.mapper.TSystemMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.yz.model.entity.TSystemMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="father_id" property="fatherId" jdbcType="INTEGER" />
+    <result column="menu_code" property="menuCode" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
+  </resultMap>
+
+  <!-- 定义公共SQL -->
+  <sql id="commonConditions1">
+      AND m.status = 1
+      AND m.is_delete = 0
+  </sql>
+
+  <select id="searchMenuTree" resultType="HashMap">
+    SELECT
+        m.id,
+        m.menu_name as menuName,
+        m.level,
+        m.father_id as fatherId,
+        m.menu_code as menuCode,
+        m.sort
+    FROM t_system_menu m where 1=1
+    AND m.level = #{level}
+    AND m.language = #{language}
+    <if test=" fatherId != null ">
+        AND m.father_id = #{fatherId}
+    </if>
+    <include refid="commonConditions1"/>
+    ORDER BY m.sort
+  </select>
+
+
+</mapper>

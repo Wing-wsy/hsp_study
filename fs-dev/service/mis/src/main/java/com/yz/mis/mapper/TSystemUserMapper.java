@@ -10,5 +10,7 @@ public interface TSystemUserMapper extends BaseMapper<TSystemUser> {
 
     public Set<String> searchUserPermissions(Long systemUserId);
 
+    public Set<String> searchUserPermissionsMenus(Long systemUserId);
+
     public Set<String> searchUserMenus(Long systemUserId);
 }

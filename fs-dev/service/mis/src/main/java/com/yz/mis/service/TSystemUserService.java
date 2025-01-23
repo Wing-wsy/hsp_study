@@ -15,6 +15,13 @@ public interface TSystemUserService {
     public Set<String> searchUserPermissions(Long systemUserId);
 
     /**
+     * 查询系统用户权限菜单
+     * @param systemUserId 系统用户ID
+     * @return 菜单列表
+     */
+    public Set<String> searchUserPermissionsMenus(Long systemUserId);
+
+    /**
      * 查询系统用户菜单权限
      * @param systemUserId 系统用户ID
      * @return 菜单列表

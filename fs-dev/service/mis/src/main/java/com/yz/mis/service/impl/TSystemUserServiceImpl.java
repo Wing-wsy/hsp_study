@@ -23,6 +23,12 @@ public class TSystemUserServiceImpl implements TSystemUserService {
     }
 
     @Override
+    public Set<String> searchUserPermissionsMenus(Long systemUserId) {
+        Set<String> permissionsMenus = systemUserMapper.searchUserPermissionsMenus(systemUserId);
+        return permissionsMenus;
+    }
+
+    @Override
     public Set<String> searchUserMenus(Long systemUserId) {
         Set<String> menus = systemUserMapper.searchUserMenus(systemUserId);
         return menus;

@@ -4,6 +4,7 @@ import cn.hutool.json.JSONObject;
 import com.yz.common.constant.CacheKey;
 import com.yz.common.constant.FieldConstants;
 import com.yz.common.constant.Strings;
+import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.JSONUtils;
 import com.yz.common.util.ObjectUtils;
 import com.yz.common.util.RedisOperator;
@@ -137,13 +138,23 @@ public class HttpRequestFilter extends OncePerRequestFilter {
             // 12. 对响应数据进行处理
             // 根据语言编码赋值对应的值
             String code = (String)responseJson.get("code");
+            String tips = (String)responseJson.get("msg");
             language = (String)bodyJson.get(FieldConstants.LANGUAGE);
             String key = CacheKey.MIS + CacheKey.T_RESPONSE_ERROR_ENUMS + code + Strings.COLON + language;
             String msg = redisOperator.get(key);
             if (ObjectUtils.isNotNull(msg)) {
-                responseJson.put("msg",msg);
+                // 12.1 判断是否参数拦截的异常
+                if (ResponseStatusEnum.ARGUMENT_NOT_VALID.name().equals(code)) {
+                    responseJson.put("msg",
+                                    Strings.LEFT_SQUARE_BRACKET + Strings.SPACE +
+                                    tips + Strings.SPACE +
+                                    Strings.RIGHT_SQUARE_BRACKET + Strings.SPACE +
+                                    msg);
+                } else {
+                    responseJson.put("msg",msg);
+                }
             } else {
-                // 缓存没有查询数据库
+                // 缓存没有，查询数据库
                 responseJson.put("msg","Not configured");
             }
             // 13. 将修改后的 JSON 对象转换为字符串

@@ -30,7 +30,7 @@ public class GraceExceptionHandler {
     @ResponseBody
     @ExceptionHandler(MyCustomException.class)
     public GraceResult returnMyCustomException(MyCustomException e) {
-        log.error("业务异常：", e);
+        log.error("业务异常：{}", e.getMessage());
         return GraceResult.exception(e.getResponseStatusEnum());
     }
 
@@ -51,7 +51,7 @@ public class GraceExceptionHandler {
             break;
         }
         log.error("校验异常：{} {} 【{}】", errorKey, errorVal, method);
-        return GraceResult.errorMsg(errorVal);
+        return GraceResult.errorArgumentNotValid(errorKey);
     }
 
     // 处理异常兜底

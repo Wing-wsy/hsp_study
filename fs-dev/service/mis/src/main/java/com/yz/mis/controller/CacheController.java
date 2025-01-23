@@ -2,7 +2,7 @@ package com.yz.mis.controller;
 
 import com.yz.api.controller.cst.CacheControllerApi;
 import com.yz.common.result.GraceResult;
-import com.yz.mis.service.CacheService;
+import com.yz.mis.service.custom.CacheService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

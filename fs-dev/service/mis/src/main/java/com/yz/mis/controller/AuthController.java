@@ -2,7 +2,9 @@ package com.yz.mis.controller;
 
 
 import com.yz.api.controller.mis.AuthControllerApi;
+import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
+import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.BeanUtils;
 import com.yz.common.util.ObjectUtils;
 import com.yz.mis.service.custom.AuthService;
@@ -34,20 +36,23 @@ public class AuthController extends BaseController implements AuthControllerApi 
         Long systemUserId = authService.login(loginDTO);
         // 1. 判断是否验证通过
         if (ObjectUtils.isNull(systemUserId)) {
-
+            GraceException.display(ResponseStatusEnum.ADMIN_LOGIN_ERROR);
         }
 
+        // 2. 验证通过获取账号权限
         SystemLoginVO vo = new SystemLoginVO();
         vo.setSystemUserId(systemUserId);
-        if (ObjectUtils.isNotNull(systemUserId)) {
-            // 登录成功
-            // 获取用户权限
-            Set<String> permissions = TSystemUserService.searchUserPermissions(systemUserId);
-            vo.setPermissions(permissions);
-            // 获取用户权限
-            Set<String> menus = TSystemUserService.searchUserMenus(systemUserId);
-            vo.setMenus(menus);
-        }
+        // 2.1 获取用户权限
+        Set<String> permissions = TSystemUserService.searchUserPermissions(systemUserId);
+        vo.setPermissions(permissions);
+
+        // 2.2 获取用户权限菜单
+        Set<String> permissionsMenus = TSystemUserService.searchUserPermissionsMenus(systemUserId);
+        System.out.println(permissionsMenus);
+
+        // 2.3 获取用户菜单展示
+        Set<String> menus = TSystemUserService.searchUserMenus(systemUserId);
+        vo.setMenus(menus);
         return GraceResult.ok(vo);
     }
 }
