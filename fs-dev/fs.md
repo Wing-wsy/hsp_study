@@ -613,6 +613,8 @@ public interface TUserMapper extends BaseMapper<TUser> {
 
 ## 9.2 SQL通用属性条件填充
 
+> 注意：使用mybatis plus的才会填充，自定义SQL不进行填充
+
 ### 9.2.1 insert和update
 
 ```java

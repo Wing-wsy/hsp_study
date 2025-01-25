@@ -30,8 +30,8 @@ public class TSystemMenu {
     private Integer sort;
 
     /**1有效，0禁用*/
-    private Byte status;
+    private Integer status;
 
     /**0有效，1删除*/
-    private Byte isDelete;
+    private Integer isDelete;
 }

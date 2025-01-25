@@ -3,6 +3,8 @@ package com.yz.mis.service.impl.custom;
 import com.yz.common.constant.CacheKey;
 import com.yz.common.constant.Strings;
 import com.yz.common.result.ResponseStatusEnum;
+import com.yz.common.util.JSONUtils;
+import com.yz.common.util.ListUtils;
 import com.yz.common.util.ObjectUtils;
 import com.yz.common.util.RedisOperator;
 import com.yz.mis.service.custom.CacheService;
@@ -11,7 +13,6 @@ import com.yz.model.entity.TResponseErrorEnums;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class CacheServiceImpl implements CacheService {
                 = ResponseStatusEnum.getAllResponseStatus();
 
         // 两种语言 es zh
-        List<String> languages = Arrays.asList(Strings.LOCALE_ES_LOWER,Strings.LOCALE_ZH);
+        List<String> languages = ListUtils.getLanguageList();
         for (String language : languages) {
             // mis:response:
             String key = "";

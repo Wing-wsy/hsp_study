@@ -83,6 +83,33 @@ public class Basic {
     public static final int nine = 9;
 
     /**
+     * 数字字符串
+     */
+    public static final String zero_str = "0";
+    public static final String one_str = "1";
+    public static final String two_str = "2";
+    public static final String three_str = "3";
+    public static final String four_str = "4";
+    public static final String five_str = "5";
+    public static final String six_str = "6";
+    public static final String seven_str = "7";
+    public static final String eight_str = "8";
+    public static final String nine_str = "9";
+
+
+    /**
+     * 开关状态
+     */
+    public static final int ON = 1;
+    public static final int OFF = 0;
+
+    /**
+     * 删除状态
+     */
+    public static final int DELETE = 1;
+    public static final int VAILD = 0;
+
+    /**
      * 拼接字符串
      * 例如：str A ;num 4
      * 结果：AAAA

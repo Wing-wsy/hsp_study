@@ -17,7 +17,7 @@ spring:
 mybatis-plus:
   global-config:
     db-config:
-      id-type: assign_id
+      id-type: auto # 主键生成策略设置为自增
       update-strategy: not_empty
     banner: false
   mapper-locations: classpath*:/mapper/*.xml

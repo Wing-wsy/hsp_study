@@ -1,5 +1,6 @@
 package com.yz.mis.service;
 
+import com.yz.model.bo.mis.UpdateResponseResultBO;
 import com.yz.model.entity.TResponseErrorEnums;
 
 /**
@@ -15,6 +16,21 @@ public interface TResponseErrorEnumsService {
      * @return
      */
     public TResponseErrorEnums searchResponseByOne(String code, String language);
+
+    /**
+     * 新增系统错误编码
+     */
+    public void insertResponseResult(String code, Integer status, String msg, String language);
+
+    /**
+     * 修改系统错误编码
+     */
+    public void updateResponseResult(UpdateResponseResultBO bo);
+
+    /**
+     * 删除系统错误编码
+     */
+    public void deleteResponseResult(Long id);
 
 
 }

@@ -1,5 +1,8 @@
 package com.yz.common.util;
 
+import com.yz.common.constant.Strings;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,5 +27,9 @@ public class ListUtils {
             return list;
         }
         return list;
+    }
+
+    public static List<String> getLanguageList (){
+        return Arrays.asList(Strings.LOCALE_ES_LOWER,Strings.LOCALE_ZH);
     }
 }

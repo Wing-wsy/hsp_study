@@ -16,8 +16,6 @@ public enum ResponseStatusEnum {
     SUCCESS(200, true, "操作成功！"),
     FAILED(500, false, "操作失败！"),
 
-    ARGUMENT_NOT_VALID(500, false, "参数校验不通过！"),
-
     SYSTEM_ERROR(500, false, "系统出现异常，请联系管理员！"),
     SYSTEM_ERROR_GRACE(500, false, "系统繁忙，请稍后再试！"),
 
@@ -111,7 +109,11 @@ public enum ResponseStatusEnum {
     USER_NOT_FIND(51001, false, "用户信息不存在！"),
 
     //订单错误相关
-    ORDER_NOT_FIND(52001, false, "订单不存在！");
+    ORDER_NOT_FIND(52001, false, "订单不存在！"),
+
+
+    // ARGUMENT_NOT_VALID 是过滤器使用的错误提示，业务中不能使用！
+    ARGUMENT_NOT_VALID(500, false, "参数校验不通过！");
 
 
     // 响应业务状态

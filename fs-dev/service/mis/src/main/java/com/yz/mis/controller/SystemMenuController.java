@@ -29,6 +29,7 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
 
     @Override
     public GraceResult addMenu(@RequestBody @Valid AddMenuBO bo) {
+        tSystemMenuService.addMenu(bo);
         return GraceResult.ok();
     }
 }

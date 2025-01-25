@@ -8,9 +8,44 @@
     <result column="msg" property="msg" jdbcType="VARCHAR" />
     <result column="language" property="language" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
+
+  <!-- 定义公共SQL -->
+
+  <!-- 通用查询结果列 -->
+  <sql id="Base_Column_List">
+    id, code, status, msg, `language`, sort
+  </sql>
+
+  <sql id="commonConditions1">
+      AND e.is_delete = 0
+  </sql>
+
+  <select id="getMaxSort" resultType="int">
+    SELECT
+        max(e.sort) as maxSort
+    FROM t_response_error_enums e
+    WHERE 1=1
+    AND e.language = #{language}
+    <include refid="commonConditions1"/>
+  </select>
+
+  <select id="deleteTResponseErrorEnumsById">
+    UPDATE
+        t_response_error_enums
+    SET
+        update_time = #{updateTime},
+        is_delete = 1
+    WHERE id = #{id}
+  </select>
+
+  <select id="getRecordsById" resultType="com.yz.model.entity.TResponseErrorEnums">
+    SELECT
+        <include refid="Base_Column_List"/>
+    FROM t_response_error_enums m WHERE m.code = (
+      SELECT code FROM t_response_error_enums
+      WHERE id = #{id})
+
+  </select>
 
 </mapper>

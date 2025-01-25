@@ -27,7 +27,8 @@
         m.father_id as fatherId,
         m.menu_code as menuCode,
         m.sort
-    FROM t_system_menu m where 1=1
+    FROM t_system_menu m
+    WHERE 1=1
     AND m.level = #{level}
     AND m.language = #{language}
     <if test=" fatherId != null ">
@@ -35,6 +36,19 @@
     </if>
     <include refid="commonConditions1"/>
     ORDER BY m.sort
+  </select>
+
+  <select id="getMenuMaxSort" resultType="int">
+      SELECT
+            max(m.sort) as maxSort
+      FROM t_system_menu m
+      WHERE 1=1
+      AND m.level = #{level}
+      AND m.language = #{language}
+      <if test=" fatherId != null ">
+          AND m.father_id = #{fatherId}
+      </if>
+    <include refid="commonConditions1"/>
   </select>
 
 
