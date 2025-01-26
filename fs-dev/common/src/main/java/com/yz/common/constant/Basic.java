@@ -71,30 +71,44 @@ public class Basic {
     /**
      * 数字
      */
-    public static final int zero = 0;
-    public static final int one = 1;
-    public static final int two = 2;
-    public static final int three = 3;
-    public static final int four = 4;
-    public static final int five = 5;
-    public static final int six = 6;
-    public static final int seven = 7;
-    public static final int eight = 8;
-    public static final int nine = 9;
+    public static final int ZERO_INT = 0;
+    public static final int ONE_INT = 1;
+    public static final int TWO_INT = 2;
+    public static final int THREE_INT = 3;
+    public static final int FOUR_INT = 4;
+    public static final int FIVE_INT = 5;
+    public static final int SIX_INT = 6;
+    public static final int SEVEN_INT = 7;
+    public static final int EIGHT_INT = 8;
+    public static final int NINE_INT = 9;
+
+    /**
+     * 数字
+     */
+    public static final long ZERO_LONG = 0L;
+    public static final long ONE_LONG = 1L;
+    public static final long TWO_LONG = 2L;
+    public static final long THREE_LONG = 3L;
+    public static final long FOUR_LONG = 4L;
+    public static final long FIVE_LONG = 5L;
+    public static final long SIX_LONG = 6L;
+    public static final long SEVEN_LONG = 7L;
+    public static final long EIGHT_LONG = 8L;
+    public static final long NINE_LONG = 9L;
 
     /**
      * 数字字符串
      */
-    public static final String zero_str = "0";
-    public static final String one_str = "1";
-    public static final String two_str = "2";
-    public static final String three_str = "3";
-    public static final String four_str = "4";
-    public static final String five_str = "5";
-    public static final String six_str = "6";
-    public static final String seven_str = "7";
-    public static final String eight_str = "8";
-    public static final String nine_str = "9";
+    public static final String ZERO_STR = "0";
+    public static final String ONE_STR = "1";
+    public static final String TWO_STR = "2";
+    public static final String THREE_STR = "3";
+    public static final String FOUR_STR = "4";
+    public static final String FIVE_STR = "5";
+    public static final String SIX_STR = "6";
+    public static final String SEVEN_STR = "7";
+    public static final String EIGHT_STR = "8";
+    public static final String NINE_STR = "9";
 
 
     /**

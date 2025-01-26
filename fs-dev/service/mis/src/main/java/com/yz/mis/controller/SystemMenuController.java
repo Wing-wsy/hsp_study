@@ -23,7 +23,7 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
     private TSystemMenuService tSystemMenuService;
 
     @Override
-    public GraceResult menuTree(CommonLanguageBO bo) {
+    public GraceResult menuTree(@RequestBody @Valid CommonLanguageBO bo) {
         return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage()));
     }
 

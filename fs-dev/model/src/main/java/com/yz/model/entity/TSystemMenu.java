@@ -9,7 +9,7 @@ import lombok.Data;
 public class TSystemMenu {
     /**主键*/
     @TableId
-    private Integer id;
+    private Long id;
 
     /**菜单名称*/
     private String menuName;
@@ -18,7 +18,7 @@ public class TSystemMenu {
     private Integer level;
 
     /**父级ID 顶级菜单值为0*/
-    private Integer fatherId;
+    private Long fatherId;
 
     /**菜单编码*/
     private String menuCode;

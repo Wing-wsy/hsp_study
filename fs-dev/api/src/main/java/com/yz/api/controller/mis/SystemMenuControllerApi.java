@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 测试控制层2
  */
-@Tag(name = "SystemMenuControllerApi", description = "系统菜单接口")
+@Tag(name = "SystemMenuController", description = "系统菜单接口")
 @RequestMapping("/menu")
 public interface SystemMenuControllerApi {
 
