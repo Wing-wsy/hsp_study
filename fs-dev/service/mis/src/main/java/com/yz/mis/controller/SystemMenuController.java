@@ -6,6 +6,7 @@ import com.yz.mis.service.TSystemMenuService;
 import com.yz.model.bo.common.CommonLanguageBO;
 import com.yz.model.bo.mis.AddMenuBO;
 import com.yz.model.bo.mis.DeleteMenuBO;
+import com.yz.model.bo.mis.MenuTreeBO;
 import com.yz.model.bo.mis.UpdateMenuBO;
 import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
@@ -25,8 +26,8 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
     private TSystemMenuService tSystemMenuService;
 
     @Override
-    public GraceResult menuTree(@RequestBody @Valid CommonLanguageBO bo) {
-        return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage()));
+    public GraceResult menuTree(@RequestBody @Valid MenuTreeBO bo) {
+        return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage(), bo.getStatus()));
     }
 
     @Override
@@ -41,9 +42,9 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
         return GraceResult.ok();
     }
 
-    // TODO Wing
     @Override
     public GraceResult updateMenu(UpdateMenuBO bo) {
-        return null;
+        tSystemMenuService.updateMenu(bo);
+        return GraceResult.ok();
     }
 }

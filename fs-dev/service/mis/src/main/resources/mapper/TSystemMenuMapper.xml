@@ -19,6 +19,11 @@
       AND m.is_delete = 0
   </sql>
 
+  <!-- 定义公共SQL -->
+  <sql id="commonConditions2">
+      AND m.is_delete = 0
+  </sql>
+
   <select id="searchMenuTree" resultType="HashMap">
     SELECT
         m.id,
@@ -26,6 +31,7 @@
         m.level,
         m.father_id as fatherId,
         m.menu_code as menuCode,
+        m.status,
         m.sort
     FROM t_system_menu m
     WHERE 1=1
@@ -34,7 +40,10 @@
     <if test=" fatherId != null ">
         AND m.father_id = #{fatherId}
     </if>
-    <include refid="commonConditions1"/>
+    <if test=" status == 1 ">
+        AND m.status = #{status}
+    </if>
+    <include refid="commonConditions2"/>
     ORDER BY m.sort
   </select>
 

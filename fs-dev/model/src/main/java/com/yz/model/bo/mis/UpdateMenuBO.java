@@ -1,7 +1,6 @@
 package com.yz.model.bo.mis;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -22,8 +21,10 @@ public class UpdateMenuBO {
     @Schema(description = "菜单编码")
     private String menuCode;
 
-    @Min(value = 1, message = "sort 不能小于1")
-    @Schema(description = "排序")
+    @Schema(description = "1有效，0禁用")
+    private Integer status;
+
+    @Schema(description = "排序(修改排序和其他属性不支持同时修改)")
     private int sort;
 
 

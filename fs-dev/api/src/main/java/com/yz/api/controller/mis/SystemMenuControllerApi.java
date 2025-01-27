@@ -4,6 +4,7 @@ import com.yz.common.result.GraceResult;
 import com.yz.model.bo.common.CommonLanguageBO;
 import com.yz.model.bo.mis.AddMenuBO;
 import com.yz.model.bo.mis.DeleteMenuBO;
+import com.yz.model.bo.mis.MenuTreeBO;
 import com.yz.model.bo.mis.UpdateMenuBO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,7 +22,7 @@ public interface SystemMenuControllerApi {
 
     @PostMapping("/menuTree")
     @Operation(summary = "查询菜单树")
-    public GraceResult menuTree(CommonLanguageBO bo);
+    public GraceResult menuTree(MenuTreeBO bo);
 
     @PostMapping("/addMenu")
     @Operation(summary = "新增菜单")

@@ -13,7 +13,8 @@ public interface TSystemMenuMapper extends BaseMapper<TSystemMenu> {
     public ArrayList<HashMap> searchMenuTree(
             @Param("level") int level,
             @Param("language") String language,
-            @Param("fatherId") Long fatherId);
+            @Param("fatherId") Long fatherId,
+            @Param("status") Integer status);
 
     public Integer getMenuMaxSort(
             @Param("level") int level,
