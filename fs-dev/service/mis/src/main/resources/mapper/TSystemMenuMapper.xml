@@ -38,7 +38,7 @@
     ORDER BY m.sort
   </select>
 
-  <select id="getMenuMaxSort" resultType="int">
+  <select id="getMenuMaxSort" resultType="Integer">
       SELECT
             max(m.sort) as maxSort
       FROM t_system_menu m

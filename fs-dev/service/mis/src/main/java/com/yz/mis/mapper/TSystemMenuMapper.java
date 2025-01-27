@@ -15,7 +15,7 @@ public interface TSystemMenuMapper extends BaseMapper<TSystemMenu> {
             @Param("language") String language,
             @Param("fatherId") Long fatherId);
 
-    public int getMenuMaxSort(
+    public Integer getMenuMaxSort(
             @Param("level") int level,
             @Param("language") String language,
             @Param("fatherId") Long fatherId);

@@ -7,7 +7,9 @@ import com.yz.model.bo.mis.SelectResponseResultBO;
 import com.yz.model.bo.mis.UpdateResponseResultBO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -25,11 +27,11 @@ public interface GeneralConfigControllerApi {
     @Operation(summary = "新增系统响应结果类型")
     public GraceResult insertResponseResult(InsertResponseResultBO bo);
 
-    @PostMapping("/updateResponseResult")
+    @PutMapping("/updateResponseResult")
     @Operation(summary = "修改系统响应结果类型")
     public GraceResult updateResponseResult(UpdateResponseResultBO bo);
 
-    @PostMapping("/deleteResponseResult")
+    @DeleteMapping("/deleteResponseResult")
     @Operation(summary = "删除系统响应结果类型")
     public GraceResult deleteResponseResult(DeleteResponseResultBO bo);
 

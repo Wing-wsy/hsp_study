@@ -70,9 +70,12 @@ public enum ResponseStatusEnum {
     ADMIN_FACE_LOGIN_ERROR(569, false, "人脸识别失败，请重试！"),
     ADMIN_DELETE_ERROR(5691, false, "删除管理员失败！"),
 
+
     // 查询分页错误 57x
     PAGE_ERROR_LIMIT(570, false, "查询分页超过最大分页数！"),
 
+    // 菜单模块
+    MENU_DELETE_ERROR(5701, false, "当前顶级菜单下子级菜单不为空，无法删除顶级菜单！"),
 
 
     // 人脸识别错误代码

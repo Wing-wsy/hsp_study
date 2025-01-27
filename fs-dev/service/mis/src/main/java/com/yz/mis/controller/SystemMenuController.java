@@ -5,6 +5,8 @@ import com.yz.common.result.GraceResult;
 import com.yz.mis.service.TSystemMenuService;
 import com.yz.model.bo.common.CommonLanguageBO;
 import com.yz.model.bo.mis.AddMenuBO;
+import com.yz.model.bo.mis.DeleteMenuBO;
+import com.yz.model.bo.mis.UpdateMenuBO;
 import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -31,5 +33,17 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
     public GraceResult addMenu(@RequestBody @Valid AddMenuBO bo) {
         tSystemMenuService.addMenu(bo);
         return GraceResult.ok();
+    }
+
+    @Override
+    public GraceResult deleteMenu(@RequestBody @Valid DeleteMenuBO bo) {
+        tSystemMenuService.deleteMenu(bo.getId());
+        return GraceResult.ok();
+    }
+
+    // TODO Wing
+    @Override
+    public GraceResult updateMenu(UpdateMenuBO bo) {
+        return null;
     }
 }

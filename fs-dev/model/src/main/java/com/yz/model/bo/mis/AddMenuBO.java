@@ -1,6 +1,5 @@
 package com.yz.model.bo.mis;
 
-import com.yz.model.bo.common.CommonLanguageBO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
