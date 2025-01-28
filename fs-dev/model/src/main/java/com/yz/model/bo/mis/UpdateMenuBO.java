@@ -2,6 +2,7 @@ package com.yz.model.bo.mis;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
@@ -26,6 +27,10 @@ public class UpdateMenuBO {
 
     @Schema(description = "排序(修改排序和其他属性不支持同时修改)")
     private int sort;
+
+    @Pattern(regexp = "^up$|^down$")
+    @Schema(description = "移动方式，up上移 down下移")
+    private String moveMode;
 
 
 

@@ -43,7 +43,7 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
     }
 
     @Override
-    public GraceResult updateMenu(UpdateMenuBO bo) {
+    public GraceResult updateMenu(@RequestBody @Valid UpdateMenuBO bo) {
         tSystemMenuService.updateMenu(bo);
         return GraceResult.ok();
     }

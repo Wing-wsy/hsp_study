@@ -76,6 +76,8 @@ public enum ResponseStatusEnum {
 
     // 菜单模块
     MENU_DELETE_ERROR(5701, false, "当前顶级菜单下子级菜单不为空，无法删除顶级菜单！"),
+    MENU_MOVE_UP_ERROR(5702, false, "当前菜单已经排在首位！"),
+    MENU_MOVE_DOWN_ERROR(5703, false, "当前菜单已经排在末位！"),
 
 
     // 人脸识别错误代码

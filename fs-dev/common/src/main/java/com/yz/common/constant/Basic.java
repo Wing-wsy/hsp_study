@@ -123,6 +123,15 @@ public class Basic {
     public static final int DELETE = 1;
     public static final int VAILD = 0;
 
+
+    /**
+     * 菜单等级
+     */
+    public static final int MENU_PARENT = 1;
+    public static final int MENU_SON = 2;
+
+
+
     /**
      * 拼接字符串
      * 例如：str A ;num 4

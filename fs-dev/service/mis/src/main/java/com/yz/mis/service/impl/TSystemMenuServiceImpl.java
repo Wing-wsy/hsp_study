@@ -137,71 +137,108 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
                 menuName = bo.getMenuNameByZH();
             }
 
-            // 1. 判断是否需要修改排序
-            if (bo.getSort() > 0 && bo.getSort() != tSystemMenu1.getSort()) {
-                int minSort = 0;
-                int maxSort = 0;
-                int moveSort = 0;
+            // 上移
+            if (StrUtils.isNotBlank(bo.getMoveMode()) && "up".equals(bo.getMoveMode())) {
+                if (tSystemMenu1.getSort() == Basic.ONE_INT)
+                    GraceException.display(ResponseStatusEnum.MENU_MOVE_UP_ERROR);
 
-                // 1.1 排序前移
-                if (bo.getSort() < tSystemMenu1.getSort()) {
-                    minSort = bo.getSort();
-                    maxSort = tSystemMenu1.getSort();
-                    moveSort = 1;
-                } else {
-                    // 1.2 排序前移
-                    minSort = tSystemMenu1.getSort() + 1;
-                    maxSort = bo.getSort() + 1;
-                    moveSort = -1;
-                }
+                // 找到上一个菜单,并将序号+1
+                TSystemMenu tSystemMenu2 = selectTSystemMenu(tSystemMenu1.getFatherId(), null,
+                        language, tSystemMenu1.getSort() - 1,
+                        0, null).get(0);
+                tSystemMenu2.setSort(tSystemMenu2.getSort() + 1);
+                systemMenuMapper.updateById(tSystemMenu2);
 
-                // 1.3 查询需要调整排序的记录，并更新
-                List<TSystemMenu> tSystemMenus =
-                        selectTSystemMenu(tSystemMenu1.getFatherId(), null,
-                                language, minSort,
-                                maxSort, null);
-                for (TSystemMenu systemMenu : tSystemMenus) {
-                    systemMenu.setSort(systemMenu.getSort() + moveSort);
-                    systemMenuMapper.updateById(systemMenu);
-                }
-                tSystemMenu1.setSort(bo.getSort());
+                // 将当前菜单序号-1
+                tSystemMenu1.setSort(tSystemMenu1.getSort() - 1);
                 systemMenuMapper.updateById(tSystemMenu1);
-            } else {
-                // 2. 不需要修改排序，继续判断是否是修改禁用状态
-                if (ObjectUtils.isNotNull(bo.getStatus()) && bo.getStatus() != tSystemMenu1.getStatus()) {
-                    int minSort = 0;
-                    int moveSort = 0;
-                    int status = 0;
-                    Long id = null;
+            }
 
-                    // 2.1 禁用状态修改，需要调整排序
-                    if (Basic.ON == bo.getStatus()) {
-                        // 开启
-                        minSort = tSystemMenu1.getSort();
+            // 下移
+            if (StrUtils.isNotBlank(bo.getMoveMode()) && "down".equals(bo.getMoveMode())) {
+                int maxSort = getMenuMaxSort(tSystemMenu1.getFatherId(), language, tSystemMenu1.getLevel());
+                if (tSystemMenu1.getSort() == maxSort)
+                    GraceException.display(ResponseStatusEnum.MENU_MOVE_DOWN_ERROR);
+
+                // 找到下一个菜单,并将序号-1
+                TSystemMenu tSystemMenu2 = selectTSystemMenu(tSystemMenu1.getFatherId(), null,
+                        language, tSystemMenu1.getSort() + 1,
+                        0, null).get(0);
+                tSystemMenu2.setSort(tSystemMenu2.getSort() - 1);
+                systemMenuMapper.updateById(tSystemMenu2);
+
+                // 将当前菜单序号+1
+                tSystemMenu1.setSort(tSystemMenu1.getSort() + 1);
+                systemMenuMapper.updateById(tSystemMenu1);
+            }
+
+            if (StrUtils.isBlank(bo.getMoveMode())) {
+                // 1. 判断是否需要修改排序（该方式暂不使用，使用移动排序的方式）
+                if (bo.getSort() > 0 && bo.getSort() != tSystemMenu1.getSort()) {
+                    int minSort = 0;
+                    int maxSort = 0;
+                    int moveSort = 0;
+
+                    // 1.1 排序前移
+                    if (bo.getSort() < tSystemMenu1.getSort()) {
+                        minSort = bo.getSort();
+                        maxSort = tSystemMenu1.getSort();
                         moveSort = 1;
-                        status = Basic.ON;
-                        id = tSystemMenu1.getId();
-                    }
-                    if (Basic.OFF == bo.getStatus()) {
-                        // 禁用
+                    } else {
+                        // 1.2 排序前移
                         minSort = tSystemMenu1.getSort() + 1;
+                        maxSort = bo.getSort() + 1;
                         moveSort = -1;
-                        status = Basic.OFF;
                     }
-                    // 2.2 查询需要调整的记录，并进行调整
+
+                    // 1.3 查询需要调整排序的记录，并更新
                     List<TSystemMenu> tSystemMenus =
                             selectTSystemMenu(tSystemMenu1.getFatherId(), null,
                                     language, minSort,
-                                    0, id);
+                                    maxSort, null);
                     for (TSystemMenu systemMenu : tSystemMenus) {
                         systemMenu.setSort(systemMenu.getSort() + moveSort);
                         systemMenuMapper.updateById(systemMenu);
                     }
-                    tSystemMenu1.setStatus(status);
+                    tSystemMenu1.setSort(bo.getSort());
                     systemMenuMapper.updateById(tSystemMenu1);
                 } else {
-                    // 3. 不需要修改排序，也不需要修改状态（最简单的修改）
-                    updateMenu(tSystemMenu1, menuName, bo.getMenuCode(),null, null);
+                    // 2. 不需要修改排序，继续判断是否是修改禁用状态
+                    if (ObjectUtils.isNotNull(bo.getStatus()) && bo.getStatus() != tSystemMenu1.getStatus()) {
+                        int minSort = 0;
+                        int moveSort = 0;
+                        int status = 0;
+                        Long id = null;
+
+                        // 2.1 禁用状态修改，需要调整排序
+                        if (Basic.ON == bo.getStatus()) {
+                            // 开启
+                            minSort = tSystemMenu1.getSort();
+                            moveSort = 1;
+                            status = Basic.ON;
+                            id = tSystemMenu1.getId();
+                        }
+                        if (Basic.OFF == bo.getStatus()) {
+                            // 禁用
+                            minSort = tSystemMenu1.getSort() + 1;
+                            moveSort = -1;
+                            status = Basic.OFF;
+                        }
+                        // 2.2 查询需要调整的记录，并进行调整
+                        List<TSystemMenu> tSystemMenus =
+                                selectTSystemMenu(tSystemMenu1.getFatherId(), null,
+                                        language, minSort,
+                                        0, id);
+                        for (TSystemMenu systemMenu : tSystemMenus) {
+                            systemMenu.setSort(systemMenu.getSort() + moveSort);
+                            systemMenuMapper.updateById(systemMenu);
+                        }
+                        tSystemMenu1.setStatus(status);
+                        systemMenuMapper.updateById(tSystemMenu1);
+                    } else {
+                        // 3. 不需要修改排序，也不需要修改状态（最简单的修改）
+                        updateMenu(tSystemMenu1, menuName, bo.getMenuCode(),null, null);
+                    }
                 }
             }
         }
@@ -213,7 +250,8 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
             String menuCode,
             int sort) {
 
-        int maxSort = getParentMenuMaxSort(language);
+        // 获取父级菜单最大序号
+        int maxSort = getMenuMaxSort(0L, language, Basic.MENU_PARENT);
         if (sort >= maxSort) {
             // 添加到最后
             sort = maxSort + 1;
@@ -236,7 +274,8 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
             String menuCode,
             int sort) {
 
-        int maxSort = getSonMenuMaxSort(fatherId, language);
+        // 获取子级菜单最大序号
+        int maxSort = getMenuMaxSort(fatherId, language, Basic.MENU_SON);
         if (sort >= maxSort) {
             // 添加到最后
             sort = maxSort + 1;
@@ -253,15 +292,16 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
 
     }
 
-    // 获取顶级模块最大序号
-    private int getParentMenuMaxSort(String language) {
-        Integer maxSort = systemMenuMapper.getMenuMaxSort(Basic.ONE_INT, language, null);
-        return maxSort != null ? maxSort : 0;
-    }
 
-    // 获取指定顶级模块下的子级模块最大序号
-    private int getSonMenuMaxSort(Long fatherId,String language) {
-        Integer maxSort = systemMenuMapper.getMenuMaxSort(Basic.TWO_INT, language, fatherId);
+    /**
+     * 获取指定顶级模块下的子级模块最大序号
+     * @param fatherId
+     * @param language
+     * @param level
+     * @return
+     */
+    private int getMenuMaxSort(Long fatherId,String language, int level) {
+        Integer maxSort = systemMenuMapper.getMenuMaxSort(level, language, fatherId);
         return maxSort != null ? maxSort : 0;
     }
 
@@ -328,6 +368,8 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
         // 不等于
         if (ObjectUtils.isNotNull(id))
             selectWrapper.ne("id", id);
+
+        selectWrapper.orderByAsc("sort");
 
         List<TSystemMenu> tSystemMenus = systemMenuMapper.selectList(selectWrapper);
         return tSystemMenus;
