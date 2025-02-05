@@ -118,6 +118,12 @@ public class Basic {
     public static final int OFF = 0;
 
     /**
+     * 禁用状态
+     */
+    public static final int NORMAL = 1;
+    public static final int DISABLE = 0;
+
+    /**
      * 删除状态
      */
     public static final int DELETE = 1;

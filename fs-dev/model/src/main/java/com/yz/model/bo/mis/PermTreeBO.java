@@ -7,15 +7,13 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-@Schema(description = "查询菜单树BO")
-public class MenuTreeBO extends CommonLanguageBO {
+@Schema(description = "查询权限树BO")
+public class PermTreeBO extends CommonLanguageBO {
 
     @NotNull(message = "状态不能为空")
     @Pattern(regexp = "^1$|^2$")
     @Schema(description = "状态 1查询有效，2查询有效和禁用")
     private String status;
-
-
 
 
 }

@@ -15,9 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 测试控制层2
- */
+
 @Slf4j
 @RestController
 public class SystemMenuController extends BaseController implements SystemMenuControllerApi {
@@ -27,7 +25,7 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
 
     @Override
     public GraceResult menuTree(@RequestBody @Valid MenuTreeBO bo) {
-        return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage(), bo.getStatus()));
+        return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage(), Integer.parseInt(bo.getStatus())));
     }
 
     @Override

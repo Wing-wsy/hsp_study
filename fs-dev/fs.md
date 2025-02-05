@@ -1018,7 +1018,7 @@ public class JsonSerializerManage {
 
 
 
-
+***
 
 
 
@@ -1029,15 +1029,19 @@ public class JsonSerializerManage {
 ```java
 // 1. 系统接口状态码表
 t_response_error_enums
-// 2. 管理系统用户表
+// 2. 系统用户表
 t_system_user
-// 3. 菜单表
+// 3. 系统菜单表
 t_system_menu
-// 4. 角色表
-t_system_role
-// 5. 权限表
+// 4. 系统权限表
 tb_system_permission
+// 5. 系统角色表
+t_system_role
 ```
+
+
+
+
 
 ## 表的索引（待设计）
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 测试控制层2
+ * 系统菜单控制层
  */
 @Tag(name = "SystemMenuController", description = "系统菜单控制器")
 @RequestMapping("/menu")
