@@ -114,27 +114,33 @@ public class Basic {
     /**
      * 开关状态
      */
-    public static final int ON = 1;
-    public static final int OFF = 0;
+    public static final int ON = 1; // 开启
+    public static final int OFF = 0;  // 关闭
 
     /**
      * 禁用状态
      */
-    public static final int NORMAL = 1;
-    public static final int DISABLE = 0;
+    public static final int NORMAL = 1;  // 正常
+    public static final int DISABLE = 0;  // 禁用
 
     /**
      * 删除状态
      */
-    public static final int DELETE = 1;
-    public static final int VAILD = 0;
+    public static final int DELETE = 1; // 删除
+    public static final int VAILD = 0;  // 有效
+
+    /**
+     * 移动方式
+     */
+    public static final String UP = "up";  // 上移
+    public static final String DOWN = "down"; // 下移
 
 
     /**
      * 菜单等级
      */
-    public static final int MENU_PARENT = 1;
-    public static final int MENU_SON = 2;
+    public static final int MENU_PARENT = 1; // 顶级菜单
+    public static final int MENU_SON = 2;  // 二级菜单
 
 
 

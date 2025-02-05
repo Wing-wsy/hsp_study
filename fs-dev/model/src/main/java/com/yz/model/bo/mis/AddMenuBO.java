@@ -28,14 +28,11 @@ public class AddMenuBO {
     @Schema(description = "菜单编码")
     private String menuCode;
 
-//    @NotNull(message = "fatherMenuCode 不能为空")
     @Schema(description = "父级菜单编码，添加顶级菜单不用传")
     private String fatherMenuCode;
 
-    @NotNull(message = "sort 不能为空")
-    @Min(value = 1, message = "sort 不能小于1")
     @Schema(description = "排序")
-    private int sort;
+    private Integer sort;
 
 
 

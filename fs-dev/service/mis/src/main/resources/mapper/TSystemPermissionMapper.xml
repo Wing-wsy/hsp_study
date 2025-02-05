@@ -12,5 +12,25 @@
     <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
   </resultMap>
 
+  <!-- 定义公共SQL -->
+  <sql id="commonConditions1">
+      AND p.status = 1
+      AND p.is_delete = 0
+  </sql>
+
+  <!-- 定义公共SQL -->
+  <sql id="commonConditions2">
+      AND p.is_delete = 0
+  </sql>
+
+
+  <select id="getPermMaxSort" resultType="Integer">
+    SELECT
+        max(p.sort) as maxSort
+    FROM t_system_permission p
+    WHERE 1=1
+    AND p.menu_code = #{menuCode}
+    <include refid="commonConditions2"/>
+  </select>
 
 </mapper>

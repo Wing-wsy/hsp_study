@@ -6,6 +6,9 @@ import feign.RequestTemplate;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Feign调用传递 traceId
+ */
 @Configuration
 public class FeignInterceptor implements RequestInterceptor {
 

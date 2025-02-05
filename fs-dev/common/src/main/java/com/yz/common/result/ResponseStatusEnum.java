@@ -74,10 +74,24 @@ public enum ResponseStatusEnum {
     // 查询分页错误 57x
     PAGE_ERROR_LIMIT(570, false, "查询分页超过最大分页数！"),
 
+    // 系统响应结果
+    RESP_INSERT_ERROR(4101, false, "当前添加的响应结果类型已经存在，请勿重复添加！"),
+    RESP_UPDATE_ERROR(4102, false, "当前修改的响应结果类型已经存在，修改失败！"),
+
     // 菜单模块
     MENU_DELETE_ERROR(5701, false, "当前顶级菜单下子级菜单不为空，无法删除顶级菜单！"),
     MENU_MOVE_UP_ERROR(5702, false, "当前菜单已经排在首位！"),
     MENU_MOVE_DOWN_ERROR(5703, false, "当前菜单已经排在末位！"),
+    MENU_INSERT_ERROR(5704, false, "当前添加的菜单已经存在，请勿重复添加！"),
+    MENU_UPDATE_ERROR(5705, false, "当前修改的菜单已经存在，修改失败！"),
+
+    // 权限模块
+    PERM_INSERT_ERROR(6701, false, "当前添加的权限已经存在，请勿重复添加！"),
+    PERM_DELETE_ERROR(6702, false, "权限删除失败！"),
+    PERM_UPDATE_ERROR(6703, false, "当前修改的权限已经存在，修改失败！"),
+    PERM_UPDATE_NOT_FIND_ERROR(6704, false, "当前修改的权限不存在！"),
+    PERM_MOVE_UP_ERROR(6705, false, "当前权限已经排在首位！"),
+    PERM_MOVE_DOWN_ERROR(6706, false, "当前权限已经排在末位！"),
 
 
     // 人脸识别错误代码

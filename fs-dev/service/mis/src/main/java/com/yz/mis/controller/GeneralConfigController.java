@@ -54,8 +54,8 @@ public class GeneralConfigController implements GeneralConfigControllerApi {
 
     @Override
     public GraceResult updateResponseResult(@RequestBody @Valid UpdateResponseResultBO bo) {
+        // 只传了其中一个，则拦截，要么都传，要么都不传
         if (StrUtils.isNotBlank(bo.getMsgByES()) != StrUtils.isNotBlank(bo.getMsgByZH())) {
-            // 只传了其中一个，则拦截，要么都传，要么都不传
             GraceException.display(ResponseStatusEnum.SYSTEM_PARAMS_SETTINGS_ERROR);
         }
         generalConfigService.updateResponseResult(bo);

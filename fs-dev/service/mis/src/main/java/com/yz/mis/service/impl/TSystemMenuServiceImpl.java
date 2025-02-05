@@ -14,6 +14,7 @@ import com.yz.mis.mapper.TSystemMenuMapper;
 import com.yz.mis.service.TSystemMenuService;
 import com.yz.model.bo.mis.AddMenuBO;
 import com.yz.model.bo.mis.UpdateMenuBO;
+import com.yz.model.entity.TResponseErrorEnums;
 import com.yz.model.entity.TSystemMenu;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
     // TODO 加入事务
     @Override
     public void addMenu(AddMenuBO bo) {
+        // 存在则不能重复添加
+        boolean existRecords = isExistRecords(bo.getMenuCode());
+        if (existRecords) {
+            GraceException.display(ResponseStatusEnum.MENU_INSERT_ERROR);
+        }
+
         List<String> languages = ListUtils.getLanguageList();
         for (String language : languages) {
             String menuName = null;
@@ -123,6 +130,15 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
 
     @Override
     public void updateMenu(UpdateMenuBO bo) {
+        // 修改后的值不能重复
+        if (StrUtils.isNotBlank(bo.getMenuCode())) {
+            boolean existRecords = isExistRecords(bo.getMenuCode());
+            if (existRecords) {
+                GraceException.display(ResponseStatusEnum.MENU_UPDATE_ERROR);
+            }
+        }
+
+
         TSystemMenu tSystemMenu = tSystemMenuMapper.selectById(bo.getId());
         List<String> languages = ListUtils.getLanguageList();
         for (String language : languages) {
@@ -135,7 +151,7 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
             }
 
             // 上移
-            if (StrUtils.isNotBlank(bo.getMoveMode()) && "up".equals(bo.getMoveMode())) {
+            if (StrUtils.isNotBlank(bo.getMoveMode()) && Basic.UP.equals(bo.getMoveMode())) {
                 if (tSystemMenu1.getSort() == Basic.ONE_INT)
                     GraceException.display(ResponseStatusEnum.MENU_MOVE_UP_ERROR);
 
@@ -152,7 +168,7 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
             }
 
             // 下移
-            if (StrUtils.isNotBlank(bo.getMoveMode()) && "down".equals(bo.getMoveMode())) {
+            if (StrUtils.isNotBlank(bo.getMoveMode()) && Basic.DOWN.equals(bo.getMoveMode())) {
                 int maxSort = getMenuMaxSort(tSystemMenu1.getFatherId(), language, tSystemMenu1.getLevel());
                 if (tSystemMenu1.getSort() == maxSort)
                     GraceException.display(ResponseStatusEnum.MENU_MOVE_DOWN_ERROR);
@@ -245,11 +261,11 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
             String language,
             String menuName,
             String menuCode,
-            int sort) {
+            Integer sort) {
 
         // 获取父级菜单最大序号
         int maxSort = getMenuMaxSort(0L, language, Basic.MENU_PARENT);
-        if (sort >= maxSort) {
+        if (ObjectUtils.isNull(sort) || sort >= maxSort) {
             // 添加到最后
             sort = maxSort + 1;
         } else {
@@ -297,7 +313,7 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
      * @param level
      * @return
      */
-    private int getMenuMaxSort(Long fatherId,String language, int level) {
+    private int getMenuMaxSort(Long fatherId, String language, int level) {
         Integer maxSort = tSystemMenuMapper.getMenuMaxSort(level, language, fatherId);
         return maxSort != null ? maxSort : 0;
     }
@@ -370,5 +386,18 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
 
         List<TSystemMenu> tSystemMenus = tSystemMenuMapper.selectList(selectWrapper);
         return tSystemMenus;
+    }
+
+    private boolean isExistRecords(String menuCode) {
+        boolean flag = false;
+        List<TSystemMenu> tSystemMenus1 = selectTSystemMenu(null, menuCode, Strings.LOCALE_ES_LOWER, 0, 0, null);
+        if (CollUtils.isNotEmpty(tSystemMenus1)) {
+            flag = true;
+        }
+        List<TSystemMenu> tSystemMenus2 = selectTSystemMenu(null, menuCode, Strings.LOCALE_ZH, 0, 0, null);
+        if (CollUtils.isNotEmpty(tSystemMenus2)) {
+            flag = true;
+        }
+        return flag;
     }
 }

@@ -3,7 +3,6 @@ package com.yz.mis.controller;
 import com.yz.api.controller.mis.SystemMenuControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.mis.service.TSystemMenuService;
-import com.yz.model.bo.common.CommonLanguageBO;
 import com.yz.model.bo.mis.AddMenuBO;
 import com.yz.model.bo.mis.DeleteMenuBO;
 import com.yz.model.bo.mis.MenuTreeBO;

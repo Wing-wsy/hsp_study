@@ -3,6 +3,7 @@ package com.yz.mis.service.impl.custom;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yz.common.constant.CacheKey;
 import com.yz.common.constant.Strings;
+import com.yz.common.exception.GraceException;
 import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.ListUtils;
 import com.yz.common.util.ObjectUtils;
@@ -13,8 +14,6 @@ import com.yz.mis.service.custom.GeneralConfigService;
 import com.yz.mis.service.TResponseErrorEnumsService;
 import com.yz.model.bo.mis.InsertResponseResultBO;
 import com.yz.model.bo.mis.UpdateResponseResultBO;
-import com.yz.model.dto.odr.OrderDTO;
-import com.yz.model.entity.TOrder;
 import com.yz.model.entity.TResponseErrorEnums;
 import com.yz.service.base.service.BaseService;
 import jakarta.annotation.Resource;
@@ -109,6 +108,12 @@ public class GeneralConfigServiceImpl extends BaseService implements GeneralConf
 
     @Override
     public void insertResponseResult(InsertResponseResultBO bo) {
+        // 存在则不能重复添加
+        boolean existRecords = isExistRecords(bo.getCode());
+        if (existRecords) {
+            GraceException.display(ResponseStatusEnum.RESP_INSERT_ERROR);
+        }
+
         List<String> languages = ListUtils.getLanguageList();
         for (String language : languages) {
             String msg = null;
@@ -123,12 +128,32 @@ public class GeneralConfigServiceImpl extends BaseService implements GeneralConf
 
     @Override
     public void updateResponseResult(UpdateResponseResultBO bo) {
+        // 修改后的值不能重复
+        if (StrUtils.isNotBlank(bo.getCode())) {
+            boolean existRecords = isExistRecords(bo.getCode());
+            if (existRecords) {
+                GraceException.display(ResponseStatusEnum.RESP_UPDATE_ERROR);
+            }
+        }
         tResponseErrorEnumsService.updateResponseResult(bo);
     }
 
     @Override
     public void deleteResponseResult(Long id) {
         tResponseErrorEnumsService.deleteResponseResult(id);
+    }
+
+    private boolean isExistRecords(String code) {
+        boolean flag = false;
+        TResponseErrorEnums tResponseErrorEnums1 = tResponseErrorEnumsService.searchResponseByOne(code, Strings.LOCALE_ES_LOWER);
+        if (ObjectUtils.isNotNull(tResponseErrorEnums1)) {
+            flag = true;
+        }
+        TResponseErrorEnums tResponseErrorEnums2 = tResponseErrorEnumsService.searchResponseByOne(code, Strings.LOCALE_ZH);
+        if (ObjectUtils.isNotNull(tResponseErrorEnums2)) {
+            flag = true;
+        }
+        return flag;
     }
 
 }
