@@ -13,7 +13,6 @@ import com.yz.mis.service.TSystemMenuService;
 import com.yz.mis.service.TSystemPermService;
 import com.yz.model.bo.mis.AddPermBO;
 import com.yz.model.bo.mis.UpdatePermBO;
-import com.yz.model.entity.TSystemMenu;
 import com.yz.model.entity.TSystemPermission;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

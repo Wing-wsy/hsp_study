@@ -51,16 +51,4 @@ public class SystemPermController extends BaseController implements SystemPermCo
         return GraceResult.ok();
     }
 
-
-//    @Override
-//    public GraceResult deleteMenu(@RequestBody @Valid DeleteMenuBO bo) {
-//        tSystemMenuService.deleteMenu(bo.getId());
-//        return GraceResult.ok();
-//    }
-//
-//    @Override
-//    public GraceResult updateMenu(@RequestBody @Valid UpdateMenuBO bo) {
-//        tSystemMenuService.updateMenu(bo);
-//        return GraceResult.ok();
-//    }
 }

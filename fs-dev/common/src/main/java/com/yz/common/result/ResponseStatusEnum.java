@@ -93,6 +93,9 @@ public enum ResponseStatusEnum {
     PERM_MOVE_UP_ERROR(6705, false, "当前权限已经排在首位！"),
     PERM_MOVE_DOWN_ERROR(6706, false, "当前权限已经排在末位！"),
 
+    // 角色模块
+    ROLE_SELECT_ERROR(6801, false, "角色不存在！"),
+
 
     // 人脸识别错误代码
     FACE_VERIFY_TYPE_ERROR(600, false, "人脸比对验证类型不正确！"),

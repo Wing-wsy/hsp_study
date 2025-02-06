@@ -1049,6 +1049,19 @@ t_system_role
 
 
 
+## 相关SQL
+
+创建多字段唯一索引
+
+```sql
+ALTER TABLE t_system_role
+ADD CONSTRAINT unq_role_code_language UNIQUE (role_code, language);
+```
+
+
+
+
+
 
 
 
