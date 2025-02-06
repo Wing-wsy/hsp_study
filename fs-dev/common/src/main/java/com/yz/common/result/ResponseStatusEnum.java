@@ -96,6 +96,11 @@ public enum ResponseStatusEnum {
     // 角色模块
     ROLE_SELECT_ERROR(6801, false, "角色不存在！"),
     ROLE_INSERT_ERROR(6802, false, "当前添加的角色已经存在，请勿重复添加！"),
+    ROLE_DELETE_ERROR(6803, false, "角色删除失败！"),
+    ROLE_UPDATE_NOT_FIND_ERROR(6804, false, "当前修改的角色不存在！"),
+    ROLE_UPDATE_ERROR(6805, false, "当前修改的角色已经存在，修改失败！"),
+    ROLE_MOVE_UP_ERROR(6806, false, "当前角色已经排在首位！"),
+    ROLE_MOVE_DOWN_ERROR(6807, false, "当前角色已经排在末位！"),
 
 
     // 人脸识别错误代码

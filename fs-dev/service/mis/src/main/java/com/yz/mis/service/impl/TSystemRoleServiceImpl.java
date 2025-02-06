@@ -18,6 +18,7 @@ import com.yz.mis.mapper.TSystemRoleMapper;
 import com.yz.mis.service.TSystemPermService;
 import com.yz.mis.service.TSystemRoleService;
 import com.yz.model.bo.mis.InsertRoleBO;
+import com.yz.model.bo.mis.UpdateRoleBO;
 import com.yz.model.entity.TSystemMenu;
 import com.yz.model.vo.mis.SelectRoleListVO;
 import com.yz.model.entity.TSystemPermission;
@@ -47,15 +48,15 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
 
     @Override
     public ArrayList<HashMap> selectRolePermTree(String roleCode, Integer status, String language) {
-        // 1. 查询当前角色权限
-        List<TSystemRole> tSystemRoles = selectTSystemRole(roleCode, language, status);
+        // 1. 查询当前角色角色
+        List<TSystemRole> tSystemRoles = selectTSystemRole(roleCode, language, status, null);
         if (CollUtils.isEmpty(tSystemRoles)) {
             GraceException.display(ResponseStatusEnum.ROLE_SELECT_ERROR);
         }
         String permissions = tSystemRoles.get(0).getPermissions();
         JSONArray permArray = JSONUtils.parseArray(permissions);
 
-        // 2. 获取权限树
+        // 2. 获取角色树
         ArrayList<HashMap> permTreeMaps = tSystemPermService.permTree(language, status);
         for (HashMap hashMap : permTreeMaps) {
             // 二级菜单
@@ -101,7 +102,62 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         }
     }
 
-    private List<TSystemRole> selectTSystemRole(String roleCode, String language, Integer status) {
+    @Override
+    public void updateRole(UpdateRoleBO bo) {
+        // 修改后的值不能重复
+        if (StrUtils.isNotBlank(bo.getRoleCode())) {
+            boolean existRecords = isExistRecords(bo.getRoleCode());
+            if (existRecords) {
+                GraceException.display(ResponseStatusEnum.ROLE_UPDATE_ERROR);
+            }
+        }
+
+        TSystemRole tSystemRole = tSystemRoleMapper.selectById(bo.getId());
+        List<String> languages = ListUtils.getLanguageList();
+        for (String language : languages) {
+            TSystemRole tSystemRole1 = selectTSystemRole(tSystemRole.getRoleCode(), language, null, null).get(0);
+            
+            String roleName = null;
+            if (Strings.LOCALE_ES_LOWER.equals(language)) {
+                roleName = bo.getRoleNameByES();
+            } else {
+                roleName = bo.getRoleNameByZH();
+            }
+
+            // 2. 只是修改状态、排序
+            Integer currentSort = null;
+            // 2.1 上移
+            if (StrUtils.isNotBlank(bo.getMoveMode()) && Basic.UP.equals(bo.getMoveMode())) {
+                if (tSystemRole1.getSort() == Basic.ONE_INT)
+                    GraceException.display(ResponseStatusEnum.ROLE_MOVE_UP_ERROR);
+
+                currentSort = tSystemRole1.getSort() - 1;
+                // 找到上一个角色,并将序号+1
+                TSystemRole TSystemRole2 = selectTSystemRole(null, language, null, currentSort).get(0);
+                TSystemRole2.setSort(TSystemRole2.getSort() + 1);
+                tSystemRoleMapper.updateById(TSystemRole2);
+            }
+
+            // 2.2 下移
+            if (StrUtils.isNotBlank(bo.getMoveMode()) && Basic.DOWN.equals(bo.getMoveMode())) {
+                int roleMaxSort = getRoleMaxSort(language);
+                if (tSystemRole1.getSort() == roleMaxSort)
+                    GraceException.display(ResponseStatusEnum.ROLE_MOVE_DOWN_ERROR);
+
+                currentSort = tSystemRole1.getSort() + 1;
+                // 找到下一个角色,并将序号-1
+                TSystemRole tSystemRole2 = selectTSystemRole(null, language, null, currentSort).get(0);
+                tSystemRole2.setSort(tSystemRole2.getSort() - 1);
+                tSystemRoleMapper.updateById(tSystemRole2);
+            }
+
+            updateRoleByConditions(tSystemRole1, roleName,
+                    bo.getRoleCode(), bo.getPermissions(),
+                    bo.getComment(), currentSort, bo.getStatus());
+        }
+    }
+
+    private List<TSystemRole> selectTSystemRole(String roleCode, String language, Integer status, Integer sort) {
         QueryWrapper<TSystemRole> selectWrapper = new QueryWrapper<>();
 
         if (StrUtils.isNotBlank(language)) {
@@ -111,6 +167,9 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         if (StrUtils.isNotBlank(roleCode)) {
             selectWrapper.eq("role_code", roleCode);
         }
+
+        if (ObjectUtils.isNotNull(sort))
+            selectWrapper.eq("sort", sort);
 
         if (ObjectUtils.isNotNull(status) && status == Basic.NORMAL)
             selectWrapper.eq("status", status);
@@ -159,11 +218,11 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
 
     private boolean isExistRecords(String roleCode) {
         boolean flag = false;
-        List<TSystemRole> tSystemRoles1 = selectTSystemRole(roleCode, Strings.LOCALE_ES_LOWER, null);
+        List<TSystemRole> tSystemRoles1 = selectTSystemRole(roleCode, Strings.LOCALE_ES_LOWER, null, null);
         if (CollUtils.isNotEmpty(tSystemRoles1)) {
             flag = true;
         }
-        List<TSystemRole> tSystemRoles2 = selectTSystemRole(roleCode, Strings.LOCALE_ZH, null);
+        List<TSystemRole> tSystemRoles2 = selectTSystemRole(roleCode, Strings.LOCALE_ZH, null, null);
         if (CollUtils.isNotEmpty(tSystemRoles2)) {
             flag = true;
         }
@@ -176,5 +235,31 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
     private int getRoleMaxSort(String language) {
         Integer maxSort = tSystemRoleMapper.getRoleMaxSort(language);
         return maxSort != null ? maxSort : 0;
+    }
+
+    private void updateRoleByConditions(TSystemRole tSystemRole, String roleName,
+                                        String roleCode, String permissions,
+                                        String comment, Integer sort,
+                                        Integer status) {
+
+        if (StrUtils.isNotBlank(roleName))
+            tSystemRole.setRoleName(roleName);
+
+        if (StrUtils.isNotBlank(roleCode))
+            tSystemRole.setRoleCode(roleCode);
+
+        if (StrUtils.isNotBlank(permissions))
+            tSystemRole.setPermissions(permissions);
+
+        if (StrUtils.isNotBlank(comment))
+            tSystemRole.setComment(comment);
+
+        if (ObjectUtils.isNotNull(status))
+            tSystemRole.setStatus(status);
+
+        if (ObjectUtils.isNotNull(sort))
+            tSystemRole.setSort(sort);
+
+        tSystemRoleMapper.updateById(tSystemRole);
     }
 }

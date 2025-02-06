@@ -2,6 +2,7 @@ package com.yz.mis.service;
 
 import com.yz.common.util.page.PageResult;
 import com.yz.model.bo.mis.InsertRoleBO;
+import com.yz.model.bo.mis.UpdateRoleBO;
 import com.yz.model.vo.mis.SelectRoleListVO;
 
 import java.util.ArrayList;
@@ -25,6 +26,11 @@ public interface TSystemRoleService {
      * 新增角色
      */
     public void insertRole(InsertRoleBO bo);
+
+    /**
+     * 修改角色
+     */
+    public void updateRole(UpdateRoleBO bo);
 
 
 }
