@@ -6,12 +6,20 @@
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
     <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
     <result column="permissions" property="permissions" jdbcType="CHAR" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
     <result column="default_permissions" property="defaultPermissions" jdbcType="CHAR" />
     <result column="systemic" property="systemic" jdbcType="BIT" />
     <result column="language" property="language" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
+
+  <select id="getRoleMaxSort" resultType="Integer">
+    SELECT
+    max(r.sort) as maxSort
+    FROM t_system_role r
+    WHERE 1=1
+    AND r.language = #{language}
+  </select>
 
 </mapper>

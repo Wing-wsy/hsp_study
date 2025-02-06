@@ -1,6 +1,7 @@
 package com.yz.api.controller.mis;
 
 import com.yz.common.result.GraceResult;
+import com.yz.model.bo.mis.InsertRoleBO;
 import com.yz.model.bo.mis.SelectRoleListBO;
 import com.yz.model.bo.mis.SelectRolePermBO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,6 +23,10 @@ public interface SystemRoleControllerApi {
     @PostMapping("/selectRolePerm")
     @Operation(summary = "查询角色权限")
     public GraceResult selectRolePerm(SelectRolePermBO bo);
+
+    @PostMapping("/insertRole")
+    @Operation(summary = "新增角色")
+    public GraceResult insertRole(InsertRoleBO bo);
 
 
 }

@@ -284,11 +284,11 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
             String language,
             String menuName,
             String menuCode,
-            int sort) {
+            Integer sort) {
 
         // 获取子级菜单最大序号
         int maxSort = getMenuMaxSort(fatherId, language, Basic.MENU_SON);
-        if (sort >= maxSort) {
+        if (ObjectUtils.isNull(sort) || sort >= maxSort) {
             // 添加到最后
             sort = maxSort + 1;
         } else {

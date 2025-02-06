@@ -95,6 +95,7 @@ public enum ResponseStatusEnum {
 
     // 角色模块
     ROLE_SELECT_ERROR(6801, false, "角色不存在！"),
+    ROLE_INSERT_ERROR(6802, false, "当前添加的角色已经存在，请勿重复添加！"),
 
 
     // 人脸识别错误代码

@@ -31,7 +31,7 @@ public class AddMenuBO {
     @Schema(description = "父级菜单编码，添加顶级菜单不用传")
     private String fatherMenuCode;
 
-    @Schema(description = "排序")
+    @Schema(description = "排序(默认添加到最后)")
     private Integer sort;
 
 

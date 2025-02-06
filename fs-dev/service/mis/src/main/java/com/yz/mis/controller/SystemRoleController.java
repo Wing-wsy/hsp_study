@@ -4,6 +4,7 @@ import com.yz.api.controller.mis.SystemRoleControllerApi;
 import com.yz.common.result.GraceResult;
 import com.yz.common.util.page.PageResult;
 import com.yz.mis.service.TSystemRoleService;
+import com.yz.model.bo.mis.InsertRoleBO;
 import com.yz.model.bo.mis.SelectRoleListBO;
 import com.yz.model.bo.mis.SelectRolePermBO;
 import com.yz.model.vo.mis.SelectRoleListVO;
@@ -32,5 +33,11 @@ public class SystemRoleController extends BaseController implements SystemRoleCo
     @Override
     public GraceResult selectRolePerm(@RequestBody @Valid SelectRolePermBO bo) {
         return GraceResult.ok(tSystemRoleService.selectRolePermTree(bo.getRoleCode(), Integer.parseInt(bo.getStatus()),  bo.getLanguage()));
+    }
+
+    @Override
+    public GraceResult insertRole(@RequestBody @Valid InsertRoleBO bo) {
+        tSystemRoleService.insertRole(bo);
+        return GraceResult.ok();
     }
 }
