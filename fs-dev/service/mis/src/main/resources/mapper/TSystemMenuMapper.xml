@@ -57,7 +57,7 @@
       <if test=" fatherId != null ">
           AND m.father_id = #{fatherId}
       </if>
-    <include refid="commonConditions1"/>
+    <include refid="commonConditions2"/>
   </select>
 
 

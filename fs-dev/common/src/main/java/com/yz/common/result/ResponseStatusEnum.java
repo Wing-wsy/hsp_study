@@ -102,6 +102,15 @@ public enum ResponseStatusEnum {
     ROLE_MOVE_UP_ERROR(6806, false, "当前角色已经排在首位！"),
     ROLE_MOVE_DOWN_ERROR(6807, false, "当前角色已经排在末位！"),
 
+    // 部门模块
+    DEPT_SELECT_ERROR(6901, false, "部门不存在！"),
+    DEPT_INSERT_ERROR(6902, false, "当前添加的部门已经存在，请勿重复添加！"),
+    DEPT_DELETE_ERROR(6903, false, "部门删除失败！"),
+    DEPT_UPDATE_NOT_FIND_ERROR(6904, false, "当前修改的部门不存在！"),
+    DEPT_UPDATE_ERROR(6905, false, "当前修改的部门已经存在，修改失败！"),
+    DEPT_MOVE_UP_ERROR(6906, false, "当前部门已经排在首位！"),
+    DEPT_MOVE_DOWN_ERROR(6907, false, "当前部门已经排在末位！"),
+
 
     // 人脸识别错误代码
     FACE_VERIFY_TYPE_ERROR(600, false, "人脸比对验证类型不正确！"),

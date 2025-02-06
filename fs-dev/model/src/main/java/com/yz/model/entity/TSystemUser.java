@@ -42,6 +42,6 @@ public class TSystemUser extends BaseEntity implements Serializable {
     private Integer deptId;
 
     /**1有效，2离职，3禁用*/
-    private Byte status;
+    private Integer status;
 
 }

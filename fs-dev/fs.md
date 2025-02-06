@@ -1037,6 +1037,8 @@ t_system_menu
 tb_system_permission
 // 5. 系统角色表
 t_system_role
+// 6. 部门表
+t_system_dept
 ```
 
 
