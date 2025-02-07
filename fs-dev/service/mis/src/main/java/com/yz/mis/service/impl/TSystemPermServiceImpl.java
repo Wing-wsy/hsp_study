@@ -151,23 +151,23 @@ public class TSystemPermServiceImpl implements TSystemPermService {
     }
 
     private List<TSystemPermission> selectTSystemPermission(TSystemPermConditions conditions) {
-        QueryWrapper<TSystemPermission> selectWrapper = new QueryWrapper<>();
-        selectWrapper.eq("is_delete", Basic.VAILD);
+        QueryWrapper<TSystemPermission> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_delete", Basic.VAILD);
 
         if (StrUtils.isNotBlank(conditions.getPermissionName()))
-            selectWrapper.eq("permission_name", conditions.getPermissionName());
+            queryWrapper.eq("permission_name", conditions.getPermissionName());
 
         if (StrUtils.isNotBlank(conditions.getMenuCode()))
-            selectWrapper.eq("menu_code", conditions.getMenuCode());
+            queryWrapper.eq("menu_code", conditions.getMenuCode());
 
         if (ObjectUtils.isNotNull(conditions.getSort()))
-            selectWrapper.eq("sort", conditions.getSort());
+            queryWrapper.eq("sort", conditions.getSort());
 
         if (ObjectUtils.isNotNull(conditions.getStatus()) && conditions.getStatus() == Basic.NORMAL)
-            selectWrapper.eq("status", conditions.getStatus());
+            queryWrapper.eq("status", conditions.getStatus());
 
-        selectWrapper.orderByAsc("sort");
-        List<TSystemPermission> tSystemPermissions = tSystemPermissionMapper.selectList(selectWrapper);
+        queryWrapper.orderByAsc("sort");
+        List<TSystemPermission> tSystemPermissions = tSystemPermissionMapper.selectList(queryWrapper);
         return tSystemPermissions;
     }
 

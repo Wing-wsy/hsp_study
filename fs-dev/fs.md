@@ -1060,6 +1060,12 @@ ALTER TABLE t_system_role
 ADD CONSTRAINT unq_role_code_language UNIQUE (role_code, language);
 ```
 
+删除指定索引
+
+```sql
+ALTER TABLE t_system_user DROP INDEX unq_root;
+```
+
 
 
 

@@ -18,4 +18,5 @@ public class CommonPageBO extends CommonLanguageBO{
     @Min(value = 1, message = "pageSize不能小于1")
     @Schema(description = "每页条数")
     private Integer pageSize;
+
 }

@@ -12,6 +12,7 @@ import com.yz.model.bo.mis.InsertRoleBO;
 import com.yz.model.bo.mis.SelectRoleListBO;
 import com.yz.model.bo.mis.SelectRolePermBO;
 import com.yz.model.bo.mis.UpdateRoleBO;
+import com.yz.model.condition.mis.TSystemRoleConditions;
 import com.yz.model.vo.mis.SelectRoleListVO;
 import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
@@ -30,8 +31,12 @@ public class SystemRoleController extends BaseController implements SystemRoleCo
 
     @Override
     public GraceResult selectRoleList(@RequestBody @Valid SelectRoleListBO bo) {
-        PageResult<SelectRoleListVO> selectRoleListVOPageResult
-                = tSystemRoleService.selectRoleList(bo.getLanguage(), Integer.parseInt(bo.getStatus()), bo.getPage(), bo.getPageSize());
+        TSystemRoleConditions conditions = TSystemRoleConditions.newInstance()
+                .addLanguage(bo.getLanguage())
+                .addStatus(Integer.parseInt(bo.getStatus()))
+                .addPage(bo.getPage())
+                .addPageSize(bo.getPageSize());
+        PageResult<SelectRoleListVO> selectRoleListVOPageResult = tSystemRoleService.selectRoleList(conditions);
         return GraceResult.ok(selectRoleListVOPageResult);
     }
 

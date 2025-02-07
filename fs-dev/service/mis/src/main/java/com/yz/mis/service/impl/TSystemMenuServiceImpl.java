@@ -388,34 +388,34 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
     }
 
     private List<TSystemMenu> selectTSystemMenu(TSystemMenuConditions conditions) {
-        QueryWrapper<TSystemMenu> selectWrapper = new QueryWrapper<>();
-        selectWrapper.eq("is_delete", Basic.VAILD);
+        QueryWrapper<TSystemMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_delete", Basic.VAILD);
 
         if (StrUtils.isNotBlank(conditions.getLanguage())) {
-            selectWrapper.eq("language", conditions.getLanguage());
+            queryWrapper.eq("language", conditions.getLanguage());
         }
 
         if (ObjectUtils.isNotNull(conditions.getFatherId()))
-            selectWrapper.eq("father_id", conditions.getFatherId());
+            queryWrapper.eq("father_id", conditions.getFatherId());
 
         if (StrUtils.isNotBlank(conditions.getMenuCode()))
-            selectWrapper.eq("menu_code", conditions.getMenuCode());
+            queryWrapper.eq("menu_code", conditions.getMenuCode());
 
         // 大于等于
         if (conditions.getMinSort() > 0)
-            selectWrapper.ge("sort", conditions.getMinSort());
+            queryWrapper.ge("sort", conditions.getMinSort());
 
         // 小于
         if (conditions.getMaxSort() > 0)
-            selectWrapper.lt("sort", conditions.getMaxSort());
+            queryWrapper.lt("sort", conditions.getMaxSort());
 
         // 不等于
         if (ObjectUtils.isNotNull(conditions.getId()))
-            selectWrapper.ne("id", conditions.getId());
+            queryWrapper.ne("id", conditions.getId());
 
-        selectWrapper.orderByAsc("sort");
+        queryWrapper.orderByAsc("sort");
 
-        List<TSystemMenu> tSystemMenus = tSystemMenuMapper.selectList(selectWrapper);
+        List<TSystemMenu> tSystemMenus = tSystemMenuMapper.selectList(queryWrapper);
         return tSystemMenus;
     }
 

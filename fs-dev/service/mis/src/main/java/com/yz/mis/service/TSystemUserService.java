@@ -1,5 +1,9 @@
 package com.yz.mis.service;
 
+import com.yz.common.util.page.PageResult;
+import com.yz.model.condition.mis.TSystemUserConditions;
+import com.yz.model.vo.mis.SelectUserListVO;
+
 import java.util.Set;
 
 /**
@@ -27,5 +31,10 @@ public interface TSystemUserService {
      * @return 菜单列表
      */
     public Set<String> searchUserMenus(Long systemUserId);
+
+    /**
+     * 查询用户列表
+     */
+    public PageResult<SelectUserListVO> selectUserList(TSystemUserConditions conditions);
 
 }

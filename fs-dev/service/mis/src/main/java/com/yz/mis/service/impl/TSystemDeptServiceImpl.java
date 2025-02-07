@@ -17,11 +17,7 @@ import com.yz.mis.service.TSystemDeptService;
 import com.yz.model.bo.mis.AddDeptBO;
 import com.yz.model.bo.mis.UpdateDeptBO;
 import com.yz.model.condition.mis.TSystemDeptConditions;
-import com.yz.model.condition.mis.TSystemMenuConditions;
-import com.yz.model.condition.mis.TSystemPermConditions;
 import com.yz.model.entity.TSystemDept;
-import com.yz.model.entity.TSystemMenu;
-import com.yz.model.entity.TSystemPermission;
 import com.yz.model.vo.mis.SelectDeptListVO;
 import com.yz.service.base.service.BaseService;
 import jakarta.annotation.Resource;
@@ -38,8 +34,8 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
     private TSystemDeptMapper tSystemDeptMapper;
 
     @Override
-    public PageResult<SelectDeptListVO> selectDeptList(String language, Integer status, Integer page, Integer pageSize) {
-        return selectTSystemDeptListPage(language, status, page, pageSize);
+    public PageResult<SelectDeptListVO> selectDeptList(TSystemDeptConditions conditions) {
+        return selectTSystemDeptListPage(conditions);
     }
 
     @Override
@@ -82,13 +78,13 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
             TSystemDeptConditions conditions1 = TSystemDeptConditions.newInstance()
                     .addDeptCode(tSystemDept.getDeptCode())
                     .addLanguage(language);
-            TSystemDept tSystemDept1 = selectTSystemDept(conditions1).get(0);
+            TSystemDept tSystemDept1 = selectTSystemDeptList(conditions1).get(0);
 
             // 修改其他部门排序
             TSystemDeptConditions conditions2 = TSystemDeptConditions.newInstance()
                     .addLanguage(language)
                     .addMinSort(tSystemDept1.getSort() + 1);
-            List<TSystemDept> tSystemDepts1 = selectTSystemDept(conditions2);
+            List<TSystemDept> tSystemDepts1 = selectTSystemDeptList(conditions2);
             for (TSystemDept systemDept : tSystemDepts1) {
                 systemDept.setSort(systemDept.getSort() - 1);
                 tSystemDeptMapper.updateById(systemDept);
@@ -112,7 +108,7 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
             TSystemDeptConditions conditions1 = TSystemDeptConditions.newInstance()
                     .addDeptCode(tSystemDept.getDeptCode())
                     .addLanguage(language);
-            TSystemDept tSystemDept1 = selectTSystemDept(conditions1).get(0);
+            TSystemDept tSystemDept1 = selectTSystemDeptList(conditions1).get(0);
 
             // 1. 判断是否需要修改基础信息
             if (StrUtils.isNotBlank(bo.getDeptNameByES())) {
@@ -152,7 +148,7 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
                     TSystemDeptConditions conditions2 = TSystemDeptConditions.newInstance()
                             .addLanguage(language)
                             .addMinSort(currentSort);
-                    TSystemDept tSystemDept2 = selectTSystemDept(conditions2).get(0);
+                    TSystemDept tSystemDept2 = selectTSystemDeptList(conditions2).get(0);
                     tSystemDept2.setSort(tSystemDept2.getSort() + 1);
                     tSystemDeptMapper.updateById(tSystemDept2);
                 }
@@ -168,7 +164,7 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
                     TSystemDeptConditions conditions3 = TSystemDeptConditions.newInstance()
                             .addLanguage(language)
                             .addMinSort(currentSort);
-                    TSystemDept tSystemDept2 = selectTSystemDept(conditions3).get(0);
+                    TSystemDept tSystemDept2 = selectTSystemDeptList(conditions3).get(0);
                     tSystemDept2.setSort(tSystemDept2.getSort() - 1);
                     tSystemDeptMapper.updateById(tSystemDept2);
                 }
@@ -187,53 +183,53 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
         }
     }
 
-    private List<TSystemDept> selectTSystemDept(TSystemDeptConditions conditions) {
-        QueryWrapper<TSystemDept> selectWrapper = new QueryWrapper<>();
-        selectWrapper.eq("is_delete", Basic.VAILD);
+    private List<TSystemDept> selectTSystemDeptList(TSystemDeptConditions conditions) {
+        QueryWrapper<TSystemDept> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_delete", Basic.VAILD);
 
         if (StrUtils.isNotBlank(conditions.getLanguage()))
-            selectWrapper.eq("language", conditions.getLanguage());
+            queryWrapper.eq("language", conditions.getLanguage());
 
         if (ObjectUtils.isNotNull(conditions.getParentId()))
-            selectWrapper.eq("parent_id", conditions.getParentId());
+            queryWrapper.eq("parent_id", conditions.getParentId());
 
         if (StrUtils.isNotBlank(conditions.getDeptCode()))
-            selectWrapper.eq("dept_code", conditions.getDeptCode());
+            queryWrapper.eq("dept_code", conditions.getDeptCode());
 
         // 大于等于
         if (conditions.getMinSort() > 0)
-            selectWrapper.ge("sort", conditions.getMinSort());
+            queryWrapper.ge("sort", conditions.getMinSort());
 
         // 小于
         if (conditions.getMaxSort() > 0)
-            selectWrapper.lt("sort", conditions.getMaxSort());
+            queryWrapper.lt("sort", conditions.getMaxSort());
 
         // 不等于
         if (ObjectUtils.isNotNull(conditions.getId()))
-            selectWrapper.ne("id", conditions.getId());
+            queryWrapper.ne("id", conditions.getId());
 
-        selectWrapper.orderByAsc("sort");
+        queryWrapper.orderByAsc("sort");
 
-        List<TSystemDept> tSystemDepts = tSystemDeptMapper.selectList(selectWrapper);
+        List<TSystemDept> tSystemDepts = tSystemDeptMapper.selectList(queryWrapper);
         return tSystemDepts;
     }
 
     // 分页
-    private PageResult<SelectDeptListVO> selectTSystemDeptListPage(String language, Integer status, Integer page, Integer pageSize) {
-        QueryWrapper<TSystemDept> selectWrapper = new QueryWrapper<>();
+    private PageResult<SelectDeptListVO> selectTSystemDeptListPage(TSystemDeptConditions conditions) {
+        QueryWrapper<TSystemDept> queryWrapper = new QueryWrapper<>();
 
-        if (StrUtils.isNotBlank(language)) {
-            selectWrapper.eq("language", language);
+        if (StrUtils.isNotBlank(conditions.getLanguage())) {
+            queryWrapper.eq("language", conditions.getLanguage());
         }
 
-        if (ObjectUtils.isNotNull(status) && status == Basic.NORMAL)
-            selectWrapper.eq("status", status);
+        if (ObjectUtils.isNotNull(conditions.getStatus()) && conditions.getStatus() == Basic.NORMAL)
+            queryWrapper.eq("status", conditions.getStatus());
 
-        selectWrapper.orderByAsc("sort");
+        queryWrapper.orderByAsc("sort");
 
         // 设置分页参数
-        Page<TSystemDept> pageInfo = new Page<>(page, pageSize);
-        tSystemDeptMapper.selectPage(pageInfo,selectWrapper);
+        Page<TSystemDept> pageInfo = new Page<>(conditions.getPage(), conditions.getPageSize());
+        tSystemDeptMapper.selectPage(pageInfo,queryWrapper);
 
         List<TSystemDept> tSystemDepts = pageInfo.getRecords();
         List<SelectDeptListVO> dtoList = BeanUtils.convertBeanList(tSystemDepts, SelectDeptListVO.class);
@@ -247,7 +243,7 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
         TSystemDeptConditions conditions1 = TSystemDeptConditions.newInstance()
                 .addDeptCode(deptCode)
                 .addLanguage(Strings.LOCALE_ES);
-        List<TSystemDept> tSystemDepts1 = selectTSystemDept(conditions1);
+        List<TSystemDept> tSystemDepts1 = selectTSystemDeptList(conditions1);
         if (CollUtils.isNotEmpty(tSystemDepts1)) {
             flag = true;
         }
@@ -255,7 +251,7 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
         TSystemDeptConditions conditions2 = TSystemDeptConditions.newInstance()
                 .addDeptCode(deptCode)
                 .addLanguage(Strings.LOCALE_ZH);
-        List<TSystemDept> tSystemDepts2 = selectTSystemDept(conditions2);
+        List<TSystemDept> tSystemDepts2 = selectTSystemDeptList(conditions2);
         if (CollUtils.isNotEmpty(tSystemDepts2)) {
             flag = true;
         }

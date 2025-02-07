@@ -1,23 +1,15 @@
-package com.yz.model.entity;
+package com.yz.model.vo.mis;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-@TableName("t_system_user")
-public class TSystemUser extends BaseEntity implements Serializable {
+public class SelectUserListVO {
+
     /**主键*/
-    @TableId
     private Long id;
 
     /**用户名*/
     private String username;
-
-    /**密码（加密）*/
-    private String password;
 
     /**姓名*/
     private String name;
@@ -37,10 +29,11 @@ public class TSystemUser extends BaseEntity implements Serializable {
     /**是否为超级管理员*/
     private Integer root;
 
-    /**部门编码*/
-    private String deptCode;
+    /**部门名称*/
+    private String deptName;
 
-    /**1有效，2休息 3离职 0禁用*/
+    /**1有效 2休息 3离职 0禁用*/
     private Integer status;
+
 
 }

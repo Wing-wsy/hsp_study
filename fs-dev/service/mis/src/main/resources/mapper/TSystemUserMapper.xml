@@ -9,9 +9,9 @@
     <result column="sex" property="sex" jdbcType="TINYINT" />
     <result column="mobile" property="mobile" jdbcType="CHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="role" property="role" jdbcType="CHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
     <result column="root" property="root" jdbcType="TINYINT" />
-    <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="dept_code" property="deptCode" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -51,6 +51,43 @@
     WHERE u.id = #{systemUserId}
      <include refid="commonConditions1"/>
   </select>
+
+    <select id="selectTSystemUserListByPage" resultType="com.yz.model.vo.mis.SelectUserListVO">
+        SELECT
+            u.id,
+            u.username,
+            u.name,
+            u.sex,
+            u.mobile,
+            u.email,
+            u.root,
+            u.status,
+            u.role,
+            d.dept_name AS deptName
+        FROM t_system_user u LEFT JOIN t_system_dept d ON u.dept_code = d.dept_code
+        WHERE 1=1
+          AND d.language = #{conditions.language}
+        <if test="conditions.status != null">
+            AND u.status = #{conditions.status}
+        </if>
+        <if test="conditions.username != null">
+            AND u.username LIKE '%${conditions.username}%'
+        </if>
+        <if test="conditions.name != null">
+            AND u.name LIKE '%${conditions.name}%'
+        </if>
+        <if test="conditions.mobile != null">
+            AND u.mobile = #{conditions.mobile}
+        </if>
+        <if test="conditions.deptCode != null">
+            AND u.dept_code = #{conditions.deptCode}
+        </if>
+        <if test="conditions.roleCode != null">
+            AND JSON_CONTAINS(u.role, '"${conditions.roleCode}"')
+        </if>
+
+        ORDER BY u.username
+    </select>
 
 
 </mapper>

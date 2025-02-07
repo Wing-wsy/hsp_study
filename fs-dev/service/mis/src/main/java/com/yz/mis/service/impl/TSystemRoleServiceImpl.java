@@ -41,9 +41,8 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
     private TSystemRoleMapper tSystemRoleMapper;
 
     @Override
-    public PageResult<SelectRoleListVO> selectRoleList(String language, Integer status,
-                                                       Integer page, Integer pageSize) {
-        return selectTSystemRoleListPage(language, status, page, pageSize);
+    public PageResult<SelectRoleListVO> selectRoleList(TSystemRoleConditions conditions) {
+        return selectTSystemRoleListPage(conditions);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
                 .addRoleCode(roleCode)
                 .addLanguage(language)
                 .addStatus(status);
-        List<TSystemRole> tSystemRoles = selectTSystemRole(conditions1);
+        List<TSystemRole> tSystemRoles = selectTSystemRoleList(conditions1);
         if (CollUtils.isEmpty(tSystemRoles)) {
             GraceException.display(ResponseStatusEnum.ROLE_SELECT_ERROR);
         }
@@ -122,7 +121,7 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
             TSystemRoleConditions conditions1 = TSystemRoleConditions.newInstance()
                     .addRoleCode(tSystemRole.getRoleCode())
                     .addLanguage(language);
-            TSystemRole tSystemRole1 = selectTSystemRole(conditions1).get(0);
+            TSystemRole tSystemRole1 = selectTSystemRoleList(conditions1).get(0);
             
             String roleName = null;
             if (Strings.LOCALE_ES.equals(language)) {
@@ -143,7 +142,7 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
                 TSystemRoleConditions conditions2 = TSystemRoleConditions.newInstance()
                         .addLanguage(language)
                         .addSort(currentSort);
-                TSystemRole TSystemRole2 = selectTSystemRole(conditions2).get(0);
+                TSystemRole TSystemRole2 = selectTSystemRoleList(conditions2).get(0);
                 TSystemRole2.setSort(TSystemRole2.getSort() + 1);
                 tSystemRoleMapper.updateById(TSystemRole2);
             }
@@ -159,7 +158,7 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
                 TSystemRoleConditions conditions3 = TSystemRoleConditions.newInstance()
                         .addLanguage(language)
                         .addSort(currentSort);
-                TSystemRole tSystemRole2 = selectTSystemRole(conditions3).get(0);
+                TSystemRole tSystemRole2 = selectTSystemRoleList(conditions3).get(0);
                 tSystemRole2.setSort(tSystemRole2.getSort() - 1);
                 tSystemRoleMapper.updateById(tSystemRole2);
             }
@@ -170,45 +169,45 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         }
     }
 
-    private List<TSystemRole> selectTSystemRole(TSystemRoleConditions conditions) {
-        QueryWrapper<TSystemRole> selectWrapper = new QueryWrapper<>();
+    private List<TSystemRole> selectTSystemRoleList(TSystemRoleConditions conditions) {
+        QueryWrapper<TSystemRole> queryWrapper = new QueryWrapper<>();
 
         if (StrUtils.isNotBlank(conditions.getLanguage())) {
-            selectWrapper.eq("language", conditions.getLanguage());
+            queryWrapper.eq("language", conditions.getLanguage());
         }
 
         if (StrUtils.isNotBlank(conditions.getRoleCode())) {
-            selectWrapper.eq("role_code", conditions.getRoleCode());
+            queryWrapper.eq("role_code", conditions.getRoleCode());
         }
 
         if (ObjectUtils.isNotNull(conditions.getSort()))
-            selectWrapper.eq("sort", conditions.getSort());
+            queryWrapper.eq("sort", conditions.getSort());
 
         if (ObjectUtils.isNotNull(conditions.getStatus()) && conditions.getStatus() == Basic.NORMAL)
-            selectWrapper.eq("status", conditions.getStatus());
+            queryWrapper.eq("status", conditions.getStatus());
 
-        selectWrapper.orderByAsc("sort");
+        queryWrapper.orderByAsc("sort");
 
-        List<TSystemRole> tSystemRoles = tSystemRoleMapper.selectList(selectWrapper);
+        List<TSystemRole> tSystemRoles = tSystemRoleMapper.selectList(queryWrapper);
         return tSystemRoles;
     }
 
     // 分页
-    private PageResult<SelectRoleListVO> selectTSystemRoleListPage(String language, Integer status, Integer page, Integer pageSize) {
-        QueryWrapper<TSystemRole> selectWrapper = new QueryWrapper<>();
+    private PageResult<SelectRoleListVO> selectTSystemRoleListPage(TSystemRoleConditions conditions) {
+        QueryWrapper<TSystemRole> queryWrapper = new QueryWrapper<>();
 
-        if (StrUtils.isNotBlank(language)) {
-            selectWrapper.eq("language", language);
+        if (StrUtils.isNotBlank(conditions.getLanguage())) {
+            queryWrapper.eq("language", conditions.getLanguage());
         }
 
-        if (ObjectUtils.isNotNull(status) && status == Basic.NORMAL)
-            selectWrapper.eq("status", status);
+        if (ObjectUtils.isNotNull(conditions.getStatus()) && conditions.getStatus() == Basic.NORMAL)
+            queryWrapper.eq("status", conditions.getStatus());
 
-        selectWrapper.orderByAsc("sort");
+        queryWrapper.orderByAsc("sort");
 
         // 设置分页参数
-        Page<TSystemRole> pageInfo = new Page<>(page, pageSize);
-        tSystemRoleMapper.selectPage(pageInfo,selectWrapper);
+        Page<TSystemRole> pageInfo = new Page<>(conditions.getPage(), conditions.getPageSize());
+        tSystemRoleMapper.selectPage(pageInfo,queryWrapper);
 
         List<TSystemRole> tSystemRoles = pageInfo.getRecords();
         List<SelectRoleListVO> dtoList = BeanUtils.convertBeanList(tSystemRoles, SelectRoleListVO.class);
@@ -234,7 +233,7 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         TSystemRoleConditions conditions1 = TSystemRoleConditions.newInstance()
                 .addRoleCode(roleCode)
                 .addLanguage(Strings.LOCALE_ES);
-        List<TSystemRole> tSystemRoles1 = selectTSystemRole(conditions1);
+        List<TSystemRole> tSystemRoles1 = selectTSystemRoleList(conditions1);
         if (CollUtils.isNotEmpty(tSystemRoles1)) {
             flag = true;
         }
@@ -242,7 +241,7 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         TSystemRoleConditions conditions2 = TSystemRoleConditions.newInstance()
                 .addRoleCode(roleCode)
                 .addLanguage(Strings.LOCALE_ZH);
-        List<TSystemRole> tSystemRoles2 = selectTSystemRole(conditions2);
+        List<TSystemRole> tSystemRoles2 = selectTSystemRoleList(conditions2);
         if (CollUtils.isNotEmpty(tSystemRoles2)) {
             flag = true;
         }

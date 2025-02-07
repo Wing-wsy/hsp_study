@@ -23,10 +23,10 @@ public class TResponseErrorEnumsServiceImpl implements TResponseErrorEnumsServic
     @Override
     public TResponseErrorEnums searchResponseByOne(String code, String language) {
 
-        QueryWrapper<TResponseErrorEnums> selectWrapper = new QueryWrapper<>();
-        selectWrapper.eq("code", code);
-        selectWrapper.eq("language", language);
-        return tResponseErrorEnumsMapper.selectOne(selectWrapper);
+        QueryWrapper<TResponseErrorEnums> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("code", code);
+        queryWrapper.eq("language", language);
+        return tResponseErrorEnumsMapper.selectOne(queryWrapper);
 
     }
 

@@ -37,11 +37,11 @@ public class TOrderServiceImpl extends BaseService implements TOrderService {
 
     @Override
     public PageResult<OrderDTO> searchOrderByUser(Long userId, Integer page, Integer pageSize) {
-        QueryWrapper<TOrder> selectWrapper = new QueryWrapper<>();
-        selectWrapper.eq("user_id", userId);
+        QueryWrapper<TOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
         // 设置分页参数
         Page<TOrder> pageInfoTOrder = new Page<>(page, pageSize);
-        tOrderMapper.selectPage(pageInfoTOrder,selectWrapper);
+        tOrderMapper.selectPage(pageInfoTOrder,queryWrapper);
 
         List<TOrder> tOrders = pageInfoTOrder.getRecords();
         List<OrderDTO> dtoList = BeanUtils.convertBeanList(tOrders, OrderDTO.class);

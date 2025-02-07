@@ -1,9 +1,10 @@
 package com.yz.model.condition.mis;
 
+import com.yz.model.bo.common.CommonPageBO;
 import lombok.Data;
 
 @Data
-public class TSystemRoleConditions {
+public class TSystemRoleConditions extends CommonPageBO {
 
     private String roleCode;
 
@@ -34,6 +35,16 @@ public class TSystemRoleConditions {
 
     public TSystemRoleConditions addSort(Integer sort) {
         this.sort = sort;
+        return this;
+    }
+
+    public TSystemRoleConditions addPage(Integer page) {
+        super.setPage(page);
+        return this;
+    }
+
+    public TSystemRoleConditions addPageSize(Integer pageSize) {
+        super.setPageSize(pageSize);
         return this;
     }
 

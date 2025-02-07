@@ -1,9 +1,10 @@
 package com.yz.model.condition.mis;
 
+import com.yz.model.bo.common.CommonPageBO;
 import lombok.Data;
 
 @Data
-public class TSystemDeptConditions {
+public class TSystemDeptConditions extends CommonPageBO {
 
     private Long parentId;
 
@@ -92,6 +93,16 @@ public class TSystemDeptConditions {
 
     public TSystemDeptConditions addSort(Integer sort) {
         this.sort = sort;
+        return this;
+    }
+
+    public TSystemDeptConditions addPage(Integer page) {
+        super.setPage(page);
+        return this;
+    }
+
+    public TSystemDeptConditions addPageSize(Integer pageSize) {
+        super.setPageSize(pageSize);
         return this;
     }
 

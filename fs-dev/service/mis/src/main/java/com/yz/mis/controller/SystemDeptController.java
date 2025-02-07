@@ -12,6 +12,7 @@ import com.yz.model.bo.mis.AddDeptBO;
 import com.yz.model.bo.mis.DeleteDeptBO;
 import com.yz.model.bo.mis.SelectDeptListBO;
 import com.yz.model.bo.mis.UpdateDeptBO;
+import com.yz.model.condition.mis.TSystemDeptConditions;
 import com.yz.model.vo.mis.SelectDeptListVO;
 import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
@@ -42,8 +43,12 @@ public class SystemDeptController extends BaseController implements SystemDeptCo
 
     @Override
     public GraceResult selectDeptList(@RequestBody @Valid SelectDeptListBO bo) {
-        PageResult<SelectDeptListVO> selectDeptListVOPageResult
-                = tSystemDeptService.selectDeptList(bo.getLanguage(), Integer.parseInt(bo.getStatus()), bo.getPage(), bo.getPageSize());
+        TSystemDeptConditions conditions = TSystemDeptConditions.newInstance()
+                .addLanguage(bo.getLanguage())
+                .addStatus(Integer.parseInt(bo.getStatus()))
+                .addPage(bo.getPage())
+                .addPageSize(bo.getPageSize());
+        PageResult<SelectDeptListVO> selectDeptListVOPageResult = tSystemDeptService.selectDeptList(conditions);
         return GraceResult.ok(selectDeptListVOPageResult);
     }
 

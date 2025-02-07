@@ -6,7 +6,6 @@ import com.yz.model.bo.mis.AddDeptBO;
 import com.yz.model.bo.mis.DeleteDeptBO;
 import com.yz.model.bo.mis.SelectDeptListBO;
 import com.yz.model.bo.mis.UpdateDeptBO;
-import com.yz.model.bo.mis.UpdatePermBO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.DeleteMapping;
