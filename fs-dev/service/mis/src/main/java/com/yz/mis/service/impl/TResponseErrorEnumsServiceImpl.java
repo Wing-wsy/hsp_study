@@ -47,7 +47,7 @@ public class TResponseErrorEnumsServiceImpl implements TResponseErrorEnumsServic
         List<TResponseErrorEnums> records = getRecordsById(bo.getId());
         for (TResponseErrorEnums record : records) {
             String msg = "";
-            if (Strings.LOCALE_ES_LOWER.equals(record.getLanguage())) {
+            if (Strings.LOCALE_ES.equals(record.getLanguage())) {
                 msg = bo.getMsgByES();
             } else {
                 msg = bo.getMsgByZH();

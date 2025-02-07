@@ -86,7 +86,7 @@ public class HttpRequestFilter extends OncePerRequestFilter {
             String finalLanguage = (String)bodyJson.get(FieldConstants.LANGUAGE);
             if (StrUtils.isBlank(finalLanguage)) {
                 // 请求头和请求体都没有 language 参数，则默认西语
-                finalLanguage = Strings.LOCALE_ES_LOWER;
+                finalLanguage = Strings.LOCALE_ES;
                 bodyJson.put(FieldConstants.LANGUAGE,finalLanguage);
                 // 重置后请求body参数
                 body = JSONUtils.toJsonStr(bodyJson);

@@ -168,12 +168,7 @@ public class Strings {
     /**
      * 西班牙语
      */
-    public static final String LOCALE_ES_LOWER = "es";
-
-    /**
-     * 西班牙语
-     */
-    public static final String LOCALE_ES_UPPER = "ES";
+    public static final String LOCALE_ES = "es";
     /**
      * 英文
      */

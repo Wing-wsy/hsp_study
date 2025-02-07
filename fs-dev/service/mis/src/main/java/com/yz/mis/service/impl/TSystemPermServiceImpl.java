@@ -13,6 +13,7 @@ import com.yz.mis.service.TSystemMenuService;
 import com.yz.mis.service.TSystemPermService;
 import com.yz.model.bo.mis.AddPermBO;
 import com.yz.model.bo.mis.UpdatePermBO;
+import com.yz.model.condition.mis.TSystemPermConditions;
 import com.yz.model.entity.TSystemPermission;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,10 @@ public class TSystemPermServiceImpl implements TSystemPermService {
             for (HashMap map : sonHashMap) {
                 String menuCode = (String)map.get("menuCode");
 
-                List<TSystemPermission> tSystemPermissions = selectTSystemPermission(null, menuCode, status, null);
+                TSystemPermConditions conditions1 = TSystemPermConditions.newInstance()
+                        .addMenuCode(menuCode)
+                        .addStatus(status);
+                List<TSystemPermission> tSystemPermissions = selectTSystemPermission(conditions1);
                 map.put("permList", tSystemPermissions);
             }
         }
@@ -51,7 +55,9 @@ public class TSystemPermServiceImpl implements TSystemPermService {
         String menuCode = bo.getMenuCode();
         String permissionName = menuCode + Strings.COLON + bo.getPermName();
         // 1. 判断当前权限是否已经存在，存在则不能重复添加
-        List<TSystemPermission> tSystemPermissions = selectTSystemPermission(permissionName, null, null, null);
+        TSystemPermConditions conditions1 = TSystemPermConditions.newInstance()
+                .addPermissionName(permissionName);
+        List<TSystemPermission> tSystemPermissions = selectTSystemPermission(conditions1);
         if (CollUtils.isNotEmpty(tSystemPermissions)) {
             GraceException.display(ResponseStatusEnum.PERM_INSERT_ERROR);
         }
@@ -83,7 +89,9 @@ public class TSystemPermServiceImpl implements TSystemPermService {
             String permissionName = bo.getMenuCode() + Strings.COLON + bo.getPermissionName();
 
             // 1.1 判断当前权限是否已经存在，存在则不能修改
-            List<TSystemPermission> tSystemPermissions = selectTSystemPermission(permissionName, null, null, null);
+            TSystemPermConditions conditions1 = TSystemPermConditions.newInstance()
+                    .addPermissionName(permissionName);
+            List<TSystemPermission> tSystemPermissions = selectTSystemPermission(conditions1);
             if (CollUtils.isNotEmpty(tSystemPermissions)) {
                 GraceException.display(ResponseStatusEnum.PERM_UPDATE_ERROR);
             }
@@ -101,8 +109,10 @@ public class TSystemPermServiceImpl implements TSystemPermService {
 
                 currentSort = tSystemPermission.getSort() - 1;
                 // 找到上一个权限,并将序号+1
-                TSystemPermission tSystemPermission1 = selectTSystemPermission(null, tSystemPermission.getMenuCode(),
-                        null, currentSort).get(0);
+                TSystemPermConditions conditions2 = TSystemPermConditions.newInstance()
+                        .addMenuCode(tSystemPermission.getMenuCode())
+                        .addSort(currentSort);
+                TSystemPermission tSystemPermission1 = selectTSystemPermission(conditions2).get(0);
 
                 tSystemPermission1.setSort(tSystemPermission1.getSort() + 1);
                 tSystemPermissionMapper.updateById(tSystemPermission1);
@@ -117,8 +127,10 @@ public class TSystemPermServiceImpl implements TSystemPermService {
                 currentSort = tSystemPermission.getSort() + 1;
 
                 // 找到下一个权限,并将序号-1
-                TSystemPermission tSystemPermission2 = selectTSystemPermission(null, tSystemPermission.getMenuCode(), null,
-                        currentSort).get(0);
+                TSystemPermConditions conditions3 = TSystemPermConditions.newInstance()
+                        .addMenuCode(tSystemPermission.getMenuCode())
+                        .addSort(currentSort);
+                TSystemPermission tSystemPermission2 = selectTSystemPermission(conditions3).get(0);
 
                 tSystemPermission2.setSort(tSystemPermission2.getSort() - 1);
                 tSystemPermissionMapper.updateById(tSystemPermission2);
@@ -138,22 +150,22 @@ public class TSystemPermServiceImpl implements TSystemPermService {
         }
     }
 
-    private List<TSystemPermission> selectTSystemPermission(String permissionName, String menuCode, Integer status, Integer sort) {
+    private List<TSystemPermission> selectTSystemPermission(TSystemPermConditions conditions) {
         QueryWrapper<TSystemPermission> selectWrapper = new QueryWrapper<>();
         selectWrapper.eq("is_delete", Basic.VAILD);
 
-        if (StrUtils.isNotBlank(permissionName))
-            selectWrapper.eq("permission_name", permissionName);
+        if (StrUtils.isNotBlank(conditions.getPermissionName()))
+            selectWrapper.eq("permission_name", conditions.getPermissionName());
 
-        if (StrUtils.isNotBlank(menuCode))
-            selectWrapper.eq("menu_code", menuCode);
+        if (StrUtils.isNotBlank(conditions.getMenuCode()))
+            selectWrapper.eq("menu_code", conditions.getMenuCode());
 
-        if (ObjectUtils.isNotNull(sort))
-            selectWrapper.eq("sort", sort);
+        if (ObjectUtils.isNotNull(conditions.getSort()))
+            selectWrapper.eq("sort", conditions.getSort());
 
-        if (ObjectUtils.isNotNull(status) && status == Basic.NORMAL)
-            selectWrapper.eq("status", status);
-        
+        if (ObjectUtils.isNotNull(conditions.getStatus()) && conditions.getStatus() == Basic.NORMAL)
+            selectWrapper.eq("status", conditions.getStatus());
+
         selectWrapper.orderByAsc("sort");
         List<TSystemPermission> tSystemPermissions = tSystemPermissionMapper.selectList(selectWrapper);
         return tSystemPermissions;

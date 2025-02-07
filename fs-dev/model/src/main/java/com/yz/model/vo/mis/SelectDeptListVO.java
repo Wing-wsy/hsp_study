@@ -1,16 +1,11 @@
-package com.yz.model.entity;
+package com.yz.model.vo.mis;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-@TableName("t_system_dept")
-public class TSystemDept extends BaseEntity implements Serializable {
+public class SelectDeptListVO {
+
     /**主键*/
-    @TableId
     private Long id;
 
     /**部门名称*/
@@ -18,9 +13,6 @@ public class TSystemDept extends BaseEntity implements Serializable {
 
     /**部门编码*/
     private String deptCode;
-
-    /**父级部门主键*/
-    private Long parentId;
 
     /**部门电话*/
     private String mobile;
@@ -40,8 +32,4 @@ public class TSystemDept extends BaseEntity implements Serializable {
     /**语言编码*/
     private String language;
 
-    /**
-     * 是否删除
-     */
-    private Integer isDelete;
 }

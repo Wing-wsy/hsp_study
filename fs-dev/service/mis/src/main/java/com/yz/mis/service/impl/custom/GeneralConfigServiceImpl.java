@@ -117,7 +117,7 @@ public class GeneralConfigServiceImpl extends BaseService implements GeneralConf
         List<String> languages = ListUtils.getLanguageList();
         for (String language : languages) {
             String msg = null;
-            if (Strings.LOCALE_ES_LOWER.equals(language)) {
+            if (Strings.LOCALE_ES.equals(language)) {
                 msg = bo.getMsgByES();
             } else {
                 msg = bo.getMsgByZH();
@@ -145,7 +145,7 @@ public class GeneralConfigServiceImpl extends BaseService implements GeneralConf
 
     private boolean isExistRecords(String code) {
         boolean flag = false;
-        TResponseErrorEnums tResponseErrorEnums1 = tResponseErrorEnumsService.searchResponseByOne(code, Strings.LOCALE_ES_LOWER);
+        TResponseErrorEnums tResponseErrorEnums1 = tResponseErrorEnumsService.searchResponseByOne(code, Strings.LOCALE_ES);
         if (ObjectUtils.isNotNull(tResponseErrorEnums1)) {
             flag = true;
         }

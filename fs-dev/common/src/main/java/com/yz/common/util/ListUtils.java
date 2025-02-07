@@ -30,6 +30,6 @@ public class ListUtils {
     }
 
     public static List<String> getLanguageList (){
-        return Arrays.asList(Strings.LOCALE_ES_LOWER,Strings.LOCALE_ZH);
+        return Arrays.asList(Strings.LOCALE_ES,Strings.LOCALE_ZH);
     }
 }
