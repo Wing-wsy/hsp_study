@@ -2,8 +2,8 @@ package com.yz.mis.service;
 
 import com.yz.common.util.page.PageResult;
 import com.yz.model.bo.mis.AddDeptBO;
+import com.yz.model.bo.mis.UpdateDeptBO;
 import com.yz.model.vo.mis.SelectDeptListVO;
-
 
 public interface TSystemDeptService {
 
@@ -22,6 +22,11 @@ public interface TSystemDeptService {
      * 删除部门
      */
     public void deleteDept(Long id);
+
+    /**
+     * 修改部门
+     */
+    public void updateDept(UpdateDeptBO bo);
 
 
 }

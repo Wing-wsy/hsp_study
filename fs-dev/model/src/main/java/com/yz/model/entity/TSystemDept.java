@@ -19,7 +19,7 @@ public class TSystemDept extends BaseEntity implements Serializable {
     /**部门编码*/
     private String deptCode;
 
-    /**父级部门主键*/
+    /**父级部门主键(预留字段，暂不使用)*/
     private Long parentId;
 
     /**部门电话*/

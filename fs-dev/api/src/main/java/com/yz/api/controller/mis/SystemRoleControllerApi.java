@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface SystemRoleControllerApi {
 
     @PostMapping("/selectRoleList")
-    @Operation(summary = "查询角色列表")
+    @Operation(summary = "查询角色列表(分页)")
     public GraceResult selectRoleList(SelectRoleListBO bo);
 
     @PostMapping("/selectRolePerm")
