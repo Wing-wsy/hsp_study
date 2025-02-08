@@ -8,14 +8,17 @@ import com.yz.common.exception.GraceException;
 import com.yz.common.result.ResponseStatusEnum;
 import com.yz.common.util.BeanUtils;
 import com.yz.common.util.CollUtils;
+import com.yz.common.util.IntUtils;
 import com.yz.common.util.ObjectUtils;
 import com.yz.common.util.StrUtils;
 import com.yz.common.util.page.PageResult;
 import com.yz.mis.mapper.TSystemUserMapper;
 import com.yz.mis.service.TSystemUserService;
 import com.yz.model.bo.mis.InsertUserBO;
+import com.yz.model.bo.mis.UpdateUserBO;
 import com.yz.model.condition.mis.TSystemRoleConditions;
 import com.yz.model.condition.mis.TSystemUserConditions;
+import com.yz.model.entity.TSystemPermission;
 import com.yz.model.entity.TSystemRole;
 import com.yz.model.entity.TSystemUser;
 import com.yz.model.vo.mis.SelectRoleListVO;
@@ -67,22 +70,63 @@ public class TSystemUserServiceImpl extends BaseService implements TSystemUserSe
             GraceException.display(ResponseStatusEnum.USER_INSERT_ERROR);
 
         // 超级管理员只能有一个
-        boolean existRoot = isExistRoot();
-        if (existRoot)
-            GraceException.display(ResponseStatusEnum.USER_INSERT_ROOT_ERROR);
+        if (Basic.IS_ROOT == IntUtils.parseInt(bo.getRoot())) {
+            boolean existRoot = isExistRoot();
+            if (existRoot)
+                GraceException.display(ResponseStatusEnum.USER_INSERT_ROOT_ERROR);
+        }
 
         TSystemUserConditions conditions = TSystemUserConditions.newInstance()
                 .addUsername(bo.getUsername())
                 .addPassword(bo.getPassword())
                 .addName(bo.getName())
-                .addSex(Integer.parseInt(bo.getSex()))
+                .addSex(IntUtils.parseInt(bo.getSex()))
                 .addMobile(bo.getMobile())
                 .addEmail(bo.getEmail())
                 .addRoleCode(bo.getRole())
-                .addRoot(Integer.parseInt(bo.getRoot()))
+                .addRoot(IntUtils.parseInt(bo.getRoot()))
                 .addDeptCode(bo.getDeptCode())
-                .addStatus(Integer.parseInt(bo.getStatus()));
+                .addStatus(IntUtils.parseInt(bo.getStatus()));
         insertUserByConditions(conditions);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        TSystemUser tSystemUser = tSystemUserMapper.selectById(id);
+        if (ObjectUtils.isNull(tSystemUser)) {
+            GraceException.display(ResponseStatusEnum.USER_DELETE_ERROR);
+        }
+        tSystemUser.setIsDelete(Basic.DELETE);
+        tSystemUserMapper.updateById(tSystemUser);
+    }
+
+    @Override
+    public void updateUser(UpdateUserBO bo) {
+        TSystemUser tSystemUser = tSystemUserMapper.selectById(bo.getId());
+        if (ObjectUtils.isNull(tSystemUser)) {
+            GraceException.display(ResponseStatusEnum.USER_UPDATE_NOT_FIND_ERROR);
+        }
+
+        // 超级管理员只能有一个
+        if (StrUtils.isNotBlank(bo.getRoot()) && Basic.IS_ROOT == IntUtils.parseInt(bo.getRoot())) {
+            boolean existRoot = isExistRoot();
+            if (existRoot)
+                GraceException.display(ResponseStatusEnum.USER_UPDATE_ROOT_ERROR);
+        }
+
+        TSystemUserConditions conditions = TSystemUserConditions.newInstance()
+                .addUsername(bo.getUsername())
+                .addPassword(bo.getPassword())
+                .addName(bo.getName())
+                .addSex(IntUtils.parseInt(bo.getSex()))
+                .addMobile(bo.getMobile())
+                .addEmail(bo.getEmail())
+                .addRoleCode(bo.getRole())
+                .addRoot(IntUtils.parseInt(bo.getRoot()))
+                .addDeptCode(bo.getDeptCode())
+                .addStatus(IntUtils.parseInt(bo.getStatus()));
+        updateUserByConditions(tSystemUser, conditions);
+
     }
 
     private List<TSystemUser> selectTSystemUserList(TSystemUserConditions conditions) {
@@ -166,26 +210,38 @@ public class TSystemUserServiceImpl extends BaseService implements TSystemUserSe
         tSystemUserMapper.insert(tSystemUser);
     }
 
-//    private void updateUserByConditions(TSystemUser tSystemUser, TSystemUserConditions conditions) {
-//
-//        if (StrUtils.isNotBlank(conditions.getUsername()))
-//            tSystemUser.setUsername(conditions.getUsername());
-//
-//        if (StrUtils.isNotBlank(conditions.getRoleCode()))
-//            tSystemRole.setRoleCode(conditions.getRoleCode());
-//
-//        if (StrUtils.isNotBlank(conditions.getPermissions()))
-//            tSystemRole.setPermissions(conditions.getPermissions());
-//
-//        if (StrUtils.isNotBlank(conditions.getComment()))
-//            tSystemRole.setComment(conditions.getComment());
-//
-//        if (ObjectUtils.isNotNull(conditions.getStatus()))
-//            tSystemRole.setStatus(conditions.getStatus());
-//
-//        if (ObjectUtils.isNotNull(conditions.getSort()))
-//            tSystemRole.setSort(conditions.getSort());
-//
-//        tSystemRoleMapper.updateById(tSystemRole);
-//    }
+    private void updateUserByConditions(TSystemUser tSystemUser, TSystemUserConditions conditions) {
+
+        if (StrUtils.isNotBlank(conditions.getUsername()))
+            tSystemUser.setUsername(conditions.getUsername());
+
+        if (StrUtils.isNotBlank(conditions.getPassword()))
+            tSystemUser.setPassword(conditions.getPassword());
+
+        if (StrUtils.isNotBlank(conditions.getName()))
+            tSystemUser.setName(conditions.getName());
+
+        if (ObjectUtils.isNotNull(conditions.getSex()))
+            tSystemUser.setSex(conditions.getSex());
+
+        if (StrUtils.isNotBlank(conditions.getMobile()))
+            tSystemUser.setMobile(conditions.getMobile());
+
+        if (StrUtils.isNotBlank(conditions.getEmail()))
+            tSystemUser.setEmail(conditions.getEmail());
+
+        if (StrUtils.isNotBlank(conditions.getRoleCode()))
+            tSystemUser.setRole(conditions.getRoleCode());
+
+        if (ObjectUtils.isNotNull(conditions.getRoot()))
+            tSystemUser.setRoot(conditions.getRoot());
+
+        if (StrUtils.isNotBlank(conditions.getDeptCode()))
+            tSystemUser.setDeptCode(conditions.getDeptCode());
+
+        if (ObjectUtils.isNotNull(conditions.getStatus()))
+            tSystemUser.setStatus(conditions.getStatus());
+
+        tSystemUserMapper.updateById(tSystemUser);
+    }
 }

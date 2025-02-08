@@ -135,6 +135,10 @@ public class Basic {
     public static final String UP = "up";  // 上移
     public static final String DOWN = "down"; // 下移
 
+    /**
+     * 是否超级管理员
+     */
+    public static final Integer IS_ROOT = 1;
 
     /**
      * 菜单等级

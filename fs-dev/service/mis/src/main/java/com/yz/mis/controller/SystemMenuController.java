@@ -2,6 +2,7 @@ package com.yz.mis.controller;
 
 import com.yz.api.controller.mis.SystemMenuControllerApi;
 import com.yz.common.result.GraceResult;
+import com.yz.common.util.IntUtils;
 import com.yz.mis.service.TSystemMenuService;
 import com.yz.model.bo.mis.AddMenuBO;
 import com.yz.model.bo.mis.DeleteMenuBO;
@@ -24,7 +25,7 @@ public class SystemMenuController extends BaseController implements SystemMenuCo
 
     @Override
     public GraceResult menuTree(@RequestBody @Valid MenuTreeBO bo) {
-        return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage(), Integer.parseInt(bo.getStatus())));
+        return GraceResult.ok(tSystemMenuService.menuTree(bo.getLanguage(), IntUtils.parseInt(bo.getStatus())));
     }
 
     @Override

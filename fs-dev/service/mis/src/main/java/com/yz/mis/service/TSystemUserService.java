@@ -2,6 +2,7 @@ package com.yz.mis.service;
 
 import com.yz.common.util.page.PageResult;
 import com.yz.model.bo.mis.InsertUserBO;
+import com.yz.model.bo.mis.UpdateUserBO;
 import com.yz.model.condition.mis.TSystemUserConditions;
 import com.yz.model.vo.mis.SelectUserListVO;
 
@@ -42,5 +43,15 @@ public interface TSystemUserService {
      * 新增用户
      */
     public void insertUser(InsertUserBO bo);
+
+    /**
+     * 删除用户
+     */
+    public void deleteUser(Long id);
+
+    /**
+     * 修改用户
+     */
+    public void updateUser(UpdateUserBO bo);
 
 }

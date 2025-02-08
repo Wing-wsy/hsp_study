@@ -4,6 +4,7 @@ import com.yz.api.controller.mis.SystemPermControllerApi;
 import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
+import com.yz.common.util.IntUtils;
 import com.yz.common.util.StrUtils;
 import com.yz.mis.service.TSystemPermService;
 import com.yz.model.bo.mis.AddPermBO;
@@ -26,7 +27,7 @@ public class SystemPermController extends BaseController implements SystemPermCo
 
     @Override
     public GraceResult permTree(@RequestBody @Valid PermTreeBO bo) {
-        return GraceResult.ok(tSystemPermService.permTree(bo.getLanguage(), Integer.parseInt(bo.getStatus())));
+        return GraceResult.ok(tSystemPermService.permTree(bo.getLanguage(), IntUtils.parseInt(bo.getStatus())));
     }
 
     @Override

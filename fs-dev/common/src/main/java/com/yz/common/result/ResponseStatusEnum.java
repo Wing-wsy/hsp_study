@@ -118,6 +118,7 @@ public enum ResponseStatusEnum {
     USER_UPDATE_NOT_FIND_ERROR(7004, false, "当前修改的用户不存在！"),
     USER_UPDATE_ERROR(7005, false, "当前修改的用户已经存在，修改失败！"),
     USER_INSERT_ROOT_ERROR(7006, false, "当前添加的用户不能为超级管理员！"),
+    USER_UPDATE_ROOT_ERROR(7007, false, "当前修改的用户不能为超级管理员！"),
 
 
     // 人脸识别错误代码

@@ -4,6 +4,7 @@ import com.yz.api.controller.mis.SystemRoleControllerApi;
 import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
+import com.yz.common.util.IntUtils;
 import com.yz.common.util.StrUtils;
 import com.yz.common.util.page.PageResult;
 import com.yz.mis.service.TSystemRoleService;
@@ -33,7 +34,7 @@ public class SystemRoleController extends BaseController implements SystemRoleCo
     public GraceResult selectRoleList(@RequestBody @Valid SelectRoleListBO bo) {
         TSystemRoleConditions conditions = TSystemRoleConditions.newInstance()
                 .addLanguage(bo.getLanguage())
-                .addStatus(Integer.parseInt(bo.getStatus()))
+                .addStatus(IntUtils.parseInt(bo.getStatus()))
                 .addPage(bo.getPage())
                 .addPageSize(bo.getPageSize());
         PageResult<SelectRoleListVO> selectRoleListVOPageResult = tSystemRoleService.selectRoleList(conditions);

@@ -5,6 +5,7 @@ import com.yz.api.controller.mis.SystemDeptControllerApi;
 import com.yz.common.exception.GraceException;
 import com.yz.common.result.GraceResult;
 import com.yz.common.result.ResponseStatusEnum;
+import com.yz.common.util.IntUtils;
 import com.yz.common.util.StrUtils;
 import com.yz.common.util.page.PageResult;
 import com.yz.mis.service.TSystemDeptService;
@@ -45,7 +46,7 @@ public class SystemDeptController extends BaseController implements SystemDeptCo
     public GraceResult selectDeptList(@RequestBody @Valid SelectDeptListBO bo) {
         TSystemDeptConditions conditions = TSystemDeptConditions.newInstance()
                 .addLanguage(bo.getLanguage())
-                .addStatus(Integer.parseInt(bo.getStatus()))
+                .addStatus(IntUtils.parseInt(bo.getStatus()))
                 .addPage(bo.getPage())
                 .addPageSize(bo.getPageSize());
         PageResult<SelectDeptListVO> selectDeptListVOPageResult = tSystemDeptService.selectDeptList(conditions);

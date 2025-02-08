@@ -6,8 +6,10 @@ import com.yz.common.constant.Basic;
 import com.yz.common.result.GraceResult;
 import com.yz.common.util.page.PageResult;
 import com.yz.mis.service.TSystemUserService;
+import com.yz.model.bo.mis.DeleteUserBO;
 import com.yz.model.bo.mis.InsertUserBO;
 import com.yz.model.bo.mis.SelectUserListBO;
+import com.yz.model.bo.mis.UpdateUserBO;
 import com.yz.model.condition.mis.TSystemUserConditions;
 import com.yz.model.vo.mis.SelectUserListVO;
 import com.yz.service.base.controller.BaseController;
@@ -46,6 +48,18 @@ public class SystemUserController extends BaseController implements SystemUserCo
     @Override
     public GraceResult insertUser(@RequestBody @Valid InsertUserBO bo) {
         tSystemUserService.insertUser(bo);
+        return GraceResult.ok();
+    }
+
+    @Override
+    public GraceResult deleteUser(@RequestBody @Valid DeleteUserBO bo) {
+        tSystemUserService.deleteUser(bo.getId());
+        return GraceResult.ok();
+    }
+
+    @Override
+    public GraceResult updateUser(@RequestBody @Valid UpdateUserBO bo) {
+        tSystemUserService.updateUser(bo);
         return GraceResult.ok();
     }
 }

@@ -43,4 +43,7 @@ public class TSystemUser extends BaseEntity implements Serializable {
     /**1有效，2休息 3离职 0禁用*/
     private Integer status;
 
+    /**0有效，1删除*/
+    private Integer isDelete;
+
 }
