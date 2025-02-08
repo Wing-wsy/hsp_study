@@ -17,6 +17,14 @@ public class TSystemMenuConditions {
 
     private Long id;
 
+    private String menuName;
+
+    private Integer level;
+
+    private Integer sort;
+
+    private Integer status;
+
     public static TSystemMenuConditions newInstance() {
         return new TSystemMenuConditions();
     }
@@ -26,8 +34,28 @@ public class TSystemMenuConditions {
         return this;
     }
 
+    public TSystemMenuConditions addSort(Integer sort) {
+        this.sort = sort;
+        return this;
+    }
+
+    public TSystemMenuConditions addStatus(Integer status) {
+        this.status = status;
+        return this;
+    }
+
+    public TSystemMenuConditions addLevel(Integer level) {
+        this.level = level;
+        return this;
+    }
+
     public TSystemMenuConditions addMenuCode(String menuCode) {
         this.menuCode = menuCode;
+        return this;
+    }
+
+    public TSystemMenuConditions addMenuName(String menuName) {
+        this.menuName = menuName;
         return this;
     }
 

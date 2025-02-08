@@ -101,7 +101,14 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
 
             // 获取父级菜单最大序号
             int maxSort = getRoleMaxSort(language);
-            insertRoleByConditions(bo.getPermissions(), roleName, bo.getRoleCode(), bo.getComment(), language, maxSort + 1);
+            TSystemRoleConditions conditions = TSystemRoleConditions.newInstance()
+                    .addPermissions(bo.getPermissions())
+                    .addRoleName(roleName)
+                    .addRoleCode(bo.getRoleCode())
+                    .addComment(bo.getComment())
+                    .addLanguage(language)
+                    .addSort(maxSort + 1);
+            insertRoleByConditions(conditions);
         }
     }
 
@@ -163,9 +170,14 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
                 tSystemRoleMapper.updateById(tSystemRole2);
             }
 
-            updateRoleByConditions(tSystemRole1, roleName,
-                    bo.getRoleCode(), bo.getPermissions(),
-                    bo.getComment(), currentSort, bo.getStatus());
+            TSystemRoleConditions conditions = TSystemRoleConditions.newInstance()
+                    .addRoleName(roleName)
+                    .addRoleCode(bo.getRoleCode())
+                    .addPermissions(bo.getPermissions())
+                    .addComment(bo.getComment())
+                    .addSort(currentSort)
+                    .addStatus(bo.getStatus());
+            updateRoleByConditions(tSystemRole1, conditions);
         }
     }
 
@@ -216,15 +228,15 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         return setPagePlus(selectRoleListVOPage);
     }
 
-    private void insertRoleByConditions(String permissions, String roleName, String roleCode, String comment, String language, Integer sort) {
+    private void insertRoleByConditions(TSystemRoleConditions conditions) {
         TSystemRole tSystemRole = new TSystemRole();
-        tSystemRole.setRoleName(roleName);
-        tSystemRole.setRoleCode(roleCode);
-        tSystemRole.setComment(comment);
-        tSystemRole.setLanguage(language);
+        tSystemRole.setRoleName(conditions.getRoleName());
+        tSystemRole.setRoleCode(conditions.getRoleCode());
+        tSystemRole.setComment(conditions.getComment());
+        tSystemRole.setLanguage(conditions.getLanguage());
         tSystemRole.setStatus(Basic.NORMAL);
-        tSystemRole.setSort(sort);
-        tSystemRole.setPermissions(permissions);
+        tSystemRole.setSort(conditions.getSort());
+        tSystemRole.setPermissions(conditions.getPermissions());
         tSystemRoleMapper.insert(tSystemRole);
     }
 
@@ -256,28 +268,25 @@ public class TSystemRoleServiceImpl extends BaseService implements TSystemRoleSe
         return maxSort != null ? maxSort : 0;
     }
 
-    private void updateRoleByConditions(TSystemRole tSystemRole, String roleName,
-                                        String roleCode, String permissions,
-                                        String comment, Integer sort,
-                                        Integer status) {
+    private void updateRoleByConditions(TSystemRole tSystemRole, TSystemRoleConditions conditions) {
 
-        if (StrUtils.isNotBlank(roleName))
-            tSystemRole.setRoleName(roleName);
+        if (StrUtils.isNotBlank(conditions.getRoleName()))
+            tSystemRole.setRoleName(conditions.getRoleName());
 
-        if (StrUtils.isNotBlank(roleCode))
-            tSystemRole.setRoleCode(roleCode);
+        if (StrUtils.isNotBlank(conditions.getRoleCode()))
+            tSystemRole.setRoleCode(conditions.getRoleCode());
 
-        if (StrUtils.isNotBlank(permissions))
-            tSystemRole.setPermissions(permissions);
+        if (StrUtils.isNotBlank(conditions.getPermissions()))
+            tSystemRole.setPermissions(conditions.getPermissions());
 
-        if (StrUtils.isNotBlank(comment))
-            tSystemRole.setComment(comment);
+        if (StrUtils.isNotBlank(conditions.getComment()))
+            tSystemRole.setComment(conditions.getComment());
 
-        if (ObjectUtils.isNotNull(status))
-            tSystemRole.setStatus(status);
+        if (ObjectUtils.isNotNull(conditions.getStatus()))
+            tSystemRole.setStatus(conditions.getStatus());
 
-        if (ObjectUtils.isNotNull(sort))
-            tSystemRole.setSort(sort);
+        if (ObjectUtils.isNotNull(conditions.getSort()))
+            tSystemRole.setSort(conditions.getSort());
 
         tSystemRoleMapper.updateById(tSystemRole);
     }

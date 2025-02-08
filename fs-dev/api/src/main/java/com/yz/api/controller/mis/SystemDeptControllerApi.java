@@ -29,7 +29,7 @@ public interface SystemDeptControllerApi {
     public GraceResult deleteDept(DeleteDeptBO bo);
 
     @PostMapping("/selectDeptList")
-    @Operation(summary = "查询部门列表(分页)")
+    @Operation(summary = "查询部门列表【分页】")
     public GraceResult selectDeptList(SelectDeptListBO bo);
 
     @PutMapping("/updateDept")

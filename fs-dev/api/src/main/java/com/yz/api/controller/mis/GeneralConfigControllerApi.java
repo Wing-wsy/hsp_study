@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface GeneralConfigControllerApi {
 
     @PostMapping("/searchResponseResult")
-    @Operation(summary = "查询系统响应结果类型(分页)")
+    @Operation(summary = "查询系统响应结果类型【分页】")
     public GraceResult searchResponseResult(SelectResponseResultBO bo);
 
     @PostMapping("/insertResponseResult")

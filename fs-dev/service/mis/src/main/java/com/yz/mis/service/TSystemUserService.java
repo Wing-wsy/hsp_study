@@ -1,6 +1,7 @@
 package com.yz.mis.service;
 
 import com.yz.common.util.page.PageResult;
+import com.yz.model.bo.mis.InsertUserBO;
 import com.yz.model.condition.mis.TSystemUserConditions;
 import com.yz.model.vo.mis.SelectUserListVO;
 
@@ -36,5 +37,10 @@ public interface TSystemUserService {
      * 查询用户列表
      */
     public PageResult<SelectUserListVO> selectUserList(TSystemUserConditions conditions);
+
+    /**
+     * 新增用户
+     */
+    public void insertUser(InsertUserBO bo);
 
 }

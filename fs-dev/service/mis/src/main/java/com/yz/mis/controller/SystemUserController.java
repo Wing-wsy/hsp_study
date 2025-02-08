@@ -6,10 +6,9 @@ import com.yz.common.constant.Basic;
 import com.yz.common.result.GraceResult;
 import com.yz.common.util.page.PageResult;
 import com.yz.mis.service.TSystemUserService;
+import com.yz.model.bo.mis.InsertUserBO;
 import com.yz.model.bo.mis.SelectUserListBO;
-import com.yz.model.condition.mis.TSystemRoleConditions;
 import com.yz.model.condition.mis.TSystemUserConditions;
-import com.yz.model.vo.mis.SelectRoleListVO;
 import com.yz.model.vo.mis.SelectUserListVO;
 import com.yz.service.base.controller.BaseController;
 import jakarta.annotation.Resource;
@@ -42,5 +41,11 @@ public class SystemUserController extends BaseController implements SystemUserCo
                 .addPageSize(bo.getPageSize());
         PageResult<SelectUserListVO> selectUserListVOPageResult = tSystemUserService.selectUserList(conditions);
         return GraceResult.ok(selectUserListVOPageResult);
+    }
+
+    @Override
+    public GraceResult insertUser(@RequestBody @Valid InsertUserBO bo) {
+        tSystemUserService.insertUser(bo);
+        return GraceResult.ok();
     }
 }

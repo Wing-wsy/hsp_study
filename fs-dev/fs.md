@@ -253,7 +253,7 @@ public class GraceResult {
 /**
  * 响应结果枚举，用于提供给GraceResult返回给前端
  * 本枚举类中包含了很多的不同的状态码供使用，可以自定义
- * 便于更优雅的对状态码进行管理，一目了然
+ * 便于对状态码进行管理
  */
 public enum ResponseStatusEnum {
 
@@ -569,6 +569,9 @@ private String deptName;
 @NotBlank(message = "mode不能为空")
 @Pattern(regexp = "^driving$|^walking$|^bicycling$")
 private String mode;
+
+# 邮箱格式
+@Email
 ```
 
 > @Pattern 注解支持正则表达式，可以实现更复杂的校验
@@ -671,8 +674,6 @@ public class MybatisPlusConfig {
     }
 }
 ```
-
-
 
 
 
@@ -1043,14 +1044,6 @@ t_system_dept
 
 
 
-
-
-## 表的索引（待设计）
-
-
-
-
-
 ## 相关SQL
 
 创建多字段唯一索引
@@ -1067,6 +1060,8 @@ ALTER TABLE t_system_user DROP INDEX unq_root;
 ```
 
 
+
+## 表的索引（待设计）
 
 
 

@@ -11,13 +11,24 @@ public class TSystemUserConditions extends CommonPageBO {
 
     private String username;
 
+    // 精确匹配
+    private String usernameByExact;
+
+    private String password;
+
     private String name;
 
     private String mobile;
 
+    private String email;
+
     private String deptCode;
 
     private String roleCode;
+
+    private Integer sex;
+
+    private Integer root;
 
 
     public static TSystemUserConditions newInstance() {
@@ -29,8 +40,29 @@ public class TSystemUserConditions extends CommonPageBO {
         return this;
     }
 
+    public TSystemUserConditions addSex(Integer sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public TSystemUserConditions addRoot(Integer root) {
+        this.root = root;
+        return this;
+    }
+
     public TSystemUserConditions addUsername(String username) {
         this.username = username;
+        return this;
+    }
+
+
+    public TSystemUserConditions addUsernameByExact(String usernameByExact) {
+        this.usernameByExact = usernameByExact;
+        return this;
+    }
+
+    public TSystemUserConditions addPassword(String password) {
+        this.password = password;
         return this;
     }
 
@@ -41,6 +73,11 @@ public class TSystemUserConditions extends CommonPageBO {
 
     public TSystemUserConditions addMobile(String mobile) {
         this.mobile = mobile;
+        return this;
+    }
+
+    public TSystemUserConditions addEmail(String email) {
+        this.email = email;
         return this;
     }
 

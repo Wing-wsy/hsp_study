@@ -64,7 +64,11 @@ public class TSystemPermServiceImpl implements TSystemPermService {
         // 2. 获取最大序号
         int permMaxSort = getPermMaxSort(menuCode);
         // 3. 新增一条记录
-        insertPermission(permissionName, menuCode, permMaxSort + 1);
+        TSystemPermConditions conditions = TSystemPermConditions.newInstance()
+                .addPermissionName(permissionName)
+                .addMenuCode(menuCode)
+                .addSort(permMaxSort + 1);
+                insertPermissionByConditions(conditions);
     }
 
     @Override
@@ -97,8 +101,10 @@ public class TSystemPermServiceImpl implements TSystemPermService {
             }
 
             // 1.2 修改权限
-            updatePermByConditions(tSystemPermission, permissionName,
-                    bo.getMenuCode(), null, null);
+            TSystemPermConditions conditions = TSystemPermConditions.newInstance()
+                    .addPermissionName(permissionName)
+                    .addMenuCode(bo.getMenuCode());
+            updatePermByConditions(tSystemPermission, conditions);
         } else {
             // 2. 只是修改状态、排序
             Integer currentSort = null;
@@ -171,14 +177,14 @@ public class TSystemPermServiceImpl implements TSystemPermService {
         return tSystemPermissions;
     }
 
-    private void insertPermission(String permissionName, String menuCode, Integer sort) {
+    private void insertPermissionByConditions(TSystemPermConditions conditions) {
         TSystemPermission tSystemPermission = new TSystemPermission();
-        tSystemPermission.setPermissionName(permissionName);
+        tSystemPermission.setPermissionName(conditions.getPermissionName());
         tSystemPermission.setModuleId(Basic.ONE_INT);
         tSystemPermission.setActionId(Basic.ONE_INT);
-        tSystemPermission.setMenuCode(menuCode);
+        tSystemPermission.setMenuCode(conditions.getMenuCode());
         tSystemPermission.setStatus(Basic.NORMAL);
-        tSystemPermission.setSort(sort);
+        tSystemPermission.setSort(conditions.getSort());
         tSystemPermission.setIsDelete(Basic.VAILD);
         tSystemPermissionMapper.insert(tSystemPermission);
     }
@@ -188,21 +194,19 @@ public class TSystemPermServiceImpl implements TSystemPermService {
         return maxSort != null ? maxSort : 0;
     }
 
-    private void updatePermByConditions(TSystemPermission tSystemPermission, String permissionName,
-                            String menuCode, Integer sort,
-                            Integer status) {
+    private void updatePermByConditions(TSystemPermission tSystemPermission, TSystemPermConditions conditions) {
 
-        if (StrUtils.isNotBlank(permissionName))
-            tSystemPermission.setPermissionName(permissionName);
+        if (StrUtils.isNotBlank(conditions.getPermissionName()))
+            tSystemPermission.setPermissionName(conditions.getPermissionName());
 
-        if (StrUtils.isNotBlank(menuCode))
-            tSystemPermission.setMenuCode(menuCode);
+        if (StrUtils.isNotBlank(conditions.getMenuCode()))
+            tSystemPermission.setMenuCode(conditions.getMenuCode());
 
-        if (ObjectUtils.isNotNull(status))
-            tSystemPermission.setStatus(status);
+        if (ObjectUtils.isNotNull(conditions.getStatus()))
+            tSystemPermission.setStatus(conditions.getStatus());
 
-        if (ObjectUtils.isNotNull(sort))
-            tSystemPermission.setSort(sort);
+        if (ObjectUtils.isNotNull(conditions.getSort()))
+            tSystemPermission.setSort(conditions.getSort());
 
         tSystemPermissionMapper.updateById(tSystemPermission);
     }

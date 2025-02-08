@@ -276,7 +276,10 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
                         tSystemMenuMapper.updateById(tSystemMenu1);
                     } else {
                         // 3. 不需要修改排序，也不需要修改状态（最简单的修改）
-                        updateMenu(tSystemMenu1, menuName, bo.getMenuCode(),null, null);
+                        TSystemMenuConditions conditions = TSystemMenuConditions.newInstance()
+                                .addMenuName(menuName)
+                                .addMenuCode(bo.getMenuCode());
+                        updateMenuByConditions(tSystemMenu1, conditions);
                     }
                 }
             }
@@ -307,7 +310,15 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
                 tSystemMenuMapper.updateById(tSystemMenu);
             }
         }
-        insertMenu(menuName, Basic.ONE_INT, Basic.ZERO_LONG, menuCode, language, sort, Basic.ON);
+        TSystemMenuConditions conditions = TSystemMenuConditions.newInstance()
+                .addMenuName(menuName)
+                .addLevel(Basic.ONE_INT)
+                .addFatherId(Basic.ZERO_LONG)
+                .addMenuCode(menuCode)
+                .addLanguage(language)
+                .addSort(sort)
+                .addStatus(Basic.ON);
+        insertMenuByConditions(conditions);
     }
 
     private void addSonMenu(
@@ -335,7 +346,15 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
                 tSystemMenuMapper.updateById(tSystemMenu);
             }
         }
-        insertMenu(menuName, Basic.TWO_INT, fatherId, menuCode, language, sort, Basic.ON);
+        TSystemMenuConditions conditions = TSystemMenuConditions.newInstance()
+                .addMenuName(menuName)
+                .addLevel(Basic.TWO_INT)
+                .addFatherId(fatherId)
+                .addMenuCode(menuCode)
+                .addLanguage(language)
+                .addSort(sort)
+                .addStatus(Basic.ON);
+        insertMenuByConditions(conditions);
 
     }
 
@@ -352,37 +371,32 @@ public class TSystemMenuServiceImpl implements TSystemMenuService {
         return maxSort != null ? maxSort : 0;
     }
 
-    private void insertMenu(String menuName, Integer level,
-                            Long fatherId, String menuCode,
-                            String language,Integer sort,
-                            Integer status) {
+    private void insertMenuByConditions(TSystemMenuConditions conditions) {
         TSystemMenu tSystemMenu = new TSystemMenu();
-        tSystemMenu.setMenuName(menuName);
-        tSystemMenu.setLevel(level);
-        tSystemMenu.setFatherId(fatherId);
-        tSystemMenu.setMenuCode(menuCode);
-        tSystemMenu.setLanguage(language);
-        tSystemMenu.setSort(sort);
-        tSystemMenu.setStatus(status);
+        tSystemMenu.setMenuName(conditions.getMenuName());
+        tSystemMenu.setLevel(conditions.getLevel());
+        tSystemMenu.setFatherId(conditions.getFatherId());
+        tSystemMenu.setMenuCode(conditions.getMenuCode());
+        tSystemMenu.setLanguage(conditions.getLanguage());
+        tSystemMenu.setSort(conditions.getSort());
+        tSystemMenu.setStatus(conditions.getStatus());
         tSystemMenu.setIsDelete(Basic.VAILD);
         tSystemMenuMapper.insert(tSystemMenu);
     }
 
-    private void updateMenu(TSystemMenu tSystemMenu, String menuName,
-                            String menuCode,Integer sort,
-                            Integer status) {
+    private void updateMenuByConditions(TSystemMenu tSystemMenu, TSystemMenuConditions conditions) {
 
-        if (StrUtils.isNotBlank(menuName))
-            tSystemMenu.setMenuName(menuName);
+        if (StrUtils.isNotBlank(conditions.getMenuName()))
+            tSystemMenu.setMenuName(conditions.getMenuName());
 
-        if (StrUtils.isNotBlank(menuCode))
-            tSystemMenu.setMenuCode(menuCode);
+        if (StrUtils.isNotBlank(conditions.getMenuCode()))
+            tSystemMenu.setMenuCode(conditions.getMenuCode());
 
-        if (ObjectUtils.isNotNull(status))
-            tSystemMenu.setStatus(status);
+        if (ObjectUtils.isNotNull(conditions.getStatus()))
+            tSystemMenu.setStatus(conditions.getStatus());
 
-        if (ObjectUtils.isNotNull(sort))
-            tSystemMenu.setSort(sort);
+        if (ObjectUtils.isNotNull(conditions.getSort()))
+            tSystemMenu.setSort(conditions.getSort());
 
         tSystemMenuMapper.updateById(tSystemMenu);
     }

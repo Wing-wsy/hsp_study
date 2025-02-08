@@ -57,11 +57,17 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
 
             // 获取子级菜单最大序号
             int maxSort = getDeptMaxSort(bo.getParentId(), language);
-            insertDept(deptName, bo.getDeptCode(),
-                    bo.getParentId(), bo.getMobile(),
-                    bo.getEmail(), bo.getComment(),
-                    language,maxSort + 1,
-                    Basic.NORMAL);
+            TSystemDeptConditions conditions = TSystemDeptConditions.newInstance()
+                    .addDeptName(deptName)
+                    .addDeptCode(bo.getDeptCode())
+                    .addParentId(bo.getParentId())
+                    .addMobile(bo.getMobile())
+                    .addEmail(bo.getEmail())
+                    .addComment(bo.getComment())
+                    .addLanguage(language)
+                    .addSort(maxSort + 1)
+                    .addStatus(Basic.NORMAL);
+            insertDeptByConditions(conditions);
         }
     }
 
@@ -259,25 +265,18 @@ public class TSystemDeptServiceImpl extends BaseService implements TSystemDeptSe
     }
 
 
-    private void insertDept(String deptName, String deptCode,
-                            Long parentId, String mobile,
-                            String email, String comment,
-                            String language,Integer sort,
-                            Integer status) {
+    private void insertDeptByConditions(TSystemDeptConditions conditions) {
         LocalDateTime localDateTime = LocalDateTime.now();
         TSystemDept tSystemDept = new TSystemDept();
-        tSystemDept.setDeptName(deptName);
-        tSystemDept.setDeptCode(deptCode);
-        if (parentId == null)
-            parentId = 0L;
-
-        tSystemDept.setParentId(parentId);
-        tSystemDept.setMobile(mobile);
-        tSystemDept.setEmail(email);
-        tSystemDept.setComment(comment);
-        tSystemDept.setLanguage(language);
-        tSystemDept.setSort(sort);
-        tSystemDept.setStatus(status);
+        tSystemDept.setDeptName(conditions.getDeptName());
+        tSystemDept.setDeptCode(conditions.getDeptCode());
+        tSystemDept.setParentId(0L);
+        tSystemDept.setMobile(conditions.getMobile());
+        tSystemDept.setEmail(conditions.getEmail());
+        tSystemDept.setComment(conditions.getComment());
+        tSystemDept.setLanguage(conditions.getLanguage());
+        tSystemDept.setSort(conditions.getSort());
+        tSystemDept.setStatus(conditions.getStatus());
         tSystemDept.setIsDelete(Basic.VAILD);
 
         tSystemDept.setCreateTime(localDateTime);
